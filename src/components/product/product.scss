@@ -1,0 +1,189 @@
+.product {
+    padding: 180px 0 50px 0;
+    background-color: rgb(240,240,240);
+    &__wrapper {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 20px;
+    }
+    &__img {
+        width: 541px;
+        height: 601px;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    &__breadecrums {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__breadecrums-link {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 17px;
+        color: #777777;
+        margin-right: 5px;
+        &::after {
+            content: '/';
+            margin-left: 5px;
+        }
+    }
+    &__breadecrums-last {
+        font-weight: 700;
+        font-size: 11px;
+        line-height: 17px;
+        color: #333333;
+    }
+    &__breadecrums-menu {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 40px;
+    }
+    &__breadecrums-menu-arrow-left {
+        &::before {
+            content: '';
+            border: solid black;
+            border-width: 0 1px 1px 0;
+            display: inline-block;
+            padding: 3px;
+            transform: rotate(135deg);
+            cursor: pointer;
+        }
+    }
+    &__breadecrums-menu-btn {
+        &::before {
+            content: '\2E2C';
+            font-size: 19px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+    }
+    &__breadecrums-menu-arrow-right {
+        &::before {
+            content: '';
+            border: solid black;
+            border-width: 0 1px 1px 0;
+            display: inline-block;
+            padding: 3px;
+            transform: rotate(-45deg);
+            cursor: pointer;
+        }
+    }
+    &__name {
+        margin-top: 20px;
+        font-weight: 400;
+        font-size: 30px;
+        line-height: 36px;
+        color: #333333;
+    }
+    &__price {
+        margin-top: 20px;
+        color: rgb(17,17,17);
+        font-size: 30px;
+        font-weight: 600;
+        line-height: 36px;
+    }
+    &__dscr {
+        margin-top: 20px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 22px;
+        color: #777777;
+    }
+    &__taste {
+        text-align: center;
+        margin-top: 30px;
+        padding: 0 10px;
+        border: 1px solid #969696;
+        border-radius: 5px;
+        height: 40px;
+        background-color: transparent;
+        outline: none;
+    }
+    &__amount {
+        position: relative;
+        margin-top: 20px;
+        border-top: 1px solid rgba(119,119,119, .5);
+        padding: 8px 20px;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 19px;
+        color: #85B951;
+        &::before {
+            content: '\2713';
+            position: absolute;
+            left: 3px;
+        }
+    }
+    &__form {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        width: 253px;
+    }
+    &__form-button {
+        width: 160px;
+        height: 42px;
+        background: #FC6320;
+        border-radius: 5px;
+        border: none;
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 18px;
+        text-align: center;
+        color: #fff;
+        text-transform: uppercase;
+    }
+    &__category {
+        margin-top: 20px;
+        border-top: 1px solid rgba(119,119,119, .5);
+        padding-top: 20px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        color: #777777;
+        span, a {
+            color: #333333;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 19px;
+        }
+        a {
+            font-weight: 400;
+            color: #777777;
+        }
+    }
+    &__info {
+        margin-top: 20px;
+        display: grid;
+        grid-template: 78px / repeat(4, 1fr);
+        column-gap: 10px;
+    }
+    &__info-item {
+        border-radius: 16px;
+        border: 2px solid rgb(0,0,0,0.1);
+        box-shadow: 0 0 15px rgb(0,0,0,0.1);
+        padding: 7px;
+        display: grid;
+        grid-template-columns: 30px 1fr;
+        column-gap: 10px;
+        align-items: center;
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+        }
+    }
+    &__info-item-title {
+        font-weight: 700;
+        text-align: center;
+    }
+    &__info-item-subtitle {
+        font-size: 14px;
+        text-align: center;
+    }
+}

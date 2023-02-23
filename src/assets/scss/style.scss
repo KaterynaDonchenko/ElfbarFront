@@ -1,0 +1,51 @@
+@import './lib/bootstrap-reboot.min';
+@import './lib/fonts.scss';
+@import './blocks/buttons.scss';
+@import '@splidejs/react-splide/css';
+
+* {
+    font-family: 'Aeroport';
+}
+
+.container {
+    width: 1300px;
+    margin: 0 auto;
+}
+
+h2 {
+    margin: 0;
+}
+
+a {
+    &:hover {
+        text-decoration: none;
+        color: #fff;
+    }
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+input {
+    padding: 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+label {
+    margin: 0;
+}

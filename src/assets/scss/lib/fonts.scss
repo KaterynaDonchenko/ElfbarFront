@@ -1,0 +1,47 @@
+@font-face {
+	font-family: 'Roboto Condensed';
+	src: url('../../fonts/RobotoCondensed-Regular.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Roboto Condensed-light';
+	src: url('../../fonts/RobotoCondensed-Light.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Aeroport';
+	src: url('../../fonts/Aeroport-Light.eot');
+	src: local('../../fonts/Aeroport-Light.eot'),
+		url('../../fonts/Aeroport-Light.woff') format('woff'),
+		url('../../fonts/Aeroport-Light.woff2') format('woff2'),
+		url('../../fonts/Aeroport-Light.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+}
+
+
+@font-face {
+	font-family: 'Aeroport';
+	src: url('../../fonts/Aeroport-Medium.eot');
+	src: local('../../fonts/Aeroport-Medium.eot'),
+		url('../../fonts/Aeroport-Medium.woff') format('woff'),
+		url('../../fonts/Aeroport-MediumItalic.woff2') format('woff2'),
+		url('../../fonts/Aeroport-Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Aeroport';
+	src: url('../../fonts/Aeroport-Bold.eot');
+	src: local('../../fonts/Aeroport-Bold.eot'),
+		url('../../fonts/Aeroport-Bold.woff') format('woff'),
+		url('../../fonts/Aeroport-Bold.woff2') format('woff2'),
+		url('../../fonts/Aeroport-Bold.ttf') format('truetype');
+	font-weight: 700;
+	font-style: normal;
+}

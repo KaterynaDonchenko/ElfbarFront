@@ -1,0 +1,74 @@
+import { useSelector, useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { showCartWidget } from '../cardWidget/CartWidgetSlice';
+
+import './header.scss'
+
+import logo from '../../assets/icons/LogoPar.svg';
+
+const Header = () => {
+    // useEffect(() => {
+    //     const header = document.querySelector('.header');
+
+    //     window.addEventListener('scroll', () => {
+    //         window.pageYOffset > 150 ? document.querySelector('.header').style.cssText = 'display: none;' : document.querySelector('.header').style.cssText = 'display: flex;';
+    //     });
+    // })
+
+    const { cartIconDisplay } = useSelector(state => state.header);
+    const { userProductCart } = useSelector(state => state.productCard);
+    
+    const dispatch = useDispatch();
+
+    const counter = userProductCart.length > 0 ? userProductCart.reduce((sum, item) => sum + item.counter, 0) : 0;
+
+    return (
+        <header className="header">   
+            <NavLink className="header__logo" to='/' end>
+                <img src={logo} alt="logo" />
+            </NavLink>
+            <nav className="header__menu">
+                <ul className="header__menu-list">
+                    <li className="header__menu-item">
+                        <NavLink to='/' end>Головна</NavLink>
+                    </li>
+                    <li className="header__menu-item">
+                        <NavLink to='/catalog' end>Каталог</NavLink>
+                    </li>
+                    <li className="header__menu-item">
+                        <a href="№">Відповіді на питання</a>
+                    </li>
+                </ul>
+            </nav>
+            <div className="header__settings">
+                <div className="header__settings-left-block">
+                    <a href="№" className="header__settings-sosial-telegram">
+                        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><path d="M21.9453125,2.7646484c-0.4393311-0.3643188-1.0431519-0.4580688-1.5722656-0.2441406L2.4560547,9.7539062c-0.788147,0.3244019-1.1640625,1.2263184-0.8396606,2.0144043c0.1677856,0.4075928,0.50177,0.723938,0.9177856,0.8693848l3.8652344,1.34375l2.0947266,6.9257812c0.0042114,0.0140991,0.0171509,0.0227051,0.022583,0.0362549c0.0216675,0.0552368,0.0533447,0.1060791,0.0933228,0.1499023c0.0148926,0.0176392,0.0311279,0.0341797,0.0484619,0.0494385c0.0521851,0.043335,0.112793,0.0753784,0.1779785,0.0940552c0.0099487,0.0029297,0.0166016,0.0117798,0.0267334,0.0140991l0.0058594-0.0002441l0.0029297,0.0012207c0.0333862,0.0074463,0.0674438,0.0110474,0.1015625,0.0107422c0.0446167-0.0015869,0.0888672-0.0092773,0.1313477-0.0228882c0.0082397-0.0022583,0.0165405-0.0016479,0.0245972-0.0043335c0.0725708-0.0255737,0.1381226-0.067627,0.1915283-0.1229248c0.0062256-0.0062256,0.015686-0.0073242,0.0216675-0.013916l3.0136719-3.3251953l4.3964844,3.4042969C17.0200195,21.3865967,17.3493652,21.500061,17.6884155,21.5c0.7333984-0.0001221,1.3664551-0.513855,1.5175781-1.2314453L22.46875,4.2509766C22.5817871,3.6968994,22.3805542,3.1256104,21.9453125,2.7646484z M9.5878906,15.2949219l-0.7072144,3.4367676l-1.4748535-4.8778076l7.3148804-3.809021l-4.9970703,4.9971313C9.654541,15.111145,9.6073608,15.1990967,9.5878906,15.2949219z M18.2265625,20.0673828c-0.0383301,0.184082-0.1696777,0.335022-0.3466797,0.3984375c-0.1729736,0.0665283-0.3682861,0.0368652-0.5136719-0.078125l-4.7636719-3.6884766c-0.2062378-0.159668-0.5006104-0.133728-0.6757812,0.0595703l-2.0956421,2.3121948l0.7059937-3.4274292l7.1884766-7.1894531c0.1953735-0.1950073,0.1956787-0.5114136,0.0006714-0.7067261c-0.1542358-0.1546021-0.3909912-0.1911011-0.5846558-0.0901489L6.7782593,13.053894l-3.9169312-1.3615112C2.6478271,11.6221313,2.5026245,11.4239502,2.5,11.1992188c-0.0103149-0.2263184,0.1236572-0.4343872,0.3339844-0.5185547l17.9140625-7.2324219c0.1871338-0.0794067,0.4030762-0.0461426,0.5576172,0.0859375c0.1538086,0.1241455,0.2244873,0.3244019,0.1826172,0.5175781L18.2265625,20.0673828z"/></svg>
+                    </a>
+                    <div className="header__settings-search">
+                        <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 32 32" width="32px" height="32px"><path d="M 19 3 C 13.488281 3 9 7.488281 9 13 C 9 15.394531 9.839844 17.589844 11.25 19.3125 L 3.28125 27.28125 L 4.71875 28.71875 L 12.6875 20.75 C 14.410156 22.160156 16.605469 23 19 23 C 24.511719 23 29 18.511719 29 13 C 29 7.488281 24.511719 3 19 3 Z M 19 5 C 23.429688 5 27 8.570313 27 13 C 27 17.429688 23.429688 21 19 21 C 14.570313 21 11 17.429688 11 13 C 11 8.570313 14.570313 5 19 5 Z"/>
+                        </svg>
+                    </div>
+                    <div className="header__settings-language">
+                        <div className="header__settings-language-img"></div>
+                        <div className="header__settings-language-UA">UA</div>
+                    </div>
+                </div>
+                <div className="header__settings-right-block">
+                    <a href="#" className="header__settings-manager-telegram">запитати спеціаліста</a>
+                </div>
+            </div>
+            <div className="header__cart" 
+                 style={{ 'display' : cartIconDisplay}}
+                 onClick={() => dispatch(showCartWidget())}>
+                <div className="header__cart-wrapper">
+                <svg role="img" class="header__cart-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                    <path fill="none" stroke-width="2" stroke-miterlimit="10" d="M44 18h10v45H10V18h10z"/><path fill="none" stroke-width="2" stroke-miterlimit="10" d="M22 24V11c0-5.523 4.477-10 10-10s10 4.477 10 10v13"/></svg>
+                </div>
+                <div className="header__cart-counter">{counter}</div>
+            </div>   
+        </header>
+    )
+}
+
+export default Header;
