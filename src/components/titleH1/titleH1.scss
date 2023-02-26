@@ -1,5 +1,12 @@
 .title-h1 {
-    padding: 300px 0 0 0;
-    text-align: center;
-    color: #fff;
+    font-weight: 700;
+    &_pdt150 {
+        padding-top: 150px;
+    }
+    &_center {
+        text-align: center;
+    }
+    &_fz-50 {
+        font-size: 50px;
+    }
 }

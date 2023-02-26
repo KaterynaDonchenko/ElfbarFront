@@ -2,11 +2,14 @@ import {useEffect} from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import { fetchProducts, fetchProductsCategory } from './ProductListSlice'; 
 import { useParams } from 'react-router-dom';
+
 import ProductCard from '../productCard/ProductCard';
+import Spiner from '../spiner/Spiner';
+import Error from '../error/Error';
 
 
 const ProductList = ({marker = '', removeMarker}) => {
-    const { products } = useSelector(state => state.products);
+    const { products, productsLoadingStatus } = useSelector(state => state.products);
     const dispatch = useDispatch();
     const {category} = useParams();
 
@@ -36,12 +39,18 @@ const ProductList = ({marker = '', removeMarker}) => {
         }
     }
 
-    const cardItem = renderProductCard(products);
+    const cardItem = renderProductCard(products) ;
+    const spiner = productsLoadingStatus === 'loading' ? <Spiner/> : null;
+    const error = productsLoadingStatus === 'error' ? <Error/> : null;
     
     return (
-        <ul className="card-list">
-            {cardItem}
-        </ul>
+        <>
+            {spiner}
+            {error}
+            <ul className="card-list">
+                {cardItem}
+            </ul>
+        </>
     )
 }
 

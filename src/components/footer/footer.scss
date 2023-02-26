@@ -1,15 +1,19 @@
+@import '../../assets/scss/base/variables.scss';
+
 .footer {
-    padding-top: 120px;
+    padding: 40px 20px 0;
     &__main {
         display: grid;
         grid-template-columns: 295px 3fr 1fr;
         column-gap: 50px;
-        padding: 101px 0 45px 0;
+        padding: 101px 20px 45px;
         border-radius: 64px 64px 0 0;
         background-color: #fff;
         box-shadow: 0 0 15px #e9eae6;
     }
     &__left-block {
+        background-color: $main-color;
+        border-radius: 30px;
         img {
             width: 100%;
             height: 100%;
@@ -41,9 +45,12 @@
     }
     &__sosial-wrapper {
         margin-top: 20px;
-        width: 150px;
+        width: 100px;
         display: flex;
         justify-content: space-between;
+    }
+    &__sosial-telegram, &__sosial-instagram {
+        cursor: pointer;
     }
     &__bottom {
         position: relative;
@@ -58,6 +65,11 @@
         transform: translateX(50%);
         a {
             text-decoration: underline;
+        }
+    }
+    a {
+        &:hover {
+            color: $main-color;
         }
     } 
 }

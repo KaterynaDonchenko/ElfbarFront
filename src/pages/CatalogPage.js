@@ -1,15 +1,20 @@
 import ProductList from "../components/productList/ProductList";
 import Filters from "../components/filters/Filters";
+import TitleH1 from "../components/titleH1/TitleH1";
 
 const CatalogPage = () => {
     return (
-        <>
-            <div className="container">
-                <h1>Каталог товарів</h1>
-                <Filters/>
+        <div className="main-content" style={{'backgroundColor': 'rgb(246,246,246)'}}>
+            <div className="main-content__header" style={{'backgroundColor': 'rgb(251, 242, 251)'}}>
+                <div className="container">
+                    <TitleH1 title='Каталог товарів' classN='title-h1_pdt150 title-h1_center title-h1_fz-50'/>
+                    <Filters/>
+                </div>
             </div>
-            <ProductList removeMarker={true}/>
-        </>
+            <div className="container">
+                <ProductList removeMarker={true}/>
+            </div>
+        </div>
     )
 }
 

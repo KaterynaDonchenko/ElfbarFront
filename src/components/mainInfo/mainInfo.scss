@@ -1,0 +1,36 @@
+@import '../../assets/scss/base/variables.scss';
+
+.info-advantages {
+    margin-top: 40px;
+    padding: 20px;
+    height: 350px;
+    border-radius: 12px;
+    overflow-y: scroll;
+    box-shadow: 0 0 15px #e9eae6;
+    &__title, &__text, &__subtitle {
+        margin-bottom: 20px;
+    }
+    &__text {
+        color: rgb(119,119,119);
+    }
+    &__text:last-child {
+        margin-bottom: 0;
+    }
+    &__subtitle {
+        font-weight: 700;
+        font-size: 22px;
+    }
+
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+    &::-webkit-scrollbar-track {
+        background: rgba(0,0,0,.1);
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+    background: $main-color;
+    border-radius: 10px;
+    }
+}
+

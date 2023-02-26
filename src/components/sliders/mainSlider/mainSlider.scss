@@ -10,17 +10,16 @@
     &__title {
         position: absolute;
         top: 0;
-        font-size: 50px;
-        letter-spacing: 2px;
-    }
-    &__subtitle {
-        position: absolute;
-        top: 0;
         color: #fff;
         letter-spacing: 2px;
         font-size: 26px;
         padding: 376px 0 0 0;
         font-weight: 300;
+    }
+    &__title_big {
+        top: -50px;
+        font-size: 50px;
+        font-weight: 700;
     }
     &__bottom {
         position: absolute;

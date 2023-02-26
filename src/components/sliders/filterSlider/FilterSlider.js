@@ -4,10 +4,13 @@ import { fetchFilterSlider } from './FilterSliderSlice';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import Spiner from '../../spiner/Spiner';
+import Error from '../../error/Error';
+
 import './filterSlider.scss';
 
 const FilterSlider = () => {
-    const { filterSlider } = useSelector(state => state.filterSlider);
+    const { filterSlider, filterSliderStatus } = useSelector(state => state.filterSlider);
     const dispatch = useDispatch();
     const [style, setStyle] = useState([]);
 
@@ -63,11 +66,17 @@ const FilterSlider = () => {
         })
     }
 
-    const slides = renderFilterSlides(filterSlider)
+    const slides = renderFilterSlides(filterSlider);
+    const spiner = filterSliderStatus === 'loading' ? <Spiner/> : null;
+    const error = filterSliderStatus === 'error' ? <Error/> : null;
+    const slider = slides ? <Splide options={{rewind: true, perPage: 8, perMove: 4, speed: 1200, pagination: false}}>{slides}</Splide> : null;
+
     return (
-        <Splide options={{rewind: true, perPage: 8, perMove: 4, speed: 1200, pagination: false}}>
-            {slides}
-        </Splide>
+        <>
+            {spiner}
+            {error}
+            {slider}
+        </>
     );
 }
 

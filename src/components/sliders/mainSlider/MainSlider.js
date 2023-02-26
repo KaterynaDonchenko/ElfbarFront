@@ -1,6 +1,6 @@
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 
-import TitleH1 from '../../titleH1/TitleH1';
+
 import TitleH2 from '../../titleH2/TitleH2';
 
 import './mainSlider.scss';
@@ -22,8 +22,8 @@ const MainSlider = () => {
                 <SplideSlide className='main-slider__item'>
                     <img src={slide1} alt="slide 1" />
                     <div className="container">
-                        <TitleH1 classN='main-slider__title' title='Нові літні смаки'/>
-                        <TitleH2 classN='main-slider__subtitle' title='дистриб`ютор оригінальної продукції'/>
+                        <TitleH2 classN='main-slider__title main-slider__title_big' title='Нові літні смаки'/>
+                        <TitleH2 classN='main-slider__title' title='дистриб`ютор оригінальної продукції'/>
                     </div>
                 </SplideSlide>
                 <SplideSlide className='main-slider__item'>

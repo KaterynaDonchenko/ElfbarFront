@@ -2,7 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { useHttp } from '../../../hooks/http.hook';
 
 const initialState = {
-    filterSlider: []
+    filterSlider: [],
+    filterSliderStatus: 'idle'
 }
 
 const filterSliderSlice = createSlice({
@@ -11,9 +12,12 @@ const filterSliderSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
+            .addCase(fetchFilterSlider.pending, state => {state.filterSliderStatus = 'loading'})
             .addCase(fetchFilterSlider.fulfilled, (state, action) => {
+                state.filterSliderStatus = 'idle';
                 state.filterSlider = action.payload;
             })
+            .addCase(fetchFilterSlider.rejected, state => {state.filterSliderStatus = 'error'})
             .addDefaultCase(() => {});
     }
 });
