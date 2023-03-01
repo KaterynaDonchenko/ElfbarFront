@@ -12,8 +12,6 @@ const ProductList = ({marker = '', removeMarker}) => {
     const { products, productsLoadingStatus } = useSelector(state => state.products);
     const dispatch = useDispatch();
     const {category} = useParams();
-    console.log(category);
-
 
     useEffect(() => {
         category ? dispatch(fetchProductsCategory(category)) : dispatch(fetchProducts());

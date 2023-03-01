@@ -1,6 +1,7 @@
 import ProductList from "../components/productList/ProductList";
 import Filters from "../components/filters/Filters";
 import TitleH1 from "../components/titleH1/TitleH1";
+import BreadCrumbs from "../components/breadCrumbs/BreadCrumbs";
 
 const CatalogPage = () => {
     return (
@@ -12,6 +13,7 @@ const CatalogPage = () => {
                 </div>
             </div>
             <div className="container">
+                <BreadCrumbs/>
                 <ProductList removeMarker={true}/>
             </div>
         </div>

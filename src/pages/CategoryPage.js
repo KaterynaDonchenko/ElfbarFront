@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import ProductList from "../components/productList/ProductList";
 import Filters from "../components/filters/Filters";
 import TitleH1 from "../components/titleH1/TitleH1";
+import BreadCrumbs from "../components/breadCrumbs/BreadCrumbs";
 
 const CategoryPage = () => {
     const {category} = useParams();
@@ -16,6 +17,7 @@ const CategoryPage = () => {
             </div>
         </div>
         <div className="container">
+            <BreadCrumbs/>
             <ProductList removeMarker={true}/>
         </div>
     </div>

@@ -7,11 +7,21 @@ import cart from '../components/cart/CartSlice';
 import productCounter from '../components/productCounter/ProductCounterSlice';
 import checkout from '../components/checkout/CheckoutSlice';
 import filterSlider from '../components/sliders/filterSlider/FilterSliderSlice';
+import productsPrevAndNext from '../components/breadeCrumbsMenu/BreadCrumbsMenuSlice';
 import { configureStore } from '@reduxjs/toolkit';
 
 
 const store = configureStore({
-    reducer: {products, product, header, productCard, cartWidget, cart, productCounter, checkout, filterSlider},
+    reducer: {products, 
+              product, 
+              header, 
+              productCard, 
+              cartWidget, 
+              cart, 
+              productCounter, 
+              checkout, 
+              filterSlider, 
+              productsPrevAndNext},
     middleware: getDefaultMiddleware => getDefaultMiddleware(),
     devTools: process.env.NODE_ENV !== 'production'    
 });

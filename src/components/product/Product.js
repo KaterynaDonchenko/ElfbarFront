@@ -7,6 +7,8 @@ import { saveUserProductCart } from '../productCard/ProductCartSlice';
 import ProductCounter from '../productCounter/ProductCounter';
 import Spiner from '../spinner/Spinner';
 import Error from '../error/Error';
+import BreadCrumbs from '../breadCrumbs/BreadCrumbs';
+import BreadCrumbsMenu from '../breadeCrumbsMenu/BreadCrumbsMenu';
 
 import './product.scss';
 
@@ -49,16 +51,8 @@ const ProductContent = () => {
             </div>
             <div className="product__right-block">
                 <div className="product__breadecrums">
-                    <nav className="product__breadecrums-wrapper">
-                        <a href="" className="product__breadecrums-link">Головна</a>
-                        <a href="" className="product__breadecrums-link">ELFBAR 1500 LUX</a>
-                        <span className="product__breadecrums-last">Одноразова Pod система Elf Bar 1500 LUX BANANA MILK</span>
-                    </nav>
-                    <div className="product__breadecrums-menu">
-                        <div className="product__breadecrums-menu-arrow-left"></div>
-                        <a className="product__breadecrums-menu-btn"></a>
-                        <div className="product__breadecrums-menu-arrow-right"></div>
-                    </div>
+                    <BreadCrumbs/>
+                    <BreadCrumbsMenu/>
                 </div>
                 <h1 className="product__name">{title}</h1>
                 <div className="product__price">{price} грн</div>

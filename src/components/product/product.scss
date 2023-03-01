@@ -2,6 +2,7 @@
     padding: 180px 0 50px 0;
     background-color: rgb(240,240,240);
     &__wrapper {
+        position: relative;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         column-gap: 20px;
@@ -19,59 +20,6 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-    }
-    &__breadecrums-link {
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 17px;
-        color: #777777;
-        margin-right: 5px;
-        &::after {
-            content: '/';
-            margin-left: 5px;
-        }
-    }
-    &__breadecrums-last {
-        font-weight: 700;
-        font-size: 11px;
-        line-height: 17px;
-        color: #333333;
-    }
-    &__breadecrums-menu {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 40px;
-    }
-    &__breadecrums-menu-arrow-left {
-        &::before {
-            content: '';
-            border: solid black;
-            border-width: 0 1px 1px 0;
-            display: inline-block;
-            padding: 3px;
-            transform: rotate(135deg);
-            cursor: pointer;
-        }
-    }
-    &__breadecrums-menu-btn {
-        &::before {
-            content: '\2E2C';
-            font-size: 19px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-    }
-    &__breadecrums-menu-arrow-right {
-        &::before {
-            content: '';
-            border: solid black;
-            border-width: 0 1px 1px 0;
-            display: inline-block;
-            padding: 3px;
-            transform: rotate(-45deg);
-            cursor: pointer;
-        }
     }
     &__name {
         margin-top: 20px;

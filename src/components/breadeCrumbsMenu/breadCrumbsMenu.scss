@@ -1,0 +1,105 @@
+.breadcrumbs-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 40px;
+    &__arrow-left {
+        position: relative;
+        z-index: 8;
+        &::before {
+            content: '';
+            border: solid black;
+            border-width: 0 1px 1px 0;
+            display: inline-block;
+            padding: 3px;
+            transform: rotate(135deg);
+            cursor: pointer;
+        }
+    }
+    &__dropdown {
+        display: none;
+        position: absolute;
+        right: 4px;
+        top: 0;
+        padding-top: 34px;
+        cursor: pointer;
+    }
+    &__wrapper {
+        display: grid;
+        grid-template: 120px / 90px 118px;
+        column-gap: 10px;
+        padding: 10px 15px;
+        background-color: #fff;
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+    &__dropdown-title {
+        font-size: 14px;
+        font-weight: 500;
+        color: rgb(56, 56, 56);
+        line-height: 18px;
+    }
+    &__dropdown-price {
+        margin-top: 4px;
+        font-size: 14px;
+        line-height: 22px;
+        color: rgb(52, 48, 61);
+        font-weight: 700;
+    }
+    &__lable {
+        display: block;
+        opacity: 0;
+        position: absolute;
+        top: -28px;
+        width: 83px;
+        font-size: 11px;
+        background-color: #000;
+        color: #fff;
+        text-align: center;
+        padding: 8px 10px;
+        right: -24px;
+        transition: all .3s;   
+        &::after {
+            content: '';
+            position: absolute;
+            top: 28px;
+            right: 35px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 10px solid #000;
+        }
+    }
+    &__lable_active {
+        transform: translateY(-5px);
+        opacity: 1;
+    } 
+    &__btn {
+        position: relative;
+        z-index: 7;
+        &::before {
+            content: '\2E2C';
+            font-size: 19px;
+            font-weight: 700;
+            cursor: pointer;
+            color: rgb(33, 37, 41)
+        }
+    }
+    &__arrow-right {
+        position: relative;
+        z-index: 8;
+        &::before {
+            content: '';
+            border: solid black;
+            border-width: 0 1px 1px 0;
+            display: inline-block;
+            padding: 3px;
+            transform: rotate(-45deg);
+            cursor: pointer;
+        }
+    }
+}
