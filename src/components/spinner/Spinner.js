@@ -1,8 +1,11 @@
+import spiner from '../../assets/icons/spiner.gif';
+
+import './spinner.scss';
 
 const Spinner = () => {
     return (
-        <div className="spinner-border mx-auto mt-5" role="status">
-            <span className="visually-hidden">Loading...</span>
+        <div className="spiner">
+            <img src={spiner} alt="spiner" />
         </div>
     )
 }

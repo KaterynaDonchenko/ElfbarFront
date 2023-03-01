@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'; 
 
 import { showCartWidget } from '../cardWidget/CartWidgetSlice';
 
@@ -8,7 +8,6 @@ import './header.scss'
 import logo from '../../assets/icons/LogoPar.svg';
 
 const Header = () => {
-
     const { cartIconDisplay } = useSelector(state => state.header);
     const { userProductCart } = useSelector(state => state.productCard);
     
@@ -18,7 +17,7 @@ const Header = () => {
 
     return (
         <header className="header">   
-            <NavLink className="header__logo" to='/' end>
+            <NavLink className="header__logo" to='/' >
                 <img src={logo} alt="logo" />
             </NavLink>
             <nav className="header__menu">

@@ -5,7 +5,7 @@ import { fetchProduct } from './ProductSlice';
 import { saveUserProductCart } from '../productCard/ProductCartSlice';
 
 import ProductCounter from '../productCounter/ProductCounter';
-import Spiner from '../spiner/Spiner';
+import Spiner from '../spinner/Spinner';
 import Error from '../error/Error';
 
 import './product.scss';

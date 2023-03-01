@@ -4,7 +4,7 @@ import { fetchFilterSlider } from './FilterSliderSlice';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import Spiner from '../../spiner/Spiner';
+import Spiner from '../../spinner/Spinner';
 import Error from '../../error/Error';
 
 import './filterSlider.scss';
@@ -51,7 +51,7 @@ const FilterSlider = () => {
         return arr.map( ({name, img, color}, i) => {
             return (
                 <SplideSlide key={i} className='slide'>
-                    <Link to={`productCategory/${name}`}>
+                    <Link to={`/product-category/${name}`}>
                         <div className="slide__item-sircle" 
                             onMouseEnter={() => setStyle(style.map((item, index) => index === i ? {'borderColor': color} : item))}
                             onMouseLeave={() => setStyle(style.map((item, index) => index === i ? {'borderColor': '#E9E6E3'} : item))} 

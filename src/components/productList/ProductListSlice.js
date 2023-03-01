@@ -18,9 +18,12 @@ const productsSlice = createSlice({
                 state.products = action.payload;
             })
             .addCase(fetchProducts.rejected, state => {state.productsLoadingStatus = 'error'})
+            .addCase(fetchProductsCategory.pending, state => {state.productsLoadingStatus = 'loading'})
             .addCase(fetchProductsCategory.fulfilled, (state, action) => {
+                state.productsLoadingStatus = 'idle';
                 state.products = action.payload;
             })
+            .addCase(fetchProductsCategory.rejected, state => {state.productsLoadingStatus = 'error'})
             .addDefaultCase(() => {})
     }
 });

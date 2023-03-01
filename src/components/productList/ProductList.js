@@ -4,7 +4,7 @@ import { fetchProducts, fetchProductsCategory } from './ProductListSlice';
 import { useParams } from 'react-router-dom';
 
 import ProductCard from '../productCard/ProductCard';
-import Spiner from '../spiner/Spiner';
+import Spiner from '../spinner/Spinner';
 import Error from '../error/Error';
 
 
@@ -12,6 +12,7 @@ const ProductList = ({marker = '', removeMarker}) => {
     const { products, productsLoadingStatus } = useSelector(state => state.products);
     const dispatch = useDispatch();
     const {category} = useParams();
+    console.log(category);
 
 
     useEffect(() => {
