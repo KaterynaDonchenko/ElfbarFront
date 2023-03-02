@@ -24,7 +24,7 @@ const BreadCrumbs = () => {
         )
     }
 
-    const breadcrumbs = pathname.includes('/catalog/') ? setProductBreadCrumbs(product) : setCategoryBreadCrumbs(); 
+    const breadcrumbs = pathname.includes('/product/') ? setProductBreadCrumbs(product) : setCategoryBreadCrumbs(); 
     return (
         <nav className="breade-crumbs">
             <Link to='/' className="breade-crumbs__link">Головна</Link>

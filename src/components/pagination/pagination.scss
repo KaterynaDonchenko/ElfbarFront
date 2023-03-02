@@ -1,0 +1,62 @@
+@import '../../assets/scss/base/variables.scss';
+
+.pagination {
+    padding: 40px 0 20px 0;
+    margin: 0 auto;
+    &__list {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style-type: none;
+    }
+    &__item {
+        position: relative;
+        height: 34px;
+        width: 34px;
+        margin-right: 5px;
+        cursor: pointer;
+        &:last-child {
+            margin-right: 0;
+        }
+        &_active {
+            background-color: $main-color;
+            cursor: auto;
+        }
+    }
+    &__item_active > &__link {
+        color: #fff;
+    }
+    &__item {
+        &:last-child > .pagination__link {
+            &::before {
+                content: '';
+                border: solid black;
+                border-width: 0 2px 2px 0;
+                display: inline-block;
+                padding: 4px;
+                transform: rotate(-45deg);
+                cursor: pointer;
+            } 
+        }
+        &:first-child > .pagination__link {
+            &::before {
+                content: '';
+                border: solid black;
+                border-width: 0 2px 2px 0;
+                display: inline-block;
+                padding: 4px;
+                transform: rotate(135deg);
+                cursor: pointer;
+            } 
+        }
+    }
+    &__link {
+        position: absolute;
+        top: 50%;
+        right: 50%;
+        transform: translate(50%, -50%);
+        font-weight: 600;
+        font-size: 14px;
+        color: #242424;
+    }
+}

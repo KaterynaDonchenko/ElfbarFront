@@ -9,19 +9,19 @@ const BreadCrumbsMenu = () => {
     const lableRef = useRef();
     const prevProductRef = useRef();
     const nextProductRef = useRef();
-    const { catalogId } = useParams();
+    const { productId } = useParams();
     const dispatch = useDispatch();
     const { productPrev, productNext} = useSelector(state => state.productsPrevAndNext);
 
     useEffect(() => {
-        dispatch(fetchProductPrev(+catalogId - 1));
-        dispatch(fetchProductNext(+catalogId + 1));
-    }, [catalogId]);
+        dispatch(fetchProductPrev(+productId - 1));
+        dispatch(fetchProductNext(+productId + 1));
+    }, [productId]);
 
     return (
         <div className="breadcrumbs-menu">
             <div className="breadcrumbs-menu__left">
-                <Link to={`/catalog/${productPrev._id}`} 
+                <Link to={`/product/${productPrev._id}`} 
                       className="breadcrumbs-menu__arrow-left"
                       onMouseEnter={() => prevProductRef.current.style.display = 'block'}>
                 </Link>
@@ -35,7 +35,7 @@ const BreadCrumbsMenu = () => {
                       onMouseLeave={() => lableRef.current.classList.remove('breadcrumbs-menu__lable_active')}></Link>
             </div>
             <div className="breadcrumbs-menu__right">
-                <Link to={`/catalog/${productNext._id}`} 
+                <Link to={`/product/${productNext._id}`} 
                       className="breadcrumbs-menu__arrow-right"
                       onMouseEnter={() => nextProductRef.current.style.display = 'block'}>
                 </Link>
@@ -53,11 +53,11 @@ const ProductDropdown = ({productRef, product}) => {
                 ref={el => productRef.current = el} 
                 onMouseLeave={() => productRef.current.style.display = 'none'}>
             <div className="breadcrumbs-menu__wrapper">
-                <Link to={`/catalog/${_id}`} className="breadcrumbs-menu__dropdown-link">
+                <Link to={`/product/${_id}`} className="breadcrumbs-menu__dropdown-link">
                     <img src={`http://localhost:3001/${img}`} alt={title} />
                 </Link>
                 <div className="breadcrumbs-menu__dropdown-content">
-                    <Link to={`/catalog/${_id}`} className="breadcrumbs-menu__dropdown-link">
+                    <Link to={`/product/${_id}`} className="breadcrumbs-menu__dropdown-link">
                         <div className="breadcrumbs-menu__dropdown-title">{title}</div>
                     </Link>
                     <div className="breadcrumbs-menu__dropdown-price">{price} грн</div>

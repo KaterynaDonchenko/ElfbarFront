@@ -16,6 +16,7 @@ const productsSlice = createSlice({
             .addCase(fetchProducts.fulfilled, (state, action) => {
                 state.productsLoadingStatus = 'idle';
                 state.products = action.payload;
+                console.log(action.payload);
             })
             .addCase(fetchProducts.rejected, state => {state.productsLoadingStatus = 'error'})
             .addCase(fetchProductsCategory.pending, state => {state.productsLoadingStatus = 'loading'})
@@ -32,7 +33,7 @@ export const fetchProducts = createAsyncThunk(
     'products/fetchProducts',
     async () => {
         const request = useHttp();
-        return await request("http://localhost:3001/getProducts");
+        return await request("http://localhost:3001/getProducts?limit=10");
     }
 );
 

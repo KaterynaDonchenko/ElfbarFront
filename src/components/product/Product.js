@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchProduct } from './ProductSlice';
+import { fetchProduct, fetchCategoryInfo } from './ProductSlice';
 import { saveUserProductCart } from '../productCard/ProductCartSlice';
 
 import ProductCounter from '../productCounter/ProductCounter';
@@ -12,36 +12,46 @@ import BreadCrumbsMenu from '../breadeCrumbsMenu/BreadCrumbsMenu';
 
 import './product.scss';
 
-import icon1 from '../../assets/icons/infoEl/strong.svg';
-import icon2 from '../../assets/icons/infoEl/man.svg';
-import icon3 from '../../assets/icons/infoEl/volume.svg';
-import icon4 from '../../assets/icons/infoEl/batterysvg.svg'; 
-
 const Product = () => {
-    const { productLoadingStatus } = useSelector(state => state.product);
+    const { productLoadingStatus, categoryInfoLoadingStatus } = useSelector(state => state.product);
 
-    const spiner = productLoadingStatus === 'loading' ? <Spiner/> : null;
-    const error = productLoadingStatus === 'error' ? <Error/> : null;
+    const spinerMain = productLoadingStatus === 'loading' ? <Spiner/> : null;
+    const spinerBottom = categoryInfoLoadingStatus === 'loading' ? <Spiner/> : null;
+    const errorMain = productLoadingStatus === 'error' ? <Error/> : null;
+    const errorBottom = categoryInfoLoadingStatus === 'error' ? <Error/> : null;
     return (
         <section className="product">
-            <div className="container">
-                {spiner}
-                {error}
-                <ProductContent/>
+            <div className="product__main">
+                <div className="container">
+                    {spinerMain}
+                    {errorMain}
+                    <ProductMain/>
+                </div>
+            </div>
+            <div className="product__bottom">
+                <div className="container">
+                    {spinerBottom}
+                    {errorBottom}
+                    <ProductBottom/>
+                </div>
             </div>
         </section>
     )
 }
 
-const ProductContent = () => {
-    const { catalogId } = useParams();
+const ProductMain = () => {
+    const { productId } = useParams();
     const { product } = useSelector(state => state.product);
     const { counter } = useSelector(state => state.productCounter)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(fetchProduct(catalogId));
-    }, [catalogId])
+        dispatch(fetchProduct(productId));
+    }, [productId]);
+
+    useEffect(() => {
+        dispatch(fetchCategoryInfo(product.category));
+    }, [product.category])
 
     const {title, price, taste, quantity, category, img, dscr} = product;
     return (
@@ -64,40 +74,70 @@ const ProductContent = () => {
                 <div className="product__amount">{quantity}</div>
                 <form action="" className="product__form">
                     <ProductCounter/>
-                    <button onClick={(e) => {e.preventDefault(); dispatch(saveUserProductCart({id : catalogId, title, price, img, counter}))}} className="product__form-button">Додати в кошик</button>
+                    <button onClick={(e) => {e.preventDefault(); dispatch(saveUserProductCart({id : productId, title, price, img, counter}))}} className="product__form-button">Додати в кошик</button>
                 </form>
                 <div className="product__category"><span>Категорія:</span> <a href="">{category}</a></div>
-                <div className="product__info">
-                    <div className="product__info-item">
-                        <img src={icon1} alt="" className="product__info-item-img" />
-                        <div className="product__info-item-rightblock">
-                            <div className="product__info-item-title">Міцність</div>
-                            <div className="product__info-item-subtitle">5% (50 mg/ml)</div>
-                        </div>
-                    </div>
-                    <div className="product__info-item">
-                        <img src={icon2} alt="" className="product__info-item-img" />
-                        <div className="product__info-item-rightblock">
-                            <div className="product__info-item-title">Тяг</div>
-                            <div className="product__info-item-subtitle">1500</div>
-                        </div>
-                    </div>
-                    <div className="product__info-item">
-                        <img src={icon3} alt="" className="product__info-item-img" />
-                        <div className="product__info-item-rightblock">
-                            <div className="product__info-item-title">Рідина</div>
-                            <div className="product__info-item-subtitle">4.8 ml</div>
-                        </div>
-                    </div>
-                    <div className="product__info-item">
-                        <img src={icon4} alt="" className="product__info-item-img" />
-                        <div className="product__info-item-rightblock">
-                            <div className="product__info-item-title">Батарея</div>
-                            <div className="product__info-item-subtitle">850 ma/h</div>
-                        </div>
+            </div>
+        </div>
+    )
+}
+
+const ProductBottom = () => {
+    const { categoryInfo, characteristic } = useSelector(state => state.product);
+
+    const renderCharacteristic = (info, characteristic) => {
+        return characteristic.map(({icon, title}, i) => {
+            return (
+                <div key={i} className="product__info-item">
+                    <img src={`http://localhost:3001/${icon}`} alt={title} className="product__info-item-img" />
+                    <div className="product__info-item-rightblock">
+                        <div className="product__info-item-title">{title}</div>
+                        <div className="product__info-item-subtitle">{info ? Object.values(info)[i] : null}</div>
                     </div>
                 </div>
+            )
+        })
+    }
+
+    const {info, dscr, additionalInfo} = categoryInfo;
+    const characteristicBlock = renderCharacteristic(info, characteristic);
+
+    return (
+        <div className="product__bottom">
+            <div className="product__bottom-title">Опис</div>
+            {additionalInfo ? <div className="product__additional-info">{additionalInfo}</div> : null}
+            <div className="product__info">
+                {characteristicBlock}
+                {/* <div className="product__info-item">
+                    <img src={icon1} alt="" className="product__info-item-img" />
+                    <div className="product__info-item-rightblock">
+                        <div className="product__info-item-title">Міцність</div>
+                        <div className="product__info-item-subtitle">5% (50 mg/ml)</div>
+                    </div>
+                </div>
+                <div className="product__info-item">
+                    <img src={icon2} alt="" className="product__info-item-img" />
+                    <div className="product__info-item-rightblock">
+                        <div className="product__info-item-title">Тяг</div>
+                        <div className="product__info-item-subtitle">1500</div>
+                    </div>
+                </div>
+                <div className="product__info-item">
+                    <img src={icon3} alt="" className="product__info-item-img" />
+                    <div className="product__info-item-rightblock">
+                        <div className="product__info-item-title">Рідина</div>
+                        <div className="product__info-item-subtitle">4.8 ml</div>
+                    </div>
+                </div>
+                <div className="product__info-item">
+                    <img src={icon4} alt="" className="product__info-item-img" />
+                    <div className="product__info-item-rightblock">
+                        <div className="product__info-item-title">Батарея</div>
+                        <div className="product__info-item-subtitle">850 ma/h</div>
+                    </div>
+                </div> */}
             </div>
+            <div className="product__dscr">{dscr}</div> 
         </div>
     )
 }

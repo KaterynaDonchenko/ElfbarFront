@@ -1,7 +1,14 @@
+@import '../../assets/scss/base/variables.scss';
+
 .product {
-    padding: 180px 0 50px 0;
-    background-color: rgb(240,240,240);
+    padding-top: 120px;
+    background-color: #fbf2fb;
+    &__main {
+        background-color: rgb(240,240,240);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.105);
+    }
     &__wrapper {
+        padding: 30px 0 10px 0;
         position: relative;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -54,7 +61,7 @@
     }
     &__amount {
         position: relative;
-        margin-top: 20px;
+        margin-top: 40px;
         border-top: 1px solid rgba(119,119,119, .5);
         padding: 8px 20px;
         font-weight: 700;
@@ -87,9 +94,9 @@
         text-transform: uppercase;
     }
     &__category {
-        margin-top: 20px;
+        margin-top: 40px;
         border-top: 1px solid rgba(119,119,119, .5);
-        padding-top: 20px;
+        padding-top: 40px;
         font-weight: 400;
         font-size: 14px;
         line-height: 19px;
@@ -106,10 +113,34 @@
         }
     }
     &__info {
-        margin-top: 20px;
+        margin-top: 30px;
         display: grid;
-        grid-template: 78px / repeat(4, 1fr);
+        grid-template: 78px / repeat(4, 155px);
         column-gap: 10px;
+    }
+    &__bottom {
+        padding: 10px 0;
+        background-color: #fff;
+    }
+    &__bottom-title {
+        font-size: 16px;
+        color: rgb(51, 51, 51);
+        font-weight: 700;
+        text-align: center;
+        &::after {
+            content: '';
+            display: block;
+            margin: 0 auto;
+            width: 4%;
+            height: 2px;
+            background-color: $main-color;
+        }
+    }
+    &__additional-info {
+        margin-top: 30px;
+        font-size: 14px;
+        color: #ff0000;
+        font-weight: 400;
     }
     &__info-item {
         border-radius: 16px;
@@ -133,5 +164,8 @@
     &__info-item-subtitle {
         font-size: 14px;
         text-align: center;
+    }
+    &__dscr {
+        margin-top: 30px;
     }
 }

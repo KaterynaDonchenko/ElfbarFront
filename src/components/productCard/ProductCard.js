@@ -22,7 +22,7 @@ const ProductCart = ({title, category, price, img, lable, id}) => {
             <div className="card-list__item-hover" ref={element => listRef.current[id] = element}></div>
             {divLable}
             <div className="card-list__item-wrapper">
-                <Link to={`/catalog/${id}`} >
+                <Link to={`/product/${id}`} >
                     <img className='card-list__item-img' src={`http://localhost:3001/${img}`} alt={title} />
                 </Link>
                 <div className="card-list__item-content">

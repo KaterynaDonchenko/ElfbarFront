@@ -2,6 +2,7 @@ import ProductList from "../components/productList/ProductList";
 import Filters from "../components/filters/Filters";
 import TitleH1 from "../components/titleH1/TitleH1";
 import BreadCrumbs from "../components/breadCrumbs/BreadCrumbs";
+import Pagination from "../components/pagination/Pagination";
 
 const CatalogPage = () => {
     return (
@@ -15,6 +16,7 @@ const CatalogPage = () => {
             <div className="container">
                 <BreadCrumbs/>
                 <ProductList removeMarker={true}/>
+                <Pagination/>
             </div>
         </div>
     )
