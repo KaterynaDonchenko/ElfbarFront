@@ -1,11 +1,15 @@
 import Product from "../components/product/Product";
 import TitleH2 from "../components/titleH2/TitleH2";
+import ProductSlider from "../components/sliders/productSlider/ProductSlider";
 
 const ProductPageItem = () => {
     return (
         <>
             <Product/>
-            <TitleH2 title='Товари які можуть вас зацівати'/>
+            <div className="container">
+                <TitleH2 title='Cхожі товари'/>
+                <ProductSlider/>
+            </div>
         </>
     )
 }

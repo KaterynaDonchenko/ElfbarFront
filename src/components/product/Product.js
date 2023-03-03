@@ -1,7 +1,8 @@
 import { useParams, Link, useNavigate} from 'react-router-dom';
 import {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchProduct, fetchCategoryInfo, fetchTastes } from './ProductSlice';
+import { fetchProduct, fetchCategoryInfo} from './ProductSlice';
+import { fetchProductsCategory } from '../productList/ProductListSlice';
 import { saveUserProductCart } from '../productCard/ProductCartSlice';
 
 import ProductCounter from '../productCounter/ProductCounter';
@@ -41,7 +42,8 @@ const Product = () => {
 
 const ProductMain = () => {
     const { productId } = useParams();
-    const { product, tastes } = useSelector(state => state.product);
+    const { product } = useSelector(state => state.product);
+    const { products, productsLoadingStatus } = useSelector(state => state.products);
     const { counter } = useSelector(state => state.productCounter)
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -51,7 +53,7 @@ const ProductMain = () => {
     }, [productId]);
 
     useEffect(() => {
-        dispatch(fetchTastes(product.category));
+        dispatch(fetchProductsCategory(product.categoryUrl));
     }, [product.category]);
 
     useEffect(() => {
@@ -62,8 +64,8 @@ const ProductMain = () => {
         if (event.target.value !== '') navigate(event.target.value)
     } 
 
-    const renderSelect = (tastes) => {
-        const options = tastes.map(item => {
+    const renderSelect = (arr) => {
+        const options = arr.map(item => {
             return (
                 <option key={item._id} value={`/product/${item._id}`}>{item.taste}</option>
             )
@@ -76,7 +78,7 @@ const ProductMain = () => {
         )
     }
 
-    const selectBlock = renderSelect(tastes)
+    const selectBlock = renderSelect(products)
     const {title, price, quantity, category, img, dscr, categoryUrl} = product;
     return (
         <div className="product__wrapper">

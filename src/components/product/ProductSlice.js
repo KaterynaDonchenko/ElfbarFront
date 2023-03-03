@@ -10,8 +10,6 @@ const initialState = {
            {'icon': 'img/info/man.svg', 'title': 'Тяг'}, 
            {'icon': 'img/info/volume.svg', 'title': 'Рідина'}, 
            {'icon': 'img/info/batterysvg.svg', 'title': 'Батарея'}],
-    tastes: [],
-    tastesLoadingStatus: 'idle',
 }
 
 const productSlice = createSlice({
@@ -32,12 +30,6 @@ const productSlice = createSlice({
                 state.categoryInfo = action.payload;
             })
             .addCase(fetchCategoryInfo.rejected, state => {state.categoryInfoLoadingStatus = 'error'})
-            .addCase(fetchTastes.pending, state => {state.tastesLoadingStatus = 'loading'})
-            .addCase(fetchTastes.fulfilled, (state, action) => {
-                state.tastesLoadingStatus = 'idle';
-                state.tastes = action.payload;
-            })
-            .addCase(fetchTastes.rejected, state => {state.tastesLoadingStatus = 'error'})
             .addDefaultCase(() => {});     
     }
 });
@@ -55,14 +47,6 @@ export const fetchCategoryInfo = createAsyncThunk(
     (category) => {
         const request = useHttp();
         return request(`http://localhost:3001/categoryInfo/${category}`);
-    }
-);
-
-export const fetchTastes = createAsyncThunk(
-    'product/fetchTastes',
-    (category) => {
-        const request = useHttp();
-        return request(`http://localhost:3001/taste/${category}`);
     }
 );
 
