@@ -8,7 +8,7 @@
         border-bottom: 1px solid rgba(0, 0, 0, 0.105);
     }
     &__wrapper {
-        padding: 30px 0 10px 0;
+        padding: 90px 0 10px 0;
         position: relative;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -49,15 +49,67 @@
         line-height: 22px;
         color: #777777;
     }
-    &__taste {
+    &__select {
+        width: 200px;
+        position: relative;
         text-align: center;
         margin-top: 30px;
-        padding: 0 10px;
         border: 1px solid #969696;
         border-radius: 5px;
         height: 40px;
         background-color: transparent;
         outline: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__select-btn {
+        content: "";
+        position: absolute;
+        right: 9px;
+        top: 12px;
+        border: solid black;
+        border-width: 0 2px 2px 0;
+        padding: 4px;
+        transform: rotate(45deg);
+        cursor: pointer;
+        transition: all .3s;
+    }
+    &__select-btn_rotate {
+        transform: rotate(225deg);
+        top: 16px;
+    }
+    &__select-variants {
+        display: none;
+        width: 200px;
+        position: absolute;
+        left: 0;
+        top: 40px;
+        z-index: 10;
+        background-color: #fff;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+    &__select-variants_show {
+        display: block;
+    }
+    &__select-mainvariant {
+        position: relative;
+        z-index: 9;
+        width: 100%;
+        height: 100%;
+        line-height: 35px;
+        cursor: pointer;
+    }
+    &__select-variant { 
+        text-align: center;
+        padding: 5px 10px;
+        &:hover {
+            background-color: rgba(0,0,0,.1);
+        }
+        a {
+            color: #000;
+        }
     }
     &__amount {
         position: relative;

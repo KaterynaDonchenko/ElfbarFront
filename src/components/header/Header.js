@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom'; 
 
-import { showCartWidget } from '../cardWidget/CartWidgetSlice';
+import { showCartWidget } from '../cartWidget/CartWidgetSlice';
 
 import './header.scss'
 

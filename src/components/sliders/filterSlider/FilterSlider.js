@@ -4,7 +4,7 @@ import { fetchFilterSlider } from './FilterSliderSlice';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import Spiner from '../../spinner/Spinner';
+import Spinner from '../../spinner/Spinner';
 import Error from '../../error/Error';
 
 import './filterSlider.scss';
@@ -22,32 +22,43 @@ const FilterSlider = () => {
         setStyle(filterSlider.map(() => ({'borderColor': ''})))
     }, [filterSlider]);
 
-    function showArrows(left, rigth) {
+    const onShowArrows = (left, rigth) => {
         left.classList.add('splide__arrow--prev_show');
         rigth.classList.add('splide__arrow--next_show'); 
     }
 
-    function hideArrows(left, rigth) {
+    const onHideArrows = (left, rigth) => {
         left.classList.remove('splide__arrow--prev_show');
         rigth.classList.remove('splide__arrow--next_show');
     }
-
-    useEffect(() => {
+    
+    const addArrows = () => {
         const slider = document.querySelector('.filters .splide');
-        const arrowLeft = document.querySelector('.splide__arrow--prev');
-        const arrowRight = document.querySelector('.splide__arrow--next');
+        const arrowLeft = slider.querySelector('.splide__arrow--prev');
+        const arrowRight = slider.querySelector('.splide__arrow--next');
+        const sliderArrows = slider.querySelector('.splide__arrows');
+        
+        sliderArrows.style.display = 'block';
 
-        slider.addEventListener('mouseover', () => showArrows(arrowLeft, arrowRight));
-        slider.addEventListener('mouseout', () => hideArrows(arrowLeft, arrowRight));
+        slider.addEventListener('mouseover', () => onShowArrows(arrowLeft, arrowRight));
+        slider.addEventListener('mouseout', () => onHideArrows(arrowLeft, arrowRight));
 
         return () => {
-            slider.removeEventListener('mouseover', () => showArrows(arrowLeft, arrowRight));
-            slider.removeEventListener('mouseout', () => hideArrows(arrowLeft, arrowRight));
+            slider.removeEventListener('mouseover', () => onShowArrows(arrowLeft, arrowRight));
+            slider.removeEventListener('mouseout', () => onHideArrows(arrowLeft, arrowRight));
         }
-    });
+    }
+
+    const removeArrows = () => {
+        const sliderArrows = document.querySelector('.filters .splide__arrows');
+        sliderArrows.style.display = 'none';
+    }
+
+    useEffect(() => {
+        filterSlider.length > 8 ? addArrows() : removeArrows();
+    }, [filterSlider]);
 
     const renderFilterSlides = (arr) => {
-
         return arr.map( ({name, img, color}, i) => {
             return (
                 <SplideSlide key={i} className='slide'>
@@ -67,9 +78,11 @@ const FilterSlider = () => {
     }
 
     const slides = renderFilterSlides(filterSlider);
-    const spiner = filterSliderStatus === 'loading' ? <Spiner/> : null;
+    const spiner = filterSliderStatus === 'loading' ? <Spinner/> : null;
     const error = filterSliderStatus === 'error' ? <Error/> : null;
-    const slider = slides ? <Splide options={{rewind: true, perPage: 8, perMove: 4, speed: 1200, pagination: false}}>{slides}</Splide> : null;
+    const slider = slides ? <Splide options={{rewind: true, perPage: 8, perMove: 4, speed: 1200, pagination: false}}>
+                                {slides}
+                            </Splide> : null;
 
     return (
         <>

@@ -1,7 +1,7 @@
 import {Routes, Route, useNavigate, Location, useLocation} from 'react-router-dom';
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
-import CartWidget from '../cardWidget/CartWidget';
+import CartWidget from '../cartWidget/CartWidget';
 import { MainPage, 
          ProductPageItem, 
          CatalogPage, 

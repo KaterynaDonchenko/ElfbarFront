@@ -1,0 +1,18 @@
+.empty-productlist {
+    padding: 40px 0;
+    &__text {
+        position: relative;
+        padding: 40px 0 40px 80px;
+        background-color: #E0B252;
+        color: #fff;
+        font-weight: 500;
+        &::before {
+            content: '!';
+            font-weight: 700;
+            font-size: 22px;
+            position: absolute;
+            left: 33px;
+            top: 33px;
+        }
+    }
+}

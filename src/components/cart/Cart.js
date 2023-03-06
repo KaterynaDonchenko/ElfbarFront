@@ -1,9 +1,11 @@
-import Counter from '../counter/Counter';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 import { removeProductFromTheCart } from '../productCard/ProductCartSlice';
+import Counter from '../counter/Counter';
 
 import './cart.scss';
+
 import emptyCart from '../../assets/icons/empty-cart.svg';
 
 const Cart = () => {
@@ -24,17 +26,23 @@ const Product = ({userProductCart}) => {
     return (
         <>
             {
-                userProductCart.map(({img, title, price, counter, id}, i) => {
+                userProductCart.map(({img, title, price, counter, _id}, i) => {
                     return (
                         <tr key={i} className="cart__table-body-row">
-                            <td onClick={() => dispatch(removeProductFromTheCart(id))} className="cart__table-body-romove"></td>
+                            <td onClick={() => dispatch(removeProductFromTheCart(_id))} className="cart__table-body-romove"></td>
                             <td className="cart__table-body-thumbnail">
-                                <img src={`http://localhost:3001/${img}`} alt={title} />
+                                <Link to={`/product/${_id}`}>
+                                    <img src={`http://localhost:3001/${img}`} alt={title} />
+                                </Link>
                             </td>
-                            <td className="cart__table-body-name">{title}</td>
+                            <td className="cart__table-body-name">
+                                <Link to={`/product/${_id}`}>
+                                    {title}
+                                </Link>
+                            </td>
                             <td className="cart__table-body-price">{price} грн</td>
                             <td className="cart__table-body-quantity">
-                                <Counter counter={counter} id={id}/>
+                                <Counter counterProduct={counter}/>
                             </td>
                             <td className="cart__table-body-subtota">{price * counter} грн</td>
                         </tr>
@@ -51,7 +59,7 @@ const EmptyCart = () => {
             <img src={emptyCart} alt="empty cart" />
             <h2 className="cart__empty-title">Ваш кошик порожній</h2>
             <div className="cart__empty-title-btn">
-                <NavLink to='/catalog' end className="btn">Повернутися в магазин</NavLink>
+                <Link to='/catalog' end className="btn">Повернутися в магазин</Link>
             </div>
         </div>
     )
@@ -93,7 +101,7 @@ const CartWithProducts = () => {
                         Загалом
                         <span>{total} грн</span>
                     </div>
-                    <NavLink to='/checkout' end className="btn"> Перейти до оформлення</NavLink>
+                    <Link to='/checkout' end className="btn"> Перейти до оформлення</Link>
                 </div>
             </div>
         </div>

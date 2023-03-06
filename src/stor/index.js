@@ -2,9 +2,9 @@ import products from '../components/productList/ProductListSlice';
 import product from '../components/product/ProductSlice';
 import header from '../components/header/HeaderSlice';
 import productCard from '../components/productCard/ProductCartSlice';
-import cartWidget from '../components/cardWidget/CartWidgetSlice';
+import cartWidget from '../components/cartWidget/CartWidgetSlice';
 import cart from '../components/cart/CartSlice';
-import productCounter from '../components/productCounter/ProductCounterSlice';
+import counter from '../components/counter/CounterSlice';
 import checkout from '../components/checkout/CheckoutSlice';
 import filterSlider from '../components/sliders/filterSlider/FilterSliderSlice';
 import productsPrevAndNext from '../components/breadeCrumbsMenu/BreadCrumbsMenuSlice';
@@ -18,7 +18,7 @@ const store = configureStore({
               productCard, 
               cartWidget, 
               cart, 
-              productCounter, 
+              counter, 
               checkout, 
               filterSlider, 
               productsPrevAndNext},

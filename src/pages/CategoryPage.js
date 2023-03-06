@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { useSelector} from "react-redux";
 
 import ProductList from "../components/productList/ProductList";
 import Filters from "../components/filters/Filters";
@@ -7,6 +8,10 @@ import BreadCrumbs from "../components/breadCrumbs/BreadCrumbs";
 
 const CategoryPage = () => {
     const {category} = useParams();
+    const { products } = useSelector(state => state.products);
+
+    const content = <ProductList removeMarker={true}/>;
+    const warning = products.length <= 0 ? <EmptyProductList/> : null    
 
     return (
         <div className="main-content" style={{'backgroundColor': 'rgb(246,246,246)'}}>
@@ -18,10 +23,22 @@ const CategoryPage = () => {
         </div>
         <div className="container">
             <BreadCrumbs/>
-            <ProductList removeMarker={true}/>
+            {content}
+            {warning}
         </div>
     </div>
     )
 }
 
+const EmptyProductList = () => {
+    return (
+        <div className="empty-productlist">
+            <div className="empty-productlist__text">
+                Товарів, які відповідають вашому запиту, не знайдені
+            </div>
+        </div>
+    )
+}
+
 export default CategoryPage;
+

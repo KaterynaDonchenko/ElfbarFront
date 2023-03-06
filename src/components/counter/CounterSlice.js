@@ -5,7 +5,7 @@ const initialState = {
 };
 
 const productCounterSlice = createSlice({
-    name: 'productCounter',
+    name: 'counter',
     initialState,
     reducers:{
         increaceCounter: (state) => {state.counter += 1},

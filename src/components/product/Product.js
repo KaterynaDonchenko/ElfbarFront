@@ -1,11 +1,11 @@
-import { useParams, Link, useNavigate} from 'react-router-dom';
-import {useEffect} from 'react';
+import { useParams, Link} from 'react-router-dom';
+import {useEffect, useRef} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProduct, fetchCategoryInfo} from './ProductSlice';
 import { fetchProductsCategory } from '../productList/ProductListSlice';
 import { saveUserProductCart } from '../productCard/ProductCartSlice';
 
-import ProductCounter from '../productCounter/ProductCounter';
+import Counter from '../counter/Counter';
 import Spiner from '../spinner/Spinner';
 import Error from '../error/Error';
 import BreadCrumbs from '../breadCrumbs/BreadCrumbs';
@@ -44,9 +44,10 @@ const ProductMain = () => {
     const { productId } = useParams();
     const { product } = useSelector(state => state.product);
     const { products, productsLoadingStatus } = useSelector(state => state.products);
-    const { counter } = useSelector(state => state.productCounter)
+    const { counter } = useSelector(state => state.counter);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const selectRef = useRef();
+    const arrowRef = useRef();
 
     useEffect(() => {
         dispatch(fetchProduct(productId));
@@ -60,21 +61,45 @@ const ProductMain = () => {
         dispatch(fetchCategoryInfo(product.category));
     }, [product.category]);
 
-    const onChangePage = (event) => {
-        if (event.target.value !== '') navigate(event.target.value)
-    } 
+    const onTogleDropdown = (element, arrow) => {
+        if (element && arrow) {
+            element.classList.toggle('product__select-variants_show');
+            arrow.classList.toggle('product__select-btn_rotate');
+        }
+    }
+
+    const spinerSelector = productsLoadingStatus === 'loading' ? <Spiner/> : null;
+    const errorSelector = productsLoadingStatus === 'error' ? <Error/> : null;
 
     const renderSelect = (arr) => {
-        const options = arr.map(item => {
-            return (
-                <option key={item._id} value={`/product/${item._id}`}>{item.taste}</option>
-            )
-        })
+        let mainVariant;
+        const variants = arr.map(item => {
+            if (item._id == productId) {
+                mainVariant = <div onClick={() => onTogleDropdown(selectRef.current, arrowRef.current)} 
+                                   className="product__select-mainvariant">
+                                   {item.taste.slice(0, 18)}
+                               </div>
+            }
+            else {
+                return (
+                    <div className="product__select-variant">
+                        <Link key={item._id} to={`/product/${item._id}`}>{item.taste}</Link>
+                    </div>
+                )
+            }
+
+        });
 
         return (
-            <select value={`/product/${productId}`} name="taste" className="product__taste" onChange={onChangePage}>
-                {options}
-            </select> 
+            <div name="taste" className="product__select">
+                <div className="product__select-btn" ref={el => arrowRef.current = el}></div>
+                    {spinerSelector}
+                    {errorSelector}
+                    {mainVariant}
+                <div className="product__select-variants" ref={el => selectRef.current = el}>
+                    {variants}
+                </div>
+            </div> 
         )
     }
 
@@ -96,7 +121,7 @@ const ProductMain = () => {
                 {selectBlock}
                 <div className="product__amount">{quantity}</div>
                 <form action="" className="product__form">
-                    <ProductCounter/>
+                    <Counter/>
                     <button onClick={(e) => {e.preventDefault(); dispatch(saveUserProductCart({id : productId, title, price, img, counter}))}} className="product__form-button">Додати в кошик</button>
                 </form>
                 <div className="product__category">
