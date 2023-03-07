@@ -24,9 +24,10 @@
         }
     }
     &__breadecrums {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        display: grid;
+        grid-template-columns: 600px 1fr;
+        column-gap: 10px;
+        align-items:baseline;
     }
     &__name {
         margin-top: 20px;

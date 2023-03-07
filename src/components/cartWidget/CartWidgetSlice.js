@@ -9,13 +9,12 @@ const cartWidgetSlice = createSlice({
     name: 'cartWidget',
     initialState,
     reducers: {
-        showCartWidget: state => {state.widgetDisplay = 'block'},
-        hideCartWidget: state => {state.widgetDisplay = 'none'},
+        changeDispalayCartWidget: (state, actions) => {state.widgetDisplay = actions.payload},
         changeTotal: (state, action) => {state.total = action.payload},
     }
 });
 
 const {actions, reducer} = cartWidgetSlice;
 export default reducer;
-export const {showCartWidget, hideCartWidget, changeTotal } = actions;
+export const {changeDispalayCartWidget, changeTotal } = actions;
 

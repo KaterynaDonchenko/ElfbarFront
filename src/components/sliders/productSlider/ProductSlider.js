@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import { saveUserProductCart } from '../../productCard/ProductCartSlice';
+import { changeCartIconDisplay } from '../../header/HeaderSlice';
 import Spinner from '../../spinner/Spinner';
 import Error from '../../error/Error';
 
@@ -66,13 +67,16 @@ const ProductSlider = () => {
                                     </Link>
                                     <div className="product-slider__content">
                                         <Link to={`/product/${_id}`} >
-                                            <div className="product-slider__title">{title}</div>
+                                            <div className="product-slider__title">{title.slice(0, 70)}</div>
                                         </Link>
                                         <div className="product-slider__model"><Link to={`/product-category/${categoryUrl}`} end>{category}</Link></div>
                                         <div className="product-slider__footer">
                                             <div className="product-slider__price">{price} грн</div>
                                             <div className="product-slider__basket"
-                                                 onClick={() => dispatch(saveUserProductCart({_id, title, price, img}))}>
+                                                 onClick={() => {
+                                                    dispatch(saveUserProductCart({_id, title, price, img}));
+                                                    dispatch(changeCartIconDisplay('block'));
+                                                 }}>
                                                 <img src={cart} alt="cart" />
                                             </div>
                                         </div>

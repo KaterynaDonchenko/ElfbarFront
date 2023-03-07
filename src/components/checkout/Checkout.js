@@ -1,8 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage, useField } from 'formik';
-import { fetchEmail, fetchCity } from './CheckoutSlice';
 import * as Yup from 'yup';
 import InputMask from 'react-input-mask';
+
+import { fetchEmail, fetchCity } from './CheckoutSlice';
+import { changeCartIconDisplay } from '../header/HeaderSlice';
 
 import './checkout.scss'
 
@@ -23,6 +25,7 @@ const Checkout = () => {
     const { userProductCart } = useSelector( state => state.productCard);
     const { total } = useSelector(state => state.cartWidget);
     const dispatch = useDispatch();
+    dispatch(changeCartIconDisplay('none'));
 
     // dispatch(fetchCity());
 

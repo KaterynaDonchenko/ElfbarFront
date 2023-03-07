@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { removeProductFromTheCart } from '../productCard/ProductCartSlice';
+import { changeCartIconDisplay } from '../header/HeaderSlice';
 import Counter from '../counter/Counter';
 
 import './cart.scss';
@@ -10,6 +11,8 @@ import emptyCart from '../../assets/icons/empty-cart.svg';
 
 const Cart = () => {
     const { userProductCart } = useSelector( state => state.productCard);
+    const dispatch = useDispatch();
+    dispatch(changeCartIconDisplay('none'));
 
     const content = userProductCart.length > 0 ? <CartWithProducts/> : <EmptyCart/>
     return (
@@ -32,7 +35,7 @@ const Product = ({userProductCart}) => {
                             <td onClick={() => dispatch(removeProductFromTheCart(_id))} className="cart__table-body-romove"></td>
                             <td className="cart__table-body-thumbnail">
                                 <Link to={`/product/${_id}`}>
-                                    <img src={`http://localhost:3001/${img}`} alt={title} />
+                                    <img src={`http://localhost:3001/${img}`} alt={title.slice(0, 100)} />
                                 </Link>
                             </td>
                             <td className="cart__table-body-name">
@@ -42,7 +45,7 @@ const Product = ({userProductCart}) => {
                             </td>
                             <td className="cart__table-body-price">{price} грн</td>
                             <td className="cart__table-body-quantity">
-                                <Counter counterProduct={counter}/>
+                                <Counter counterProduct={counter} _id={_id}/>
                             </td>
                             <td className="cart__table-body-subtota">{price * counter} грн</td>
                         </tr>

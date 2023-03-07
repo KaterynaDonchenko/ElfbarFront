@@ -1,10 +1,12 @@
 import { useParams, Link} from 'react-router-dom';
 import {useEffect, useRef} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { fetchProduct, fetchCategoryInfo} from './ProductSlice';
 import { fetchProductsCategory } from '../productList/ProductListSlice';
 import { saveUserProductCart } from '../productCard/ProductCartSlice';
-
+import { resetCounter } from '../counter/CounterSlice';
+import { changeCartIconDisplay } from '../header/HeaderSlice';
 import Counter from '../counter/Counter';
 import Spiner from '../spinner/Spinner';
 import Error from '../error/Error';
@@ -15,6 +17,10 @@ import './product.scss';
 
 const Product = () => {
     const { productLoadingStatus, categoryInfoLoadingStatus } = useSelector(state => state.product);
+    const { userProductCart } = useSelector( state => state.productCard);
+    const dispatch = useDispatch();
+
+    if (userProductCart.length > 0) dispatch(changeCartIconDisplay('block'));
 
     const spinerMain = productLoadingStatus === 'loading' ? <Spiner/> : null;
     const spinerBottom = categoryInfoLoadingStatus === 'loading' ? <Spiner/> : null;
@@ -51,6 +57,7 @@ const ProductMain = () => {
 
     useEffect(() => {
         dispatch(fetchProduct(productId));
+        dispatch(resetCounter());
     }, [productId]);
 
     useEffect(() => {
@@ -122,7 +129,13 @@ const ProductMain = () => {
                 <div className="product__amount">{quantity}</div>
                 <form action="" className="product__form">
                     <Counter/>
-                    <button onClick={(e) => {e.preventDefault(); dispatch(saveUserProductCart({id : productId, title, price, img, counter}))}} className="product__form-button">Додати в кошик</button>
+                    <button onClick={(e) => {
+                            e.preventDefault(); 
+                            dispatch(saveUserProductCart({_id : productId, title, price, img, counter}))
+                            dispatch(changeCartIconDisplay('block'))}} 
+                            className="product__form-button">
+                            Додати в кошик
+                    </button>
                 </form>
                 <div className="product__category">
                     <span>Категорія:</span> 

@@ -24,13 +24,15 @@ const productCardSlice = createSlice({
             const productId = action.payload;
             state.userProductCart = state.userProductCart.filter(item => item._id !== productId);
         },
-        increaseCounter: (state, action) => {
+        increaseCounterInTheProduct: (state, action) => {
+            console.log(action.payload);
             const productId = action.payload;
-            state.userProductCart.map(item => item.counter = item._id === productId ? item.counter +=1 : item.counter);
+            state.userProductCart.map(item => item.counter = item._id == productId ? item.counter +=1 : item.counter);
         },
-        decreaseCounter: (state, action) => {
+        decreaseCounterInTheProduct: (state, action) => {
+            console.log(action.payload);
             const productId = action.payload;
-            state.userProductCart.map(item => item.counter = item._id !== productId ? item.counter : item.counter > 1 ? 
+            state.userProductCart.map(item => item.counter = item._id != productId ? item.counter : item.counter > 1 ? 
             item.counter -=1 : state.userProductCart = state.userProductCart.filter(item => item._id !== productId));
         }
     },
@@ -38,4 +40,4 @@ const productCardSlice = createSlice({
 
 export const {actions, reducer} = productCardSlice;
 export default reducer;
-export const { saveUserProductCart, removeProductFromTheCart, increaseCounter, decreaseCounter } = actions;
+export const { saveUserProductCart, removeProductFromTheCart, increaseCounterInTheProduct, decreaseCounterInTheProduct } = actions;

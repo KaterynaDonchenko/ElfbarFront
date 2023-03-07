@@ -1,8 +1,9 @@
 import {useEffect} from 'react';
 import { useSelector, useDispatch} from 'react-redux';
-import { fetchProducts, fetchProductsCategory } from './ProductListSlice'; 
-import { useParams } from 'react-router-dom';
+ import { useParams } from 'react-router-dom';
 
+import { fetchProducts, fetchProductsCategory } from './ProductListSlice';
+import { changeCartIconDisplay } from '../header/HeaderSlice'; 
 import ProductCard from '../productCard/ProductCard';
 import Spinner from '../spinner/Spinner';
 import Error from '../error/Error';
@@ -11,12 +12,15 @@ import './productList.scss';
 
 const ProductList = ({marker = '', removeMarker}) => {
     const { products, productsLoadingStatus } = useSelector(state => state.products);
+    const { userProductCart } = useSelector( state => state.productCard);
     const dispatch = useDispatch();
     const {category} = useParams();
 
     useEffect(() => {
         category ? dispatch(fetchProductsCategory(category)) : dispatch(fetchProducts());
     }, [category]);
+
+    if (userProductCart.length > 0) dispatch(changeCartIconDisplay('block'));
 
     const renderProductCard = (arr) => {
         if (arr.length !== 0) {

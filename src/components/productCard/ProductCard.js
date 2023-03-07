@@ -27,7 +27,7 @@ const ProductCart = ({title, category, price, img, lable, _id, categoryUrl}) => 
                 </Link>
                 <div className="card-list__item-content">
                     <Link to={`/product/${_id}`} >
-                        <div className="card-list__item-title">{title}</div>
+                        <div className="card-list__item-title">{title.slice(0, 70)}</div>
                     </Link>
                     <div className="card-list__item-model"><Link to={`/product-category/${categoryUrl}`} end>{category}</Link></div>
                     <div className="card-list__item-footer">
