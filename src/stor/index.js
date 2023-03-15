@@ -8,6 +8,7 @@ import counter from '../components/counter/CounterSlice';
 import checkout from '../components/checkout/CheckoutSlice';
 import filterSlider from '../components/sliders/filterSlider/FilterSliderSlice';
 import productsPrevAndNext from '../components/breadeCrumbsMenu/BreadCrumbsMenuSlice';
+import question from '../components/question/QuestionSlice';
 import { configureStore } from '@reduxjs/toolkit';
 
 
@@ -20,7 +21,8 @@ const store = configureStore({
               cart, 
               counter, 
               checkout, 
-              filterSlider, 
+              filterSlider,
+              question, 
               productsPrevAndNext},
     middleware: getDefaultMiddleware => getDefaultMiddleware(),
     devTools: process.env.NODE_ENV !== 'production'    

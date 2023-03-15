@@ -1,4 +1,4 @@
-import {Routes, Route, useNavigate, Location, useLocation} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import CartWidget from '../cartWidget/CartWidget';
@@ -7,7 +7,8 @@ import { MainPage,
          CatalogPage, 
          CartPage, 
          CheckoutPage, 
-         CategoryPage, 
+         CategoryPage,
+         QuestionPage, 
          Page404 } from '../../pages';   
    
 import '../../assets/scss/style.scss';
@@ -21,6 +22,7 @@ const App = () => {
                 <Routes>
                     <Route path='/' element={<MainPage/>}/>
                     <Route path='/catalog' element={<CatalogPage/>}/>
+                    <Route path='/question' element={<QuestionPage/>}/>
                     <Route path='/product/:productId' element={<ProductPageItem/>}/>
                     <Route path='/cart' element={<CartPage/>}/>
                     <Route path='/checkout' element={<CheckoutPage/>}/>

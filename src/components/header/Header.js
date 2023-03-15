@@ -29,7 +29,7 @@ const Header = () => {
                         <NavLink to='/catalog' end>Каталог</NavLink>
                     </li>
                     <li className="header__menu-item">
-                        <a href="№">Відповіді на питання</a>
+                        <NavLink to='/question' end>Відповіді на питання</NavLink>
                     </li>
                 </ul>
             </nav>
