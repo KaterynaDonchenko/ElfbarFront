@@ -1,3 +1,7 @@
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+
+import { setSearch } from "../components/search/SearchSlice";
 import MainScreen from '../components/mainScreen/MainScreen';
 import Filtersl from '../components/filters/Filters';
 import ProductList from '../components/productList/ProductList';
@@ -6,6 +10,12 @@ import MainInfo from '../components/mainInfo/MainInfo';
 import Advantages from '../components/advantages/Advantages';
 
 const MainPage = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(setSearch(''));
+    }, []);
+
     return (
         <>
             <MainScreen/>

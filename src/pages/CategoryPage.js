@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
-import { useSelector} from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
+import { useEffect } from "react";
 
+import { setSearch } from "../components/search/SearchSlice";
 import ProductList from "../components/productList/ProductList";
 import Filters from "../components/filters/Filters";
 import TitleH1 from "../components/titleH1/TitleH1";
@@ -9,6 +11,11 @@ import BreadCrumbs from "../components/breadCrumbs/BreadCrumbs";
 const CategoryPage = () => {
     const {category} = useParams();
     const { products } = useSelector(state => state.products);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(setSearch(''));
+    }, []);
 
     const content = <ProductList removeMarker={true}/>;
     const warning = products.length <= 0 ? <EmptyProductList/> : null    

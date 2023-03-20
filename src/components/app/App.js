@@ -1,4 +1,5 @@
 import {Routes, Route} from 'react-router-dom';
+
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import CartWidget from '../cartWidget/CartWidget';
@@ -8,7 +9,8 @@ import { MainPage,
          CartPage, 
          CheckoutPage, 
          CategoryPage,
-         QuestionPage, 
+         QuestionPage,
+         SearchPage, 
          Page404 } from '../../pages';   
    
 import '../../assets/scss/style.scss';
@@ -27,6 +29,7 @@ const App = () => {
                     <Route path='/cart' element={<CartPage/>}/>
                     <Route path='/checkout' element={<CheckoutPage/>}/>
                     <Route path='/product-category/:category' element={<CategoryPage/>}/>
+                    <Route path={`/search`} element={<SearchPage/>}/>
                     <Route path='*' element={<Page404/>}/>
                 </Routes>
                 <Footer/>

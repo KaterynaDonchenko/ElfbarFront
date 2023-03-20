@@ -4,12 +4,13 @@ import { useSelector } from "react-redux";
 import './breadCrumbs.scss';
 
 const BreadCrumbs = () => {
-    const { pathname } = useLocation();
+    const { pathname, search } = useLocation();
     const { product } = useSelector(state => state.product);
 
     const setCategoryBreadCrumbs = () => {
         const model = pathname.slice(-((pathname.length - pathname.indexOf('y/')) - 2));
-        const nameLink = pathname === '/catalog' ? 'Каталог товарів' : `ELFBAR ${model}`;
+        const nameLink = pathname === '/catalog' ? 'Каталог товарів' : pathname === '/search/' ?  
+        `Результат пошуку для "${search.slice(search.indexOf('=') + 1).replace(/\+/ig, ' ')}"` : `ELFBAR ${model}`;
         return (
             <span className="breade-crumbs__link breade-crumbs__link_active">{nameLink}</span>
         )

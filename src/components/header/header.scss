@@ -22,6 +22,9 @@
         }
     }
     &__menu {
+        position: absolute;
+        right: 50%;
+        transform: translateX(50%);
         height: 61px;
         padding: 21px 40px;
         width: 515px;
@@ -31,7 +34,7 @@
     }
     &__menu-list {
         list-style-type: none;
-        display: grid; //131 172
+        display: grid; 
         grid-template-columns: 131px 131px 172px;
         justify-items: baseline;
         
@@ -62,43 +65,24 @@
         }
     }
     &__settings-left-block {
+        position: relative;
         padding: 18px 5px;
-        display: grid;
-        grid-template: 25px / repeat(3, 1fr);
+        display: flex;
         background: #FFFFFF;
         border-radius: 28px;
         margin-right: 5px;
+        transition: grid-template .5s;
     }
-    &__settings-sosial-telegram, &__settings-search, &__settings-language {
+    &__settings-sosial-telegram {
+        position: relative;
         display: block;
         height: 25px;
+        width: 40px;
+        transition: all .5s;
         svg {
             width: 100%;
             height: 100%;
             object-fit: contain;
-        }
-    }
-    &__settings-language {
-        position: relative;
-        display: flex;
-        justify-content: space-between;
-        width: 48px;
-    }
-    &__settings-language-img {
-        &::before {
-            content: url('../../assets//icons/globe.svg');
-            cursor: pointer;
-        }
-        &:hover {
-            content: url('../../assets//icons/globe2.svg');
-            cursor: pointer;
-        }
-    }
-    &__settings-language-UA {
-        position: absolute;
-        right: 0;
-        &:hover {
-            color: $main-color;
         }
     }
     &__settings-right-block {
