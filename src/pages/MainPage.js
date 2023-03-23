@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 import { setSearch } from "../components/search/SearchSlice";
 import MainScreen from '../components/mainScreen/MainScreen';
-import Filtersl from '../components/filters/Filters';
+import FilterSlider from "../components/sliders/filterSlider/FilterSlider";
 import ProductList from '../components/productList/ProductList';
 import TitleH2 from '../components/titleH2/TitleH2';
 import MainInfo from '../components/mainInfo/MainInfo';
@@ -20,7 +20,7 @@ const MainPage = () => {
         <>
             <MainScreen/>
             <div className="container">
-                <Filtersl/>
+                <FilterSlider/>
                 <TitleH2 title='Новинки'/>
                 <ProductList marker='новинка'/>
                 <TitleH2 title='Популярні товари'/>

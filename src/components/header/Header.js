@@ -27,7 +27,7 @@ const Header = () => {
                         <NavLink to='/' end>Головна</NavLink>
                     </li>
                     <li className="header__menu-item">
-                        <NavLink to='/catalog' end>Каталог</NavLink>
+                        <NavLink to={`/catalog/filter?orderby=all`} end>Каталог</NavLink>
                     </li>
                     <li className="header__menu-item">
                         <NavLink to='/question' end>Відповіді на питання</NavLink>

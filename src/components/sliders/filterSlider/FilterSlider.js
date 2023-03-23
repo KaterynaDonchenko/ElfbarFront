@@ -33,7 +33,7 @@ const FilterSlider = () => {
     }
     
     const addArrows = () => {
-        const slider = document.querySelector('.filters .splide');
+        const slider = document.querySelector('.filter-slider .splide');
         const arrowLeft = slider.querySelector('.splide__arrow--prev');
         const arrowRight = slider.querySelector('.splide__arrow--next');
         const sliderArrows = slider.querySelector('.splide__arrows');
@@ -50,7 +50,7 @@ const FilterSlider = () => {
     }
 
     const removeArrows = () => {
-        const sliderArrows = document.querySelector('.filters .splide__arrows');
+        const sliderArrows = document.querySelector('.filter-slider .splide__arrows');
         sliderArrows.style.display = 'none';
     }
 
@@ -88,7 +88,9 @@ const FilterSlider = () => {
         <>
             {spiner}
             {error}
-            {slider}
+            <div className="filter-slider">
+                {slider}
+            </div>
         </>
     );
 }

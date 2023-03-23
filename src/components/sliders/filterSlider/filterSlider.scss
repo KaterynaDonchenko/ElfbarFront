@@ -1,3 +1,10 @@
+.filter-slider {
+    padding: 45px 0 34px 0;
+    .splide__list {
+        justify-content: center;
+    }
+}
+
 .slide {
     display: grid; 
     grid-template: 120px 19px 22px / 154px;

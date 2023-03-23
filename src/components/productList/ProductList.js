@@ -10,7 +10,7 @@ import Error from '../error/Error';
 
 import './productList.scss';
 
-const ProductList = ({marker = '', removeMarker, search = null}) => {
+const ProductList = ({marker = '', removeMarker, search = null, filter = null}) => {
     const { products, productsLoadingStatus } = useSelector(state => state.products);
     const { userProductCart } = useSelector( state => state.productCard);
     const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const ProductList = ({marker = '', removeMarker, search = null}) => {
         }
     }
 
-    const cardItem = !search ? renderProductCard(products) :  renderProductCard(search);
+    const cardItem = search ? renderProductCard(search) : filter ? renderProductCard(filter) : renderProductCard(products);
     const spiner = productsLoadingStatus === 'loading' ? <Spinner/> : null;
     const error = productsLoadingStatus === 'error' ? <Error/> : null;
     const content = products.length > 0 ? <ul className="card-list">{cardItem}</ul> : null;

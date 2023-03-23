@@ -23,7 +23,7 @@ const App = () => {
                 <CartWidget/>
                 <Routes>
                     <Route path='/' element={<MainPage/>}/>
-                    <Route path='/catalog' element={<CatalogPage/>}/>
+                    <Route path={`/catalog/filter`} element={<CatalogPage/>}/>
                     <Route path='/question' element={<QuestionPage/>}/>
                     <Route path='/product/:productId' element={<ProductPageItem/>}/>
                     <Route path='/cart' element={<CartPage/>}/>

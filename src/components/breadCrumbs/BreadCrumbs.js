@@ -9,7 +9,7 @@ const BreadCrumbs = () => {
 
     const setCategoryBreadCrumbs = () => {
         const model = pathname.slice(-((pathname.length - pathname.indexOf('y/')) - 2));
-        const nameLink = pathname === '/catalog' ? 'Каталог товарів' : pathname === '/search/' ?  
+        const nameLink = pathname.includes('/catalog') ? 'Каталог товарів' : pathname === '/search/' ?  
         `Результат пошуку для "${search.slice(search.indexOf('=') + 1).replace(/\+/ig, ' ')}"` : `ELFBAR ${model}`;
         return (
             <span className="breade-crumbs__link breade-crumbs__link_active">{nameLink}</span>

@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 import { setSearch } from "../components/search/SearchSlice";
 import ProductList from "../components/productList/ProductList";
-import Filters from "../components/filters/Filters";
+import FilterSlider from "../components/sliders/filterSlider/FilterSlider";
 import TitleH1 from "../components/titleH1/TitleH1";
 import BreadCrumbs from "../components/breadCrumbs/BreadCrumbs";
 
@@ -25,7 +25,7 @@ const CategoryPage = () => {
         <div className="main-content__header" style={{'backgroundColor': 'rgb(251, 242, 251)'}}>
             <div className="container">
                 <TitleH1 title={`ELFBAR ${category}`} classN='title-h1_pdt150 title-h1_center title-h1_fz-50'/>
-                <Filters/>
+                <FilterSlider/>
             </div>
         </div>
         <div className="container">

@@ -10,6 +10,7 @@ import filterSlider from '../components/sliders/filterSlider/FilterSliderSlice';
 import productsPrevAndNext from '../components/breadeCrumbsMenu/BreadCrumbsMenuSlice';
 import question from '../components/question/QuestionSlice';
 import search from '../components/search/SearchSlice';
+import filter from '../components/filters/FilterSlice';
 import { configureStore } from '@reduxjs/toolkit';
 
 
@@ -24,7 +25,8 @@ const store = configureStore({
               checkout, 
               filterSlider,
               question,
-              search, 
+              search,
+              filter, 
               productsPrevAndNext},
     middleware: getDefaultMiddleware => getDefaultMiddleware(),
     devTools: process.env.NODE_ENV !== 'production'    

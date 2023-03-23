@@ -1,6 +1,11 @@
 .filters {
-    padding: 45px 0 34px 0;
-    .splide__list {
-        justify-content: center;
-    }
+    margin-left: 10px;
+    width: 240px;
+    padding: 5px 20px 5px 2px;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid rgba(0,0,0, .1);
+    background-color: unset;
+    font-weight: 600;
+    line-height: 1.2;
 }
