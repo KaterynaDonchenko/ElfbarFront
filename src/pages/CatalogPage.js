@@ -38,7 +38,7 @@ const CatalogPage = () => {
                     <BreadCrumbs/>
                     <Filters/>
                 </div>
-                <ProductList filter={filterResult} removeMarker={true}/>
+                <ProductList filter={filterResult}/>
                 <Pagination/>
             </div>
         </div>

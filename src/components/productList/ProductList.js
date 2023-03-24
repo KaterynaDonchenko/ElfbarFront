@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 import { useSelector, useDispatch} from 'react-redux';
  import { useParams } from 'react-router-dom';
 
-import { fetchProducts, fetchProductsCategory } from './ProductListSlice';
+import { fetchProducts, fetchProductsCategory, fetchProductsWithTheLable } from './ProductListSlice';
 import { changeCartIconDisplay } from '../header/HeaderSlice'; 
 import ProductCard from '../productCard/ProductCard';
 import Spinner from '../spinner/Spinner';
@@ -10,8 +10,8 @@ import Error from '../error/Error';
 
 import './productList.scss';
 
-const ProductList = ({marker = '', removeMarker, search = null, filter = null}) => {
-    const { products, productsLoadingStatus } = useSelector(state => state.products);
+const ProductList = ({lable = false, search = null, filter = null}) => {
+    const { products, productsTop, productsNew, productsLoadingStatus } = useSelector(state => state.products);
     const { userProductCart } = useSelector( state => state.productCard);
     const dispatch = useDispatch();
     const {category} = useParams();
@@ -20,31 +20,32 @@ const ProductList = ({marker = '', removeMarker, search = null, filter = null}) 
         category ? dispatch(fetchProductsCategory(category)) : dispatch(fetchProducts());
     }, [category]);
 
+    useEffect(() => {
+        dispatch(fetchProductsWithTheLable(lable))
+    }, []);
+
     if (userProductCart.length > 0) dispatch(changeCartIconDisplay('block'));
 
-    const renderProductCard = (arr) => {
+    const renderProductCard = (arr, lable) => {
         if (arr.length !== 0) {
-            return arr.map(({_id, title, category, price, img, lable, categoryUrl}) => {
-                if (removeMarker) lable = ''
-                 
-                if (marker === lable) {
-                    return (
-                        <ProductCard 
-                            key={_id} 
-                            title={title} 
-                            category={category} 
-                            price={price}
-                            img={img} 
-                            lable={lable}
-                            _id={_id}
-                            categoryUrl={categoryUrl}/> 
-                    )
-                }
+            return arr.map(({_id, title, category, price, img, categoryUrl}) => {
+                return (
+                    <ProductCard 
+                        key={_id} 
+                        title={title} 
+                        category={category} 
+                        price={price}
+                        img={img} 
+                        lable={lable}
+                        _id={_id}
+                        categoryUrl={categoryUrl}/> 
+                )
             });
         }
     }
 
-    const cardItem = search ? renderProductCard(search) : filter ? renderProductCard(filter) : renderProductCard(products);
+    const cardItem = search ? renderProductCard(search) : filter ? renderProductCard(filter) : lable === 'топ'? 
+    renderProductCard(productsTop, lable) : lable === 'новинка'? renderProductCard(productsNew, lable) : renderProductCard(products, lable);
     const spiner = productsLoadingStatus === 'loading' ? <Spinner/> : null;
     const error = productsLoadingStatus === 'error' ? <Error/> : null;
     const content = products.length > 0 ? <ul className="card-list">{cardItem}</ul> : null;

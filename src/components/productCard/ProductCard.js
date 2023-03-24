@@ -9,7 +9,7 @@ import './productCard.scss';
 
 import cart from '../../assets/icons/cart.svg';
 
-const ProductCart = ({title, category, price, img, lable, _id, categoryUrl}) => {
+const ProductCart = ({title, category, price, img, _id, categoryUrl, lable}) => {
     const dispatch = useDispatch();
     const listRef = useRef([]);
 

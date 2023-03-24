@@ -22,9 +22,9 @@ const MainPage = () => {
             <div className="container">
                 <FilterSlider/>
                 <TitleH2 title='Новинки'/>
-                <ProductList marker='новинка'/>
+                <ProductList lable='новинка'/>
                 <TitleH2 title='Популярні товари'/>
-                <ProductList marker='топ'/>
+                <ProductList lable='топ'/>
                 <Advantages/>
                 <MainInfo/>
             </div>
@@ -32,4 +32,6 @@ const MainPage = () => {
     )
 }
 
+// marker='новинка'
+//marker='топ'
 export default MainPage;
