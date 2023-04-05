@@ -14,7 +14,7 @@ import './productSlider.scss';
 import cart from '../../../assets/icons/cart.svg';
 
 const ProductSlider = () => {
-    const { products, productsLoadingStatus } = useSelector(state => state.products);
+    const { productsCategory, productsCategoryLoadingStatus } = useSelector(state => state.products);
     const { productId } = useParams();
     const dispatch = useDispatch();
 
@@ -51,8 +51,8 @@ const ProductSlider = () => {
     }
 
     useEffect(() => {
-        products.length > 5 ? addArrows() : removeArrows();
-    }, [products]);
+        productsCategory.length > 5 ? addArrows() : removeArrows();
+    }, [productsCategory]);
 
     const renderProductCard = (arr) => {
         if (arr.length !== 0) {
@@ -90,10 +90,10 @@ const ProductSlider = () => {
         }
     }
 
-    const cardItem = renderProductCard(products) ;
-    const spiner = productsLoadingStatus === 'loading' ? <Spinner/> : null;
-    const error = productsLoadingStatus === 'error' ? <Error/> : null;
-    const content = products ? <Splide options={{rewind: true, perPage: 5, perMove: 5, speed: 1200, pagination: false}}>
+    const cardItem = renderProductCard(productsCategory) ;
+    const spiner = productsCategoryLoadingStatus === 'loading' ? <Spinner/> : null;
+    const error = productsCategoryLoadingStatus === 'error' ? <Error/> : null;
+    const content = productsCategory ? <Splide options={{rewind: true, perPage: 5, perMove: 5, speed: 1200, pagination: false}}>
                                     {cardItem}
                                 </Splide> : null;
     return (

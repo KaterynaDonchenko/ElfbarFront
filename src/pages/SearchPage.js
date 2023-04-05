@@ -2,17 +2,21 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 import { setSearch } from "../components/search/SearchSlice";
+import { setCurrentPage } from "../components/pagination/PaginationSlice";
 import ProductList from "../components/productList/ProductList";
 import TitleH1 from "../components/titleH1/TitleH1";
 import BreadCrumbs from "../components/breadCrumbs/BreadCrumbs";
+import Pagination from "../components/pagination/Pagination";
 
 const SearchPage = () => {
-    const { searchItemsForSearchPage } = useSelector(state => state.search);
+    const { searchResultForSearchPage, serchResultLoadingStatus } = useSelector(state => state.search);
+    const { currentPageData } = useSelector(state => state.pagination);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(setSearch(''));
-    }, [searchItemsForSearchPage]);
+        dispatch(setCurrentPage(0));
+    }, [searchResultForSearchPage]);
 
 
     return (
@@ -24,7 +28,8 @@ const SearchPage = () => {
             </div>
             <div className="container">
                 <BreadCrumbs/>
-                <ProductList removeMarker={true} search={searchItemsForSearchPage}/>
+                <ProductList productsArray={currentPageData}/>
+                {!(serchResultLoadingStatus === 'loading') ? <Pagination array={searchResultForSearchPage}/> : null}
             </div>
         </div>
     )

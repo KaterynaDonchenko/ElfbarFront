@@ -4,8 +4,8 @@ import { useHttp } from '../../hooks/http.hook';
 const initialState = {
     search: '',
     searchResult: [],
-    serchLoadingStatus: 'idle',
-    searchItemsForSearchPage: []
+    serchResultLoadingStatus: 'idle',
+    searchResultForSearchPage: []
 }
 
 const SearchSlice = createSlice({
@@ -14,16 +14,16 @@ const SearchSlice = createSlice({
     reducers: {
         setSearch: (state, actions) => {state.search = actions.payload},
         cleareSearchResult: state => {state.searchResult = []},
-        setSearchItemsForSearchPage: (state, actions) => {state.searchItemsForSearchPage = actions.payload}
+        setSearchResultForSearchPage: (state, actions) => {state.searchResultForSearchPage = actions.payload}
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchSearch.pending, state => {state.serchLoadingStatus = 'loading'})
+            .addCase(fetchSearch.pending, state => {state.serchResultLoadingStatus = 'loading'})
             .addCase(fetchSearch.fulfilled, (state, action) => {
-                state.serchLoadingStatus = 'idle';
+                state.serchResultLoadingStatus = 'idle';
                 state.searchResult = action.payload;
             })
-            .addCase(fetchSearch.rejected, state => {state.serchLoadingStatus = 'error'})
+            .addCase(fetchSearch.rejected, state => {state.serchResultLoadingStatus = 'error'})
     }
 });
 
@@ -36,7 +36,7 @@ export const fetchSearch = createAsyncThunk(
 );
 
 const {actions, reducer} = SearchSlice;
-export const { setSearch, cleareSearchResult, setSearchItemsForSearchPage } = actions;
+export const { setSearch, cleareSearchResult, setSearchResultForSearchPage } = actions;
 
 export default reducer;
 

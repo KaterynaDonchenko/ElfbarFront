@@ -70,7 +70,7 @@ const FilterSlider = () => {
                             <img src={`http://localhost:3001/${img}`} alt={`elfbar ${name}`} />
                         </div>
                         <div className="slide__item-title">ELFBAR</div>
-                        <div style={{'color': color}} className="slide__item-price">{name}</div>
+                        <div style={{'color': color}} className="slide__item-subtitle">{name}</div>
                     </Link>
                 </SplideSlide>
             )
@@ -80,7 +80,7 @@ const FilterSlider = () => {
     const slides = renderFilterSlides(filterSlider);
     const spiner = filterSliderStatus === 'loading' ? <Spinner/> : null;
     const error = filterSliderStatus === 'error' ? <Error/> : null;
-    const slider = slides ? <Splide options={{rewind: true, perPage: 8, perMove: 4, speed: 1200, pagination: false}}>
+    const slider = !(spiner || error ) ? <Splide options={{rewind: true, perPage: 8, perMove: 4, speed: 1200, pagination: false}}>
                                 {slides}
                             </Splide> : null;
 

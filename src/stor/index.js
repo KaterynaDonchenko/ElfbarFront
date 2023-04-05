@@ -11,6 +11,7 @@ import productsPrevAndNext from '../components/breadeCrumbsMenu/BreadCrumbsMenuS
 import question from '../components/question/QuestionSlice';
 import search from '../components/search/SearchSlice';
 import filter from '../components/filters/FilterSlice';
+import pagination from '../components/pagination/PaginationSlice';
 import { configureStore } from '@reduxjs/toolkit';
 
 
@@ -26,7 +27,8 @@ const store = configureStore({
               filterSlider,
               question,
               search,
-              filter, 
+              filter,
+              pagination, 
               productsPrevAndNext},
     middleware: getDefaultMiddleware => getDefaultMiddleware(),
     devTools: process.env.NODE_ENV !== 'production'    

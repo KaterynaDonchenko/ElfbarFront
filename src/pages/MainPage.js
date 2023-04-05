@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 import { setSearch } from "../components/search/SearchSlice";
@@ -10,6 +10,7 @@ import MainInfo from '../components/mainInfo/MainInfo';
 import Advantages from '../components/advantages/Advantages';
 
 const MainPage = () => {
+    const { productsTop, productsNew, productsWithLableLoadingStatus } = useSelector(state => state.products);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -22,9 +23,9 @@ const MainPage = () => {
             <div className="container">
                 <FilterSlider/>
                 <TitleH2 title='Новинки'/>
-                <ProductList lable='новинка'/>
+                <ProductList lable='новинка' productsArray={productsNew} statusProductsArray={productsWithLableLoadingStatus}/>
                 <TitleH2 title='Популярні товари'/>
-                <ProductList lable='топ'/>
+                <ProductList lable='топ' productsArray={productsTop} statusProductsArray={productsWithLableLoadingStatus}/>
                 <Advantages/>
                 <MainInfo/>
             </div>

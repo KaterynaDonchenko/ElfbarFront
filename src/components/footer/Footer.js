@@ -1,10 +1,21 @@
 import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { setFilter } from "../filters/FilterSlice";
+import { setCurrentPage } from '../pagination/PaginationSlice';
 
 import './footer.scss';
 
 import logo from '../../assets/icons/LogoPar.svg';
 
 const Footer = () => {
+    const dispatch = useDispatch();
+
+    const goToCatalog = () => {
+        dispatch(setFilter('all'));
+        dispatch(setCurrentPage(0));
+    }
+
     return (
         <footer className="footer">
             <div className="footer__main">
@@ -19,10 +30,10 @@ const Footer = () => {
                                 <NavLink to='/' end>Головна</NavLink>
                             </li>
                             <li className="footer__menu-item">
-                                <NavLink to='/catalog' end>Каталог</NavLink>
+                                <NavLink to={`/catalog/filter?orderby=all&page=1`} onClick={goToCatalog} end>Каталог</NavLink>
                             </li>
                             <li className="footer__menu-item">
-                                <NavLink to='' end>Відповіді на питання</NavLink>
+                                <NavLink to='/question' end>Відповіді на питання</NavLink>
                             </li>
                         </ul>
                     </nav>

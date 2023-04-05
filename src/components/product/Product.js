@@ -49,7 +49,7 @@ const Product = () => {
 const ProductMain = () => {
     const { productId } = useParams();
     const { product } = useSelector(state => state.product);
-    const { products, productsLoadingStatus } = useSelector(state => state.products);
+    const { productsCategory, productsCategoryLoadingStatus } = useSelector(state => state.products);
     const { counter } = useSelector(state => state.counter);
     const dispatch = useDispatch();
     const selectRef = useRef();
@@ -75,8 +75,8 @@ const ProductMain = () => {
         }
     }
 
-    const spinerSelector = productsLoadingStatus === 'loading' ? <Spiner/> : null;
-    const errorSelector = productsLoadingStatus === 'error' ? <Error/> : null;
+    const spinerSelector = productsCategoryLoadingStatus === 'loading' ? <Spiner/> : null;
+    const errorSelector = productsCategoryLoadingStatus === 'error' ? <Error/> : null;
 
     const renderSelect = (arr) => {
         let mainVariant;
@@ -110,7 +110,7 @@ const ProductMain = () => {
         )
     }
 
-    const selectBlock = renderSelect(products)
+    const selectBlock = renderSelect(productsCategory)
     const {title, price, quantity, category, img, dscr, categoryUrl} = product;
     return (
         <div className="product__wrapper">

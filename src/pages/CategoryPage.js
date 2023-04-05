@@ -3,23 +3,42 @@ import { useSelector, useDispatch} from "react-redux";
 import { useEffect } from "react";
 
 import { setSearch } from "../components/search/SearchSlice";
+import { fetchProductsCategory } from "../components/productList/ProductListSlice";
+import { setCurrentPage } from "../components/pagination/PaginationSlice";
+import Pagination from "../components/pagination/Pagination";
 import ProductList from "../components/productList/ProductList";
 import FilterSlider from "../components/sliders/filterSlider/FilterSlider";
 import TitleH1 from "../components/titleH1/TitleH1";
 import BreadCrumbs from "../components/breadCrumbs/BreadCrumbs";
 
 const CategoryPage = () => {
-    const {category} = useParams();
-    const { products } = useSelector(state => state.products);
+    const { productsCategory, productsCategoryLoadingStatus, productsCategoryAfterLoading } = useSelector(state => state.products);
+    const { currentPageData } = useSelector(state => state.pagination);
     const dispatch = useDispatch();
+    const {category} = useParams();
+
+    useEffect(() => {
+        dispatch(fetchProductsCategory(category));
+    }, [category]);
 
     useEffect(() => {
         dispatch(setSearch(''));
+        dispatch(setCurrentPage(0));
     }, []);
 
-    const content = <ProductList removeMarker={true}/>;
-    const warning = products.length <= 0 ? <EmptyProductList/> : null    
-
+    const renderProducts = () => {
+        return (
+            <>
+                <ProductList productsArray={currentPageData} statusProductsArray={productsCategoryLoadingStatus}/>
+                {!(productsCategoryLoadingStatus === 'loading') ? <Pagination array={productsCategory}/> : null} 
+            </> 
+        )
+    }
+    
+    const products = renderProducts();
+    const warning = productsCategoryAfterLoading === 'empty' ? <EmptyProductList/> : null;
+    const content = !warning ? products : null;
+    console.log(warning);
     return (
         <div className="main-content" style={{'backgroundColor': 'rgb(246,246,246)'}}>
         <div className="main-content__header" style={{'backgroundColor': 'rgb(251, 242, 251)'}}>
@@ -30,8 +49,8 @@ const CategoryPage = () => {
         </div>
         <div className="container">
             <BreadCrumbs/>
-            {content}
             {warning}
+            {content}
         </div>
     </div>
     )

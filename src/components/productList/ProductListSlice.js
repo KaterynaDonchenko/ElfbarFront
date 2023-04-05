@@ -2,10 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { useHttp } from '../../hooks/http.hook';
 
 const initialState = {
-    products: [],
+    productsCategory: [],
     productsTop: [],
     productsNew: [],
-    productsLoadingStatus: 'idle'
+    productsCategoryLoadingStatus: 'idle',
+    productsWithLableLoadingStatus: 'idle',
+    productsCategoryAfterLoading: ''
 }
 
 const productsSlice = createSlice({
@@ -14,35 +16,28 @@ const productsSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchProducts.pending, state => {state.productsLoadingStatus = 'loading'})
-            .addCase(fetchProducts.fulfilled, (state, action) => {
-                state.productsLoadingStatus = 'idle';
-                state.products = action.payload;
+            .addCase(fetchProductsCategory.pending, state => {
+                state.productsCategoryAfterLoading = '';
+                state.productsCategoryLoadingStatus = 'loading';
             })
-            .addCase(fetchProducts.rejected, state => {state.productsLoadingStatus = 'error'})
-            .addCase(fetchProductsCategory.pending, state => {state.productsLoadingStatus = 'loading'})
             .addCase(fetchProductsCategory.fulfilled, (state, action) => {
-                state.productsLoadingStatus = 'idle';
-                state.products = action.payload;
+                state.productsCategoryLoadingStatus = 'idle';
+                state.productsCategory = action.payload;
+                state.productsCategory.length > 0 ? state.productsCategoryAfterLoading = 'full' : state.productsCategoryAfterLoading = 'empty';
             })
-            .addCase(fetchProductsCategory.rejected, state => {state.productsLoadingStatus = 'error'})
-            .addCase(fetchProductsWithTheLable.pending, state => {state.productsLoadingStatus = 'loading'})
+            .addCase(fetchProductsCategory.rejected, state => {
+                state.productsCategoryAfterLoading = '';
+                state.productsCategoryLoadingStatus = 'error';
+            })
+            .addCase(fetchProductsWithTheLable.pending, state => {state.productsWithLableLoadingStatus = 'loading'})
             .addCase(fetchProductsWithTheLable.fulfilled, (state, action) => {
-                state.productsLoadingStatus = 'idle';
+                state.productsWithLableLoadingStatus = 'idle';
                 action.payload.length > 5 ? state.productsTop = action.payload : state.productsNew = action.payload;
             })
-            .addCase(fetchProductsWithTheLable.rejected, state => {state.productsLoadingStatus = 'error'})
+            .addCase(fetchProductsWithTheLable.rejected, state => {state.productsWithLableLoadingStatus = 'error'})
             .addDefaultCase(() => {})
     }
 });
-
-export const fetchProducts = createAsyncThunk(
-    'products/fetchProducts',
-    async () => {
-        const request = useHttp();
-        return await request("http://localhost:3001/getProducts");
-    }
-);
 
 export const fetchProductsCategory = createAsyncThunk(
     'products/fetchProductsCategory',
@@ -56,7 +51,7 @@ export const fetchProductsWithTheLable = createAsyncThunk(
     'products/fetchProductsWithTheLable',
     async (lable) => {
         const request = useHttp();
-        return await request(`http://localhost:3001/getProducts/${lable}`);
+        return await request(`http://localhost:3001/products/${lable}`);
     }
 )
 

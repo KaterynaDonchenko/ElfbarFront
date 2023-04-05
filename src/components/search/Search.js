@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate  } from 'react-router-dom';
 import { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'; 
 
-import { fetchSearch, cleareSearchResult, setSearch, setSearchItemsForSearchPage } from './SearchSlice';
+import { fetchSearch, cleareSearchResult, setSearch, setSearchResultForSearchPage } from './SearchSlice';
 import Spinner from '../spinner/Spinner';
 import Error from '../error/Error';
 
@@ -12,7 +12,7 @@ const Search = () => {
     const serchBlockRef = useRef();
     const inputSearchRef = useRef();
     const linkRef = useRef();
-    const { search, searchResult, serchLoadingStatus } = useSelector(state => state.search);
+    const { search, searchResult, serchResultLoadingStatus } = useSelector(state => state.search);
     const dispatch = useDispatch();
     const url = useLocation();
     const navigate = useNavigate();
@@ -72,7 +72,7 @@ const Search = () => {
                         {items}
                     </ul>
                     <div className="search__result-more">
-                        <Link onClick={() => dispatch(setSearchItemsForSearchPage(searchResult))} 
+                        <Link onClick={() => dispatch(setSearchResultForSearchPage(searchResult))} 
                               to={`/search/?s=${search}`}
                               ref={el => linkRef.current = el}>
                               Всі результати
@@ -93,10 +93,10 @@ const Search = () => {
         }
     }
 
-
-    const loading = serchLoadingStatus === 'loading' ? <Spinner/> : null;
-    const error = serchLoadingStatus === 'error' ? <Error/> : null;
-    const result = renderSearchResult(searchResult);
+    const products = renderSearchResult(searchResult);
+    const loading = serchResultLoadingStatus === 'loading' ? <Spinner/> : null;
+    const error = serchResultLoadingStatus === 'error' ? <Error/> : null;
+    const result = !(loading || error) ? products : null;
     return (
         <>
             <div ref={el => serchBlockRef.current = el} className="search">

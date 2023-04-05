@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
+import { setFilter } from "../filters/FilterSlice";
+import { setCurrentPage } from '../pagination/PaginationSlice';
 import { changeDispalayCartWidget } from '../cartWidget/CartWidgetSlice';
 import Search from '../search/Search';
 
@@ -11,10 +13,14 @@ import logo from '../../assets/icons/LogoPar.svg';
 const Header = () => {
     const { cartIconDisplay } = useSelector(state => state.header);
     const { userProductCart } = useSelector(state => state.productCard);
-    
     const dispatch = useDispatch();
 
     const counter = userProductCart.length > 0 ? userProductCart.reduce((sum, item) => sum + item.counter, 0) : 0;
+
+    const goToCatalog = () => {
+        dispatch(setFilter('all'));
+        dispatch(setCurrentPage(0));
+    }
 
     return (
         <header className="header">   
@@ -27,7 +33,7 @@ const Header = () => {
                         <NavLink to='/' end>Головна</NavLink>
                     </li>
                     <li className="header__menu-item">
-                        <NavLink to={`/catalog/filter?orderby=all`} end>Каталог</NavLink>
+                        <NavLink to={`/catalog/filter?orderby=all&page=1`} onClick={goToCatalog} end>Каталог</NavLink>
                     </li>
                     <li className="header__menu-item">
                         <NavLink to='/question' end>Відповіді на питання</NavLink>
