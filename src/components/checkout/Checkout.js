@@ -1,10 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { Formik, Form, Field, ErrorMessage, useField } from 'formik';
+import { Formik, Form, Field, ErrorMessage, useField, useFormikContext } from 'formik';
 import * as Yup from 'yup';
 import InputMask from 'react-input-mask';
+import { useState, useRef, useEffect } from 'react';
 
-import { fetchEmail, fetchCity } from './CheckoutSlice';
+import { fetchEmail, fetchCity, fetchWarehouses } from './CheckoutSlice';
+import { onChangeWarehouse } from './CheckoutSlice';
 import { changeCartIconDisplay } from '../header/HeaderSlice';
+import Spinner from '../spinner/Spinner';
 
 import './checkout.scss'
 
@@ -27,8 +30,6 @@ const Checkout = () => {
     const dispatch = useDispatch();
     dispatch(changeCartIconDisplay('none'));
 
-    // dispatch(fetchCity());
-
     const onFetchEmail = (data) => {
         data.total = total;
         data.userProductCart = userProductCart;
@@ -49,7 +50,7 @@ const Checkout = () => {
                             phone: '',
                             deliveryMethod: 'nova',
                             city: '',
-                            division: '',
+                            warehouse: '',
                             ukrDelivery: '',
                             text: '',
                         }}
@@ -66,7 +67,7 @@ const Checkout = () => {
                         onSubmit={(value) => onFetchEmail(value)}
                         >
                         {
-                            ({isSubmitting, values, handleChange, handleBlur, handleSubmit}) => (
+                            ({values, handleChange, handleBlur}) => (
                                 <Form className="checkout__form">
                                     <div className="checkout__form-left">
                                         <div className="checkout__form-info">
@@ -99,7 +100,10 @@ const Checkout = () => {
                                                     <option value="ukr">укрпошта</option>
                                             </Field>
                                             <ErrorMessage className='error' name='deliveryMethod' component='div'/>
-                                            <Delivery method={values.deliveryMethod}/>
+                                            <Delivery method={values.deliveryMethod} 
+                                                      handleChange={handleChange}
+                                                      handleBlur={handleBlur} 
+                                                      valueCity={values.city}/>
                                         </div>
                                         <div className="checkout__form-title">Додаткова інформація</div>
                                         <div className="checkout__form-info-group">
@@ -185,31 +189,166 @@ const Order = ({userProductCart}) => {
     )
 }
 
-const Delivery = ({method}) => {
+const Delivery = ({method, handleChange, valueCity}) => {
+    const [citySearch, setCitySearch] = useState('');
+    const [warehousesSearch, setWarehousesSearch] = useState([]);
+    const { cities, cityLoadingStatus, warehouses, cityLoadingWarehouses } = useSelector( state => state.checkout);
+    const dispatch = useDispatch();
+    const citySearchRef = useRef();
+    const cityRef = useRef();
+    const warehouseRef = useRef();
+    const lableWarehouseRef = useRef();
+    const warehouseListRef = useRef();
+    const { values, submitForm } = useFormikContext();
+
+    const onFetchCity = (event) => {
+        const city = {
+            marker: 'city',
+            name: event.target.value
+        };
+
+        if(event.target.value.length > 2) dispatch(fetchCity(city));
+    }
+
+    const onSaveCity = (city, ref) => {
+        values.city = city;
+        cityRef.current.value = city;
+        dispatch(fetchWarehouses({marker: 'warehouse', cityRef: ref}));
+        lableWarehouseRef.current.style.color = '#000';
+    }
+    
+    const onSaveWarehouse = (warehouse) => {
+        values.warehouse = warehouse;
+        warehouseRef.current.value = warehouse;
+        lableWarehouseRef.current.style.display = 'none';
+        warehouseListRef.current.style.display = 'none';
+    }
+ 
+
+    const renderCity = (arr, search, loading) => {
+        if (arr.length > 0) {
+            const items = arr.map(({city, cityRef}, i) => {
+                return (
+                    <li onClick={() => onSaveCity(city, cityRef)} key={i} className="checkout__form-delivery-select-item">
+                        {city}
+                    </li>
+                )
+            })
+
+            return (
+                <ul className="checkout__form-delivery-select-list">
+                    {items}
+                </ul>
+            )
+        }
+
+        if (search.length > 2 && arr.length === 0 && loading !== 'loading') {
+            return (
+                <div className="checkout__form-delivery-select-none">
+                    Доставка в це місто зараз неможлива. Будь ласка, перевіре назву або виберіть інший найближчий населенний пункт
+                </div>
+            )
+        }
+    }
+
+    useEffect(() => {
+        const onHiddeCitySerch = event => {
+            const cityInput = document.querySelector('.checkout__form-delivery-input');
+
+            if (citySearchRef.current && event.target != citySearchRef.current && event.target != cityInput) {
+                citySearchRef.current.style.display = "none";
+                setCitySearch('');
+            }
+        };
+
+        window.addEventListener('click', onHiddeCitySerch);
+
+        return () => {
+            window.removeEventListener('click', onHiddeCitySerch);
+        };
+      }, []); 
+
+    const onShowCitySerch = () => {
+        citySearchRef.current.style.display = "block";
+        citySearchRef.current.focus();
+    };
+
+    useEffect(() => {
+        setWarehousesSearch([...warehouses]);
+    }, [cityLoadingWarehouses])
+
+    const renderWarehouse = (arr) => {
+        const items = arr.map(({warehouses}, i) => {
+            return (
+                <li className="checkout__form-delivery-warehouse-select-item" 
+                    key={i} 
+                    value={warehouses}
+                    onClick={() => onSaveWarehouse(warehouses)}>{warehouses}</li>
+            )
+        });
+
+        return (
+            <ul ref={warehouseListRef} className="checkout__form-delivery-warehouse-select-list">{items}</ul>
+        );
+
+    }
+
+    const onSearchWarehouse = () => {
+        if (cities.length > 0 && cityRef.current.value.length > 0) {
+            lableWarehouseRef.current.style.display = 'none';
+            warehouseRef.current.focus();
+            warehouseRef.current.value = '';
+            warehouseListRef.current.style.display = 'block';
+        }
+    }
+
+    const searchCity = citySearch.length > 0 ? renderCity(cities, citySearch, cityLoadingStatus) : null;
+    const serchWarehouse = values.city.length > 0 ? renderWarehouse(warehouses): null;
     return (
         <> 
             {
                 method === 'nova' ? 
                 <>
-                    <Field 
+                    <input
                         placeholder='Оберіть місто' 
                         name="city"  
-                        className="checkout__form-delivery-select"
-                        as='select'>
-                            <option value=""></option>
-                    </Field>
+                        className="checkout__form-delivery-input"
+                        onChange={handleChange}  
+                        onClick={onShowCitySerch}
+                        ref={cityRef}
+                        readOnly
+                        />
+                    <input
+                        value={citySearch}
+                        ref={citySearchRef}
+                        style={{'display': 'none'}}
+                        name="citySearch"  
+                        className="checkout__form-delivery-city-search"
+                        onChange={(event) => {
+                            onFetchCity(event);
+                            setCitySearch(event.target.value);
+                        }}
+                    />
+                    {searchCity}
                     <ErrorMessage className='error' name='phone' component='div'/>
-                    <Field 
-                        placeholder='Оберіть відділення' 
-                        name="division" 
-                        className="checkout__form-delivery-select"
-                        as='select'>
-                            <option value=""></option>
-                    </Field>
-                    <ErrorMessage className='error' name='phone' component='div'/>
+                    <div>
+                        <input 
+                            name="division" 
+                            className="checkout__form-delivery-select"
+                            as='input'
+                            ref={warehouseRef}
+                            onChange={() => {dispatch(onChangeWarehouse({input: warehouseRef.current.value, arr: warehousesSearch}))}}
+                            onClick={onSearchWarehouse}
+                            />
+                        <div onClick={onSearchWarehouse} 
+                             className="checkout__form-delivery-select-lable"
+                             ref={lableWarehouseRef}>-Оберіть відділення (поштомат)</div>
+                        {serchWarehouse}
+                        <ErrorMessage className='error' name='phone' component='div'/>
+                    </div>
                 </>
                 : 
-                <TextInput label="Введіть данні" type="text" name='ukrDelivery' className="checkout__form-info-input"/>
+                <TextInput label="Введіть данні (індекс)" type="text" name='ukrDelivery' className="checkout__form-info-input"/>
             }
         </>
 

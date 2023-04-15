@@ -48,7 +48,10 @@
         font-size: 14px;
         outline: none;
     }
-    &__form-delivery-select {
+    &__form-delivery {
+        position: relative;
+    }
+    &__form-delivery-select, &__form-delivery-input {
         padding: 9px 28px 9px 12px;
         background: #fff;
         border: 1px solid #ddd;
@@ -56,6 +59,79 @@
         width: 100%;
         margin-bottom: 20px;
         outline: none;
+    }
+    &__form-delivery-select-lable {
+        position: relative;
+        bottom: 64px;
+        padding-left: 12px;
+        line-height: 43px;
+        cursor: pointer;
+        z-index: 1;
+        color: rgb(0,0,0, .6);
+        &:after {
+            content: '';
+            border: solid black;
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 2.4px;
+            transform: rotate(45deg);
+            position: absolute;
+            right: 6px;
+            top: 16px;
+        }
+    }
+    &__form-delivery-city-search {
+        background-image: url('../../assets/icons/search.svg');
+        background-repeat: no-repeat;
+        background-position: left center;
+        background-size: 25px 25px;
+        position: relative;
+        bottom: 20px;
+        background-color: #fff;
+        border: 1px solid #aaa;
+        border-radius: 4px;
+        outline: none;
+        cursor: pointer;
+        padding: 9px 28px 9px 30px;
+        width: 100%;
+    }
+    &__form-delivery-select-list {
+        position: absolute;
+        top: 228px;
+        width: 100%;
+        list-style-type: none;
+        max-height: 260px;
+        overflow-y: auto;
+        background-color: #fff;
+        z-index: 99;
+    }
+    &__form-delivery-select-item, &__form-delivery-warehouse-select-item {
+        position: relative;
+        padding: 10px;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 20px;
+        color: rgb(51,51,51);
+        &:hover {
+            background-color: rgb(0,0,0, .1);
+        }
+    }
+    &__form-delivery-warehouse-select-list {
+        display: none;
+        position: absolute;
+        top: 247px;
+        width: 100%;
+        list-style-type: none;
+        max-height: 260px;
+        overflow-y: auto;
+        background-color: #fff; 
+    }
+    &__form-delivery-select-none {
+        position: relative;
+        bottom: 20px;
+        width: 100%;
+        padding: 5px;
+        color: red;
     }
     &__form-info-textarea {
         width: 100%;
@@ -133,4 +209,15 @@
         font-size: 14px;
         font-weight: 400;
     }
+    &__cityspinner {
+        background-color: #fff;
+        position: relative;
+        bottom: 19px;
+    }
+    &__warehousespinner {
+        background-color: #fff;
+        position: relative;
+        bottom: 63px;
+    }
+
 }
