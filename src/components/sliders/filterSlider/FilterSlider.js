@@ -80,9 +80,23 @@ const FilterSlider = () => {
     const slides = renderFilterSlides(filterSlider);
     const spiner = filterSliderStatus === 'loading' ? <Spinner/> : null;
     const error = filterSliderStatus === 'error' ? <Error/> : null;
-    const slider = !(spiner || error ) ? <Splide options={{rewind: true, perPage: 8, perMove: 4, speed: 1200, pagination: false}}>
-                                {slides}
-                            </Splide> : null;
+    const slider = !(spiner || error ) ?    <Splide options={{rewind: true, 
+                                                              perPage: 8,
+                                                              breakpoints: {
+                                                                991: {
+                                                                    perPage: 5,
+                                                                    perMove: 5,
+                                                                },
+                                                                767: {
+                                                                    perPage: 3,
+                                                                    perMove: 3
+                                                                }
+                                                              }, 
+                                                              perMove: 8, 
+                                                              speed: 1200, 
+                                                              pagination: false}}>
+                                                {slides}
+                                            </Splide> : null;
 
     return (
         <>

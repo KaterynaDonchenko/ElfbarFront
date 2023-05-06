@@ -93,7 +93,25 @@ const ProductSlider = () => {
     const cardItem = renderProductCard(productsCategory) ;
     const spiner = productsCategoryLoadingStatus === 'loading' ? <Spinner/> : null;
     const error = productsCategoryLoadingStatus === 'error' ? <Error/> : null;
-    const content = productsCategory ? <Splide options={{rewind: true, perPage: 5, perMove: 5, speed: 1200, pagination: false}}>
+    const content = productsCategory ? <Splide options={{rewind: true, 
+                                                         perPage: 5, 
+                                                         perMove: 5,
+                                                         breakpoints: {
+                                                            1400: {
+                                                                perPage: 4,
+                                                                perMove: 4
+                                                            },
+                                                            991: {
+                                                                perPage: 3,
+                                                                perMove: 3
+                                                            },
+                                                            575: {
+                                                                perPage: 2,
+                                                                perMove: 2
+                                                            }
+                                                         }, 
+                                                         speed: 1200, 
+                                                         pagination: false}}>
                                     {cardItem}
                                 </Splide> : null;
     return (

@@ -1,9 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
+import { useRef } from 'react';
 
 import { setFilter } from "../filters/FilterSlice";
 import { setCurrentPage } from '../pagination/PaginationSlice';
 import { changeDispalayCartWidget } from '../cartWidget/CartWidgetSlice';
+import { changeMobileMenuDisplay } from './HeaderSlice';
 import Search from '../search/Search';
 
 import './header.scss'
@@ -11,8 +13,11 @@ import './header.scss'
 import logo from '../../assets/icons/LogoPar.svg';
 
 const Header = () => {
-    const { cartIconDisplay } = useSelector(state => state.header);
+    const { cartIconDisplay, mobileMenuDisplay } = useSelector(state => state.header);
     const { userProductCart } = useSelector(state => state.productCard);
+    const { filterSlider } = useSelector(state => state.filterSlider);
+    const arowRight = useRef();
+    const arowDown = useRef();
     const dispatch = useDispatch();
 
     const counter = userProductCart.length > 0 ? userProductCart.reduce((sum, item) => sum + item.counter, 0) : 0;
@@ -22,6 +27,48 @@ const Header = () => {
         dispatch(setCurrentPage(0));
     }
 
+    const renderCategoryList = (arr) => {
+        const categoryItem = arr.map( ({name, img, }, i) => {
+            return (
+                <li key={i} className='header__mobile-menu-category-item'>
+                    <Link to={`/product-category/${name}`}>
+                        <div className="header__mobile-menu-category-item-sircle" >
+                            <img src={`http://localhost:3001/${img}`} alt={`elfbar ${name}`} />
+                        </div>
+                        <div className="header__mobile-menu-category-item-title">ELFBAR {name}</div>
+                    </Link>
+                </li>
+            )
+        })
+
+        return (
+            <ul className='header__mobile-menu-category-list'>{categoryItem}</ul>
+        )
+    }
+
+    const categoryIist = filterSlider.length > 0 ? renderCategoryList(filterSlider) : null;
+
+    const onToggleDisplayMobileCatalog = () => {
+        const mobileCatalog = document.querySelector('.header__mobile-menu-category-list');
+        const mobileMenu = document.querySelector('.header__mobile-menu-list');
+        const itemQuestionMobile = document.querySelector('.header__mobile-menu-item-question')
+        
+        mobileCatalog.classList.toggle('header__mobile-menu-category-list_active');
+
+        if (window.getComputedStyle(arowRight.current).display === 'block') {
+            arowRight.current.style.display = 'none';
+            arowDown.current.style.display = 'block';
+            mobileMenu.style.gridTemplate = `60px 60px ${mobileCatalog.offsetHeight + 60}px / 1fr`;
+            itemQuestionMobile.style.paddingTop = `${mobileCatalog.offsetHeight + 10}px`;
+
+        } else {
+            arowRight.current.style.display = 'block';
+            arowDown.current.style.display = 'none';
+            mobileMenu.style.gridTemplate= '';
+            itemQuestionMobile.style.paddingTop = '';
+        }  
+    }
+    
     return (
         <header className="header">   
             <NavLink className="header__logo" to='/' >
@@ -49,6 +96,54 @@ const Header = () => {
                 </div>
                 <div className="header__settings-right-block">
                     <a href="https://t.me/elfsolodkiypar" className="header__settings-manager-telegram">запитати спеціаліста</a>
+                </div>
+            </div>
+            <div className="header__mobile-menu" onClick={() => dispatch(changeMobileMenuDisplay('block'))}>
+                    <div class="header__mobile-menu-line"></div>
+                    <div class="header__mobile-menu-line"></div>
+                    <div class="header__mobile-menu-line"></div>
+            </div>
+            <div className="header__mobile-menu-wrapper" style={{'display': mobileMenuDisplay}}>
+                <div className="header__mobile-menu-block">
+                    <div className="header__mobile-menu-header">
+                        <NavLink className="header__logo" to='/' >
+                            <img src={logo} alt="logo" />
+                        </NavLink>
+                        <div className="header__mobile-menu-close" 
+                             onClick={() => dispatch(changeMobileMenuDisplay('none'))}>Закрити</div>
+                    </div>
+                    <div className="header__mobile-menu-search">
+                        <Search activeClass='search__line_active'/>
+                    </div>
+                    <ul class="header__mobile-menu-list">
+                        <li class="header__mobile-menu-item">
+                            <NavLink to='/' end>Головна</NavLink>
+                        </li>
+                        <li class="header__mobile-menu-item">
+                            <div className="header__mobile-menu-item-link">
+                                <NavLink to={`/catalog/filter?orderby=all&page=1`} onClick={goToCatalog} end>Каталог</NavLink>
+                                <div className="header__mobile-menu-item-arow-right" 
+                                     ref={arowRight} 
+                                     onClick={onToggleDisplayMobileCatalog}>
+                                </div>
+                                <div className="header__mobile-menu-item-arow-down" 
+                                     ref={arowDown}
+                                     onClick={onToggleDisplayMobileCatalog}>
+                                </div>
+                            </div>
+                            {categoryIist}
+                        </li>
+                        <li class="header__mobile-menu-item header__mobile-menu-item-question">
+                            <NavLink to='/question' end>Відповіді на питання</NavLink>
+                        </li>
+                    </ul>
+                    <div className="header__mobile-menu-down-block">
+                        <div className="header__mobile-menu-btn">
+                            <a href="https://t.me/elfsolodkiypar" className="header__mobile-menu-telegram">
+                                запитати спеціаліста
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="header__cart" 

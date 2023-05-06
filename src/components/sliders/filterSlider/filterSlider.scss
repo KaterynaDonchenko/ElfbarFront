@@ -1,5 +1,8 @@
 .filter-slider {
     padding: 45px 0 34px 0;
+    .splide {
+        overflow-x: hidden;
+    }
     .splide__list {
         justify-content: center;
     }
@@ -18,7 +21,6 @@
         position: relative;
         width: 120px;
         height: 120px;
-        margin: 0 17px;
         border: 2px solid #E9E6E3;
         border-radius: 60px;
         transition: .3s all;

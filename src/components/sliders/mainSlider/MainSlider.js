@@ -5,7 +5,7 @@ import TitleH2 from '../../titleH2/TitleH2';
 
 import './mainSlider.scss';
 import slide1 from '../../../assets/img/slide/slide1.jpg';
-import slide3 from '../../../assets/img/slide/slide2.jpg';
+import slide3 from '../../../assets/img/slide/slide3.jpg';
 
 const MainSlider = () => {
     return (

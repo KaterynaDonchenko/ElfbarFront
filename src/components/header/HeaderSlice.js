@@ -1,18 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    cartIconDisplay: 'none'
+    cartIconDisplay: 'none',
+    mobileMenuDisplay: 'none'
 }
 
 const headerSlice = createSlice({
     name: 'header',
     initialState,
     reducers: {
-        changeCartIconDisplay: (state, action) => {state.cartIconDisplay = action.payload}
+        changeCartIconDisplay: (state, action) => {state.cartIconDisplay = action.payload},
+        changeMobileMenuDisplay: (state, action) => {state.mobileMenuDisplay = action.payload},
     }
 });
 
 const {actions, reducer} = headerSlice;
 export default reducer;
-export const {changeCartIconDisplay} = actions;
+export const {changeCartIconDisplay, changeMobileMenuDisplay} = actions;
 

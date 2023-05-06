@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 import { setSearch } from "../components/search/SearchSlice";
+import { changeMobileMenuDisplay } from '../components/header/HeaderSlice';
 import img404 from '../assets/img/404.png';
 
 const Page404 = () => {
@@ -10,6 +11,7 @@ const Page404 = () => {
 
     useEffect(() => {
         dispatch(setSearch(''));
+        dispatch(changeMobileMenuDisplay('none'));
     }, []);
     
     return (

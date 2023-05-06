@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 import { setSearch } from "../components/search/SearchSlice";
+import { changeMobileMenuDisplay } from "../components/header/HeaderSlice";
 import Question from "../components/question/Question";
 
 const QuestionPage = () => {
@@ -9,6 +10,7 @@ const QuestionPage = () => {
 
     useEffect(() => {
         dispatch(setSearch(''));
+        dispatch(changeMobileMenuDisplay('none'));
     }, []);
 
     return (

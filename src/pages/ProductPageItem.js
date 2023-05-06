@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 import { setSearch } from "../components/search/SearchSlice";
+import { changeMobileMenuDisplay } from "../components/header/HeaderSlice";
 import Product from "../components/product/Product";
 import TitleH2 from "../components/titleH2/TitleH2";
 import ProductSlider from "../components/sliders/productSlider/ProductSlider";
@@ -11,6 +12,7 @@ const ProductPageItem = () => {
 
     useEffect(() => {
         dispatch(setSearch(''));
+        dispatch(changeMobileMenuDisplay('none'));
     }, []);
 
     return (

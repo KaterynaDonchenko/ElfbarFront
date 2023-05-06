@@ -12,15 +12,14 @@
         position: relative;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        column-gap: 20px;
+        column-gap: 10px;
     }
     &__img {
         width: 541px;
         height: 601px;
         img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
     }
     &__breadecrums {
@@ -96,7 +95,7 @@
     }
     &__select-mainvariant {
         position: relative;
-        z-index: 9;
+        z-index: 1;
         width: 100%;
         height: 100%;
         line-height: 35px;

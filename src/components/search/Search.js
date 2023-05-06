@@ -8,10 +8,11 @@ import Error from '../error/Error';
 
 import './search.scss';
 
-const Search = () => {
+const Search = ({activeClass = null}) => {
     const serchBlockRef = useRef();
     const inputSearchRef = useRef();
     const linkRef = useRef();
+    const searchResaltElement = useRef();
     const { search, searchResult, serchResultLoadingStatus } = useSelector(state => state.search);
     const dispatch = useDispatch();
     const url = useLocation();
@@ -20,18 +21,30 @@ const Search = () => {
     useEffect(() => {
         const newParam = url.search.replace(/%20/g, '+');
         if (newParam !== url.search) navigate(`/search/${newParam}`, { replace: true });
-        
     }, [url.search]);
 
     const onShowSearchInput = () => {
+        document.querySelector('.header__menu').classList.toggle('header__menu_left');
         serchBlockRef.current.classList.toggle('search_active');
         inputSearchRef.current.classList.toggle('search__line_active');
         serchBlockRef.current.classList.contains('search_active') ? inputSearchRef.current.focus() : inputSearchRef.current.blur();
     }
 
     useEffect(() => {
-        search.length > 1 ? dispatch(fetchSearch(search)) : dispatch(cleareSearchResult());
-    }, [search])
+        search.length > 2 ? dispatch(fetchSearch(search)) : dispatch(cleareSearchResult());
+    }, [search]);
+
+    useEffect(() => {
+        const mobileMenu = document.querySelector('.header__mobile-menu-block');
+        const mobileList = document.querySelector('.header__mobile-menu-list');
+        
+        if (searchResult.length > 0 && window.getComputedStyle(mobileMenu).display === 'grid') {
+            mobileList.style.paddingTop = `${searchResaltElement.current.offsetHeight}px`;
+        } else {
+            mobileList.style.paddingTop = '';
+        }
+
+    }, [searchResult])
 
 
     const highlightText = (text) => {
@@ -82,7 +95,7 @@ const Search = () => {
             )
         }
 
-        if (search.length > 1 && arr.length == 0) {
+        if (search.length > 2 && arr.length == 0) {
             return (
                 <div className="search__result-list">
                     <div className="search__result-list-text">
@@ -111,9 +124,9 @@ const Search = () => {
                         }} 
                         ref={el => inputSearchRef.current = el}
                         onKeyDown={e => e.key === 'Enter' ? linkRef.current.click(): null} 
-                        className="search__line"/>
+                        className={`search__line ${activeClass}`}/>
             </div>
-            <div className="search__result">
+            <div className="search__result" ref={searchResaltElement}>
                 {loading}
                 {error}
                 {result}

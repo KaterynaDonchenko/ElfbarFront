@@ -5,7 +5,7 @@
     width: 40px;
     &__arrow-left {
         position: relative;
-        z-index: 8;
+        z-index: 1;
         &::before {
             content: '';
             border: solid black;
@@ -80,7 +80,7 @@
     } 
     &__btn {
         position: relative;
-        z-index: 7;
+        z-index: 1;
         &::before {
             content: '\2E2C';
             font-size: 19px;
@@ -91,7 +91,7 @@
     }
     &__arrow-right {
         position: relative;
-        z-index: 8;
+        z-index: 1;
         &::before {
             content: '';
             border: solid black;

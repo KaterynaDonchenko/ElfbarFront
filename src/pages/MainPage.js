@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 import { setSearch } from "../components/search/SearchSlice";
+import { changeMobileMenuDisplay } from "../components/header/HeaderSlice";
 import MainScreen from '../components/mainScreen/MainScreen';
 import FilterSlider from "../components/sliders/filterSlider/FilterSlider";
 import ProductList from '../components/productList/ProductList';
@@ -15,6 +16,7 @@ const MainPage = () => {
 
     useEffect(() => {
         dispatch(setSearch(''));
+        dispatch(changeMobileMenuDisplay('none'));
     }, []);
 
     return (
@@ -33,6 +35,4 @@ const MainPage = () => {
     )
 }
 
-// marker='новинка'
-//marker='топ'
 export default MainPage;

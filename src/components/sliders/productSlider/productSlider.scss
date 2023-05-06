@@ -2,6 +2,9 @@
 
 .product-slider {
     padding: 20px 0;
+    .splide {
+        overflow-x: hidden;
+    }
     &__item {
         height: 430px;
         position: relative;

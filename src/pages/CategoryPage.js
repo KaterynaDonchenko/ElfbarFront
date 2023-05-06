@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { setSearch } from "../components/search/SearchSlice";
 import { fetchProductsCategory } from "../components/productList/ProductListSlice";
 import { setCurrentPage } from "../components/pagination/PaginationSlice";
+import { changeMobileMenuDisplay } from "../components/header/HeaderSlice";
 import Pagination from "../components/pagination/Pagination";
 import ProductList from "../components/productList/ProductList";
 import FilterSlider from "../components/sliders/filterSlider/FilterSlider";
@@ -24,6 +25,7 @@ const CategoryPage = () => {
     useEffect(() => {
         dispatch(setSearch(''));
         dispatch(setCurrentPage(0));
+        dispatch(changeMobileMenuDisplay('none'));
     }, []);
 
     const renderProducts = () => {
@@ -60,7 +62,7 @@ const EmptyProductList = () => {
     return (
         <div className="empty-productlist">
             <div className="empty-productlist__text">
-                Товарів, які відповідають вашому запиту, не знайдені
+                Товари, які відповідають вашому запиту, не знайдені
             </div>
         </div>
     )

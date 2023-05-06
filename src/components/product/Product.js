@@ -12,6 +12,7 @@ import Spiner from '../spinner/Spinner';
 import Error from '../error/Error';
 import BreadCrumbs from '../breadCrumbs/BreadCrumbs';
 import BreadCrumbsMenu from '../breadeCrumbsMenu/BreadCrumbsMenu';
+import TitleH1 from '../titleH1/TitleH1';
 
 import './product.scss';
 
@@ -122,7 +123,7 @@ const ProductMain = () => {
                     <BreadCrumbs/>
                     <BreadCrumbsMenu/>
                 </div>
-                <h1 className="product__name">{title}</h1>
+                <TitleH1 title={title} classN='product__name'/>
                 <div className="product__price">{price} грн</div>
                 <div className="product__dscr">{dscr}</div>
                 {selectBlock}

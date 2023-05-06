@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 import { setSearch } from "../components/search/SearchSlice";
 import { setCurrentPage } from "../components/pagination/PaginationSlice";
+import { changeMobileMenuDisplay } from "../components/header/HeaderSlice";
 import ProductList from "../components/productList/ProductList";
 import TitleH1 from "../components/titleH1/TitleH1";
 import BreadCrumbs from "../components/breadCrumbs/BreadCrumbs";
@@ -17,6 +18,10 @@ const SearchPage = () => {
         dispatch(setSearch(''));
         dispatch(setCurrentPage(0));
     }, [searchResultForSearchPage]);
+
+    useEffect(() => {
+        dispatch(changeMobileMenuDisplay('none'));
+    }, []);
 
 
     return (

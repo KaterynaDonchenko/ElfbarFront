@@ -104,7 +104,9 @@ const CartWithProducts = () => {
                         Загалом
                         <span>{total} грн</span>
                     </div>
-                    <Link to='/checkout' end className="btn"> Перейти до оформлення</Link>
+                    <div className="cart__total-btn">
+                        <Link to='/checkout' end className="btn"> Перейти до оформлення</Link>
+                    </div>
                 </div>
             </div>
         </div>
