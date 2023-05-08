@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import { removeProductFromTheCart } from '../productCard/ProductCartSlice';
 import { changeCartIconDisplay } from '../header/HeaderSlice';
@@ -12,7 +13,10 @@ import emptyCart from '../../assets/icons/empty-cart.svg';
 const Cart = () => {
     const { userProductCart } = useSelector( state => state.productCard);
     const dispatch = useDispatch();
-    dispatch(changeCartIconDisplay('none'));
+
+    useEffect(() => {
+        dispatch(changeCartIconDisplay('none'));
+    }, [])
 
     const content = userProductCart.length > 0 ? <CartWithProducts/> : <EmptyCart/>
     return (
@@ -62,7 +66,7 @@ const EmptyCart = () => {
             <img src={emptyCart} alt="empty cart" />
             <h2 className="cart__empty-title">Ваш кошик порожній</h2>
             <div className="cart__empty-title-btn">
-                <Link to={`/catalog/filter?orderby=all`} end className="btn">Повернутися в магазин</Link>
+                <Link to={`/catalog/filter?orderby=all`} className="btn">Повернутися в магазин</Link>
             </div>
         </div>
     )
@@ -105,7 +109,7 @@ const CartWithProducts = () => {
                         <span>{total} грн</span>
                     </div>
                     <div className="cart__total-btn">
-                        <Link to='/checkout' end className="btn"> Перейти до оформлення</Link>
+                        <Link to='/checkout' className="btn"> Перейти до оформлення</Link>
                     </div>
                 </div>
             </div>

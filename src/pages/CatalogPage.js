@@ -6,6 +6,7 @@ import { setSearch } from "../components/search/SearchSlice";
 import { setFilter } from "../components/filters/FilterSlice";
 import { setCurrentPage } from "../components/pagination/PaginationSlice";
 import { changeMobileMenuDisplay } from "../components/header/HeaderSlice";
+import { changeDispalayCartWidget } from "../components/cartWidget/CartWidgetSlice";
 import ProductList from "../components/productList/ProductList";
 import Filters from "../components/filters/Filters";
 import FilterSlider from "../components/sliders/filterSlider/FilterSlider";
@@ -25,6 +26,7 @@ const CatalogPage = () => {
         dispatch(setFilter('all'));
         dispatch(setCurrentPage(0));
         dispatch(changeMobileMenuDisplay('none'));
+        dispatch(changeDispalayCartWidget('none'));
     }, []);
 
     useEffect(() => {

@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { changeDispalayCartWidget, changeTotal } from './CartWidgetSlice';
@@ -14,17 +15,12 @@ const CartWidget = () => {
     const { userProductCart } = useSelector( state => state.productCard);
     const dispatch = useDispatch();
 
-    const countTotalSumCart = () => {
-        const totalSumCart = userProductCart.length > 0 ? userProductCart.reduce((sum, item) => sum + item.price * item.counter, 0) : 0;
+    const totalSumCart = userProductCart.length > 0 ? userProductCart.reduce((sum, item) => sum + item.price * item.counter, 0) : 0;
 
+    useEffect(() => {
         if (totalSumCart <= 0) dispatch(changeCartIconDisplay('none'));
-    
         dispatch(changeTotal(totalSumCart));
-    }
-
-    countTotalSumCart();
-
-
+    }, [totalSumCart]);
 
     const list = userProductCart.length > 0 ? <ProductList userProductCart={userProductCart} /> : <EmptyCart/>;
     return (
@@ -95,7 +91,7 @@ const EmptyCart = () => {
         <div className="cart-widget__empty-cart">
             <img src={emptyCart} alt="the empty cart" />
             <div className="cart-widget__empty-cart-text">НЕМАЄ ТОВАРІВ В КОШИКУ</div>
-            <Link to='/catalog' end className="btn">До каталогу</Link>
+            <Link to={`/catalog/filter?orderby=all&page=1`} className="btn">До каталогу</Link>
         </div>
     )
 }

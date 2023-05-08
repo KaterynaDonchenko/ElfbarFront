@@ -25,12 +25,10 @@ const productCardSlice = createSlice({
             state.userProductCart = state.userProductCart.filter(item => item._id !== productId);
         },
         increaseCounterInTheProduct: (state, action) => {
-            console.log(action.payload);
             const productId = action.payload;
             state.userProductCart.map(item => item.counter = item._id == productId ? item.counter +=1 : item.counter);
         },
         decreaseCounterInTheProduct: (state, action) => {
-            console.log(action.payload);
             const productId = action.payload;
             state.userProductCart.map(item => item.counter = item._id != productId ? item.counter : item.counter > 1 ? 
             item.counter -=1 : state.userProductCart = state.userProductCart.filter(item => item._id !== productId));

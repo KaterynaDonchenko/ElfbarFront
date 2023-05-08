@@ -1,0 +1,107 @@
+.order-received {
+    padding: 130px 0 50px 0;
+    background-color: rgb(246, 246, 246);
+    &__wrapper {
+        padding: 0 250px;
+    }
+    &__notice {
+        margin-bottom: 30px;
+        padding: 3%;
+        width: 100%;
+        border: 2px dashed #7a9c59;
+        color: #7a9c59;
+        text-align: center;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 1.4;
+    }
+    &__overview {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        justify-content: space-between;
+        list-style-type: none;
+        margin-bottom: 50px;
+        li {
+            display: grid;
+            padding: 0 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-right: 0.8px solid rgba(0, 0, 0, .106);
+            font-size: 14px;
+            line-height: 24px;
+        }
+        li:last-child {
+            border-right: none;
+        }
+    }
+    &__details-title {
+        text-transform: uppercase;
+        font-size: 22px;
+        line-height: 1.4;
+        margin-bottom: 20px;
+    }
+    &__details-table {
+        tr {
+            border-bottom: 2px solid rgba(0, 0, 0, .075);
+        }
+        th {
+            padding: 15px 10px;
+            max-width: 50%;
+            width: 50%;
+            text-align: left;
+            font-weight: 700;
+        }
+        td {
+            padding: 15px 10px;
+        }
+    }
+    &__details-table-head {
+        th {
+            text-transform: uppercase;
+            font-size: 16px;
+            line-height: 22px;
+        }
+    }
+    &__details-table-head th:last-child,
+    &__details-table-body td:last-child,
+    &__details-table-foot td:last-child {
+        text-align: right;
+    }
+    &__details-table-body {
+        td:first-child {
+            display: grid;
+            a {
+                color: #333;
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 1.4;
+            }
+        }
+        td:last-child {
+            font-weight: 400;
+            color: #777;
+        }
+        strong {
+            color: rgb(119, 119, 119);
+        }
+    }
+    &__details-table-foot {
+        th {
+            font-size: 14px;
+        }
+        tr:first-child {
+            td {
+                color: #000;
+                font-weight: 600;
+            }
+        }
+        tr:last-child {
+            th, td {
+                font-size: 20px;
+                color: #000;
+                font-weight: 700;
+                text-transform: uppercase;
+            }
+        }
+    }  
+}

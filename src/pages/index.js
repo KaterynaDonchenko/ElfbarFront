@@ -6,6 +6,7 @@ import CheckoutPage from "./CheckoutPage";
 import CategoryPage from "./CategoryPage";
 import QuestionPage from "./QuestionPage";
 import SearchPage from "./SearchPage";
+import OrderReceivedPage from "./OrderReceivedPage";
 import Page404 from "./Page404";
 
 export {MainPage, 
@@ -15,5 +16,6 @@ export {MainPage,
         CheckoutPage, 
         CategoryPage,
         QuestionPage,
-        SearchPage, 
+        SearchPage,
+        OrderReceivedPage, 
         Page404};

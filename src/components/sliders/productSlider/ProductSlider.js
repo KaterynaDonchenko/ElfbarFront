@@ -69,7 +69,7 @@ const ProductSlider = () => {
                                         <Link to={`/product/${_id}`} >
                                             <div className="product-slider__title">{title.slice(0, 70)}</div>
                                         </Link>
-                                        <div className="product-slider__model"><Link to={`/product-category/${categoryUrl}`} end>{category}</Link></div>
+                                        <div className="product-slider__model"><Link to={`/product-category/${categoryUrl}`}>{category}</Link></div>
                                         <div className="product-slider__footer">
                                             <div className="product-slider__price">{price} грн</div>
                                             <div className="product-slider__basket"

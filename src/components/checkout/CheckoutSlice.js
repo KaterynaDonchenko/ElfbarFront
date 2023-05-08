@@ -6,7 +6,10 @@ const initialState = {
     cities: [],
     warehouses: [],
     cityLoadingStatus: 'idle',
-    cityLoadingWarehouses: 'idle'
+    cityLoadingWarehouses: 'idle',
+    order: {},
+    fetchEmailLoadingStatus: 'idle',
+    isSendForm: false
 }
 
 const CheckoutSlice = createSlice({
@@ -16,7 +19,8 @@ const CheckoutSlice = createSlice({
         onChangeWarehouse: (state, actions) => {
             state.warehouses = actions.payload.arr.filter(item => actions.payload.input.length > 0 ?
                  item.warehouses.toLowerCase().indexOf(actions.payload.input.toLowerCase()) > -1 : item);
-        }
+        },
+        onSaveOrder : (state, actions) => {state.order = actions.payload}
     },
     extraReducers: (builder) => {
         builder
@@ -32,6 +36,12 @@ const CheckoutSlice = createSlice({
                 state.warehouses = actions.payload;
             })
             .addCase(fetchWarehouses.rejected, state => {state.cityLoadingWarehouses = 'error'})
+            .addCase(fetchEmail.pending, state => {state.fetchEmailLoadingStatus = 'loading'})
+            .addCase(fetchEmail.fulfilled, state => {
+                state.fetchEmailLoadingStatus = 'idle';
+                state.isSendForm = true;
+            })
+            .addCase(fetchEmail.rejected, state => {state.fetchEmailLoadingStatus = 'error'})
             .addDefaultCase(() => {});     
     }
 });
@@ -39,7 +49,7 @@ const CheckoutSlice = createSlice({
 export const fetchEmail = createAsyncThunk(
     'checkout/fetchEmail',
     (data) => {
-        const request = useHttp()
+        const request = useHttp();
         request('http://localhost:3001/sendEmail', 'POST', data)
     }
 );
@@ -61,7 +71,7 @@ export const fetchWarehouses = createAsyncThunk(
 )
 
 const {actions, reducer} = CheckoutSlice;
-export const { onChangeWarehouse } = actions;
+export const { onChangeWarehouse, onSaveOrder } = actions;
 export default reducer;
 
 

@@ -29,7 +29,7 @@ const ProductCart = ({title, category, price, img, _id, categoryUrl, lable}) => 
                     <Link to={`/product/${_id}`} >
                         <div className="card-list__item-title">{title.slice(0, 70)}</div>
                     </Link>
-                    <div className="card-list__item-model"><Link to={`/product-category/${categoryUrl}`} end>{category}</Link></div>
+                    <div className="card-list__item-model"><Link to={`/product-category/${categoryUrl}`}>{category}</Link></div>
                     <div className="card-list__item-footer">
                         <div className="card-list__item-price">
                             <div className="card-list__item-price-now">{price} грн</div>

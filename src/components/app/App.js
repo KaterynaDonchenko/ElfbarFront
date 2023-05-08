@@ -10,7 +10,8 @@ import { MainPage,
          CheckoutPage, 
          CategoryPage,
          QuestionPage,
-         SearchPage, 
+         SearchPage,
+         OrderReceivedPage, 
          Page404 } from '../../pages';   
    
 import '../../assets/scss/style.scss';
@@ -28,8 +29,9 @@ const App = () => {
                     <Route path='/product/:productId' element={<ProductPageItem/>}/>
                     <Route path='/cart' element={<CartPage/>}/>
                     <Route path='/checkout' element={<CheckoutPage/>}/>
+                    <Route path='/checkout/order-received' element={<OrderReceivedPage/>}/>
                     <Route path='/product-category/:category' element={<CategoryPage/>}/>
-                    <Route path={`/search`} element={<SearchPage/>}/>
+                    <Route path={`/search`} element={<SearchPage/>}/> 
                     <Route path='*' element={<Page404/>}/>
                 </Routes>
                 <Footer/>

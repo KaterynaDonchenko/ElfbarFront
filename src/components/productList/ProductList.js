@@ -18,7 +18,9 @@ const ProductList = ({lable = false, productsArray, statusProductsArray}) => {
        if(lable) dispatch(fetchProductsWithTheLable(lable));
     }, []);
 
-    if (userProductCart.length > 0) dispatch(changeCartIconDisplay('block'));
+    useEffect(() => {
+        if (userProductCart.length > 0) dispatch(changeCartIconDisplay('block'));
+    }, [userProductCart])
 
     const renderProductCard = (arr, lable = null) => {
         if (arr.length !== 0) {

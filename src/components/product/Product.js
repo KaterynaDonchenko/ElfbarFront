@@ -21,7 +21,9 @@ const Product = () => {
     const { userProductCart } = useSelector( state => state.productCard);
     const dispatch = useDispatch();
 
-    if (userProductCart.length > 0) dispatch(changeCartIconDisplay('block'));
+    useEffect(() => {
+        if (userProductCart.length > 0) dispatch(changeCartIconDisplay('block'));
+    }, [userProductCart]);
 
     const spinerMain = productLoadingStatus === 'loading' ? <Spiner/> : null;
     const spinerBottom = categoryInfoLoadingStatus === 'loading' ? <Spiner/> : null;
@@ -81,16 +83,16 @@ const ProductMain = () => {
 
     const renderSelect = (arr) => {
         let mainVariant;
-        const variants = arr.map(item => {
+        const variants = arr.map((item, i) => {
             if (item._id == productId) {
-                mainVariant = <div onClick={() => onTogleDropdown(selectRef.current, arrowRef.current)} 
+                mainVariant = <div key={i} onClick={() => onTogleDropdown(selectRef.current, arrowRef.current)} 
                                    className="product__select-mainvariant">
                                    {item.taste.slice(0, 18)}
                                </div>
             }
             else {
                 return (
-                    <div className="product__select-variant">
+                    <div key={i} className="product__select-variant">
                         <Link key={item._id} to={`/product/${item._id}`}>{item.taste}</Link>
                     </div>
                 )
