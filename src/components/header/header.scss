@@ -170,6 +170,7 @@
         height: 100vh;
         background-color: #fff;
         overflow-y: auto;
+        z-index: 200;
     }
     &__mobile-menu-header {
         display: flex;

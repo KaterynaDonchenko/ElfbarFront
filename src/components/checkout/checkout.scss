@@ -235,12 +235,12 @@
         position: absolute;
         top: 0;
         background-color: rgb(255, 255, 255);
-        z-index: 199;
+        z-index: 1;
         opacity: .6;
         .spiner {
             position: absolute;
             right: 50%;
-            transform: translateX(-50%);
+            transform: translateX(50%);
             top: 30%;
         }
     }

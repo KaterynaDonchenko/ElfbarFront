@@ -100,6 +100,12 @@
             line-height: 19px;
         }
     }
+
+    .order-received {
+        &__wrapper {
+            padding: 0 150px;
+        }
+    }
     
 
     .footer {
@@ -356,6 +362,22 @@
         }
     }
 
+    .order-received {
+        &__wrapper {
+            padding: 0 73px;
+        }
+    }
+
+    .page404 {
+        &__img {
+            width: 100%;
+            object-fit: contain;
+        }
+        &__title {
+            font-size: 33px;
+        }
+    }
+
     .footer {
         &__main {
             grid-template-columns: 150px 3fr 1fr;
@@ -603,6 +625,28 @@
         }
     }
 
+    .order-received {
+        &__wrapper {
+            padding: 0 29px;
+        }
+        &__overview li {
+            padding: 0  11px;
+            line-height: 20px;
+        }
+        &__details-table td {
+            padding: 10px 5px;
+        }
+    }
+    
+    .page404 {
+        &__title {
+            font-size: 28px;
+        }
+        &__link {
+            font-size: 19px;
+        }
+    }
+
     .footer {
         &__main {
             grid-template-columns: 1fr;
@@ -820,6 +864,52 @@
         }
         &__form-info-group:last-child {
             grid-column: revert;
+        }
+    }
+
+    .order-received {
+        &__notice {
+            font-size: 20px;
+        }
+        &__wrapper {
+            padding: 0 6px;
+        }
+        &__overview {
+            grid-template-columns: repeat(2, 1fr);
+            margin-bottom: 30px;
+        }
+        &__overview li {
+            padding: 7px 11px;
+            line-height: 20px;
+            margin-bottom: 0;
+            border-bottom: 0.8px solid rgba(0, 0, 0, .106);
+        }
+        &__overview li:nth-child(2) {
+            border-right: none;
+        }
+        &__overview li:nth-child(3), &__overview li:nth-child(4) {
+            border-bottom: none;
+        }
+        &__details-title {
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        &__details-table th  {
+            max-width: 60%;
+        }
+        &__details-table-foot tr:last-child th {
+            font-size: 17px;
+        }
+
+    }
+
+    .page404 {
+        &__title {
+            font-size: 23px;
+        }
+        &__link {
+            font-size: 18px;
         }
     }
     

@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { setSearch } from "../components/search/SearchSlice";
 import { setCurrentPage } from "../components/pagination/PaginationSlice";
@@ -10,18 +11,30 @@ import BreadCrumbs from "../components/breadCrumbs/BreadCrumbs";
 import Pagination from "../components/pagination/Pagination";
 
 const SearchPage = () => {
-    const { searchResultForSearchPage, serchResultLoadingStatus } = useSelector(state => state.search);
-    const { currentPageData } = useSelector(state => state.pagination);
+    const { search, searchResultForSearchPage, serchResultLoadingStatus } = useSelector(state => state.search);
+    const { currentPage, currentPageData } = useSelector(state => state.pagination);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const url = useLocation();
 
     useEffect(() => {
         dispatch(setSearch(''));
         dispatch(setCurrentPage(0));
+        window.scrollTo(0, 0);
     }, [searchResultForSearchPage]);
 
     useEffect(() => {
         dispatch(changeMobileMenuDisplay('none'));
     }, []);
+
+    useEffect(() => {
+        const newParam = url.search.includes('&') ? url.search.slice(0, url.search.indexOf('&')).replace(/%20/g, '+') 
+                                                    : 
+                                                    url.search.replace(/%20/g, '+');
+
+        navigate(`/search/${newParam}&page=${currentPage + 1}`, { replace: true });
+
+    }, [search, currentPage]);
 
 
     return (

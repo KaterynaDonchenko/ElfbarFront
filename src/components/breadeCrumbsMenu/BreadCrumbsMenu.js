@@ -29,7 +29,7 @@ const BreadCrumbsMenu = () => {
             </div>
             <div className="breadcrumbs-menu__center">
                 <div className="breadcrumbs-menu__lable" ref={el => lableRef.current = el}>До каталогу</div>
-                <Link to='/catalog' 
+                <Link to={`/catalog/filter?orderby=all&page=1`} 
                       className="breadcrumbs-menu__btn"
                       onMouseEnter={() => lableRef.current.classList.add('breadcrumbs-menu__lable_active')}
                       onMouseLeave={() => lableRef.current.classList.remove('breadcrumbs-menu__lable_active')}></Link>

@@ -11,6 +11,7 @@ const QuestionPage = () => {
     useEffect(() => {
         dispatch(setSearch(''));
         dispatch(changeMobileMenuDisplay('none'));
+        window.scrollTo(0, 0);
     }, []);
 
     return (

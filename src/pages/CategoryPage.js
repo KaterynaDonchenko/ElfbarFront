@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch} from "react-redux";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { setSearch } from "../components/search/SearchSlice";
 import { fetchProductsCategory } from "../components/productList/ProductListSlice";
@@ -14,19 +15,28 @@ import BreadCrumbs from "../components/breadCrumbs/BreadCrumbs";
 
 const CategoryPage = () => {
     const { productsCategory, productsCategoryLoadingStatus, productsCategoryAfterLoading } = useSelector(state => state.products);
-    const { currentPageData } = useSelector(state => state.pagination);
+    const { currentPage, currentPageData } = useSelector(state => state.pagination);
     const dispatch = useDispatch();
     const {category} = useParams();
+    const navigate = useNavigate();
+
+    console.log(category);
 
     useEffect(() => {
         dispatch(fetchProductsCategory(category));
+        dispatch(setCurrentPage(0));
     }, [category]);
 
     useEffect(() => {
         dispatch(setSearch(''));
         dispatch(setCurrentPage(0));
         dispatch(changeMobileMenuDisplay('none'));
+        window.scrollTo(0, 0);
     }, []);
+
+    useEffect(() => {
+        navigate(`/product-category/${category}?page=${currentPage + 1}`, { replace: true });
+    }, [currentPage, category]);
 
     const renderProducts = () => {
         return (
@@ -40,7 +50,6 @@ const CategoryPage = () => {
     const products = renderProducts();
     const warning = productsCategoryAfterLoading === 'empty' ? <EmptyProductList/> : null;
     const content = !warning ? products : null;
-    console.log(warning);
     return (
         <div className="main-content" style={{'backgroundColor': 'rgb(246,246,246)'}}>
         <div className="main-content__header" style={{'backgroundColor': 'rgb(251, 242, 251)'}}>

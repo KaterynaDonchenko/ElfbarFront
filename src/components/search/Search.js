@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate  } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'; 
 
@@ -15,16 +15,9 @@ const Search = ({activeClass = null}) => {
     const searchResaltElement = useRef();
     const { search, searchResult, serchResultLoadingStatus } = useSelector(state => state.search);
     const dispatch = useDispatch();
-    const url = useLocation();
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        const newParam = url.search.replace(/%20/g, '+');
-        if (newParam !== url.search) navigate(`/search/${newParam}`, { replace: true });
-    }, [url.search]);
 
     const onShowSearchInput = () => {
-        document.querySelector('.header__menu').classList.toggle('header__menu_left');
+        if (window.innerWidth < 1200) document.querySelector('.header__menu').classList.toggle('header__menu_left');
         serchBlockRef.current.classList.toggle('search_active');
         inputSearchRef.current.classList.toggle('search__line_active');
         serchBlockRef.current.classList.contains('search_active') ? inputSearchRef.current.focus() : inputSearchRef.current.blur();

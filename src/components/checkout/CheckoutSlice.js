@@ -38,7 +38,7 @@ const CheckoutSlice = createSlice({
             .addCase(fetchWarehouses.rejected, state => {state.cityLoadingWarehouses = 'error'})
             .addCase(fetchEmail.pending, state => {state.fetchEmailLoadingStatus = 'loading'})
             .addCase(fetchEmail.fulfilled, state => {
-                state.fetchEmailLoadingStatus = 'idle';
+                state.fetchEmailLoadingStatus = 'loading';
                 state.isSendForm = true;
             })
             .addCase(fetchEmail.rejected, state => {state.fetchEmailLoadingStatus = 'error'})

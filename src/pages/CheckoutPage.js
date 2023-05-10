@@ -9,6 +9,7 @@ const CheckoutPage = () => {
 
     useEffect(() => {
         dispatch(setSearch(''));
+        window.scrollTo(0, 0);
     }, []);
     
     return (

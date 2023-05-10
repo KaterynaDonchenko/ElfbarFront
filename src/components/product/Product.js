@@ -17,7 +17,6 @@ import TitleH1 from '../titleH1/TitleH1';
 import './product.scss';
 
 const Product = () => {
-    const { productLoadingStatus, categoryInfoLoadingStatus } = useSelector(state => state.product);
     const { userProductCart } = useSelector( state => state.productCard);
     const dispatch = useDispatch();
 
@@ -25,23 +24,15 @@ const Product = () => {
         if (userProductCart.length > 0) dispatch(changeCartIconDisplay('block'));
     }, [userProductCart]);
 
-    const spinerMain = productLoadingStatus === 'loading' ? <Spiner/> : null;
-    const spinerBottom = categoryInfoLoadingStatus === 'loading' ? <Spiner/> : null;
-    const errorMain = productLoadingStatus === 'error' ? <Error/> : null;
-    const errorBottom = categoryInfoLoadingStatus === 'error' ? <Error/> : null;
     return (
         <section className="product">
             <div className="product__main">
                 <div className="container">
-                    {spinerMain}
-                    {errorMain}
                     <ProductMain/>
                 </div>
             </div>
             <div className="product__bottom">
                 <div className="container">
-                    {spinerBottom}
-                    {errorBottom}
                     <ProductBottom/>
                 </div>
             </div>
@@ -51,7 +42,7 @@ const Product = () => {
 
 const ProductMain = () => {
     const { productId } = useParams();
-    const { product } = useSelector(state => state.product);
+    const { product, productLoadingStatus } = useSelector(state => state.product);
     const { productsCategory, productsCategoryLoadingStatus } = useSelector(state => state.products);
     const { counter } = useSelector(state => state.counter);
     const dispatch = useDispatch();
@@ -61,6 +52,7 @@ const ProductMain = () => {
     useEffect(() => {
         dispatch(fetchProduct(productId));
         dispatch(resetCounter());
+        window.scrollTo(0, 0);
     }, [productId]);
 
     useEffect(() => {
@@ -113,44 +105,58 @@ const ProductMain = () => {
         )
     }
 
-    const selectBlock = renderSelect(productsCategory)
-    const {title, price, quantity, category, img, dscr, categoryUrl} = product;
+    const renderMainContentForTheProduct = () => {
+        const selectBlock = renderSelect(productsCategory)
+        const {title, price, quantity, category, img, dscr, categoryUrl} = product;
+
+        return (
+            <div className="product__wrapper">
+                <div className="product__img">
+                    <img src={`http://localhost:3001/${img}`} alt={title} />
+                </div>
+                <div className="product__right-block">
+                    <div className="product__breadecrums">
+                        <BreadCrumbs/>
+                        <BreadCrumbsMenu/>
+                    </div>
+                    <TitleH1 title={title} classN='product__name'/>
+                    <div className="product__price">{price} грн</div>
+                    <div className="product__dscr">{dscr}</div>
+                    {selectBlock}
+                    <div className="product__amount">{quantity}</div>
+                    <form action="" className="product__form">
+                        <Counter/>
+                        <button onClick={(e) => {
+                                e.preventDefault(); 
+                                dispatch(saveUserProductCart({_id : productId, title, price, img, counter}))
+                                dispatch(changeCartIconDisplay('block'))}} 
+                                className="product__form-button">
+                                Додати в кошик
+                        </button>
+                    </form>
+                    <div className="product__category">
+                        <span>Категорія:</span> 
+                        <Link to={`/product-category/${categoryUrl}`}>{category}</Link>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+    
+    const spinerMain = productLoadingStatus === 'loading' ? <Spiner clazz='product__spinner'/> : null;
+    const errorMain = productLoadingStatus === 'error' ? <Error/> : null;
+    const mainContent = !(spinerMain || errorMain) ? renderMainContentForTheProduct() : null;
     return (
-        <div className="product__wrapper">
-            <div className="product__img">
-            <img src={`http://localhost:3001/${img}`} alt={title} />
-            </div>
-            <div className="product__right-block">
-                <div className="product__breadecrums">
-                    <BreadCrumbs/>
-                    <BreadCrumbsMenu/>
-                </div>
-                <TitleH1 title={title} classN='product__name'/>
-                <div className="product__price">{price} грн</div>
-                <div className="product__dscr">{dscr}</div>
-                {selectBlock}
-                <div className="product__amount">{quantity}</div>
-                <form action="" className="product__form">
-                    <Counter/>
-                    <button onClick={(e) => {
-                            e.preventDefault(); 
-                            dispatch(saveUserProductCart({_id : productId, title, price, img, counter}))
-                            dispatch(changeCartIconDisplay('block'))}} 
-                            className="product__form-button">
-                            Додати в кошик
-                    </button>
-                </form>
-                <div className="product__category">
-                    <span>Категорія:</span> 
-                    <Link to={`/product-category/${categoryUrl}`}>{category}</Link>
-                </div>
-            </div>
-        </div>
+        <>
+            {spinerMain}
+            {errorMain}
+            {mainContent}
+        </>
     )
 }
 
 const ProductBottom = () => {
-    const { categoryInfo, characteristic } = useSelector(state => state.product);
+    const { categoryInfo, characteristic, categoryInfoLoadingStatus } = useSelector(state => state.product);
 
     const renderCharacteristic = (info, characteristic) => {
         return characteristic.map(({icon, title}, i) => {
@@ -166,18 +172,31 @@ const ProductBottom = () => {
         })
     }
 
-    const {info, dscr, additionalInfo} = categoryInfo;
-    const characteristicBlock = renderCharacteristic(info, characteristic);
+    const renderBottomForTheProduct = () => {
+        const {info, dscr, additionalInfo} = categoryInfo;
+        const characteristicBlock = renderCharacteristic(info, characteristic);
 
-    return (
-        <div className="product__bottom">
-            <div className="product__bottom-title">Опис</div>
-            {additionalInfo ? <div className="product__additional-info">{additionalInfo}</div> : null}
-            <div className="product__info">
-                {characteristicBlock}
+        return (
+            <div className="product__bottom">
+                <div className="product__bottom-title">Опис</div>
+                {additionalInfo ? <div className="product__additional-info">{additionalInfo}</div> : null}
+                <div className="product__info">
+                    {characteristicBlock}
+                </div>
+                <div className="product__dscr">{dscr}</div> 
             </div>
-            <div className="product__dscr">{dscr}</div> 
-        </div>
+        )
+    }
+
+    const spinerMain = categoryInfoLoadingStatus === 'loading' ? <Spiner clazz='product__spinner'/> : null;
+    const errorMain = categoryInfoLoadingStatus === 'error' ? <Error/> : null;
+    const mainContent = !(spinerMain || errorMain) ? renderBottomForTheProduct() : null;
+    return (
+        <>
+            {spinerMain}
+            {errorMain}
+            {mainContent}
+        </>
     )
 }
 

@@ -51,7 +51,7 @@ const Checkout = () => {
 
     
     useEffect(() => {
-        if (isSendForm === true) navigate('/checkout/order-received');
+        if (isSendForm === true) setTimeout(() => {navigate('/checkout/order-received')}, 4000);
     }, [isSendForm])
 
     const order = userProductCart.length > 0 ? <Order userProductCart={userProductCart}/> : null;

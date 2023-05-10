@@ -27,6 +27,7 @@ const CatalogPage = () => {
         dispatch(setCurrentPage(0));
         dispatch(changeMobileMenuDisplay('none'));
         dispatch(changeDispalayCartWidget('none'));
+        window.scrollTo(0, 0);
     }, []);
 
     useEffect(() => {
