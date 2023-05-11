@@ -2,8 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { changeDispalayCartWidget, changeTotal } from './CartWidgetSlice';
-import { removeProductFromTheCart } from '../productCard/ProductCartSlice';
+import { changeDispalayCartWidget, changeTotal, removeProductFromTheCart, fetchArrayOfProducts } from './CartWidgetSlice';
 import { changeCartIconDisplay } from '../header/HeaderSlice'; 
 
 import './cartWidget.scss';
@@ -11,12 +10,17 @@ import './cartWidget.scss';
 import emptyCart from '../../assets/icons/empty-cart.svg';
 
 const CartWidget = () => {
-    const { widgetDisplay } = useSelector(state => state.cartWidget);
-    const { userProductCart } = useSelector( state => state.productCard);
+    const { widgetDisplay, userProductCart } = useSelector(state => state.cartWidget);
     const dispatch = useDispatch();
 
     const totalSumCart = userProductCart.length > 0 ? userProductCart.reduce((sum, item) => sum + item.price * item.counter, 0) : 0;
 
+    useEffect(() => {
+        const existingLocalStorage = JSON.parse(localStorage.getItem('userProductCart')) || [];
+        const idArrayFromLocalStorage = existingLocalStorage.map(item => item.id);
+        dispatch(fetchArrayOfProducts(idArrayFromLocalStorage));
+    }, [])
+    
     useEffect(() => {
         if (totalSumCart <= 0) dispatch(changeCartIconDisplay('none'));
         dispatch(changeTotal(totalSumCart));

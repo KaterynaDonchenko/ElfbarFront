@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import { saveUserProductCart } from '../../productCard/ProductCartSlice';
+import { saveUserProductCart } from '../../cartWidget/CartWidgetSlice';
 import { changeCartIconDisplay } from '../../header/HeaderSlice';
 import Spinner from '../../spinner/Spinner';
 import Error from '../../error/Error';

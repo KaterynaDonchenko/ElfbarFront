@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { fetchProduct, fetchCategoryInfo} from './ProductSlice';
 import { fetchProductsCategory } from '../productList/ProductListSlice';
-import { saveUserProductCart } from '../productCard/ProductCartSlice';
+import { saveUserProductCart } from '../cartWidget/CartWidgetSlice';
 import { resetCounter } from '../counter/CounterSlice';
 import { changeCartIconDisplay } from '../header/HeaderSlice';
 import Counter from '../counter/Counter';
@@ -17,7 +17,7 @@ import TitleH1 from '../titleH1/TitleH1';
 import './product.scss';
 
 const Product = () => {
-    const { userProductCart } = useSelector( state => state.productCard);
+    const { userProductCart } = useSelector( state => state.cartWidget);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -50,10 +50,10 @@ const ProductMain = () => {
     const arrowRef = useRef();
 
     useEffect(() => {
-        dispatch(fetchProduct(productId));
+        dispatch(fetchProduct(+productId));
         dispatch(resetCounter());
         window.scrollTo(0, 0);
-    }, [productId]);
+    }, [+productId]);
 
     useEffect(() => {
         dispatch(fetchProductsCategory(product.categoryUrl));
@@ -76,7 +76,7 @@ const ProductMain = () => {
     const renderSelect = (arr) => {
         let mainVariant;
         const variants = arr.map((item, i) => {
-            if (item._id == productId) {
+            if (item._id === +productId) {
                 mainVariant = <div key={i} onClick={() => onTogleDropdown(selectRef.current, arrowRef.current)} 
                                    className="product__select-mainvariant">
                                    {item.taste.slice(0, 18)}
@@ -128,7 +128,7 @@ const ProductMain = () => {
                         <Counter/>
                         <button onClick={(e) => {
                                 e.preventDefault(); 
-                                dispatch(saveUserProductCart({_id : productId, title, price, img, counter}))
+                                dispatch(saveUserProductCart({_id : +productId, title, price, img, counter}))
                                 dispatch(changeCartIconDisplay('block'))}} 
                                 className="product__form-button">
                                 Додати в кошик

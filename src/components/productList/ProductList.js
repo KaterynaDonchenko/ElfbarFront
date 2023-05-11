@@ -10,7 +10,7 @@ import Error from '../error/Error';
 import './productList.scss';
 
 const ProductList = ({lable = false, productsArray, statusProductsArray}) => { 
-    const { userProductCart } = useSelector( state => state.productCard);
+    const { userProductCart } = useSelector( state => state.cartWidget);
     const dispatch = useDispatch();
 
     useEffect(() => {

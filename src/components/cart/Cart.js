@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import { removeProductFromTheCart } from '../productCard/ProductCartSlice';
+import { removeProductFromTheCart } from '../cartWidget/CartWidgetSlice';
 import { changeCartIconDisplay } from '../header/HeaderSlice';
 import Counter from '../counter/Counter';
 
@@ -11,7 +11,7 @@ import './cart.scss';
 import emptyCart from '../../assets/icons/empty-cart.svg';
 
 const Cart = () => {
-    const { userProductCart } = useSelector( state => state.productCard);
+    const { userProductCart } = useSelector( state => state.cartWidget);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -73,8 +73,7 @@ const EmptyCart = () => {
 }
 
 const CartWithProducts = () => {
-    const { userProductCart } = useSelector( state => state.productCard);
-    const { total } = useSelector(state => state.cartWidget);
+    const { total, userProductCart } = useSelector(state => state.cartWidget);
 
     const product = userProductCart.length > 0 ? <Product userProductCart={userProductCart}/> : null;  
 

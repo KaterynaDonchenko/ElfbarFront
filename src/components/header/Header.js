@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 
 import { setFilter } from "../filters/FilterSlice";
 import { setCurrentPage } from '../pagination/PaginationSlice';
@@ -14,13 +14,17 @@ import logo from '../../assets/icons/LogoPar.svg';
 
 const Header = () => {
     const { cartIconDisplay, mobileMenuDisplay } = useSelector(state => state.header);
-    const { userProductCart } = useSelector(state => state.productCard);
+    const { userProductCart } = useSelector(state => state.cartWidget);
     const { filterSlider } = useSelector(state => state.filterSlider);
     const arowRight = useRef();
     const arowDown = useRef();
     const dispatch = useDispatch();
 
     const counter = userProductCart.length > 0 ? userProductCart.reduce((sum, item) => sum + item.counter, 0) : 0;
+
+    // useEffect(() => {
+    //     localStorage.setItem('userProductCart', JSON.stringify([]));
+    // }, [])
 
     const goToCatalog = () => {
         dispatch(setFilter('all'));

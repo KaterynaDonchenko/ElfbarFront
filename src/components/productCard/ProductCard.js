@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useRef } from 'react';
 
-import { saveUserProductCart } from './ProductCartSlice';
+import { saveUserProductCart } from '../cartWidget/CartWidgetSlice';
 import { changeCartIconDisplay } from '../header/HeaderSlice'; 
 
 import './productCard.scss';

@@ -26,8 +26,7 @@ const TextInput = ({label, ...props}) => {
 }
 
 const Checkout = () => {
-    const { userProductCart } = useSelector( state => state.productCard);
-    const { total } = useSelector(state => state.cartWidget);
+    const { total, userProductCart } = useSelector(state => state.cartWidget);
     const { fetchEmailLoadingStatus, isSendForm } = useSelector(state => state.checkout);
     const dispatch = useDispatch();
     const spinnerRef = useRef();

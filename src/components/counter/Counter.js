@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { increaceCounter, decreaceCounter } from './CounterSlice';
-import { increaseCounterInTheProduct, decreaseCounterInTheProduct } from '../productCard/ProductCartSlice';
+import { increaseCounterInTheProduct, decreaseCounterInTheProduct } from '../cartWidget/CartWidgetSlice';
 
 import './counter.scss'
 

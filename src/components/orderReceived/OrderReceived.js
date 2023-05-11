@@ -1,15 +1,25 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
+import { cleareUserProductCart } from '../cartWidget/CartWidgetSlice';
 import './orderReceived.scss';
 
 const OrderReceived = () => {
     const { order } = useSelector(state => state.checkout);
     const { total } = useSelector(state => state.cartWidget);
-    const { userProductCart } = useSelector( state => state.productCard);
+    const { userProductCart } = useSelector( state => state.cartWidget);
     const currentDate = new Date();
+    const dispatch = useDispatch();
     const day = currentDate.getDate().toString().padStart(2, '0');
     const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
     const year = currentDate.getFullYear().toString();
+
+    useEffect(() => {
+        return () => {
+            localStorage.removeItem('userProductCart');
+            dispatch(cleareUserProductCart());
+        }
+    }, [])
 
     const renderProducts = (arr) => {
         return arr.map(({title, price, counter}, i) => {
