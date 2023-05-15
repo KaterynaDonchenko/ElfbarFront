@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 
 import { setFilter } from "../filters/FilterSlice";
 import { setCurrentPage } from '../pagination/PaginationSlice';
@@ -21,10 +21,6 @@ const Header = () => {
     const dispatch = useDispatch();
 
     const counter = userProductCart.length > 0 ? userProductCart.reduce((sum, item) => sum + item.counter, 0) : 0;
-
-    // useEffect(() => {
-    //     localStorage.setItem('userProductCart', JSON.stringify([]));
-    // }, [])
 
     const goToCatalog = () => {
         dispatch(setFilter('all'));

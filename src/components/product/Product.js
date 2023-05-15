@@ -43,7 +43,9 @@ const Product = () => {
 const ProductMain = () => {
     const { productId } = useParams();
     const { product, productLoadingStatus } = useSelector(state => state.product);
-    const { productsCategory, productsCategoryLoadingStatus } = useSelector(state => state.products);
+    const { productsCategory, 
+            productsCategoryLoadingStatus, 
+            selectMainVarianLoadingStatust } = useSelector(state => state.products);
     const { counter } = useSelector(state => state.counter);
     const dispatch = useDispatch();
     const selectRef = useRef();
@@ -70,9 +72,6 @@ const ProductMain = () => {
         }
     }
 
-    const spinerSelector = productsCategoryLoadingStatus === 'loading' ? <Spiner/> : null;
-    const errorSelector = productsCategoryLoadingStatus === 'error' ? <Error/> : null;
-
     const renderSelect = (arr) => {
         let mainVariant;
         const variants = arr.map((item, i) => {
@@ -93,20 +92,20 @@ const ProductMain = () => {
         });
 
         return (
-            <div name="taste" className="product__select">
+            <>
                 <div className="product__select-btn" ref={el => arrowRef.current = el}></div>
-                    {spinerSelector}
-                    {errorSelector}
                     {mainVariant}
                 <div className="product__select-variants" ref={el => selectRef.current = el}>
                     {variants}
                 </div>
-            </div> 
+            </>
         )
     }
 
     const renderMainContentForTheProduct = () => {
-        const selectBlock = renderSelect(productsCategory)
+        const spinerSelector = productsCategoryLoadingStatus === 'loading' ? <Spiner/> : null;
+        const errorSelector = productsCategoryLoadingStatus === 'error' ? <Error/> : null;
+        const selectBlock = !(spinerSelector && errorSelector)? renderSelect(productsCategory) : null;
         const {title, price, quantity, category, img, dscr, categoryUrl} = product;
 
         return (
@@ -122,7 +121,11 @@ const ProductMain = () => {
                     <TitleH1 title={title} classN='product__name'/>
                     <div className="product__price">{price} грн</div>
                     <div className="product__dscr">{dscr}</div>
-                    {selectBlock}
+                    <div name="taste" className="product__select">
+                        {spinerSelector}
+                        {errorSelector}
+                        {selectBlock}
+                    </div> 
                     <div className="product__amount">{quantity}</div>
                     <form action="" className="product__form">
                         <Counter/>

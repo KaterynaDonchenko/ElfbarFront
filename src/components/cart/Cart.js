@@ -66,7 +66,7 @@ const EmptyCart = () => {
             <img src={emptyCart} alt="empty cart" />
             <h2 className="cart__empty-title">Ваш кошик порожній</h2>
             <div className="cart__empty-title-btn">
-                <Link to={`/catalog/filter?orderby=all`} className="btn">Повернутися в магазин</Link>
+                <Link to={`/catalog/filter?orderby=all&page=1`} className="btn">Повернутися в магазин</Link>
             </div>
         </div>
     )

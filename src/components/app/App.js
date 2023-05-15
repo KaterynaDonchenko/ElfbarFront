@@ -11,7 +11,8 @@ import { MainPage,
          CategoryPage,
          QuestionPage,
          SearchPage,
-         OrderReceivedPage, 
+         OrderReceivedPage,
+         PolicyPage, 
          Page404 } from '../../pages';   
    
 import '../../assets/scss/style.scss';
@@ -24,14 +25,15 @@ const App = () => {
                 <CartWidget/>
                 <Routes>
                     <Route path='/' element={<MainPage/>}/>
-                    <Route path={`/catalog/filter`} element={<CatalogPage/>}/>
+                    <Route path='/catalog/filter' element={<CatalogPage/>}/>
                     <Route path='/question' element={<QuestionPage/>}/>
                     <Route path='/product/:productId' element={<ProductPageItem/>}/>
                     <Route path='/cart' element={<CartPage/>}/>
                     <Route path='/checkout' element={<CheckoutPage/>}/>
                     <Route path='/checkout/order-received' element={<OrderReceivedPage/>}/>
                     <Route path='/product-category/:category' element={<CategoryPage/>}/>
-                    <Route path={`/search`} element={<SearchPage/>}/> 
+                    <Route path='/search' element={<SearchPage/>}/>
+                    <Route path='/policy' element={<PolicyPage/>}/> 
                     <Route path='*' element={<Page404/>}/>
                 </Routes>
                 <Footer/>

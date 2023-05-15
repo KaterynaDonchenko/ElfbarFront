@@ -7,6 +7,7 @@ import CategoryPage from "./CategoryPage";
 import QuestionPage from "./QuestionPage";
 import SearchPage from "./SearchPage";
 import OrderReceivedPage from "./OrderReceivedPage";
+import PolicyPage from "./PolicyPage";
 import Page404 from "./Page404";
 
 export {MainPage, 
@@ -17,5 +18,6 @@ export {MainPage,
         CategoryPage,
         QuestionPage,
         SearchPage,
-        OrderReceivedPage, 
+        OrderReceivedPage,
+        PolicyPage, 
         Page404};

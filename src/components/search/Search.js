@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'; 
 
-import { fetchSearch, cleareSearchResult, setSearch, setSearchResultForSearchPage } from './SearchSlice';
+import { fetchSearch, cleareSearchResult, setSearch, setSearchResultForSearchPage, changeDisplaySearchResult } from './SearchSlice';
+import { setCurrentPage } from '../pagination/PaginationSlice';
 import Spinner from '../spinner/Spinner';
 import Error from '../error/Error';
 
@@ -13,29 +14,58 @@ const Search = ({activeClass = null}) => {
     const inputSearchRef = useRef();
     const linkRef = useRef();
     const searchResaltElement = useRef();
-    const { search, searchResult, serchResultLoadingStatus } = useSelector(state => state.search);
+    const { search, searchResult, serchResultLoadingStatus, displaySearchResult } = useSelector(state => state.search);
     const dispatch = useDispatch();
 
-    const onShowSearchInput = () => {
-        if (window.innerWidth < 1200) document.querySelector('.header__menu').classList.toggle('header__menu_left');
-        serchBlockRef.current.classList.toggle('search_active');
-        inputSearchRef.current.classList.toggle('search__line_active');
-        serchBlockRef.current.classList.contains('search_active') ? inputSearchRef.current.focus() : inputSearchRef.current.blur();
-    }
+    useEffect(() => {
+        const imgSearch = document.querySelector('.search__img svg');
+
+        const onShowSearchInput = () => {
+            if (window.innerWidth < 1200) document.querySelector('.header__menu').classList.toggle('header__menu_left');
+            serchBlockRef.current.classList.toggle('search_active');
+            inputSearchRef.current.classList.toggle('search__line_active');
+            dispatch(changeDisplaySearchResult('block'));
+            serchBlockRef.current.classList.contains('search_active') ? inputSearchRef.current.focus() : 
+                                                                        inputSearchRef.current.blur();
+        }
+
+        imgSearch.addEventListener('click', onShowSearchInput);
+
+        const onHideSerch = event => {
+
+            if (event.target !== imgSearch && event.target !== inputSearchRef.current ) { 
+                serchBlockRef.current.classList.remove('search_active');
+                inputSearchRef.current.classList.remove('search__line_active');
+                dispatch(setSearch(''));
+            }
+        };
+
+        window.addEventListener('click', onHideSerch);
+
+        return () => {
+            imgSearch.removeEventListener('click', onShowSearchInput)
+            window.removeEventListener('click', onHideSerch);
+        }
+    }, [])
 
     useEffect(() => {
         search.length > 2 ? dispatch(fetchSearch(search)) : dispatch(cleareSearchResult());
     }, [search]);
 
     useEffect(() => {
-        const mobileMenu = document.querySelector('.header__mobile-menu-block');
-        const mobileList = document.querySelector('.header__mobile-menu-list');
+        let mobileMenu = document.querySelector('.header__mobile-menu-block');
+        let mobileList = document.querySelector('.header__mobile-menu-list');
         
         if (searchResult.length > 0 && window.getComputedStyle(mobileMenu).display === 'grid') {
             mobileList.style.paddingTop = `${searchResaltElement.current.offsetHeight}px`;
         } else {
             mobileList.style.paddingTop = '';
         }
+
+        return () => {
+            mobileMenu = null;
+            mobileList = null;
+        };
 
     }, [searchResult])
 
@@ -78,7 +108,10 @@ const Search = ({activeClass = null}) => {
                         {items}
                     </ul>
                     <div className="search__result-more">
-                        <Link onClick={() => dispatch(setSearchResultForSearchPage(searchResult))} 
+                        <Link onClick={() => {
+                              dispatch(setSearchResultForSearchPage(searchResult))
+                              dispatch(setCurrentPage(0))
+                              }} 
                               to={`/search/?s=${search}`}
                               ref={el => linkRef.current = el}>
                               Всі результати
@@ -106,7 +139,7 @@ const Search = ({activeClass = null}) => {
     return (
         <>
             <div ref={el => serchBlockRef.current = el} className="search">
-                <div onClick={onShowSearchInput} className="search__img">
+                <div className="search__img">
                     <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 32 32" width="32px" height="32px"><path d="M 19 3 C 13.488281 3 9 7.488281 9 13 C 9 15.394531 9.839844 17.589844 11.25 19.3125 L 3.28125 27.28125 L 4.71875 28.71875 L 12.6875 20.75 C 14.410156 22.160156 16.605469 23 19 23 C 24.511719 23 29 18.511719 29 13 C 29 7.488281 24.511719 3 19 3 Z M 19 5 C 23.429688 5 27 8.570313 27 13 C 27 17.429688 23.429688 21 19 21 C 14.570313 21 11 17.429688 11 13 C 11 8.570313 14.570313 5 19 5 Z"/></svg>
                 </div>
                 <input 
@@ -119,7 +152,7 @@ const Search = ({activeClass = null}) => {
                         onKeyDown={e => e.key === 'Enter' ? linkRef.current.click(): null} 
                         className={`search__line ${activeClass}`}/>
             </div>
-            <div className="search__result" ref={searchResaltElement}>
+            <div className="search__result" ref={searchResaltElement} style={{'display': displaySearchResult}}>
                 {loading}
                 {error}
                 {result}

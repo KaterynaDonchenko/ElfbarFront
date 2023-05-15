@@ -3,8 +3,6 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { setSearch } from "../components/search/SearchSlice";
-import { setFilter } from "../components/filters/FilterSlice";
-import { setCurrentPage } from "../components/pagination/PaginationSlice";
 import { changeMobileMenuDisplay } from "../components/header/HeaderSlice";
 import { changeDispalayCartWidget } from "../components/cartWidget/CartWidgetSlice";
 import ProductList from "../components/productList/ProductList";
@@ -23,8 +21,6 @@ const CatalogPage = () => {
 
     useEffect(() => {
         dispatch(setSearch(''));
-        dispatch(setFilter('all'));
-        dispatch(setCurrentPage(0));
         dispatch(changeMobileMenuDisplay('none'));
         dispatch(changeDispalayCartWidget('none'));
         window.scrollTo(0, 0);

@@ -11,9 +11,18 @@ const Filters = () => {
     const selectRef = useRef();
 
     useEffect(() => {
+        sessionStorage.setItem('filter', JSON.stringify(filter));
+    }, [])
+
+    useEffect(() => {
         dispatch(fetchFilter(filter));
-        dispatch(setCurrentPage(0));
-        if (filter == 'all') selectRef.current.value = 'all';
+        if (filter === 'all') selectRef.current.value = 'all';
+
+        const filterFromSessionStorage = JSON.parse(sessionStorage.getItem('filter'));
+        if (filterFromSessionStorage !== filter) dispatch(setCurrentPage(0));
+        
+        sessionStorage.setItem('filter', JSON.stringify(filter));
+        selectRef.current.value = filter;
     }, [filter])
 
     return (

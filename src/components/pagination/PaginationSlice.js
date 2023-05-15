@@ -1,7 +1,9 @@
 import { createSlice} from "@reduxjs/toolkit";
 
+const currentPageFromSessionStorage = JSON.parse(sessionStorage.getItem('currentPage'));
+
 const initialState = {
-    currentPage: 0,
+    currentPage: currentPageFromSessionStorage > 0 ? currentPageFromSessionStorage : 0,
     currentPageData: []
 }
 

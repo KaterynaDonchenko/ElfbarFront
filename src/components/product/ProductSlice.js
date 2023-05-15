@@ -15,7 +15,9 @@ const initialState = {
 const productSlice = createSlice({
     name: 'product',
     initialState,
-    reducers: {},
+    reducers: {
+        changeSelectMainVarianLoadingStatus: (state, action) => {state.selectMainVarianLoadingStatust = action.payload}
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchProduct.pending, state => {state.productLoadingStatus = 'loading'})

@@ -20,16 +20,12 @@ const CategoryPage = () => {
     const {category} = useParams();
     const navigate = useNavigate();
 
-    console.log(category);
-
     useEffect(() => {
         dispatch(fetchProductsCategory(category));
-        dispatch(setCurrentPage(0));
     }, [category]);
 
     useEffect(() => {
         dispatch(setSearch(''));
-        dispatch(setCurrentPage(0));
         dispatch(changeMobileMenuDisplay('none'));
         window.scrollTo(0, 0);
     }, []);

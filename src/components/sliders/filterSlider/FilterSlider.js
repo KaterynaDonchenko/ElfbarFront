@@ -4,6 +4,7 @@ import { fetchFilterSlider } from './FilterSliderSlice';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { setCurrentPage } from '../../pagination/PaginationSlice';
 import Spinner from '../../spinner/Spinner';
 import Error from '../../error/Error';
 
@@ -62,7 +63,7 @@ const FilterSlider = () => {
         return arr.map( ({name, img, color}, i) => {
             return (
                 <SplideSlide key={i} className='slide'>
-                    <Link to={`/product-category/${name}`}>
+                    <Link onClick={() => dispatch(setCurrentPage(0))} to={`/product-category/${name}`}>
                         <div className="slide__item-sircle" 
                             onMouseEnter={() => setStyle(style.map((item, index) => index === i ? {'borderColor': color} : item))}
                             onMouseLeave={() => setStyle(style.map((item, index) => index === i ? {'borderColor': '#E9E6E3'} : item))} 

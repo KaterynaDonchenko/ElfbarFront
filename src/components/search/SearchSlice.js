@@ -4,6 +4,7 @@ import { useHttp } from '../../hooks/http.hook';
 const initialState = {
     search: '',
     searchResult: [],
+    displaySearchResult: 'none',
     serchResultLoadingStatus: 'idle',
     searchResultForSearchPage: []
 }
@@ -12,9 +13,13 @@ const SearchSlice = createSlice({
     name: 'search',
     initialState,
     reducers: {
-        setSearch: (state, actions) => {state.search = actions.payload},
+        setSearch: (state, actions) => {
+            state.search = actions.payload;
+            if(actions.payload.length > 0) sessionStorage.setItem('userSearch', JSON.stringify(actions.payload));
+        },
         cleareSearchResult: state => {state.searchResult = []},
-        setSearchResultForSearchPage: (state, actions) => {state.searchResultForSearchPage = actions.payload}
+        setSearchResultForSearchPage: (state, actions) => {state.searchResultForSearchPage = actions.payload},
+        changeDisplaySearchResult: (state, actions) => {state.displaySearchResult = actions.payload}
     },
     extraReducers: (builder) => {
         builder
@@ -36,7 +41,7 @@ export const fetchSearch = createAsyncThunk(
 );
 
 const {actions, reducer} = SearchSlice;
-export const { setSearch, cleareSearchResult, setSearchResultForSearchPage } = actions;
+export const { setSearch, cleareSearchResult, setSearchResultForSearchPage, changeDisplaySearchResult } = actions;
 
 export default reducer;
 

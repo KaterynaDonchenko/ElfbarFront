@@ -1,8 +1,10 @@
 import { createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { useHttp } from '../../hooks/http.hook';
 
+const filterFromSessionStorage = JSON.parse(sessionStorage.getItem('filter'));
+
 const initialState = {
-    filter: 'all',
+    filter: filterFromSessionStorage ? filterFromSessionStorage : 'all',
     filterResult: [],
     filterLoadingStatus: 'idle',
 }

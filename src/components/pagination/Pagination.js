@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import ReactPaginate from 'react-paginate';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { setCurrentPage, setCurrentPageData } from './PaginationSlice';
 
 import './pagination.scss';
@@ -8,10 +8,13 @@ import './pagination.scss';
 const Pagination = ({array}) => {
   const { currentPage } = useSelector(state => state.pagination);
   const dispatch = useDispatch();
-  const paginateRef = useRef();
 
-  const PER_PAGE = 5;
+  const PER_PAGE = 10;
   const offset = currentPage * PER_PAGE;
+
+  useEffect(() => {
+    sessionStorage.setItem('currentPage', JSON.stringify(currentPage));
+  }, [currentPage]);
   
   useEffect(() => {
     dispatch(setCurrentPageData(array.slice(offset, offset + PER_PAGE)));
@@ -21,11 +24,8 @@ const Pagination = ({array}) => {
     
   const handlePageClick = (event) => {
     dispatch(setCurrentPage(event.selected));
+    window.scrollTo(0, 250);
   };
-
-  useEffect(() => {
-    if(currentPage === 0) paginateRef.current.state.selected = 0;
-  }, [currentPage]);
 
     return (
       <div className="pagination">
@@ -43,7 +43,7 @@ const Pagination = ({array}) => {
           activeClassName={"pagination__item_active"}
           pageCount={pageCount}
           onPageChange={handlePageClick}
-          ref={paginateRef}
+          forcePage={currentPage}
         />
       </div>
     )

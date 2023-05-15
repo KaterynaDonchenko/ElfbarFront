@@ -273,7 +273,9 @@ const Delivery = ({method}) => {
     useEffect(() => {
         const onHiddeCitySerch = event => {
 
-            if (citySearchRef.current && event.target !== citySearchRef.current && cityRef.current.className !== event.target.className) {
+            if (citySearchRef.current && event.target !== citySearchRef.current && 
+                cityRef.current.className !== event.target.className) {
+                    
                 citySearchRef.current.style.display = "none";
                 setCitySearch('');
             }

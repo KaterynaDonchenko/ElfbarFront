@@ -16,6 +16,17 @@ const CartWidget = () => {
     const totalSumCart = userProductCart.length > 0 ? userProductCart.reduce((sum, item) => sum + item.price * item.counter, 0) : 0;
 
     useEffect(() => {
+        const cartWidget = document.querySelector('.cart-widget');
+
+        const hideCartWidget = event => {
+            if (event.target === cartWidget || event.keyCode === 27) dispatch(changeDispalayCartWidget('none'));
+        }
+
+        window.addEventListener('click', hideCartWidget);
+        window.addEventListener('keydown', hideCartWidget);
+    }, [])
+
+    useEffect(() => {
         const existingLocalStorage = JSON.parse(localStorage.getItem('userProductCart')) || [];
         const idArrayFromLocalStorage = existingLocalStorage.map(item => item.id);
         dispatch(fetchArrayOfProducts(idArrayFromLocalStorage));

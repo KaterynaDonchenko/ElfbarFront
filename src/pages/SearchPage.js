@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { setSearch } from "../components/search/SearchSlice";
+import { setSearch, fetchSearch, setSearchResultForSearchPage, cleareSearchResult, changeDisplaySearchResult } from "../components/search/SearchSlice";
 import { setCurrentPage } from "../components/pagination/PaginationSlice";
 import { changeMobileMenuDisplay } from "../components/header/HeaderSlice";
 import ProductList from "../components/productList/ProductList";
@@ -11,7 +11,10 @@ import BreadCrumbs from "../components/breadCrumbs/BreadCrumbs";
 import Pagination from "../components/pagination/Pagination";
 
 const SearchPage = () => {
-    const { search, searchResultForSearchPage, serchResultLoadingStatus } = useSelector(state => state.search);
+    const { search, 
+            searchResultForSearchPage, 
+            serchResultLoadingStatus, 
+            searchResult} = useSelector(state => state.search);
     const { currentPage, currentPageData } = useSelector(state => state.pagination);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -19,13 +22,32 @@ const SearchPage = () => {
 
     useEffect(() => {
         dispatch(setSearch(''));
-        dispatch(setCurrentPage(0));
         window.scrollTo(0, 0);
     }, [searchResultForSearchPage]);
 
     useEffect(() => {
         dispatch(changeMobileMenuDisplay('none'));
     }, []);
+
+    useEffect(() => {
+        if (search.length === 0) {
+            const userSearchFromSessionStorage = JSON.parse(sessionStorage.getItem('userSearch'));
+            dispatch(fetchSearch(userSearchFromSessionStorage));
+        }
+    }, []);
+
+    useEffect(() => {
+        if (search.length === 0 && searchResult.length > 0 ) {
+            dispatch(setSearchResultForSearchPage(searchResult));
+            dispatch(changeDisplaySearchResult('none'));
+        }
+    }, [searchResult]);
+
+    useEffect(() => {
+        if (search.length === 0 && searchResult.length > 0 && searchResultForSearchPage.length > 0) {
+            dispatch(cleareSearchResult());
+        }
+    }, [searchResultForSearchPage]);
 
     useEffect(() => {
         const newParam = url.search.includes('&') ? url.search.slice(0, url.search.indexOf('&')).replace(/%20/g, '+') 

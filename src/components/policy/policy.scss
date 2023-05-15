@@ -1,0 +1,19 @@
+.policy {
+    padding-top: 150px;
+    &__title {
+        font-size: 48px;
+        margin-bottom: 70px;
+        text-align: center;
+    }
+    &__text {
+        font-size: 20px;
+        line-height: 1.55;
+        font-weight: 300;
+        a {
+            color: #000;
+        }
+        strong {
+            font-weight: 700;
+        }
+    }
+}
