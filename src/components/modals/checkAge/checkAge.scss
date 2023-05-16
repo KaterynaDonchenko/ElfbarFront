@@ -1,0 +1,53 @@
+.check-age {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.70);
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    &__window {
+        width: 560px;
+        position: absolute;
+        bottom: 50%;
+        right: 50%;
+        transform: translate(50%, 50%);
+        background: #fff;
+        padding: 50px;
+    }
+    &__window-title {
+        font-size: 30px;
+        font-weight: 600;
+        text-align: center;
+    }
+    &__window-subtitle {
+        margin-top: 14px;
+        font-size: 14px;
+        line-height: 1.55;
+        font-weight: 300;
+        text-align: center;
+    }
+    &__btns {
+        margin-top: 35px;
+        display: flex;
+        justify-content: center;
+    }
+    .check-age__btn {
+        border-radius: 30px;
+        height: 60px;
+        font-size: 16px;
+        padding: 0 48px;
+        font-weight: 700;
+        text-transform: inherit;
+        margin-right: 10px;
+        &_color-grey {
+            background-color: #f2f2f2;
+            color: #000;
+            padding-top: 20px;
+            &:hover {
+                color: #000;
+            }
+        }
+    }
+}

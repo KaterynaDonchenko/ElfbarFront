@@ -19,7 +19,8 @@ const BreadCrumbs = () => {
     const setCategoryBreadCrumbs = () => {
         const model = pathname.slice(-((pathname.length - pathname.indexOf('y/')) - 2));
         const nameLink = pathname.includes('/catalog') ? 'Каталог товарів' : pathname === '/search/' ?  
-        `Результат пошуку для "${search.slice(search.indexOf('=') + 1, search.indexOf('&')).replace(/\+/ig, ' ')}"` : `ELFBAR ${model}`;
+        `Результат пошуку для "${search.slice(search.indexOf('=') + 1, search.indexOf('&')).replace(/\+/ig, ' ')}"` : 
+        `ELFBAR ${model}`;
         if (nameLink === 'Каталог товарів') {
             return (
                 <span className="breade-crumbs__link breade-crumbs__link_active">{nameLink}</span>
@@ -27,7 +28,8 @@ const BreadCrumbs = () => {
         } else {
             return (
                 <>
-                    <Link to={`/catalog/filter?orderby=all&page=1`} onClick={goToCatalog} className="breade-crumbs__link">Каталог товарів</Link>
+                    <Link to={`/catalog/filter?orderby=all&page=1`} 
+                          onClick={goToCatalog} className="breade-crumbs__link">Каталог товарів</Link>
                     <span className="breade-crumbs__link breade-crumbs__link_active">{nameLink}</span>
                 </>
             )

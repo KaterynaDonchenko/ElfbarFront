@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 import { setSearch } from "../components/search/SearchSlice";
 import { fetchProductsCategory } from "../components/productList/ProductListSlice";
-import { setCurrentPage } from "../components/pagination/PaginationSlice";
 import { changeMobileMenuDisplay } from "../components/header/HeaderSlice";
 import Pagination from "../components/pagination/Pagination";
 import ProductList from "../components/productList/ProductList";
 import FilterSlider from "../components/sliders/filterSlider/FilterSlider";
 import TitleH1 from "../components/titleH1/TitleH1";
 import BreadCrumbs from "../components/breadCrumbs/BreadCrumbs";
+import ErrorBoundary from "../components/errorBoundary/ErrorBoundary";
 
 const CategoryPage = () => {
     const { productsCategory, productsCategoryLoadingStatus, productsCategoryAfterLoading } = useSelector(state => state.products);
@@ -37,8 +37,12 @@ const CategoryPage = () => {
     const renderProducts = () => {
         return (
             <>
-                <ProductList productsArray={currentPageData} statusProductsArray={productsCategoryLoadingStatus}/>
-                {!(productsCategoryLoadingStatus === 'loading') ? <Pagination array={productsCategory}/> : null} 
+                <ErrorBoundary>
+                    <ProductList productsArray={currentPageData} statusProductsArray={productsCategoryLoadingStatus}/>
+                </ErrorBoundary>
+                <ErrorBoundary>
+                    {!(productsCategoryLoadingStatus === 'loading') ? <Pagination array={productsCategory}/> : null}
+                </ErrorBoundary> 
             </> 
         )
     }
@@ -51,11 +55,15 @@ const CategoryPage = () => {
         <div className="main-content__header" style={{'backgroundColor': 'rgb(251, 242, 251)'}}>
             <div className="container">
                 <TitleH1 title={`ELFBAR ${category}`} classN='title-h1_pdt150 title-h1_center title-h1_fz-50'/>
-                <FilterSlider/>
+                <ErrorBoundary>
+                    <FilterSlider/>
+                </ErrorBoundary>
             </div>
         </div>
         <div className="container">
-            <BreadCrumbs/>
+            <ErrorBoundary>
+                <BreadCrumbs/>
+            </ErrorBoundary>
             {warning}
             {content}
         </div>

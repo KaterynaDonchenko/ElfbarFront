@@ -5,7 +5,8 @@ const initialState = {
     widgetDisplay: 'none',
     total: 0,
     userProductCart: [],
-    userProductCartLoadingStatus: 'idle'
+    userProductCartLoadingStatus: 'idle',
+    futureDateOfTheLocaleStorage: null
 }
 
 const cartWidgetSlice = createSlice({
@@ -14,6 +15,12 @@ const cartWidgetSlice = createSlice({
     reducers: {
         changeDispalayCartWidget: (state, actions) => {state.widgetDisplay = actions.payload},
         changeTotal: (state, action) => {state.total = action.payload},
+        changeFutureDateOfTheLocaleStorage: (state, actions) => {
+            const date = new Date(actions.payload);
+            state.futureDateOfTheLocaleStorage = date.toLocaleString();
+            const isUserProductCartInLocalStorage = JSON.parse(localStorage.getItem('userProductCart'));
+            if (isUserProductCartInLocalStorage) localStorage.setItem('futureDate', state.futureDateOfTheLocaleStorage);
+        },
         saveUserProductCart: (state, action) => {
             const newProductId = action.payload._id;
             const newCounter = action.payload.counter;
@@ -37,8 +44,8 @@ const cartWidgetSlice = createSlice({
 
                 localStorage.setItem('userProductCart', JSON.stringify(isUserProductCartInLocalStorage));
             } else {
-                const userProductForLocalStorage = {id: newProductId, counter: newCounter ? newCounter : 1}
-                isUserProductCartInLocalStorage.push(userProductForLocalStorage)                                                                    
+                const userProductForLocalStorage = {id: newProductId, counter: newCounter ? newCounter : 1};
+                isUserProductCartInLocalStorage.push(userProductForLocalStorage);                                                                    
                 localStorage.setItem('userProductCart', JSON.stringify(isUserProductCartInLocalStorage));
             }
         },
@@ -104,5 +111,6 @@ export const {changeDispalayCartWidget,
               removeProductFromTheCart, 
               increaseCounterInTheProduct, 
               decreaseCounterInTheProduct,
-              cleareUserProductCart} = actions;
+              cleareUserProductCart,
+              changeFutureDateOfTheLocaleStorage} = actions;
 

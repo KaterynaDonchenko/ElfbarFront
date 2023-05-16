@@ -22,6 +22,15 @@
 }
 
 @media (max-width: 1200px) {
+    .check-age {
+        &__window-title {
+            font-size: 27px;
+        }
+        &__window-subtitle {
+            font-size: 13px;
+        }
+    }
+
     .header {
         &__logo {
             height: 59px;
@@ -116,6 +125,23 @@
 }
 
 @media (max-width: 991px) {
+
+    .check-age {
+        &__window {
+            width: 470px;
+            padding: 30px;
+        }
+        &__btns {
+            margin-top: 20px;
+        }
+        .check-age__btn {
+            padding: 0 36px;
+            &_color-grey {
+                padding-top: 20px;
+            }
+        }
+    }
+
     .header {
         &__logo {
             height: 53px;
@@ -673,6 +699,28 @@
 }
 
 @media (max-width: 575px) {
+    .check-age {
+        &__window {
+            width: 90%;
+            padding: 15px;
+        }
+        &__window-title {
+            font-size: 19px;
+            line-height: 20px;
+        }
+        &__window-subtitle {
+            margin-top: 10px;
+            line-height: 17px;
+        }
+        .check-age__btn {
+            padding: 0 10px;
+            height: 44px;
+            font-size: 12px;
+            &_color-grey {
+                padding-top: 14px;
+            }
+        }
+    }
 
     .header {
         &__mobile-menu-block {

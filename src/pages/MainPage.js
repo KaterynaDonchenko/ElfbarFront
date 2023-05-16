@@ -9,6 +9,7 @@ import ProductList from '../components/productList/ProductList';
 import TitleH2 from '../components/titleH2/TitleH2';
 import MainInfo from '../components/mainInfo/MainInfo';
 import Advantages from '../components/advantages/Advantages';
+import ErrorBoundary from "../components/errorBoundary/ErrorBoundary";
 
 const MainPage = () => {
     const { productsTop, productsNew, productsWithLableLoadingStatus } = useSelector(state => state.products);
@@ -24,11 +25,17 @@ const MainPage = () => {
         <>
             <MainScreen/>
             <div className="container">
-                <FilterSlider/>
+                <ErrorBoundary>
+                    <FilterSlider/>
+                </ErrorBoundary>
                 <TitleH2 title='Новинки'/>
-                <ProductList lable='новинка' productsArray={productsNew} statusProductsArray={productsWithLableLoadingStatus}/>
+                <ErrorBoundary>
+                    <ProductList lable='новинка' productsArray={productsNew} statusProductsArray={productsWithLableLoadingStatus}/>
+                </ErrorBoundary>
                 <TitleH2 title='Популярні товари'/>
-                <ProductList lable='топ' productsArray={productsTop} statusProductsArray={productsWithLableLoadingStatus}/>
+                <ErrorBoundary>
+                    <ProductList lable='топ' productsArray={productsTop} statusProductsArray={productsWithLableLoadingStatus}/>
+                </ErrorBoundary>
                 <Advantages/>
                 <MainInfo/>
             </div>

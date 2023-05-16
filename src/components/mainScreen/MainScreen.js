@@ -1,13 +1,14 @@
 import MainSlider from '../sliders/mainSlider/MainSlider';
+import ErrorBoundary from '../errorBoundary/ErrorBoundary';
 
 import './mainScreem.scss';
-
-import bg from '../../assets/img/main-bg.jpg';
 
 const MainScreen = () => {
     return (
         <div className="main-screen">
-            <MainSlider/>
+            <ErrorBoundary>
+                <MainSlider/>
+            </ErrorBoundary>
         </div>
     )
 }

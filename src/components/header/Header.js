@@ -1,12 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { setFilter } from "../filters/FilterSlice";
 import { setCurrentPage } from '../pagination/PaginationSlice';
-import { changeDispalayCartWidget } from '../cartWidget/CartWidgetSlice';
+import { changeDispalayCartWidget, changeFutureDateOfTheLocaleStorage, cleareUserProductCart } from '../cartWidget/CartWidgetSlice';
 import { changeMobileMenuDisplay } from './HeaderSlice';
 import Search from '../search/Search';
+import CheckAge from '../modals/checkAge/CheckAge';
 
 import './header.scss'
 
@@ -19,6 +20,32 @@ const Header = () => {
     const arowRight = useRef();
     const arowDown = useRef();
     const dispatch = useDispatch();
+    const currentDate = new Date(); 
+    const futureDate = new Date(currentDate);
+
+    useEffect(() => {
+        const isFutureDateInLocaleStorage = localStorage.getItem('futureDate');
+        if (!isFutureDateInLocaleStorage) dispatch(changeFutureDateOfTheLocaleStorage(futureDate.setDate(currentDate.getDate() + 2)));
+    }, [])
+
+
+    function checkExpiration () {
+        const storedDate = localStorage.getItem('futureDate');
+        console.log(storedDate);
+        console.log(currentDate.toLocaleString());
+        
+        if (currentDate.toLocaleString() >= storedDate) {
+            localStorage.removeItem('userProductCart');
+            localStorage.removeItem('futureDate');
+            dispatch(cleareUserProductCart());
+        }
+    }
+
+    useEffect(() => {
+        checkExpiration ();
+    }, [])
+
+    setInterval(checkExpiration, 24 * 60 * 60 * 1000);
 
     const counter = userProductCart.length > 0 ? userProductCart.reduce((sum, item) => sum + item.counter, 0) : 0;
 
@@ -70,7 +97,8 @@ const Header = () => {
     }
     
     return (
-        <header className="header">   
+        <header className="header">
+            <CheckAge/>   
             <NavLink className="header__logo" to='/' >
                 <img src={logo} alt="logo" />
             </NavLink>

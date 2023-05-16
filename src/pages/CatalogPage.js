@@ -11,6 +11,7 @@ import FilterSlider from "../components/sliders/filterSlider/FilterSlider";
 import TitleH1 from "../components/titleH1/TitleH1";
 import BreadCrumbs from "../components/breadCrumbs/BreadCrumbs";
 import Pagination from "../components/pagination/Pagination";
+import ErrorBoundary from "../components/errorBoundary/ErrorBoundary";
 
 
 const CatalogPage = () => {
@@ -35,16 +36,26 @@ const CatalogPage = () => {
             <div className="main-content__header" style={{'backgroundColor': 'rgb(251, 242, 251)'}}>
                 <div className="container">
                     <TitleH1 title='Каталог товарів' classN='title-h1_pdt150 title-h1_center title-h1_fz-50'/>
-                    <FilterSlider/>
+                    <ErrorBoundary>
+                        <FilterSlider/>
+                    </ErrorBoundary>
                 </div>
             </div>
             <div className="container">
                 <div style={{'display': 'flex', 'justifyContent': 'space-between'}} className="main-content__wrapper">
-                    <BreadCrumbs/>
-                    <Filters/>
+                    <ErrorBoundary>
+                        <BreadCrumbs/>
+                    </ErrorBoundary>
+                    <ErrorBoundary>
+                        <Filters/>
+                    </ErrorBoundary>
                 </div>
-                <ProductList productsArray={currentPageData} statusProductsArray={filterLoadingStatus}/>
-                { !(filterLoadingStatus === 'loading') ? <Pagination array={filterResult}/> : null}
+                <ErrorBoundary>
+                    <ProductList productsArray={currentPageData} statusProductsArray={filterLoadingStatus}/>
+                </ErrorBoundary>
+                <ErrorBoundary>
+                    {!(filterLoadingStatus === 'loading') ? <Pagination array={filterResult}/> : null}
+                </ErrorBoundary>
             </div>
         </div>
     )

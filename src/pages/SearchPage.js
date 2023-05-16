@@ -2,13 +2,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { setSearch, fetchSearch, setSearchResultForSearchPage, cleareSearchResult, changeDisplaySearchResult } from "../components/search/SearchSlice";
-import { setCurrentPage } from "../components/pagination/PaginationSlice";
+import { setSearch, 
+         fetchSearch, 
+         setSearchResultForSearchPage, 
+         cleareSearchResult, 
+         changeDisplaySearchResult } from "../components/search/SearchSlice";
 import { changeMobileMenuDisplay } from "../components/header/HeaderSlice";
 import ProductList from "../components/productList/ProductList";
 import TitleH1 from "../components/titleH1/TitleH1";
 import BreadCrumbs from "../components/breadCrumbs/BreadCrumbs";
 import Pagination from "../components/pagination/Pagination";
+import ErrorBoundary from "../components/errorBoundary/ErrorBoundary";
 
 const SearchPage = () => {
     const { search, 
@@ -67,9 +71,15 @@ const SearchPage = () => {
                 </div>
             </div>
             <div className="container">
-                <BreadCrumbs/>
-                <ProductList productsArray={currentPageData}/>
-                {!(serchResultLoadingStatus === 'loading') ? <Pagination array={searchResultForSearchPage}/> : null}
+                <ErrorBoundary>
+                    <BreadCrumbs/>
+                </ErrorBoundary>
+                <ErrorBoundary>
+                    <ProductList productsArray={currentPageData}/>
+                </ErrorBoundary>
+                <ErrorBoundary>
+                    {!(serchResultLoadingStatus === 'loading') ? <Pagination array={searchResultForSearchPage}/> : null}
+                </ErrorBoundary>
             </div>
         </div>
     )

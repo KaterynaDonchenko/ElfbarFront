@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 import { setSearch } from "../components/search/SearchSlice";
 import Checkout from "../components/checkout/Checkout";
+import ErrorBoundary from "../components/errorBoundary/ErrorBoundary";
 
 const CheckoutPage = () => {
     const dispatch = useDispatch();
@@ -13,7 +14,9 @@ const CheckoutPage = () => {
     }, []);
     
     return (
-        <Checkout/>
+        <ErrorBoundary>
+            <Checkout/>
+        </ErrorBoundary>
     )
 }
 

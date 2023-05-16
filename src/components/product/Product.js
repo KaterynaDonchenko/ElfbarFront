@@ -44,8 +44,7 @@ const ProductMain = () => {
     const { productId } = useParams();
     const { product, productLoadingStatus } = useSelector(state => state.product);
     const { productsCategory, 
-            productsCategoryLoadingStatus, 
-            selectMainVarianLoadingStatust } = useSelector(state => state.products);
+            productsCategoryLoadingStatus } = useSelector(state => state.products);
     const { counter } = useSelector(state => state.counter);
     const dispatch = useDispatch();
     const selectRef = useRef();
