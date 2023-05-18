@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
 
 import { changeDispalayCartWidget, changeTotal, removeProductFromTheCart, fetchArrayOfProducts } from './CartWidgetSlice';
 import { changeCartIconDisplay } from '../header/HeaderSlice'; 
@@ -19,12 +20,17 @@ const CartWidget = () => {
         const cartWidget = document.querySelector('.cart-widget');
 
         const hideCartWidget = event => {
-            if (event.target === cartWidget || event.keyCode === 27) dispatch(changeDispalayCartWidget('none'));
+            if (event.target === cartWidget || event.keyCode === 27) dispatch(changeDispalayCartWidget(false));
         }
 
         window.addEventListener('click', hideCartWidget);
         window.addEventListener('keydown', hideCartWidget);
-    }, [])
+
+        return() => {
+            window.removeEventListener('click', hideCartWidget);
+            window.removeEventListener('keydown', hideCartWidget);
+        }
+    }, [widgetDisplay])
 
     useEffect(() => {
         const existingLocalStorage = JSON.parse(localStorage.getItem('userProductCart')) || [];
@@ -33,21 +39,30 @@ const CartWidget = () => {
     }, [])
     
     useEffect(() => {
-        if (totalSumCart <= 0) dispatch(changeCartIconDisplay('none'));
+        if (totalSumCart <= 0) dispatch(changeCartIconDisplay(false));
         dispatch(changeTotal(totalSumCart));
     }, [totalSumCart]);
 
     const list = userProductCart.length > 0 ? <ProductList userProductCart={userProductCart} /> : <EmptyCart/>;
     return (
-        <div className="cart-widget" style={{'display': widgetDisplay}}>
-            <div className="cart-widget__wrapper">
-                <div className="cart-widget__header">
-                    <div className="cart-widget__title">Кошик</div>
-                    <div onClick={() => dispatch(changeDispalayCartWidget('none'))} className="cart-widget__close">Закрити</div>
-                </div>
-                {list}
+        <CSSTransition in={widgetDisplay} 
+                       timeout={400} 
+                       classNames="cart-widget">
+            <div className="cart-widget">
+                <CSSTransition in={widgetDisplay} 
+                               timeout={400} 
+                               classNames="cart-widget__wrapper">
+                    <div className="cart-widget__wrapper">
+                        <div className="cart-widget__header">
+                            <div className="cart-widget__title">Кошик</div>
+                            <div onClick={() => dispatch(changeDispalayCartWidget(false))} 
+                                 className="cart-widget__close">Закрити</div>
+                        </div>
+                        {list}
+                    </div>
+                </CSSTransition>
             </div>
-        </div>
+        </CSSTransition>
     )
 }
 
@@ -86,12 +101,12 @@ const ProductList = ({userProductCart}) => {
                 </div>
                 <div className="cart-widget__buttons">
                     <Link to='/cart' 
-                          onClick={() => {dispatch(changeDispalayCartWidget('none'))}} 
+                          onClick={() => {dispatch(changeDispalayCartWidget(false))}} 
                           className="btn">
                           Переглянути кошик
                     </Link>
                     <Link to='/checkout' 
-                          onClick={() => {dispatch(changeDispalayCartWidget('none'))}} 
+                          onClick={() => {dispatch(changeDispalayCartWidget(false))}} 
                           className="btn"> 
                           Оформити замовлення
                     </Link>

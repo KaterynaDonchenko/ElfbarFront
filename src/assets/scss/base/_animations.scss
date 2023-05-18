@@ -1,0 +1,228 @@
+.select-enter {
+    opacity: 0;
+    transform: translateY(-5px);
+}
+.select-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 300ms;
+}
+.select-exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+.select-exit-active {
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: all 300ms;
+}
+
+.arrow-select-enter {
+    top: 12px;
+    transform: rotate(45deg);
+}
+.arrow-select-enter-active {
+    top: 16px;
+    transform: rotate(225deg);
+    transition: all 300ms;
+}
+.arrow-select-exit {
+    top: 16px;
+    transform: rotate(225deg);
+    transition: all 300ms;
+}
+.arrow-select-exit-active {
+    top: 12px;
+    transform: rotate(45deg);
+}
+.arrow-select-enter-done {
+    top: 16px;
+    transform: rotate(225deg);
+}
+
+
+.prev-product-enter {
+    opacity: 0;
+    transform: translateY(30px);
+}
+.prev-product-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 400ms;
+}
+.prev-product-exit {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 400ms;
+}
+.prev-product-exit-active {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.next-product-enter {
+    opacity: 0;
+    transform: translateY(30px);
+}
+.next-product-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 400ms;
+}
+.next-product-exit {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 400ms;
+}
+.next-product-exit-active {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+
+.cart-icon-enter {
+    opacity: 0;
+}
+.cart-icon-enter-active {
+    opacity: 1;
+    transition: all 300ms;
+}
+.cart-icon-exit {
+    opacity: 1;
+    transition: all 300ms;
+}
+.cart-icon-exit-active {
+    opacity: 0;
+}
+
+
+.cart-widget-enter {
+    opacity: 0;
+    visibility: hidden;
+}
+.cart-widget-enter-active {
+    visibility: visible;
+    opacity: 1;
+    transition: all 400ms;
+}
+.cart-widget-exit {
+    visibility: visible;
+    opacity: 1;
+    transition: all 400ms;
+}
+.cart-widget-exit-active {
+    visibility: hidden;
+    opacity: 0;
+}
+.cart-widget-enter-done {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+.cart-widget__wrapper-enter {
+    transform: translateX(100%);
+    z-index: 10;
+}
+.cart-widget__wrapper-enter-active {
+    transform: translateY(0%);
+    z-index: 10;
+    transition: all 400ms;
+}
+.cart-widget__wrapper-exit {
+    transform: translateX(0%);
+    transition: all 400ms;
+}
+.cart-widget__wrapper-exit-active {
+    transform: translateX(100%);
+}
+
+
+.header__mobile-menu-wrapper-enter {
+    opacity: 0;
+    visibility: hidden;
+}
+.header__mobile-menu-wrapper-enter-active {
+    visibility: visible;
+    opacity: 1;
+    transition: all 400ms;
+}
+.header__mobile-menu-wrapper-exit {
+    visibility: visible;
+    opacity: 1;
+    transition: all 400ms;
+}
+.header__mobile-menu-wrapper-exit-active {
+    visibility: hidden;
+    opacity: 0;
+}
+.header__mobile-menu-wrapper-enter-done {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+.header__mobile-menu-block-enter {
+    transform: translateX(100%);
+    z-index: 10;
+}
+.header__mobile-menu-block-enter-active {
+    transform: translateY(0%);
+    z-index: 10;
+    transition: all 400ms;
+}
+.header__mobile-menu-block-exit {
+    transform: translateX(0%);
+    transition: all 400ms;
+}
+.header__mobile-menu-block-exit-active {
+    transform: translateX(100%);
+}
+
+
+.question__block-btn-enter {
+    transform: rotate(0deg);
+}
+.question__block-btn-enter-active {
+    transform: rotate(45deg);
+    transition: all 300ms;
+}
+.question__block-btn-exit {
+    transform: rotate(45deg);
+    transition: all 300ms;
+}
+.question__block-btn-exit-active {
+    transform: rotate(0deg);
+}
+.question__block-btn-enter-done {
+    transform: rotate(45deg);
+}
+
+
+.question__block-dscr-enter {
+    opacity: 0;
+    height: 0%;
+    overflow: hidden;
+}
+.question__block-dscr-enter-active {
+    opacity: 1;
+    height: 100%;
+    overflow: visible;
+    transition: all 400ms;
+}
+.question__block-dscr-exit {
+    opacity: 1;
+    height: 100%;
+    overflow: visible;
+    transition: all 400ms;
+}
+.question__block-dscr-exit-active {
+    opacity: 0;
+    overflow: hidden;
+    height: 0%;
+}
+.question__block-dscr-enter-done {
+    opacity: 1;
+    overflow: visible;
+    height: 100%;
+}

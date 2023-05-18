@@ -18,7 +18,7 @@ const ProductList = ({lable = false, productsArray, statusProductsArray}) => {
     }, []);
 
     useEffect(() => {
-        if (userProductCart.length > 0) dispatch(changeCartIconDisplay('block'));
+        if (userProductCart.length > 0) dispatch(changeCartIconDisplay(true));
     }, [userProductCart])
 
     const renderProductCard = (arr, lable = null) => {

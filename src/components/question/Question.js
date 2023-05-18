@@ -1,42 +1,40 @@
-import { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { CSSTransition } from 'react-transition-group';
 
-import { onChangeTransform } from './QuestionSlice';
+import { onOpenQuestion } from './QuestionSlice';
 import TitleH1 from '../titleH1/TitleH1';
 
 import './question.scss';
 
 const Question = () => {
-    const dscrRef = useRef([]);
-    const { question } = useSelector(state => state.question);
+    const { questions } = useSelector(state => state.question);
     const dispatch = useDispatch();
 
-    const onAddStylesToTheQuestionBlock = (i) => {
-        dscrRef.current[i].classList.toggle('question__block-dscr_show');
-    }
-
     const renderContent = (arr) => {
-        return arr.map(({title, dscr, transform}, i) => {
+        return arr.map(({id, title, dscr, open}, i) => {
             return (
-                <div key={i} className="question__block">
+                <div className="question__block" key={i}>
                     <div className="question__block-title">{title}</div>
-                    <div style={transform} 
-                         onClick={() => {
-                            onAddStylesToTheQuestionBlock(i);
-                            dispatch(onChangeTransform({transform, i}));
-                         }}
-                         className="question__block-btn"></div>
-                    <div ref={el => dscrRef.current[i] = el} className="question__block-dscr">{dscr}</div>
+                    <CSSTransition in={open} timeout={300} classNames="question__block-btn">
+                        <div onClick={() => {
+                                dispatch(onOpenQuestion(id))
+                                }}
+                                className="question__block-btn">
+                        </div>
+                    </CSSTransition>
+                    <CSSTransition in={open} timeout={300} classNames="question__block-dscr">
+                        <div className="question__block-dscr">{dscr}</div>
+                    </CSSTransition>
                 </div>
             )
         })
     }
 
-    const content = renderContent(question);
+    const content = renderContent(questions);
     return (
         <div className="question">
             <TitleH1 classN='question__title' title='Питання-Відповідь'/>
-                {content}
+            {content}
         </div>
     )
 }

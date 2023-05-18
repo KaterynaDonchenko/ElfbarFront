@@ -1,6 +1,7 @@
 import { useParams, Link} from 'react-router-dom';
-import {useEffect, useRef} from 'react';
+import {useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { CSSTransition } from 'react-transition-group';
 
 import { fetchProduct, fetchCategoryInfo} from './ProductSlice';
 import { fetchProductsCategory } from '../productList/ProductListSlice';
@@ -47,8 +48,8 @@ const ProductMain = () => {
             productsCategoryLoadingStatus } = useSelector(state => state.products);
     const { counter } = useSelector(state => state.counter);
     const dispatch = useDispatch();
-    const selectRef = useRef();
-    const arrowRef = useRef();
+    const [showSelect, setShowSelect] = useState(false);
+    const [rotateArrow, setRotateArrow] = useState(false);
 
     useEffect(() => {
         dispatch(fetchProduct(+productId));
@@ -64,18 +65,16 @@ const ProductMain = () => {
         dispatch(fetchCategoryInfo(product.category));
     }, [product.category]);
 
-    const onTogleDropdown = (element, arrow) => {
-        if (element && arrow) {
-            element.classList.toggle('product__select-variants_show');
-            arrow.classList.toggle('product__select-btn_rotate');
-        }
+    const onToggleDropdown = () => {
+        setShowSelect(!showSelect);
+        setRotateArrow(!rotateArrow);
     }
 
     const renderSelect = (arr) => {
         let mainVariant;
         const variants = arr.map((item, i) => {
             if (item._id === +productId) {
-                mainVariant = <div key={i} onClick={() => onTogleDropdown(selectRef.current, arrowRef.current)} 
+                mainVariant = <div key={i} onClick={onToggleDropdown} 
                                    className="product__select-mainvariant">
                                    {item.taste.slice(0, 18)}
                                </div>
@@ -92,11 +91,20 @@ const ProductMain = () => {
 
         return (
             <>
-                <div className="product__select-btn" ref={el => arrowRef.current = el}></div>
+                <CSSTransition in={rotateArrow} 
+                               timeout={300} 
+                               classNames="arrow-select">
+                    <div className="product__select-btn"></div>
+                </CSSTransition>
                     {mainVariant}
-                <div className="product__select-variants" ref={el => selectRef.current = el}>
-                    {variants}
-                </div>
+                <CSSTransition in={showSelect} 
+                               timeout={300} 
+                               unmountOnExit 
+                               mountOnEnter
+                               classNames="select">
+                                
+                    <div className="product__select-variants">{variants}</div>
+                </CSSTransition>
             </>
         )
     }
@@ -131,7 +139,7 @@ const ProductMain = () => {
                         <button onClick={(e) => {
                                 e.preventDefault(); 
                                 dispatch(saveUserProductCart({_id : +productId, title, price, img, counter}))
-                                dispatch(changeCartIconDisplay('block'))}} 
+                                dispatch(changeCartIconDisplay(true))}} 
                                 className="product__form-button">
                                 Додати в кошик
                         </button>

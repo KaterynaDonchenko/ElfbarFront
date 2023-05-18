@@ -22,8 +22,8 @@ const CatalogPage = () => {
 
     useEffect(() => {
         dispatch(setSearch(''));
-        dispatch(changeMobileMenuDisplay('none'));
-        dispatch(changeDispalayCartWidget('none'));
+        dispatch(changeMobileMenuDisplay(false));
+        dispatch(changeDispalayCartWidget(false));
         window.scrollTo(0, 0);
     }, []);
 

@@ -4,7 +4,7 @@ import { useHttp } from '../../hooks/http.hook';
 const initialState = {
     search: '',
     searchResult: [],
-    displaySearchResult: 'none',
+    displaySearchResult: false,
     serchResultLoadingStatus: 'idle',
     searchResultForSearchPage: []
 }

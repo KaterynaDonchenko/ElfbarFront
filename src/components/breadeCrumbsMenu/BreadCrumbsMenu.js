@@ -1,17 +1,18 @@
 import { Link, useParams } from 'react-router-dom';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { fetchProductPrev, fetchProductNext } from './BreadCrumbsMenuSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { CSSTransition } from 'react-transition-group';
 
 import './breadCrumbsMenu.scss';
 
 const BreadCrumbsMenu = () => {
     const lableRef = useRef();
-    const prevProductRef = useRef();
-    const nextProductRef = useRef();
     const { productId } = useParams();
     const dispatch = useDispatch();
     const { productPrev, productNext} = useSelector(state => state.productsPrevAndNext);
+    const [prevProduct, setPrevProduct] = useState(false);
+    const [nextProduct, setNextProduct] = useState(false);
 
     useEffect(() => {
         dispatch(fetchProductPrev(+productId - 1));
@@ -23,9 +24,15 @@ const BreadCrumbsMenu = () => {
             <div className="breadcrumbs-menu__left">
                 <Link to={`/product/${productPrev._id}`} 
                       className="breadcrumbs-menu__arrow-left"
-                      onMouseEnter={() => prevProductRef.current.style.display = 'block'}>
+                      onMouseEnter={() => setPrevProduct(true)}>
                 </Link>
-                <ProductDropdown productRef={prevProductRef} product={productPrev}/>
+                <CSSTransition in={prevProduct}
+                               timeout={400} 
+                               unmountOnExit 
+                               mountOnEnter
+                               classNames="prev-product">
+                    <ProductDropdown product={productPrev} setProduct={setPrevProduct}/>
+                </CSSTransition>
             </div>
             <div className="breadcrumbs-menu__center">
                 <div className="breadcrumbs-menu__lable" ref={el => lableRef.current = el}>До каталогу</div>
@@ -37,21 +44,26 @@ const BreadCrumbsMenu = () => {
             <div className="breadcrumbs-menu__right">
                 <Link to={`/product/${productNext._id}`} 
                       className="breadcrumbs-menu__arrow-right"
-                      onMouseEnter={() => nextProductRef.current.style.display = 'block'}>
+                      onMouseEnter={() => setNextProduct(true)}>
                 </Link>
-                <ProductDropdown productRef={nextProductRef} product={productNext}/>
+                <CSSTransition in={nextProduct}
+                               timeout={500} 
+                               unmountOnExit 
+                               mountOnEnter
+                               classNames="next-product">
+                    <ProductDropdown product={productNext} setProduct={setNextProduct}/>
+                </CSSTransition>
             </div>
         </div>
     )
 }
 
-const ProductDropdown = ({productRef, product}) => {
+const ProductDropdown = ({product, setProduct}) => {
 
     const {_id, title, img, price} = product;
     return (
         <div className="breadcrumbs-menu__dropdown" 
-                ref={el => productRef.current = el} 
-                onMouseLeave={() => productRef.current.style.display = 'none'}>
+                onMouseLeave={() => setProduct(false)}>
             <div className="breadcrumbs-menu__wrapper">
                 <Link to={`/product/${_id}`} className="breadcrumbs-menu__dropdown-link">
                     <img src={`http://localhost:3001/${img}`} alt={title} />

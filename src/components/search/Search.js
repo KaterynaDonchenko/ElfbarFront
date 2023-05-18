@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useRef, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux'; 
+import { useSelector, useDispatch } from 'react-redux';
+import { CSSTransition } from 'react-transition-group'; 
 
 import { fetchSearch, cleareSearchResult, setSearch, setSearchResultForSearchPage, changeDisplaySearchResult } from './SearchSlice';
 import { setCurrentPage } from '../pagination/PaginationSlice';
@@ -24,7 +25,7 @@ const Search = ({activeClass = null}) => {
             if (window.innerWidth < 1200) document.querySelector('.header__menu').classList.toggle('header__menu_left');
             serchBlockRef.current.classList.toggle('search_active');
             inputSearchRef.current.classList.toggle('search__line_active');
-            dispatch(changeDisplaySearchResult('block'));
+            dispatch(changeDisplaySearchResult(true));
             serchBlockRef.current.classList.contains('search_active') ? inputSearchRef.current.focus() : 
                                                                         inputSearchRef.current.blur();
         }
@@ -152,11 +153,15 @@ const Search = ({activeClass = null}) => {
                         onKeyDown={e => e.key === 'Enter' ? linkRef.current.click(): null} 
                         className={`search__line ${activeClass}`}/>
             </div>
-            <div className="search__result" ref={searchResaltElement} style={{'display': displaySearchResult}}>
-                {loading}
-                {error}
-                {result}
-            </div>
+            {loading}
+            <CSSTransition in={displaySearchResult} 
+                            timeout={300} 
+                            classNames="search__result">
+                <div className="search__result" ref={searchResaltElement}>
+                    {error}
+                    {result}
+                </div>
+            </CSSTransition>
         </>
     )
 }

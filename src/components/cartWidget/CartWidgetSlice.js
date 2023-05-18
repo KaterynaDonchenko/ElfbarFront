@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { useHttpArray } from "../../hooks/httpArray.hook";
 
 const initialState = {
-    widgetDisplay: 'none',
+    widgetDisplay: false,
     total: 0,
     userProductCart: [],
     userProductCartLoadingStatus: 'idle',

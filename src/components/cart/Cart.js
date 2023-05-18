@@ -15,7 +15,7 @@ const Cart = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(changeCartIconDisplay('none'));
+        dispatch(changeCartIconDisplay(false));
     }, [])
 
     const content = userProductCart.length > 0 ? <CartWithProducts/> : <EmptyCart/>

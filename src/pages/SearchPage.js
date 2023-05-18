@@ -30,7 +30,7 @@ const SearchPage = () => {
     }, [searchResultForSearchPage]);
 
     useEffect(() => {
-        dispatch(changeMobileMenuDisplay('none'));
+        dispatch(changeMobileMenuDisplay(false));
     }, []);
 
     useEffect(() => {
@@ -43,7 +43,7 @@ const SearchPage = () => {
     useEffect(() => {
         if (search.length === 0 && searchResult.length > 0 ) {
             dispatch(setSearchResultForSearchPage(searchResult));
-            dispatch(changeDisplaySearchResult('none'));
+            dispatch(changeDisplaySearchResult(true));
         }
     }, [searchResult]);
 

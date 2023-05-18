@@ -1,6 +1,8 @@
 @import '../../assets/scss/base/variables.scss';
 
 .cart-widget {
+    opacity: 0;
+    visibility: hidden;
     width: 100%;
     height: 100vh;
     position: fixed;
@@ -14,6 +16,7 @@
         width: 305px;
         height: 100vh;
         background-color: #fff;
+        z-index: 10;
     }
     &__header {
         display: flex;

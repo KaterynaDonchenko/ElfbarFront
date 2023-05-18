@@ -36,7 +36,7 @@ const ProductCart = ({title, category, price, img, _id, categoryUrl, lable}) => 
                         </div>
                         <div onClick={() => {
                             dispatch(saveUserProductCart({_id, title, price, img}))
-                            dispatch(changeCartIconDisplay('block'))}} 
+                            dispatch(changeCartIconDisplay(true))}} 
                             className="card-list__item-basket">
                             <img src={cart} alt="cart" />
                         </div>

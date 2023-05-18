@@ -41,7 +41,7 @@ const Checkout = () => {
     }
 
     useEffect(() => {
-        dispatch(changeCartIconDisplay('none'));
+        dispatch(changeCartIconDisplay(false));
     }, [changeCartIconDisplay]);
 
     useEffect(() => {

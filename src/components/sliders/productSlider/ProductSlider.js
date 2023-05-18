@@ -75,7 +75,7 @@ const ProductSlider = () => {
                                             <div className="product-slider__basket"
                                                  onClick={() => {
                                                     dispatch(saveUserProductCart({_id, title, price, img}));
-                                                    dispatch(changeCartIconDisplay('block'));
+                                                    dispatch(changeCartIconDisplay(true));
                                                  }}>
                                                 <img src={cart} alt="cart" />
                                             </div>

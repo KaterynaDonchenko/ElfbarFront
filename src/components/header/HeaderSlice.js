@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    cartIconDisplay: 'none',
-    mobileMenuDisplay: 'none'
+    cartIconDisplay: false,
+    mobileMenuDisplay: false
 }
 
 const headerSlice = createSlice({

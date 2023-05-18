@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
+import { CSSTransition } from 'react-transition-group';
 
 import { setFilter } from "../filters/FilterSlice";
 import { setCurrentPage } from '../pagination/PaginationSlice';
@@ -31,8 +32,6 @@ const Header = () => {
 
     function checkExpiration () {
         const storedDate = localStorage.getItem('futureDate');
-        console.log(storedDate);
-        console.log(currentDate.toLocaleString());
         
         if (currentDate.toLocaleString() >= storedDate) {
             localStorage.removeItem('userProductCart');
@@ -54,7 +53,7 @@ const Header = () => {
         dispatch(setCurrentPage(0));
     }
 
-    const renderCategoryList = (arr) => {
+    const renderCategoryMobileList = (arr) => {
         const categoryItem = arr.map( ({name, img, }, i) => {
             return (
                 <li key={i} className='header__mobile-menu-category-item'>
@@ -73,7 +72,7 @@ const Header = () => {
         )
     }
 
-    const categoryIist = filterSlider.length > 0 ? renderCategoryList(filterSlider) : null;
+    const categoryIist = filterSlider.length > 0 ? renderCategoryMobileList(filterSlider) : null;
 
     const onToggleDisplayMobileCatalog = () => {
         const mobileCatalog = document.querySelector('.header__mobile-menu-category-list');
@@ -126,63 +125,76 @@ const Header = () => {
                     <a href="https://t.me/elfsolodkiypar" className="header__settings-manager-telegram">запитати спеціаліста</a>
                 </div>
             </div>
-            <div className="header__mobile-menu" onClick={() => dispatch(changeMobileMenuDisplay('block'))}>
+            <div className="header__mobile-menu" onClick={() => dispatch(changeMobileMenuDisplay(true))}>
                     <div className="header__mobile-menu-line"></div>
                     <div className="header__mobile-menu-line"></div>
                     <div className="header__mobile-menu-line"></div>
             </div>
-            <div className="header__mobile-menu-wrapper" style={{'display': mobileMenuDisplay}}>
-                <div className="header__mobile-menu-block">
-                    <div className="header__mobile-menu-header">
-                        <NavLink className="header__logo" to='/' >
-                            <img src={logo} alt="logo" />
-                        </NavLink>
-                        <div className="header__mobile-menu-close" 
-                             onClick={() => dispatch(changeMobileMenuDisplay('none'))}>Закрити</div>
-                    </div>
-                    <div className="header__mobile-menu-search">
-                        <Search activeClass='search__line_active'/>
-                    </div>
-                    <ul className="header__mobile-menu-list">
-                        <li className="header__mobile-menu-item">
-                            <NavLink to='/' end>Головна</NavLink>
-                        </li>
-                        <li className="header__mobile-menu-item">
-                            <div className="header__mobile-menu-item-link">
-                                <NavLink to={`/catalog/filter?orderby=all&page=1`} onClick={goToCatalog} end>Каталог</NavLink>
-                                <div className="header__mobile-menu-item-arow-right" 
-                                     ref={arowRight} 
-                                     onClick={onToggleDisplayMobileCatalog}>
-                                </div>
-                                <div className="header__mobile-menu-item-arow-down" 
-                                     ref={arowDown}
-                                     onClick={onToggleDisplayMobileCatalog}>
+            <CSSTransition in={mobileMenuDisplay} 
+                            timeout={400} 
+                            classNames="header__mobile-menu-wrapper">
+                <div className="header__mobile-menu-wrapper">
+                    <CSSTransition in={mobileMenuDisplay} 
+                                    timeout={400} 
+                                    classNames="header__mobile-menu-block">
+                        <div className="header__mobile-menu-block">
+                            <div className="header__mobile-menu-header">
+                                <NavLink className="header__logo" to='/' >
+                                    <img src={logo} alt="logo" />
+                                </NavLink>
+                                <div className="header__mobile-menu-close" 
+                                    onClick={() => dispatch(changeMobileMenuDisplay(false))}>Закрити</div>
+                            </div>
+                            <div className="header__mobile-menu-search">
+                                <Search activeClass='search__line_active'/>
+                            </div>
+                            <ul className="header__mobile-menu-list">
+                                <li className="header__mobile-menu-item">
+                                    <NavLink to='/' end>Головна</NavLink>
+                                </li>
+                                <li className="header__mobile-menu-item">
+                                    <div className="header__mobile-menu-item-link">
+                                        <NavLink to={`/catalog/filter?orderby=all&page=1`} onClick={goToCatalog} end>Каталог</NavLink>
+                                        <div className="header__mobile-menu-item-arow-right" 
+                                            ref={arowRight} 
+                                            onClick={onToggleDisplayMobileCatalog}>
+                                        </div>
+                                        <div className="header__mobile-menu-item-arow-down" 
+                                            ref={arowDown}
+                                            onClick={onToggleDisplayMobileCatalog}>
+                                        </div>
+                                    </div>
+                                    {categoryIist}
+                                </li>
+                                <li className="header__mobile-menu-item header__mobile-menu-item-question">
+                                    <NavLink to='/question' end>Відповіді на питання</NavLink>
+                                </li>
+                            </ul>
+                            <div className="header__mobile-menu-down-block">
+                                <div className="header__mobile-menu-btn">
+                                    <a href="https://t.me/elfsolodkiypar" className="header__mobile-menu-telegram">
+                                        запитати спеціаліста
+                                    </a>
                                 </div>
                             </div>
-                            {categoryIist}
-                        </li>
-                        <li className="header__mobile-menu-item header__mobile-menu-item-question">
-                            <NavLink to='/question' end>Відповіді на питання</NavLink>
-                        </li>
-                    </ul>
-                    <div className="header__mobile-menu-down-block">
-                        <div className="header__mobile-menu-btn">
-                            <a href="https://t.me/elfsolodkiypar" className="header__mobile-menu-telegram">
-                                запитати спеціаліста
-                            </a>
                         </div>
+                    </CSSTransition>
+                </div>
+            </CSSTransition>
+            <CSSTransition in={cartIconDisplay} 
+                            timeout={300} 
+                            unmountOnExit 
+                            mountOnEnter
+                            classNames="cart-icon">
+                <div  className='header__cart'
+                    onClick={() => dispatch(changeDispalayCartWidget(true))}>
+                    <div className="header__cart-wrapper">
+                    <svg role="img" className="header__cart-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                        <path fill="none" strokeWidth="2" strokeMiterlimit="10" d="M44 18h10v45H10V18h10z"/><path fill="none" strokeWidth="2" strokeMiterlimit="10" d="M22 24V11c0-5.523 4.477-10 10-10s10 4.477 10 10v13"/></svg>
                     </div>
-                </div>
-            </div>
-            <div className="header__cart" 
-                 style={{ 'display' : cartIconDisplay}}
-                 onClick={() => dispatch(changeDispalayCartWidget('block'))}>
-                <div className="header__cart-wrapper">
-                <svg role="img" className="header__cart-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-                    <path fill="none" strokeWidth="2" strokeMiterlimit="10" d="M44 18h10v45H10V18h10z"/><path fill="none" strokeWidth="2" strokeMiterlimit="10" d="M22 24V11c0-5.523 4.477-10 10-10s10 4.477 10 10v13"/></svg>
-                </div>
-                <div className="header__cart-counter">{counter}</div>
-            </div>   
+                    <div className="header__cart-counter">{counter}</div>
+                </div> 
+            </CSSTransition>  
         </header>
     )
 }

@@ -17,7 +17,7 @@ const MainPage = () => {
 
     useEffect(() => {
         dispatch(setSearch(''));
-        dispatch(changeMobileMenuDisplay('none'));
+        dispatch(changeMobileMenuDisplay(false));
         window.scrollTo(0, 0);
     }, []);
 

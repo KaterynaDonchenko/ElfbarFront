@@ -75,12 +75,11 @@
         cursor: pointer;
         transition: all .3s;
     }
-    &__select-btn_rotate {
-        transform: rotate(225deg);
-        top: 16px;
-    }
+    // &__select-btn_rotate {
+    //     transform: rotate(225deg);
+    //     top: 16px;
+    // }
     &__select-variants {
-        display: none;
         width: 200px;
         position: absolute;
         left: 0;
@@ -89,9 +88,6 @@
         background-color: #fff;
         max-height: 200px;
         overflow-y: auto;
-    }
-    &__select-variants_show {
-        display: block;
     }
     &__select-mainvariant {
         position: relative;
