@@ -3,15 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@mui/material": "^5.14.5",
     "@reduxjs/toolkit": "^1.9.1",
     "@splidejs/react-splide": "^0.7.12",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.4.0",
     "classnames": "^2.3.2",
     "formik": "^2.2.9",
     "prop-types": "^15.8.1",
+    "ra-data-json-server": "^4.12.2",
+    "ra-data-simple-rest": "^4.12.2",
     "react": "^18.2.0",
+    "react-admin": "^4.11.0",
+    "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
     "react-input-mask": "^2.0.4",
     "react-paginate": "^8.1.4",
@@ -61,6 +67,8 @@
     ]
   },
   "devDependencies": {
+    "@types/react": "^18.2.12",
+    "@types/react-dom": "^18.2.5",
     "concurrently": "^7.6.0",
     "npm-watch": "^0.11.0"
   }

@@ -15,25 +15,30 @@ const BreadCrumbsMenu = () => {
     const [nextProduct, setNextProduct] = useState(false);
 
     useEffect(() => {
-        dispatch(fetchProductPrev(+productId - 1));
-        dispatch(fetchProductNext(+productId + 1));
+        dispatch(fetchProductPrev(productId));
+        dispatch(fetchProductNext(productId));
     }, [productId]);
 
     return (
         <div className="breadcrumbs-menu">
-            <div className="breadcrumbs-menu__left">
-                <Link to={`/product/${productPrev._id}`} 
-                      className="breadcrumbs-menu__arrow-left"
-                      onMouseEnter={() => setPrevProduct(true)}>
-                </Link>
-                <CSSTransition in={prevProduct}
-                               timeout={400} 
-                               unmountOnExit 
-                               mountOnEnter
-                               classNames="prev-product">
-                    <ProductDropdown product={productPrev} setProduct={setPrevProduct}/>
-                </CSSTransition>
-            </div>
+            {
+                productPrev ? 
+                <div className="breadcrumbs-menu__left">
+                    <Link to={`/product/${productPrev._id}`} 
+                        className="breadcrumbs-menu__arrow-left"
+                        onMouseEnter={() => setPrevProduct(true)}>
+                    </Link>
+                    <CSSTransition in={prevProduct}
+                                timeout={400} 
+                                unmountOnExit 
+                                mountOnEnter
+                                classNames="prev-product">
+                        <ProductDropdown product={productPrev} setProduct={setPrevProduct}/>
+                    </CSSTransition>
+                </div>
+                :
+                null
+            }
             <div className="breadcrumbs-menu__center">
                 <div className="breadcrumbs-menu__lable" ref={el => lableRef.current = el}>До каталогу</div>
                 <Link to={`/catalog/filter?orderby=all&page=1`} 
@@ -41,19 +46,24 @@ const BreadCrumbsMenu = () => {
                       onMouseEnter={() => lableRef.current.classList.add('breadcrumbs-menu__lable_active')}
                       onMouseLeave={() => lableRef.current.classList.remove('breadcrumbs-menu__lable_active')}></Link>
             </div>
-            <div className="breadcrumbs-menu__right">
-                <Link to={`/product/${productNext._id}`} 
-                      className="breadcrumbs-menu__arrow-right"
-                      onMouseEnter={() => setNextProduct(true)}>
-                </Link>
-                <CSSTransition in={nextProduct}
-                               timeout={500} 
-                               unmountOnExit 
-                               mountOnEnter
-                               classNames="next-product">
-                    <ProductDropdown product={productNext} setProduct={setNextProduct}/>
-                </CSSTransition>
-            </div>
+            {
+                productNext ?
+                <div className="breadcrumbs-menu__right">
+                    <Link to={`/product/${productNext._id}`} 
+                        className="breadcrumbs-menu__arrow-right"
+                        onMouseEnter={() => setNextProduct(true)}>
+                    </Link>
+                    <CSSTransition in={nextProduct}
+                                timeout={500} 
+                                unmountOnExit 
+                                mountOnEnter
+                                classNames="next-product">
+                        <ProductDropdown product={productNext} setProduct={setNextProduct}/>
+                    </CSSTransition>
+                </div>
+                :
+                null
+            }
         </div>
     )
 }

@@ -10,6 +10,7 @@ import question from '../components/question/QuestionSlice';
 import search from '../components/search/SearchSlice';
 import filter from '../components/filters/FilterSlice';
 import pagination from '../components/pagination/PaginationSlice';
+import loginForm from '../components/loginForm/LoginFormSlice';
 import { configureStore } from '@reduxjs/toolkit';
 
 
@@ -25,7 +26,9 @@ const store = configureStore({
               search,
               filter,
               pagination, 
-              productsPrevAndNext},
+              productsPrevAndNext,
+              loginForm  
+            },
     middleware: getDefaultMiddleware => getDefaultMiddleware(),
     devTools: process.env.NODE_ENV !== 'production'    
 });

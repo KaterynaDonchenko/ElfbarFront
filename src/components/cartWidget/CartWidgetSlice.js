@@ -99,7 +99,7 @@ export const fetchArrayOfProducts = createAsyncThunk(
     'cartWidget/fetchArrayOfProducts',
     (arr) => {
         const arrayOfRequests = useHttpArray();
-        return arrayOfRequests(arr, 'http://localhost:3001/getProducts/');
+        return arrayOfRequests(arr, 'http://localhost:3001/products');
     }
 )
 

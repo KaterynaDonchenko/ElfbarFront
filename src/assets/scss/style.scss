@@ -12,8 +12,6 @@
     margin: 0 auto;
 }
 
-@import './base/_media.scss';
-
 h2 {
     margin: 0;
 }
@@ -51,4 +49,6 @@ input::-webkit-inner-spin-button {
 label {
     margin: 0;
 }
+
+@import './base/_media.scss';
 

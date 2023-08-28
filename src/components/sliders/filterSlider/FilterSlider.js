@@ -70,7 +70,6 @@ const FilterSlider = () => {
                             style={style[i]}>
                             <img src={`http://localhost:3001/${img}`} alt={`elfbar ${name}`} />
                         </div>
-                        <div className="slide__item-title">ELFBAR</div>
                         <div style={{'color': color}} className="slide__item-subtitle">{name}</div>
                     </Link>
                 </SplideSlide>

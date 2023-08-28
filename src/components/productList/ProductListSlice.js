@@ -31,8 +31,9 @@ const productsSlice = createSlice({
             })
             .addCase(fetchProductsWithTheLable.pending, state => {state.productsWithLableLoadingStatus = 'loading'})
             .addCase(fetchProductsWithTheLable.fulfilled, (state, action) => {
+                const lable = action.payload[0].lable;
                 state.productsWithLableLoadingStatus = 'idle';
-                action.payload.length > 5 ? state.productsTop = action.payload : state.productsNew = action.payload;
+                lable === 'топ' ? state.productsTop = action.payload : state.productsNew = action.payload;
             })
             .addCase(fetchProductsWithTheLable.rejected, state => {state.productsWithLableLoadingStatus = 'error'})
             .addDefaultCase(() => {})
@@ -43,7 +44,7 @@ export const fetchProductsCategory = createAsyncThunk(
     'products/fetchProductsCategory',
     async (category) => {
         const request = useHttp();
-        return await request(`http://localhost:3001/productCategory/${category}`);
+        return await request(`http://localhost:3001/products/category/${category}`);
     }
 );
 
@@ -51,7 +52,7 @@ export const fetchProductsWithTheLable = createAsyncThunk(
     'products/fetchProductsWithTheLable',
     async (lable) => {
         const request = useHttp();
-        return await request(`http://localhost:3001/products/${lable}`);
+        return await request(`http://localhost:3001/products/lable/${lable}`);
     }
 )
 

@@ -35,7 +35,6 @@ const Checkout = () => {
     const onFetchEmail = (data) => {
         data.total = total;
         data.userProductCart = userProductCart;
-        console.log(data);
         dispatch(fetchEmail(JSON.stringify(data)));
         dispatch(onSaveOrder(data));
     }
@@ -166,7 +165,7 @@ const Checkout = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <Checkbox deliveryMethod={values.deliveryMethod} handleChange={handleChange} handleBlur={handleBlur}/>
+                                        <Checkbox handleChange={handleChange} handleBlur={handleBlur}/>
                                         <button type='submit' className="btn">Підтвердити замовлення</button>
                                     </div>
                                 </Form>
@@ -413,7 +412,7 @@ const Delivery = ({method}) => {
     )
 }
 
-const Checkbox = ({deliveryMethod}) => {
+const Checkbox = () => {
     const [displayCardText, setDisplayCardText] = useState('none');
     const [displayCashText, setDisplayCashText] = useState('none');
 
@@ -438,64 +437,41 @@ const Checkbox = ({deliveryMethod}) => {
 
     return (
         <>
-            {deliveryMethod === 'nova' ? 
-                <div className="checkout__form-checkbox">
-                    <div className="checkout__form-checkbox-group">
-                        <label htmlFor="checkbox" className="checkout__form-checkbox-lable">
-                            <Checkbox 
-                                name="checkbox" 
-                                type="radio" 
-                                className="checkout__form-checkbox-card"
-                                value='card'
-                                />
-                            Оплата на картку
-                        </label>
-                        <div className="checkout__form-checkbox-info" style={{'display': displayCardText}}>
-                            На вказаний номер телефону буде відправлено СМС з реквізитами на оплату.
-                        </div>
+            <div className="checkout__form-checkbox">
+                <div className="checkout__form-checkbox-group">
+                    <label htmlFor="checkbox" className="checkout__form-checkbox-lable">
+                        <Checkbox 
+                            name="checkbox" 
+                            type="radio" 
+                            className="checkout__form-checkbox-card"
+                            value='card'
+                            />
+                        Оплата на картку
+                    </label>
+                    <div className="checkout__form-checkbox-info" style={{'display': displayCardText}}>
+                        На вказаний номер телефону буде відправлено СМС з реквізитами на оплату.
                     </div>
-                    <div className="checkout__form-checkbox-group">
-                        <label htmlFor="" className="checkout__form-checkbox-lable">
-                            <Checkbox 
-                                name="checkbox"   
-                                type="radio" 
-                                className="checkout__form-checkbox-cash"
-                                value='cash'
-                                />
-                            Оплата при отриманні
-                        </label>
-                        <div className="checkout__form-checkbox-info" style={{'display': displayCashText}}>
-                            Оплата при отриманні товару у відділені 
-                        </div>
-                    </div>
-                    <ErrorMessage style={{'color': '#e01020', 'position': 'relative', 'bottom': '25px'}} 
-                          className='error' 
-                          name='checkbox' 
-                          component='div'/>
                 </div>
-            : 
-                <div className="checkout__form-checkbox">
-                    <div className="checkout__form-checkbox-group">
-                        <label htmlFor="checkbox" className="checkout__form-checkbox-lable">
-                            <Checkbox 
-                                name="checkbox" 
-                                type="radio" 
-                                className="checkout__form-checkbox-card"
-                                value='card'
-                                />
-                            Оплата на картку
-                        </label>
-                        <div className="checkout__form-checkbox-info" style={{'display': displayCardText}}>
-                            На вказаний номер телефону буде відправлено СМС з реквізитами на оплату.
-                        </div>
+                <div className="checkout__form-checkbox-group">
+                    <label htmlFor="" className="checkout__form-checkbox-lable">
+                        <Checkbox 
+                            name="checkbox"   
+                            type="radio" 
+                            className="checkout__form-checkbox-cash"
+                            value='cash'
+                            />
+                        Оплата при отриманні
+                    </label>
+                    <div className="checkout__form-checkbox-info" style={{'display': displayCashText}}>
+                        Оплата при отриманні товару у відділені 
                     </div>
-                    <ErrorMessage style={{'color': '#e01020', 'position': 'relative', 'bottom': '25px'}} 
-                            className='error' 
-                            name='checkbox' 
-                            component='div'/>
                 </div>
-            }
-            
+                <ErrorMessage style={{'color': '#e01020', 'position': 'relative', 'bottom': '25px'}} 
+                        className='error' 
+                        name='checkbox' 
+                        component='div'/>
+            </div>
+
         </>
     )
 }

@@ -52,17 +52,17 @@ const ProductMain = () => {
     const [rotateArrow, setRotateArrow] = useState(false);
 
     useEffect(() => {
-        dispatch(fetchProduct(+productId));
+        dispatch(fetchProduct(productId));
         dispatch(resetCounter());
         window.scrollTo(0, 0);
-    }, [+productId]);
+    }, [productId]);
 
     useEffect(() => {
-        dispatch(fetchProductsCategory(product.categoryUrl));
+        if (product.category) dispatch(fetchProductsCategory(product.category));
     }, [product.category]);
 
     useEffect(() => {
-        dispatch(fetchCategoryInfo(product.category));
+        if (product.category) dispatch(fetchCategoryInfo(product.category));
     }, [product.category]);
 
     const onToggleDropdown = () => {
@@ -73,7 +73,7 @@ const ProductMain = () => {
     const renderSelect = (arr) => {
         let mainVariant;
         const variants = arr.map((item, i) => {
-            if (item._id === +productId) {
+            if (item._id === productId) {
                 mainVariant = <div key={i} onClick={onToggleDropdown} 
                                    className="product__select-mainvariant">
                                    {item.taste.slice(0, 18)}
@@ -138,7 +138,7 @@ const ProductMain = () => {
                         <Counter/>
                         <button onClick={(e) => {
                                 e.preventDefault(); 
-                                dispatch(saveUserProductCart({_id : +productId, title, price, img, counter}))
+                                dispatch(saveUserProductCart({_id : productId, title, price, img, counter}))
                                 dispatch(changeCartIconDisplay(true))}} 
                                 className="product__form-button">
                                 Додати в кошик

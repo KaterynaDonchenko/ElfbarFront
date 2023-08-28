@@ -2,12 +2,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
 import { cleareUserProductCart } from '../cartWidget/CartWidgetSlice';
+import { onChangeStatusSendForm } from '../checkout/CheckoutSlice';
 import './orderReceived.scss';
 
 const OrderReceived = () => {
     const { order } = useSelector(state => state.checkout);
-    const { total } = useSelector(state => state.cartWidget);
-    const { userProductCart } = useSelector( state => state.cartWidget);
+    const { total, userProductCart } = useSelector(state => state.cartWidget);
     const currentDate = new Date();
     const dispatch = useDispatch();
     const day = currentDate.getDate().toString().padStart(2, '0');
@@ -15,6 +15,8 @@ const OrderReceived = () => {
     const year = currentDate.getFullYear().toString();
 
     useEffect(() => {
+        dispatch(onChangeStatusSendForm(false));
+
         return () => {
             localStorage.removeItem('userProductCart');
             dispatch(cleareUserProductCart());
@@ -48,7 +50,7 @@ const OrderReceived = () => {
                     <ul className="order-received__overview">
                         <li className="order-received__overview-item">
                             Номер замовлення:
-                            <strong>28770</strong>	
+                            <strong>{Math.floor(Math.random() * (20000 - 1 + 1)) + 1}</strong>	
                         </li>
                         <li className="order-received__overview-item">
                             Дата:
