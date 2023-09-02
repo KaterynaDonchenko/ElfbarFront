@@ -139,7 +139,7 @@ const Header = () => {
                                     classNames="header__mobile-menu-block">
                         <div className="header__mobile-menu-block">
                             <div className="header__mobile-menu-header">
-                                <NavLink className="header__logo" to='/' >
+                                <NavLink className="header__logo header__mobile-logo" to='/' >
                                     <img src={logo} alt="logo" />
                                 </NavLink>
                                 <div className="header__mobile-menu-close" 

@@ -6,6 +6,16 @@
     .splide__list {
         justify-content: center;
     }
+    &__img {
+        display: none;
+        display: flex;
+        justify-content: center;
+        img {
+            display: none;
+            width: 32px;
+            height: 40px;
+        }
+    }
 }
 
 .slide {

@@ -34,6 +34,7 @@
     .header {
         &__logo {
             height: 59px;
+            width: 205px;
         }
         &__menu {
             width: 396px;
@@ -144,6 +145,7 @@
 
     .header {
         &__logo {
+            width: 181px;
             height: 53px;
         }
         &__menu {
@@ -739,11 +741,23 @@
         &__mobile-menu-block {
             width: 300px;
         }
+        &__mobile-logo {
+            width: 140px;
+        }
         &__mobile-menu-btn {
             font-size: 15px;
         }
         &__cart {
             left: 73%;
+        }
+    }
+
+    .filter-slider {
+        padding: 20px 0;
+        &__img {
+            img {
+                display: inline;
+            }
         }
     }
 
@@ -765,7 +779,7 @@
     }
 
     .title-h2 {
-        font-size: 25px;
+        font-size: 22px;
         line-height: 32px;
     }
 
@@ -805,6 +819,12 @@
         }
     }
 
+    .slide {
+        &__item-subtitle {
+            font-size: 14px;
+        }
+    }
+
     .container {
         width: 100%;
     }
@@ -830,6 +850,9 @@
         }
         &__dscr {
             padding: 0 10px;
+        }
+        &__additional-info {
+            padding: 0 5px;
         }
     }
 
@@ -860,20 +883,21 @@
         grid-template: 1fr/repeat(2, 1fr);
         grid-auto-rows: 1fr;
         justify-content: center;
+        padding: 20px 10px;
         &__item-lable {
             height: 15px;
             font-size: 9px;
             line-height: 15px;
         }
         &__item-wrapper {
-            grid-template-rows: 245px 1fr;
+            grid-template-rows: 184px 1fr;
         }
         &__item-content {
             grid-template-rows: 76px .5fr 1fr;
             row-gap: 10px;
         }
         &__item-title {
-            font-size: 14px;
+            font-size: 13.5px;
             line-height: 18px;
         }
         &__item-model {
@@ -905,7 +929,7 @@
         &__content {
             grid-template-rows: 54px 25px 1fr;
             row-gap: 6px;
-            padding: 7px 23px;
+            padding: 7px 20px;
         }
     }
 

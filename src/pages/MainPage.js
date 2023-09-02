@@ -25,6 +25,7 @@ const MainPage = () => {
         <>
             <MainScreen/>
             <div className="container">
+                <TitleH2 title='Категорії' classN='title-h2__filter'/>
                 <ErrorBoundary>
                     <FilterSlider/>
                 </ErrorBoundary>

@@ -27,7 +27,9 @@ const Advantages = () => {
         <div className="advantages">
             <div className="advantages__block"
                  onMouseEnter={() => onShowImg(priceImgRef, priceContentRef)}
-                 onMouseLeave={() => onHideImg(priceImgRef, priceContentRef)}>
+                 onMouseLeave={() => onHideImg(priceImgRef, priceContentRef)}
+                 onTouchStart={() => onShowImg(priceImgRef, priceContentRef)}
+                 onTouchEnd={() => onHideImg(priceImgRef, priceContentRef)}>
                 <img className="advantages__img" src={animation1} alt='elf bar' ref={el => priceImgRef.current = el} />
                 <div className="advantages__content" ref={el => priceContentRef.current = el}>
                     <img src={price} alt="price" />
@@ -37,7 +39,9 @@ const Advantages = () => {
             </div>
             <div className="advantages__block" 
                  onMouseEnter={() => onShowImg(presenceImgRef, presenceContentRef)}
-                 onMouseLeave={() => onHideImg(presenceImgRef, presenceContentRef)}>
+                 onMouseLeave={() => onHideImg(presenceImgRef, presenceContentRef)}
+                 onTouchStart={() => onShowImg(presenceImgRef, presenceContentRef)}
+                 onTouchEnd={() => onHideImg(presenceImgRef, presenceContentRef)}>
                 <img className="advantages__img" src={animation2} alt='elf bar' ref={el => presenceImgRef.current = el} />
                 <div className="advantages__content" ref={el => presenceContentRef.current = el}>
                     <img src={presence} alt="presence" />

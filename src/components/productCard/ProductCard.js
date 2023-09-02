@@ -18,7 +18,9 @@ const ProductCart = ({title, category, price, img, _id, categoryUrl, lable}) => 
     return (
         <li className="card-list__item"
             onMouseEnter={() => listRef.current[_id].classList.add('card-list__item-hover_active')}
-            onMouseLeave={() => listRef.current[_id].classList.remove('card-list__item-hover_active')}>
+            onMouseLeave={() => listRef.current[_id].classList.remove('card-list__item-hover_active')}
+            onTouchStart={() => listRef.current[_id].classList.add('card-list__item-hover_active')}
+            onTouchEnd={() => listRef.current[_id].classList.remove('card-list__item-hover_active')}>
             <div className="card-list__item-hover" ref={element => listRef.current[_id] = element}></div>
             {divLable}
             <div className="card-list__item-wrapper">

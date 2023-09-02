@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { setCurrentPage } from '../../pagination/PaginationSlice';
 import Spinner from '../../spinner/Spinner';
 import Error from '../../error/Error';
+import hand from '../../../assets/icons/hand.png';
 
 import './filterSlider.scss';
 
@@ -104,6 +105,9 @@ const FilterSlider = () => {
             {error}
             <div className="filter-slider">
                 {slider}
+                <div className="filter-slider__img">
+                    <img src={hand} title='hand'/>
+                </div>
             </div>
         </>
     );
