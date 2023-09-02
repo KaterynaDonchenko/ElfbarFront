@@ -44,7 +44,7 @@ export const fetchProductsCategory = createAsyncThunk(
     'products/fetchProductsCategory',
     async (category) => {
         const request = useHttp();
-        return await request(`http://localhost:3001/products/category/${category}`);
+        return await request(`https://solodkiypar.com.ua:885/products/category/${category}`);
     }
 );
 
@@ -52,7 +52,7 @@ export const fetchProductsWithTheLable = createAsyncThunk(
     'products/fetchProductsWithTheLable',
     async (lable) => {
         const request = useHttp();
-        return await request(`http://localhost:3001/products/lable/${lable}`);
+        return await request(`https://solodkiypar.com.ua:885/lable/${lable}`);
     }
 )
 
