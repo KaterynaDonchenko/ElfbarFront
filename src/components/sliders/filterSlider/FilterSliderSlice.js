@@ -26,7 +26,7 @@ export const fetchFilterSlider = createAsyncThunk(
     'filterSlider/fetchfilterSlider',
     () => {
         const require = useHttp();
-        return require('https://solodkiypar.com.ua:3001/filterSlides');
+        return require('https://solodkiypar.com.ua/filterSlides');
     }
 );
 
