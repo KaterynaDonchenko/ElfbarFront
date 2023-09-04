@@ -36,7 +36,7 @@ export const fetchSearch = createAsyncThunk(
     'search/fetchSearch',
     async (search) => {
         const request = useHttp();
-        return await request(`http://localhost:3001/products/search/?s=${search}`);
+        return await request(`http://solodkiypar.com.ua:3001/products/search/?s=${search}`);
     }
 );
 

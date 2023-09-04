@@ -30,7 +30,7 @@ export const fetchFilter = createAsyncThunk(
     'filter/fetchFilter',
     async (filter) => {
         const request = useHttp();
-        return await request(`http://localhost:3001/products/filter/?orderby=${filter}`);
+        return await request(`http://solodkiypar.com.ua:3001/products/filter/?orderby=${filter}`);
     }
 );
 

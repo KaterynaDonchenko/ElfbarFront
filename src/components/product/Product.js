@@ -118,7 +118,7 @@ const ProductMain = () => {
         return (
             <div className="product__wrapper">
                 <div className="product__img">
-                    <img src={`http://localhost:3001/${img}`} alt={title} />
+                    <img src={`http://solodkiypar.com.ua:3001/${img}`} alt={title} />
                 </div>
                 <div className="product__right-block">
                     <div className="product__breadecrums">
@@ -172,7 +172,7 @@ const ProductBottom = () => {
         return characteristic.map(({icon, title}, i) => {
             return (
                 <div key={i} className="product__info-item">
-                    <img src={`http://localhost:3001/${icon}`} alt={title} className="product__info-item-img" />
+                    <img src={`http://solodkiypar.com.ua:3001/${icon}`} alt={title} className="product__info-item-img" />
                     <div className="product__info-item-rightblock">
                         <div className="product__info-item-title">{title}</div>
                         <div className="product__info-item-subtitle">{info ? Object.values(info)[i] : null}</div>

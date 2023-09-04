@@ -76,7 +76,7 @@ const ProductDropdown = ({product, setProduct}) => {
                 onMouseLeave={() => setProduct(false)}>
             <div className="breadcrumbs-menu__wrapper">
                 <Link to={`/product/${_id}`} className="breadcrumbs-menu__dropdown-link">
-                    <img src={`http://localhost:3001/${img}`} alt={title} />
+                    <img src={`http://solodkiypar.com.ua:3001/${img}`} alt={title} />
                 </Link>
                 <div className="breadcrumbs-menu__dropdown-content">
                     <Link to={`/product/${_id}`} className="breadcrumbs-menu__dropdown-link">

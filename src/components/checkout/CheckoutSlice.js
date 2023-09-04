@@ -54,7 +54,7 @@ export const fetchEmail = createAsyncThunk(
     'checkout/fetchEmail',
     (data) => {
         const request = useHttp();
-        request('http://localhost:3001/email', 'POST', data)
+        request('http://solodkiypar.com.ua:3001/email', 'POST', data)
     }
 );
 

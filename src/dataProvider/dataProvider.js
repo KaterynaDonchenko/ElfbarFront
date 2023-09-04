@@ -3,7 +3,7 @@ import { stringify } from "query-string";
 import { v4 as uuidv4 } from 'uuid';
 
 
-const apiUrl = 'http://localhost:3001'; 
+const apiUrl = 'http://solodkiypar.com.ua:3001'; 
 
 const customDataProvider = {
 
@@ -21,7 +21,7 @@ const customDataProvider = {
     const url = `${apiUrl}/${resource}?${stringify(query)}`;
     const response = await fetch(url);
 
-    const data = (await response.json()).map((item) => ({id: item._id, ...item, img: `http://localhost:3001/${item.img}`}))
+    const data = (await response.json()).map((item) => ({id: item._id, ...item, img: `http://solodkiypar.com.ua:3001/${item.img}`}))
     .map(({_id, ...item}) => item);
 
     return {
@@ -37,7 +37,7 @@ const customDataProvider = {
 
     const data = Object.fromEntries(
       Object.entries((await response.json())).map(([key, value]) => (key === '_id' ? ['id', value]: key === 'img' ? 
-      [key,  `http://localhost:3001/${value}`]: [key, value])));
+      [key,  `http://solodkiypar.com.ua:3001/${value}`]: [key, value])));
      
     const image = {id: 1, title: data.img.substring(data.img.lastIndexOf('/') + 1), src: data.img};
     data.image = image;
@@ -70,7 +70,7 @@ const customDataProvider = {
 
     const newData = Object.fromEntries(
       Object.entries((await response.json())).map(([key, value]) => (key === '_id' ? ['id', value]: key === 'img' ? 
-      [key, `http://localhost:3001/${value}`] : [key, value])));
+      [key, `http://solodkiypar.com.ua:3001/${value}`] : [key, value])));
 
     return { data: newData };
   },
@@ -96,7 +96,7 @@ const customDataProvider = {
 
     const data = Object.fromEntries(
       Object.entries((await response.json())).map(([key, value]) => (key === '_id' ? ['id', value]: key === 'img' ? 
-      [key, `http://localhost:3001/${value}`] : [key, value])))
+      [key, `http://solodkiypar.com.ua:3001/${value}`] : [key, value])))
     ;
     return { data: data };
   },

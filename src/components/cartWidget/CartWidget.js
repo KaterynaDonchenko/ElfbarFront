@@ -79,7 +79,7 @@ const ProductList = ({userProductCart}) => {
                             return (
                                 <li key={i} className="cart-widget__product-item">
                                     <Link to={`/product/${_id}`} className="cart-widget__product-link">
-                                        <img src={`http://localhost:3001/${img}`} alt={title} className="cart-widget__product-img" />
+                                        <img src={`http://solodkiypar.com.ua:3001/${img}`} alt={title} className="cart-widget__product-img" />
                                         <div className="cart-widget__product-info">
                                             <div className="cart-widget__product-title">{title.slice(0, 50)}</div>
                                             <div className="cart-widget__product-quantity"><span> {counter} x </span> {price} грн</div>

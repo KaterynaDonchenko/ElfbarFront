@@ -69,7 +69,7 @@ const FilterSlider = () => {
                             onMouseEnter={() => setStyle(style.map((item, index) => index === i ? {'borderColor': color} : item))}
                             onMouseLeave={() => setStyle(style.map((item, index) => index === i ? {'borderColor': '#E9E6E3'} : item))} 
                             style={style[i]}>
-                            <img src={`http://localhost:3001/${img}`} alt={`elfbar ${name}`} />
+                            <img src={`http://solodkiypar.com.ua:3001/${img}`} alt={`elfbar ${name}`} />
                         </div>
                         <div style={{'color': color}} className="slide__item-subtitle">{name}</div>
                     </Link>
