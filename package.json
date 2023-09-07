@@ -2,6 +2,7 @@
   "name": "solodkiypar",
   "version": "1.0.0",
   "private": true,
+  "homepage": "https://solodkiypar.com.ua",
   "dependencies": {
     "@mui/material": "^5.14.5",
     "@reduxjs/toolkit": "^1.9.1",
