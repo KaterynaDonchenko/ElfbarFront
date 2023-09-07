@@ -42,7 +42,7 @@ const App = () => {
                 <CartWidget/>
                 <Routes>
                     <Route 
-                        path='/admin/*'
+                        path='/adminPanel/*'
                         element={ isAuth ? (<AdminPanel/>) : (<LoginForm/>) }
                         />
                     <Route path='/' element={<MainPage/>}/>

@@ -52,7 +52,7 @@ export const fetchProductsWithTheLable = createAsyncThunk(
     'products/fetchProductsWithTheLable',
     async (lable) => {
         const request = useHttp();
-        return await request(`https://solodkiypar.com.ua:3001/lable/${lable}`);
+        return await request(`https://solodkiypar.com.ua:3001/products/lable/${lable}`);
     }
 )
 

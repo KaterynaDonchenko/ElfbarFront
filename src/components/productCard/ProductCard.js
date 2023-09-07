@@ -25,7 +25,7 @@ const ProductCart = ({title, category, price, img, _id, categoryUrl, lable}) => 
             {divLable}
             <div className="card-list__item-wrapper">
                 <Link to={`/product/${_id}`} >
-                    <img className='card-list__item-img' src={`http://localhost:3001/${img}`} alt={title} />
+                    <img className='card-list__item-img' src={`https://solodkiypar.com.ua:3001/${img}`} alt={title} />
                 </Link>
                 <div className="card-list__item-content">
                     <Link to={`/product/${_id}`} >
