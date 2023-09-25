@@ -92,7 +92,7 @@ const Search = ({activeClass = null}) => {
                 return (
                     <li key={i} className="search__result-item">
                         <Link to={`/product/${_id}`} className="search__result-link">
-                            <img src={`http://solodkiypar.com.ua:3001/${img}`} alt={title} />
+                            <img src={`http://localhost:3001/${img}`} alt={title} />
                             <div className="search__result-info">
                                 <div className="search__result-title">
                                     {newTitle.beforeText}<strong>{newTitle.cuttingText}</strong>{newTitle.afterText}

@@ -63,7 +63,7 @@ const ProductSlider = () => {
                             <div className="product-slider__item">
                                 <div className="product-slider__wrapper">
                                     <Link to={`/product/${_id}`}>
-                                        <img className='product-slider__img' src={`http://solodkiypar.com.ua:3001/${img}`} alt={title} />
+                                        <img className='product-slider__img' src={`http://localhost:3001/${img}`} alt={title} />
                                     </Link>
                                     <div className="product-slider__content">
                                         <Link to={`/product/${_id}`} >

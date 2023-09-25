@@ -60,7 +60,7 @@ export const fetchLogin = createAsyncThunk(
     'loginForm/fetchLoginForm',
     (body) => {
         const request = useHttp();
-        return request(`http://solodkiypar.com.ua:3001/admin/login`, 'POST', JSON.stringify({email: body.email, password: body.password}), 
+        return request(`http://localhost:3001/admin/login`, 'POST', JSON.stringify({email: body.email, password: body.password}), 
         {'Content-Type': 'application/json', 'Authorization': `Bearer ${body.accessToken}`});
     }
 );
@@ -69,7 +69,7 @@ export const fetchRegistration = createAsyncThunk(
     'loginForm/fetchRegistration',
     (body) => {
         const request = useHttp();
-        return request(`http://solodkiypar.com.ua:3001/admin/registration`, 'POST', JSON.stringify({email: body.email, password: body.password}), 
+        return request(`http://localhost:3001/admin/registration`, 'POST', JSON.stringify({email: body.email, password: body.password}), 
         {'Content-Type': 'application/json', 'Authorization': `Bearer ${body.accessToke}`});
     }
 )
@@ -78,7 +78,7 @@ export const fetchLogout = createAsyncThunk(
     'loginForm/fetchLogout',
     () => {
         const request = useHttp();
-        return request(`http://solodkiypar.com.ua:3001/admin/logout`, 'POST', JSON.stringify({}),  
+        return request(`http://localhost:3001/admin/logout`, 'POST', JSON.stringify({}),  
         {'Content-Type': 'application/json'})
     }
 )
@@ -87,7 +87,7 @@ export const checkAuth = createAsyncThunk(
     'loginForm/checkAuth',
     () => {
         const request = useHttp();
-        return request(`http://solodkiypar.com.ua:3001/admin/refresh`);
+        return request(`http://localhost:3001/admin/refresh`);
     }
 )
 

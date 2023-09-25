@@ -40,7 +40,7 @@ export const fetchProduct = createAsyncThunk(
     'product/fetchProduct',
     (id) => {
         const request = useHttp();
-        return request(`http://solodkiypar.com.ua:3001/products/${id}`);
+        return request(`http://localhost:3001/products/${id}`);
     }
 );
 
@@ -48,7 +48,7 @@ export const fetchCategoryInfo = createAsyncThunk(
     'product/fetchCategoryInfo',
     (category) => {
         const request = useHttp();
-        return request(`http://solodkiypar.com.ua:3001/filterSlides/categoryInfo/${category}`);
+        return request(`http://localhost:3001/filterSlides/categoryInfo/${category}`);
     }
 );
 

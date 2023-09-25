@@ -39,7 +39,7 @@ const Product = ({userProductCart}) => {
                             <td onClick={() => dispatch(removeProductFromTheCart(_id))} className="cart__table-body-romove"></td>
                             <td className="cart__table-body-thumbnail">
                                 <Link to={`/product/${_id}`}>
-                                    <img src={`http://solodkiypar.com.ua:3001/${img}`} alt={title.slice(0, 100)} />
+                                    <img src={`http://localhost:3001/${img}`} alt={title.slice(0, 100)} />
                                 </Link>
                             </td>
                             <td className="cart__table-body-name">

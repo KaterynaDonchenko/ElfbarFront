@@ -36,7 +36,7 @@ export const ProductList = (props) => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const data = await request('http://solodkiypar.com.ua:3001/filterSlides/allCategory');
+                const data = await request('http://localhost:3001/filterSlides/allCategory');
                 setCategory(data);
                 setLoading(false);
             } catch (error) {
@@ -97,7 +97,7 @@ export const EditProduct = () => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const data = await request('http://solodkiypar.com.ua:3001/filterSlides/allCategory');
+                const data = await request('http://localhost:3001/filterSlides/allCategory');
                 setCategory(data);
                 setLoading(false);
             } catch (error) {
@@ -167,7 +167,7 @@ export const CreateProduct = () => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const data = await request('http://solodkiypar.com.ua:3001/filterSlides/allCategory');
+                const data = await request('http://localhost:3001/filterSlides/allCategory');
                 setCategory(data);
                 setLoading(false);
             } catch (error) {

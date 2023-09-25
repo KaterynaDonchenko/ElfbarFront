@@ -59,7 +59,7 @@ const Header = () => {
                 <li key={i} className='header__mobile-menu-category-item'>
                     <Link to={`/product-category/${name}`}>
                         <div className="header__mobile-menu-category-item-sircle" >
-                            <img src={`http://solodkiypar.com.ua:3001/${img}`} alt={`elfbar ${name}`} />
+                            <img src={`http://localhost:3001/${img}`} alt={`elfbar ${name}`} />
                         </div>
                         <div className="header__mobile-menu-category-item-title">ELFBAR {name}</div>
                     </Link>
