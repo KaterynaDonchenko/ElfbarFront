@@ -5,6 +5,8 @@ export const useHttp = () => {
         try {
             const response = await fetch(url, {method, credentials, body, headers});
 
+            console.log(response);
+
             if (!response.ok) {
                 throw new Error(`Could not fetch ${url}, status: ${response.status}`);
             }

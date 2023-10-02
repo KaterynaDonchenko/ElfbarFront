@@ -24,6 +24,24 @@ const FilterSlider = () => {
         setStyle(filterSlider.map(() => ({'borderColor': ''})))
     }, [filterSlider]);
 
+    useEffect(() => {
+            const filterItems = document.querySelector(".filter-slider .splide__list")
+            if (window.innerWidth <= 767) {
+                if (filterSlider.length < 3) {
+                    filterItems.classList.add('splide__list_jc')
+                }
+            } else if (window.innerWidth <= 991) {
+                if (filterSlider.length < 5) {
+                    filterItems.classList.add('splide__list_jc')
+                }
+            } else {
+                if (filterSlider.length < 8) {
+                    filterItems.classList.add('splide__list_jc')
+                }
+            }
+        
+    }, [filterSlider])
+
     const onShowArrows = (left, rigth) => {
         left.classList.add('splide__arrow--prev_show');
         rigth.classList.add('splide__arrow--next_show'); 
@@ -67,11 +85,13 @@ const FilterSlider = () => {
                     <Link onClick={() => dispatch(setCurrentPage(0))} to={`/product-category/${name}`}>
                         <div className="slide__item-sircle" 
                             onMouseEnter={() => setStyle(style.map((item, index) => index === i ? {'borderColor': color} : item))}
-                            onMouseLeave={() => setStyle(style.map((item, index) => index === i ? {'borderColor': '#E9E6E3'} : item))} 
+                            onMouseLeave={() => setStyle(style.map((item, index) => index === i ? {'borderColor': '#E9E6E3'} : item))}
+                            onTouchStart={() => setStyle(style.map((item, index) => index === i ? {'borderColor': color} : item))}
+                            onTouchEnd={() => setStyle(style.map((item, index) => index === i ? {'borderColor': '#E9E6E3'} : item))} 
                             style={style[i]}>
                             <img src={`http://localhost:3001/${img}`} alt={`elfbar ${name}`} />
                         </div>
-                        <div style={{'color': color}} className="slide__item-subtitle">{name}</div>
+                        <div style={{'color': color}} className="slide__item-subtitle">{name.slice(0, 17)}</div>
                     </Link>
                 </SplideSlide>
             )
@@ -81,8 +101,7 @@ const FilterSlider = () => {
     const slides = renderFilterSlides(filterSlider);
     const spiner = filterSliderStatus === 'loading' ? <Spinner/> : null;
     const error = filterSliderStatus === 'error' ? <Error/> : null;
-    const slider = !(spiner || error ) ?    <Splide options={{rewind: true, 
-                                                              perPage: 8,
+    const slider = !(spiner || error ) ?    <Splide options={{perPage: 8,
                                                               breakpoints: {
                                                                 991: {
                                                                     perPage: 5,
@@ -91,11 +110,15 @@ const FilterSlider = () => {
                                                                 767: {
                                                                     perPage: 3,
                                                                     perMove: 3
+                                                                },
+                                                                320: {
+                                                                    perPage: 2,
+                                                                    perMove: 2
                                                                 }
-                                                              }, 
-                                                              perMove: 8, 
-                                                              speed: 1200, 
-                                                              pagination: false}}>
+                                                              },  
+                                                              speed: 1200,
+                                                              pagination: false, 
+                                                              rewind: true}}>
                                                 {slides}
                                             </Splide> : null;
 

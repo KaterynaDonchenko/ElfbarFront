@@ -19,6 +19,7 @@ const MainPage = () => {
         dispatch(setSearch(''));
         dispatch(changeMobileMenuDisplay(false));
         window.scrollTo(0, 0);
+        document.body.style.overflow = '';
     }, []);
 
     return (

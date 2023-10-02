@@ -48,18 +48,21 @@
         color: rgb(52, 48, 61);
         font-weight: 700;
     }
+    &__center {
+        position: relative;
+    }
     &__lable {
         display: block;
         opacity: 0;
         position: absolute;
-        top: 63px;
         width: 83px;
         font-size: 11px;
         background-color: #000;
         color: #fff;
         text-align: center;
         padding: 8px 10px;
-        right: -24px;
+        right: -300%;
+        bottom: 100%;
         transition: all .3s;   
         &::after {
             content: '';
@@ -81,8 +84,8 @@
         position: relative;
         z-index: 1;
         &::before {
-            content: '\2E2C';
-            font-size: 19px;
+            content: '\2237';
+            font-size: 21px;
             font-weight: 700;
             cursor: pointer;
             color: rgb(33, 37, 41)

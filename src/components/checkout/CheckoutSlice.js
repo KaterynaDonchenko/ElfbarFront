@@ -9,7 +9,9 @@ const initialState = {
     cityLoadingWarehouses: 'idle',
     order: {},
     fetchEmailLoadingStatus: 'idle',
-    isSendForm: false
+    isSendForm: false,
+    userDeliveryMethod: '',
+    userPay: '',
 }
 
 const CheckoutSlice = createSlice({
@@ -20,7 +22,11 @@ const CheckoutSlice = createSlice({
             state.warehouses = actions.payload.arr.filter(item => actions.payload.input.length > 0 ?
                  item.warehouses.toLowerCase().indexOf(actions.payload.input.toLowerCase()) > -1 : item);
         },
-        onSaveOrder : (state, actions) => {state.order = actions.payload},
+        onSaveOrder : (state, actions) => {
+            state.order = actions.payload;
+            state.userDeliveryMethod = actions.payload.deliveryMethod;
+            state.userPay = actions.payload.checkbox;
+        },
         onChangeStatusSendForm : (state, actions) => {state.isSendForm = actions.payload}
     },
     extraReducers: (builder) => {

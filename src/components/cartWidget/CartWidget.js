@@ -55,7 +55,7 @@ const CartWidget = () => {
                     <div className="cart-widget__wrapper">
                         <div className="cart-widget__header">
                             <div className="cart-widget__title">Кошик</div>
-                            <div onClick={() => dispatch(changeDispalayCartWidget(false))} 
+                            <div onClick={() => {dispatch(changeDispalayCartWidget(false)); document.body.style.overflow = ''}} 
                                  className="cart-widget__close">Закрити</div>
                         </div>
                         {list}

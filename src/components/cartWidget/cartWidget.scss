@@ -10,7 +10,7 @@
     z-index: 9;
     &__wrapper {
         display: grid;
-        grid-template-rows: 68px 1fr 173px;
+        grid-template-rows: 68px 1fr;
         position: absolute;
         right: 0;
         width: 305px;
@@ -80,7 +80,7 @@
     &__product-close {
         &::after {
             content: '\2573';
-            font-size: 8px;
+            font-size: 9px;
             position: absolute;
             top: 15px;
             right: 15px;
@@ -109,6 +109,7 @@
     }
     &__footer {
         padding-bottom: 15px;
+        position: sticky;
     }
     &__total {
         padding: 15px;

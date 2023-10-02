@@ -31,6 +31,7 @@ const SearchPage = () => {
 
     useEffect(() => {
         dispatch(changeMobileMenuDisplay(false));
+        document.body.style.overflow = '';
     }, []);
 
     useEffect(() => {

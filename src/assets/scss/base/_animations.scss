@@ -10,11 +10,30 @@
 .select-exit {
     opacity: 1;
     transform: translateY(0);
+    transition: all 300ms;
 }
 .select-exit-active {
     opacity: 0;
     transform: translateY(-5px);
+}
+
+.mobile-menu-category-list-enter {
+    opacity: 0;
+    grid-template: 0px/1fr;
+}
+.mobile-menu-category-list-enter-active {
+    opacity: 1;
+    grid-template: 60px/1fr;
     transition: all 300ms;
+}
+.mobile-menu-category-list-exit {
+    opacity: 1;
+    grid-template: 60px/1fr;
+    transition: all 300ms;
+}
+.mobile-menu-category-list-exit-active {
+    opacity: 0;
+    grid-template: 0px/1fr;
 }
 
 .arrow-select-enter {
@@ -40,6 +59,23 @@
     transform: rotate(225deg);
 }
 
+.mobile-menu-item-arow-enter {
+    transform: rotate(-45deg);
+}
+.mobile-menu-item-arow-enter-active {
+    transform: rotate(45deg);
+    transition: all 300ms;
+}
+.mobile-menu-item-arow-exit {
+    transform: rotate(45deg);
+    transition: all 300ms;
+}
+.mobile-menu-item-arow-exit-active {
+    transform: rotate(-45deg);
+}
+.mobile-menu-item-arow-enter-done {
+    transform: rotate(45deg);
+}
 
 .prev-product-enter {
     opacity: 0;

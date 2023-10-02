@@ -6,7 +6,7 @@ import { onChangeStatusSendForm } from '../checkout/CheckoutSlice';
 import './orderReceived.scss';
 
 const OrderReceived = () => {
-    const { order } = useSelector(state => state.checkout);
+    const { userPay, userDeliveryMethod } = useSelector(state => state.checkout);
     const { total, userProductCart } = useSelector(state => state.cartWidget);
     const currentDate = new Date();
     const dispatch = useDispatch();
@@ -37,8 +37,8 @@ const OrderReceived = () => {
         })
     }
     
-    const pay = order.checkbox === 'card' ? 'Оплата на картку' : 'Оплата при отриманні';
-    const delivery = order.deliveryMethod === 'nova' ? 'Hова Пошта' : 'Укрпошта';
+    const pay = userPay === 'card' ? 'Оплата на картку' : 'Оплата при отриманні';
+    const delivery = userDeliveryMethod === 'nova' ? 'Hова Пошта' : 'Укрпошта';
     const products = renderProducts(userProductCart);
     return (
         <div className="order-received">

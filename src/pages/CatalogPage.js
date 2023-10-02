@@ -24,6 +24,7 @@ const CatalogPage = () => {
         dispatch(setSearch(''));
         dispatch(changeMobileMenuDisplay(false));
         dispatch(changeDispalayCartWidget(false));
+        document.body.style.overflow = '';
         window.scrollTo(0, 0);
     }, []);
 

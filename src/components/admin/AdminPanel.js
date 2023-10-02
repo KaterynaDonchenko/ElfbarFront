@@ -38,7 +38,7 @@ const AdminPanel = () => {
     return (
             <>
               <Button onClick={() => {onExid()}} className='admin__btn' variant="outlined">Вихід</Button>
-              <Admin basename="/admin" dataProvider={decoratedCustomDataProvider} dashboard={Dashboard}>
+              <Admin basename="/adminPanel" dataProvider={decoratedCustomDataProvider} dashboard={Dashboard}>
                 <Resource options={{ label: 'Товари' }} name="products" list={ProductList} edit={EditProduct} create={CreateProduct} />
                 <Resource options={{ label: 'Фільтри' }} name="filterSlides" list={FilterSlidesList} edit={EditFilterSlide} create={CreateFilterSlide}/>
               </Admin>

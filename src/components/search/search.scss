@@ -19,7 +19,7 @@
     }
     &__line {
         outline: none;
-        border: none;
+        border: 0;
         position: absolute;
         left: 35px;
         text-align: center;
@@ -27,6 +27,8 @@
         width: 0;
         bottom: 0;
         border-bottom: 1px solid #000;
+        overflow: hidden;
+        border-radius: 0;
     }
     &__line_active {
         width: 140px;

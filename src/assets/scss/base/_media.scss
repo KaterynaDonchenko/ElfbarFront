@@ -176,19 +176,11 @@
             justify-content: center;
             padding-bottom: 10px; 
         }
-        &__mobile-menu-item {
-            a {
-                color: #000;
-                font-size: 18px;
-                font-weight: 500;
-                display: block;
-                width: 100%;
-                height: 100%;
-            }
-        }
-        &__mobile-menu-item:nth-child(2) {
-            a {
-                width: 85%;
+        &__mobile-menu-category-list {
+            .spiner {
+                position: static;
+                background: transparent;
+                margin-top: 10px;
             }
         }
         &__mobile-menu-category-item {
@@ -229,7 +221,7 @@
 
     .question {
         &__block {
-            width: 82%;
+            width: 95%;
         }
     }
 
@@ -299,6 +291,17 @@
         width: 700px;
     }
 
+    .breadcrumbs-menu {
+        &__right, &__left {
+            position: relative;
+        }
+        &__dropdown {
+            top: 0;
+            bottom: 100%;
+            right: 0;
+        }
+    }
+
     .product {
         padding-top: 72px;
         &__wrapper {
@@ -309,6 +312,9 @@
             img {
                 height: 100%;
             }
+        }
+        &__form-button {
+            height: 50px;
         }
     }
     
@@ -344,7 +350,6 @@
         }
         &__item-basket {
             width: 59px;
-            height: 37px;
         }
     }
 
@@ -409,6 +414,12 @@
         }
     }
 
+    .counter {
+        &__number, &__minus, &__plus {
+            font-size: 17px;
+        }
+    }
+
     .page404 {
         &__img {
             width: 100%;
@@ -451,6 +462,12 @@
         .container {
             padding: 0 20px;
         }
+        &__item {
+            img {
+                height: 70%;
+                transform: translateY(20%);
+            }
+        }
         &__bottom {
             top: 33%;
         }
@@ -461,6 +478,9 @@
         &__title_big {
             font-size: 38px;
             text-align: left;
+        }
+        .splide__slide {
+            background-color: rgb(255, 179, 230, .4);
         }
     }
 
@@ -481,6 +501,7 @@
         }
         &__mobile-menu-item {
             a {
+                width: 90%;
                 font-size: 17px;
             }
         }
@@ -533,6 +554,14 @@
         &__main {
             overflow-x: hidden;
         }
+        &__dscr, &__select, &__price {
+            margin-top: 10px;
+        }
+        &__bottom {
+            .product__dscr {
+                padding: 0 10px;
+            }
+        }
     }
     
     .product-slider {
@@ -573,6 +602,22 @@
         }
         &__title, &__text, &__subtitle {
             margin-bottom: 10px;
+        }
+    }
+
+    .cart-widget {
+        &__product-item {
+            padding: 10px;
+        }
+        &__product-title {
+            font-size: 13px;
+        }
+        &__product-close {
+            &::after {
+                top: 4px;
+                right: 12px;
+                font-size: 13px;
+            }
         }
     }
 
@@ -651,18 +696,19 @@
             }
         }
         &__table-body-subtota {
+            font-size: 18px;
             &::before {
                 content: 'проміжний підсумок:';
                 width: 62%;
             }
         }
-    }
-
-    .counter {
-        width: 71px;
-        height: 30px;
-        &__number, &__minus, &__plus {
-            line-height: 27px;
+        &__table-body-price {
+            font-size: 17px;
+        }
+        &__total-price {
+            span {
+                font-size: 21px;
+            }
         }
     }
 
@@ -748,7 +794,12 @@
             font-size: 15px;
         }
         &__cart {
-            left: 73%;
+            left: 60%;
+        }
+        &__mobile-menu-item {
+            a {
+                width: 90%;
+            }
         }
     }
 
@@ -839,7 +890,7 @@
         }
         &__price {
             margin-top: 5px;
-            font-size: 18px;
+            font-size: 24px;
         }
         &__right-block {
             padding: 0 10px;
@@ -848,9 +899,6 @@
             grid-template: 78px/repeat(1, 80%);
             row-gap: 10px;
         }
-        &__dscr {
-            padding: 0 10px;
-        }
         &__additional-info {
             padding: 0 5px;
         }
@@ -858,24 +906,23 @@
 
     .breade-crumbs {
         padding: 10px;
+        padding-left: 0;
     }
 
     .question {
         &__block-title {
-            padding: 20px 35px 20px 9px;
-            font-size: 15px;
+            padding: 20px 50px 20px 9px;
+            font-size: 21px;
         }
         &__block-btn {
-            width: 27px;
-            height: 27px;
             right: 5px;
             background-size: 50% 2px, 2px 50%;
         }
-        &__block-dscr {
-            font-size: 14px;
-        }
         &__block-dscr_show {
             padding: 10px;
+        }
+        &__title {
+            margin-bottom: 35px;
         }
     }
 
@@ -907,11 +954,10 @@
             line-height: 18px;
         }
         &__item-price-now {
-            font-size: 14px;
+            font-size: 15px;
         }
         &__item-basket {
             width: 53px;
-            height: 33px;
         }
     }
 
@@ -924,7 +970,7 @@
             font-size: 17px;
         }
         &__content-text {
-            padding: 0 34px;
+            padding: 0 27px;
         }
         &__content {
             grid-template-rows: 54px 25px 1fr;
@@ -941,10 +987,6 @@
         &__subtitle {
             font-size: 16px;
         }
-    }
-
-    .title-h1 {
-        font-size: 18px;
     }
 
     .empty-productlist {
@@ -1039,7 +1081,7 @@
             }
         }
         &__bottom {
-            padding: 0 0 10px 0;
+            padding: 0 0 10px 10px;
         }
         &__privacy {
             right: 30%;
@@ -1101,6 +1143,15 @@
             height: 90px;
         }
     }
+    .product-slider {
+        &__title {
+            font-size: 13px;
+        }
+        &__price {
+            font-size: 15px;
+        }
+    }
+
     .advantages {
         &__content-text {
             padding: 0;
@@ -1114,13 +1165,6 @@
         span {
             font-size: 14px;
         } 
-    }
-
-    .counter {
-        width: 56px;
-        &__number {
-            font-size: 12px;
-        }
     }
 
     .footer {

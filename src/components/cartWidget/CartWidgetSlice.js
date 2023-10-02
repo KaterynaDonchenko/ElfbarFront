@@ -19,7 +19,9 @@ const cartWidgetSlice = createSlice({
             const date = new Date(actions.payload);
             state.futureDateOfTheLocaleStorage = date.toLocaleString();
             const isUserProductCartInLocalStorage = JSON.parse(localStorage.getItem('userProductCart'));
-            if (isUserProductCartInLocalStorage) localStorage.setItem('futureDate', state.futureDateOfTheLocaleStorage);
+            if (!isUserProductCartInLocalStorage) {
+                localStorage.setItem('futureDate', state.futureDateOfTheLocaleStorage);
+            }
         },
         saveUserProductCart: (state, action) => {
             const newProductId = action.payload._id;

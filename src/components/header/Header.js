@@ -1,14 +1,17 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, Link } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import { NavLink, Link} from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
+import { useResize } from '../../hooks/resize.hook';
 import { setFilter } from "../filters/FilterSlice";
 import { setCurrentPage } from '../pagination/PaginationSlice';
 import { changeDispalayCartWidget, changeFutureDateOfTheLocaleStorage, cleareUserProductCart } from '../cartWidget/CartWidgetSlice';
-import { changeMobileMenuDisplay } from './HeaderSlice';
+import { changeMobileMenuDisplay, changeCartIconDisplay} from './HeaderSlice';
 import Search from '../search/Search';
 import CheckAge from '../modals/checkAge/CheckAge';
+import Spinner from '../spinner/Spinner';
+import Error from '../error/Error';
 
 import './header.scss'
 
@@ -17,17 +20,28 @@ import logo from '../../assets/icons/LogoPar.svg';
 const Header = () => {
     const { cartIconDisplay, mobileMenuDisplay } = useSelector(state => state.header);
     const { userProductCart } = useSelector(state => state.cartWidget);
-    const { filterSlider } = useSelector(state => state.filterSlider);
+    const { filterSlider, filterSliderStatus } = useSelector(state => state.filterSlider);
     const arowRight = useRef();
-    const arowDown = useRef();
     const dispatch = useDispatch();
     const currentDate = new Date(); 
     const futureDate = new Date(currentDate);
+    const [rotateArrow, setRotateArrow] = useState(false);
+    const [mobileMenuItems, setMobileMenuItems] = useState(false);
+    const mobileCatalog = useRef();
+    const headerCart = useRef();
+    const userWindowWidth = useResize();
 
     useEffect(() => {
         const isFutureDateInLocaleStorage = localStorage.getItem('futureDate');
-        if (!isFutureDateInLocaleStorage) dispatch(changeFutureDateOfTheLocaleStorage(futureDate.setDate(currentDate.getDate() + 2)));
+
+        if (!isFutureDateInLocaleStorage) {
+            dispatch(changeFutureDateOfTheLocaleStorage(futureDate.setDate(currentDate.getDate() + 10)))
+        }
     }, [])
+
+    useEffect(() => {
+        if (userWindowWidth >= 991) dispatch(changeMobileMenuDisplay(false));
+    }, [userWindowWidth])
 
 
     function checkExpiration () {
@@ -42,7 +56,8 @@ const Header = () => {
 
     useEffect(() => {
         checkExpiration ();
-    }, [])
+    }, []);
+
 
     setInterval(checkExpiration, 24 * 60 * 60 * 1000);
 
@@ -61,38 +76,50 @@ const Header = () => {
                         <div className="header__mobile-menu-category-item-sircle" >
                             <img src={`http://localhost:3001/${img}`} alt={`elfbar ${name}`} />
                         </div>
-                        <div className="header__mobile-menu-category-item-title">ELFBAR {name}</div>
+                        <div className="header__mobile-menu-category-item-title">{name.slice(0, 23)}</div>
                     </Link>
                 </li>
             )
         })
 
         return (
-            <ul className='header__mobile-menu-category-list'>{categoryItem}</ul>
+            <CSSTransition in={mobileMenuItems} 
+                               timeout={300} 
+                               unmountOnExit 
+                               mountOnEnter
+                               classNames="mobile-menu-category-list">
+                                
+                <ul className='header__mobile-menu-category-list' 
+                    ref={mobileCatalog}>
+                    {filterSliderStatus === 'loading' ? <Spinner/> : filterSliderStatus === 'error' ? <Error/> : categoryItem}
+                </ul>
+            </CSSTransition>
         )
     }
 
     const categoryIist = filterSlider.length > 0 ? renderCategoryMobileList(filterSlider) : null;
 
+    const onToggleArrowAndMobileMenu = () => {
+        setMobileMenuItems(!mobileMenuItems);
+        setRotateArrow(!rotateArrow);
+    }
+
     const onToggleDisplayMobileCatalog = () => {
-        const mobileCatalog = document.querySelector('.header__mobile-menu-category-list');
         const mobileMenu = document.querySelector('.header__mobile-menu-list');
         const itemQuestionMobile = document.querySelector('.header__mobile-menu-item-question')
         
-        mobileCatalog.classList.toggle('header__mobile-menu-category-list_active');
-
-        if (window.getComputedStyle(arowRight.current).display === 'block') {
-            arowRight.current.style.display = 'none';
-            arowDown.current.style.display = 'block';
-            mobileMenu.style.gridTemplate = `60px 60px ${mobileCatalog.offsetHeight + 60}px / 1fr`;
-            itemQuestionMobile.style.paddingTop = `${mobileCatalog.offsetHeight + 10}px`;
-
-        } else {
-            arowRight.current.style.display = 'block';
-            arowDown.current.style.display = 'none';
+        if (document.querySelector('.header__mobile-menu-item-arow').classList.contains('mobile-menu-item-arow-enter-done')) {
             mobileMenu.style.gridTemplate= '';
             itemQuestionMobile.style.paddingTop = '';
-        }  
+        } else {
+            mobileMenu.style.gridTemplate = `60px 60px ${60*filterSlider.length + 60}px / 1fr`;
+            itemQuestionMobile.style.paddingTop = `${60*filterSlider.length + 10}px`;
+        }
+    }
+
+    const onChangeShowMobileMenu = () => {
+        onToggleArrowAndMobileMenu(); 
+        onToggleDisplayMobileCatalog();
     }
     
     return (
@@ -125,7 +152,9 @@ const Header = () => {
                     <a href="https://t.me/elfsolodkiypar" className="header__settings-manager-telegram">запитати спеціаліста</a>
                 </div>
             </div>
-            <div className="header__mobile-menu" onClick={() => dispatch(changeMobileMenuDisplay(true))}>
+            <div className="header__mobile-menu" onClick={() => {dispatch(changeMobileMenuDisplay(true));
+                                                                document.body.style.overflow = 'hidden'; 
+                                                                if (headerCart.current) dispatch(changeCartIconDisplay(false))}}>
                     <div className="header__mobile-menu-line"></div>
                     <div className="header__mobile-menu-line"></div>
                     <div className="header__mobile-menu-line"></div>
@@ -143,7 +172,10 @@ const Header = () => {
                                     <img src={logo} alt="logo" />
                                 </NavLink>
                                 <div className="header__mobile-menu-close" 
-                                    onClick={() => dispatch(changeMobileMenuDisplay(false))}>Закрити</div>
+                                     onClick={() => {dispatch(changeMobileMenuDisplay(false));
+                                     document.body.style.overflow = '';
+                                     if (counter > 0) dispatch(changeCartIconDisplay(true))}}>
+                                Закрити</div>
                             </div>
                             <div className="header__mobile-menu-search">
                                 <Search activeClass='search__line_active'/>
@@ -154,14 +186,18 @@ const Header = () => {
                                 </li>
                                 <li className="header__mobile-menu-item">
                                     <div className="header__mobile-menu-item-link">
-                                        <NavLink to={`/catalog/filter?orderby=all&page=1`} onClick={goToCatalog} end>Каталог</NavLink>
-                                        <div className="header__mobile-menu-item-arow-right" 
-                                            ref={arowRight} 
-                                            onClick={onToggleDisplayMobileCatalog}>
-                                        </div>
-                                        <div className="header__mobile-menu-item-arow-down" 
-                                            ref={arowDown}
-                                            onClick={onToggleDisplayMobileCatalog}>
+                                        <NavLink to={`/catalog/filter?orderby=all&page=1`} 
+                                                 onClick={goToCatalog}>
+                                            Каталог
+                                        </NavLink>
+                                        <div className="header__mobile-menu-item-wrapper"
+                                             ref={arowRight}  
+                                             onClick={onChangeShowMobileMenu}>
+                                            <CSSTransition in={rotateArrow} 
+                                                           timeout={300} 
+                                                classNames="mobile-menu-item-arow">
+                                                <div className="header__mobile-menu-item-arow"></div>
+                                            </CSSTransition>
                                         </div>
                                     </div>
                                     {categoryIist}
@@ -186,8 +222,8 @@ const Header = () => {
                             unmountOnExit 
                             mountOnEnter
                             classNames="cart-icon">
-                <div  className='header__cart'
-                    onClick={() => dispatch(changeDispalayCartWidget(true))}>
+                <div  className='header__cart' ref={headerCart}
+                    onClick={() => {dispatch(changeDispalayCartWidget(true)); document.body.style.overflow = 'hidden'}}>
                     <div className="header__cart-wrapper">
                     <svg role="img" className="header__cart-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
                         <path fill="none" strokeWidth="2" strokeMiterlimit="10" d="M44 18h10v45H10V18h10z"/><path fill="none" strokeWidth="2" strokeMiterlimit="10" d="M22 24V11c0-5.523 4.477-10 10-10s10 4.477 10 10v13"/></svg>
