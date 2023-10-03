@@ -117,14 +117,17 @@ const Header = () => {
 
     const onToggleDisplayMobileCatalog = () => {
         const mobileMenu = document.querySelector('.header__mobile-menu-list');
-        const itemQuestionMobile = document.querySelector('.header__mobile-menu-item-question')
+        const itemQuestionMobile = document.querySelector('.header__mobile-menu-item-question');
+        const hr = document.querySelector('.header__mobile-menu-item-line');
         
         if (document.querySelector('.header__mobile-menu-item-arow').classList.contains('mobile-menu-item-arow-enter-done')) {
             mobileMenu.style.gridTemplate= '';
             itemQuestionMobile.style.paddingTop = '';
+            hr.style.paddingTop = '';
         } else {
-            mobileMenu.style.gridTemplate = `60px 60px ${60*filterSlider.length + 60}px / 1fr`;
+            mobileMenu.style.gridTemplate = `60px 60px ${60*filterSlider.length + 161}px / 1fr`;
             itemQuestionMobile.style.paddingTop = `${60*filterSlider.length + 15}px`;
+            hr.style.paddingTop = `${60*filterSlider.length}px`;
         }
     }
 
@@ -215,6 +218,7 @@ const Header = () => {
                                 </li>
                                 <li className="header__mobile-menu-item header__mobile-menu-item-question">
                                     <NavLink to='/question' end>Відповіді на питання</NavLink>
+                                    <hr className="header__mobile-menu-item-line" />
                                     <div className="header__mobile-menu-down-block">
                                         <div className="header__mobile-menu-btn">
                                             <a href="https://t.me/elfsolodkiypar" className="header__mobile-menu-telegram">

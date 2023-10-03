@@ -205,6 +205,8 @@
             font-weight: 500;
             display: block;
             width: 90%;
+            position: inherit;
+            z-index: 2;
         }
     }
     &__mobile-logo {
@@ -277,15 +279,25 @@
         line-height: 50px;
     }
     &__mobile-menu-down-block {
-        padding: 10px 0;
-        margin-bottom: 20px;
+        // padding: 10px 0;
+        // margin-bottom: 20px;
         z-index: 10;
         top: 18px;
         width: 100%;
         position: relative;
+        transform: translateY(20px);
+    }
+    &__mobile-menu-item-line {
+        width: 99%;
+        position: absolute;
+        left: 0;
+        top: 50px;
+        border: 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.105);
+        z-index: 1;
     }
     &__mobile-menu-btn {
-        margin: 10px 0;
+        // margin: 10px 0;
         height: 61px;
         background-color: #eb92d2;
         border-radius: 28px;
