@@ -215,6 +215,7 @@
         padding: 15px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.105);
         transition: .3s all;
+        position: relative;
     }
     &__mobile-menu-item:nth-child(2), &__mobile-menu-category-item {
         border-bottom: 1px solid rgba(0, 0, 0, 0.105);
@@ -276,12 +277,15 @@
         line-height: 50px;
     }
     &__mobile-menu-down-block {
-        padding: 5px 10px;
+        padding: 10px 0;
         margin-bottom: 20px;
-        position: sticky;
         z-index: 10;
+        top: 18px;
+        width: 100%;
+        position: relative;
     }
     &__mobile-menu-btn {
+        margin: 10px 0;
         height: 61px;
         background-color: #eb92d2;
         border-radius: 28px;
@@ -294,6 +298,7 @@
             text-align: center;
             display: grid;
             text-transform: uppercase;
+            margin: 0 auto;
             &:hover {
                 color: #fff;
                 text-transform: uppercase;

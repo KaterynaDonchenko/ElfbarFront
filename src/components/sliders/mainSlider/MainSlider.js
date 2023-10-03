@@ -17,7 +17,7 @@ const MainSlider = () => {
                 arrows: false, 
                 pagination: false,
                 autoplay: true,
-                pauseOnHover: false
+                pauseOnHover: true
                 }}>
                 <SplideSlide className='main-slider__item'>
                     <img src={slide1} alt="slide 1" />

@@ -43,6 +43,17 @@ const Header = () => {
         if (userWindowWidth >= 991) dispatch(changeMobileMenuDisplay(false));
     }, [userWindowWidth])
 
+    useEffect(() => {
+        if (mobileMenuDisplay === true) {
+            const bottomPanel = document.querySelector('.browser-controls');
+            if (bottomPanel) {
+                const btnQuestion = document.querySelector('.header__mobile-menu-down-block')
+                bottomPanel.style.display = 'block';
+                const height = bottomPanel.getBoundingClientRect().height;
+                btnQuestion.style.paddingBottom = `${height}px`;
+            }
+        }
+    }, [mobileMenuDisplay])
 
     function checkExpiration () {
         const storedDate = localStorage.getItem('futureDate');
@@ -113,7 +124,7 @@ const Header = () => {
             itemQuestionMobile.style.paddingTop = '';
         } else {
             mobileMenu.style.gridTemplate = `60px 60px ${60*filterSlider.length + 60}px / 1fr`;
-            itemQuestionMobile.style.paddingTop = `${60*filterSlider.length + 10}px`;
+            itemQuestionMobile.style.paddingTop = `${60*filterSlider.length + 15}px`;
         }
     }
 
@@ -204,15 +215,31 @@ const Header = () => {
                                 </li>
                                 <li className="header__mobile-menu-item header__mobile-menu-item-question">
                                     <NavLink to='/question' end>Відповіді на питання</NavLink>
+                                    <div className="header__mobile-menu-down-block">
+                                        <div className="header__mobile-menu-btn">
+                                            <a href="https://t.me/elfsolodkiypar" className="header__mobile-menu-telegram">
+                                                запитати спеціаліста
+                                            </a>
+                                        </div>
+                                    </div>
                                 </li>
+                                {/* <li className="header__mobile-menu-item">
+                                    <div className="header__mobile-menu-down-block">
+                                        <div className="header__mobile-menu-btn">
+                                            <a href="https://t.me/elfsolodkiypar" className="header__mobile-menu-telegram">
+                                                запитати спеціаліста
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li> */}
                             </ul>
-                            <div className="header__mobile-menu-down-block">
+                            {/* <div className="header__mobile-menu-down-block">
                                 <div className="header__mobile-menu-btn">
                                     <a href="https://t.me/elfsolodkiypar" className="header__mobile-menu-telegram">
                                         запитати спеціаліста
                                     </a>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </CSSTransition>
                 </div>
