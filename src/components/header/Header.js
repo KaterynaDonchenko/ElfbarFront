@@ -223,23 +223,7 @@ const Header = () => {
                                         </div>
                                     </div>
                                 </li>
-                                {/* <li className="header__mobile-menu-item">
-                                    <div className="header__mobile-menu-down-block">
-                                        <div className="header__mobile-menu-btn">
-                                            <a href="https://t.me/elfsolodkiypar" className="header__mobile-menu-telegram">
-                                                запитати спеціаліста
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li> */}
                             </ul>
-                            {/* <div className="header__mobile-menu-down-block">
-                                <div className="header__mobile-menu-btn">
-                                    <a href="https://t.me/elfsolodkiypar" className="header__mobile-menu-telegram">
-                                        запитати спеціаліста
-                                    </a>
-                                </div>
-                            </div> */}
                         </div>
                     </CSSTransition>
                 </div>
