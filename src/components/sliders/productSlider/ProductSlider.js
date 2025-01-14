@@ -12,20 +12,22 @@ import Error from '../../error/Error';
 import './productSlider.scss';
 
 import cart from '../../../assets/icons/cart.svg';
+import { useTranslation } from 'react-i18next';
 
 const ProductSlider = () => {
+    const { t } = useTranslation()
     const { productsCategory, productsCategoryLoadingStatus } = useSelector(state => state.products);
     const { productId } = useParams();
     const dispatch = useDispatch();
 
-    function onShowArrows(left, rigth) {
+    function onShowArrows(left, right) {
         left.classList.add('splide__arrow--prev_show');
-        rigth.classList.add('splide__arrow--next_show'); 
+        right.classList.add('splide__arrow--next_show'); 
     }
 
-    function onHideArrows(left, rigth) {
+    function onHiddenArrows(left, right) {
         left.classList.remove('splide__arrow--prev_show');
-        rigth.classList.remove('splide__arrow--next_show');
+        right.classList.remove('splide__arrow--next_show');
     }
 
     const addArrows = () => {
@@ -37,11 +39,11 @@ const ProductSlider = () => {
         sliderArrows.style.display = 'block';
 
         slider.addEventListener('mouseover', () => onShowArrows(arrowLeft, arrowRight));
-        slider.addEventListener('mouseout', () => onHideArrows(arrowLeft, arrowRight));
+        slider.addEventListener('mouseout', () => onHiddenArrows(arrowLeft, arrowRight));
 
         return () => {
             slider.removeEventListener('mouseover', () => onShowArrows(arrowLeft, arrowRight));
-            slider.removeEventListener('mouseout', () => onHideArrows(arrowLeft, arrowRight));
+            slider.removeEventListener('mouseout', () => onHiddenArrows(arrowLeft, arrowRight));
         }
     }
 
@@ -56,42 +58,44 @@ const ProductSlider = () => {
 
     const renderProductCard = (arr) => {
         if (arr.length !== 0) {
-            return arr.map(({_id, title, category, price, img, categoryUrl}, i) => {
-                if (_id != productId) {
-                    return (
-                        <SplideSlide key={i} className='product-slider'>
-                            <div className="product-slider__item">
-                                <div className="product-slider__wrapper">
-                                    <Link to={`/product/${_id}`}>
-                                        <img className='product-slider__img' src={`http://localhost:3001/${img}`} alt={title} />
+            return arr.map(({_id, title, category, price, img}, i) => {
+                if (_id === productId) {
+                    return null;
+                }
+                return (
+                    <SplideSlide key={i} className='product-slider'>
+                        <div className="product-slider__item">
+                            <div className="product-slider__wrapper">
+                                <Link to={`/product/${_id}`}>
+                                    <img className='product-slider__img' src={`http://localhost:3001/${img}`} alt={title} />
+                                </Link>
+                                <div className="product-slider__content">
+                                    <Link to={`/product/${_id}`} >
+                                        <div className="product-slider__title">{title.slice(0, 70)}</div>
                                     </Link>
-                                    <div className="product-slider__content">
-                                        <Link to={`/product/${_id}`} >
-                                            <div className="product-slider__title">{title.slice(0, 70)}</div>
-                                        </Link>
-                                        <div className="product-slider__model"><Link to={`/product-category/${categoryUrl}`}>{category}</Link></div>
-                                        <div className="product-slider__footer">
-                                            <div className="product-slider__price">{price} грн</div>
-                                            <div className="product-slider__basket"
-                                                 onClick={() => {
-                                                    dispatch(saveUserProductCart({_id, title, price, img}));
-                                                    dispatch(changeCartIconDisplay(true));
-                                                 }}>
-                                                <img src={cart} alt="cart" />
-                                            </div>
+                                    <div className="product-slider__model"><Link to={`/product-category/${category}`}>{category.slice(0,15)}</Link></div>
+                                    <div className="product-slider__footer">
+                                        <div className="product-slider__price">{price.toFixed(2)} {t("currency")}</div>
+                                        <div className="product-slider__basket"
+                                                onClick={() => {
+                                                dispatch(saveUserProductCart({_id, title, price, img}));
+                                                dispatch(changeCartIconDisplay(true));
+                                                }}>
+                                            <img src={cart} alt="cart" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </SplideSlide>
-                    )
+                        </div>
+                    </SplideSlide>
+                )
                 }
-            });
+            );
         }
     }
 
     const cardItem = renderProductCard(productsCategory) ;
-    const spiner = productsCategoryLoadingStatus === 'loading' ? <Spinner/> : null;
+    const spinner = productsCategoryLoadingStatus === 'loading' ? <Spinner/> : null;
     const error = productsCategoryLoadingStatus === 'error' ? <Error/> : null;
     const content = productsCategory ? <Splide options={{rewind: true, 
                                                          perPage: 5, 
@@ -116,7 +120,7 @@ const ProductSlider = () => {
                                 </Splide> : null;
     return (
         <div className="product-slider">
-            {spiner}
+            {spinner}
             {error}
             {content}
         </div>

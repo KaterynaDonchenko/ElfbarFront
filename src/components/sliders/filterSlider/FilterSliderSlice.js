@@ -23,10 +23,10 @@ const filterSliderSlice = createSlice({
 });
 
 export const fetchFilterSlider = createAsyncThunk(
-    'filterSlider/fetchfilterSlider',
-    () => {
+    'filterSlider/fetchFilterSlider',
+    (language) => {
         const require = useHttp();
-        return require('http://localhost:3001/filterSlides');
+        return require(`http://localhost:3001/filterSlides?language=${language}`);
     }
 );
 

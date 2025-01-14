@@ -10,22 +10,27 @@ import Error from '../../error/Error';
 import hand from '../../../assets/icons/hand.png';
 
 import './filterSlider.scss';
+import { useTranslation } from 'react-i18next';
 
 const FilterSlider = () => {
+    const { i18n } = useTranslation()
     const { filterSlider, filterSliderStatus } = useSelector(state => state.filterSlider);
     const dispatch = useDispatch();
     const [style, setStyle] = useState([]);
 
     useEffect(() => {
-        dispatch(fetchFilterSlider());
-    }, []);
+        dispatch(fetchFilterSlider(i18n.language));
+    }, [i18n.language, dispatch]);
 
     useEffect(() => {
         setStyle(filterSlider.map(() => ({'borderColor': ''})))
-    }, [filterSlider]);
+    }, [filterSlider, dispatch]);
 
     useEffect(() => {
             const filterItems = document.querySelector(".filter-slider .splide__list")
+
+            if (!filterItems) return;
+
             if (window.innerWidth <= 767) {
                 if (filterSlider.length < 3) {
                     filterItems.classList.add('splide__list_jc')
@@ -39,17 +44,21 @@ const FilterSlider = () => {
                     filterItems.classList.add('splide__list_jc')
                 }
             }
+
+            return () => {
+                filterItems.classList.remove('splide__list_jc');
+            };
         
     }, [filterSlider])
 
-    const onShowArrows = (left, rigth) => {
+    const onShowArrows = (left, right) => {
         left.classList.add('splide__arrow--prev_show');
-        rigth.classList.add('splide__arrow--next_show'); 
+        right.classList.add('splide__arrow--next_show'); 
     }
 
-    const onHideArrows = (left, rigth) => {
+    const onHiddenArrows = (left, right) => {
         left.classList.remove('splide__arrow--prev_show');
-        rigth.classList.remove('splide__arrow--next_show');
+        right.classList.remove('splide__arrow--next_show');
     }
     
     const addArrows = () => {
@@ -61,11 +70,11 @@ const FilterSlider = () => {
         sliderArrows.style.display = 'block';
 
         slider.addEventListener('mouseover', () => onShowArrows(arrowLeft, arrowRight));
-        slider.addEventListener('mouseout', () => onHideArrows(arrowLeft, arrowRight));
+        slider.addEventListener('mouseout', () => onHiddenArrows(arrowLeft, arrowRight));
 
         return () => {
             slider.removeEventListener('mouseover', () => onShowArrows(arrowLeft, arrowRight));
-            slider.removeEventListener('mouseout', () => onHideArrows(arrowLeft, arrowRight));
+            slider.removeEventListener('mouseout', () => onHiddenArrows(arrowLeft, arrowRight));
         }
     }
 
@@ -83,7 +92,7 @@ const FilterSlider = () => {
             return (
                 <SplideSlide key={i} className='slide'>
                     <Link onClick={() => dispatch(setCurrentPage(0))} to={`/product-category/${name}`}>
-                        <div className="slide__item-sircle" 
+                        <div className="slide__item-circle" 
                             onMouseEnter={() => setStyle(style.map((item, index) => index === i ? {'borderColor': color} : item))}
                             onMouseLeave={() => setStyle(style.map((item, index) => index === i ? {'borderColor': '#E9E6E3'} : item))}
                             onTouchStart={() => setStyle(style.map((item, index) => index === i ? {'borderColor': color} : item))}
@@ -99,9 +108,9 @@ const FilterSlider = () => {
     }
 
     const slides = renderFilterSlides(filterSlider);
-    const spiner = filterSliderStatus === 'loading' ? <Spinner/> : null;
+    const spinner = filterSliderStatus === 'loading' ? <Spinner/> : null;
     const error = filterSliderStatus === 'error' ? <Error/> : null;
-    const slider = !(spiner || error ) ?    <Splide options={{perPage: 8,
+    const slider = !(spinner || error ) ?    <Splide options={{perPage: 8,
                                                               breakpoints: {
                                                                 991: {
                                                                     perPage: 5,
@@ -124,12 +133,12 @@ const FilterSlider = () => {
 
     return (
         <>
-            {spiner}
+            {spinner}
             {error}
             <div className="filter-slider">
                 {slider}
                 <div className="filter-slider__img">
-                    <img src={hand} title='hand'/>
+                    <img src={hand} title='hand' alt='hand'/>
                 </div>
             </div>
         </>

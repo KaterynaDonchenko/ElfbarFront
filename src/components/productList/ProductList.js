@@ -1,27 +1,30 @@
 import {useEffect} from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 
-import { fetchProductsWithTheLable } from './ProductListSlice';
+import {fetchProductsWithTheLabel } from './ProductListSlice';
 import { changeCartIconDisplay } from '../header/HeaderSlice'; 
 import ProductCard from '../productCard/ProductCard';
 import Spinner from '../spinner/Spinner';
 import Error from '../error/Error';
 
 import './productList.scss';
+import { useTranslation } from 'react-i18next';
 
-const ProductList = ({lable = false, productsArray, statusProductsArray}) => { 
+const ProductList = ({label = false, productsArray, statusProductsArray}) => {
+    const { i18n } = useTranslation() 
     const { userProductCart } = useSelector( state => state.cartWidget);
     const dispatch = useDispatch();
 
     useEffect(() => {
-       if(lable) dispatch(fetchProductsWithTheLable(lable));
-    }, []);
+        if (label) dispatch(fetchProductsWithTheLabel({label, language: i18n.language}))
+    }, [i18n.language, dispatch, label]);
+
 
     useEffect(() => {
         if (userProductCart.length > 0) dispatch(changeCartIconDisplay(true));
-    }, [userProductCart])
+    }, [userProductCart, dispatch])
 
-    const renderProductCard = (arr, lable = null) => {
+    const renderProductCard = (arr, label = null) => {
         if (arr.length !== 0) {
             return arr.map(({_id, title, category, price, img, categoryUrl}) => {
                 return (
@@ -31,7 +34,7 @@ const ProductList = ({lable = false, productsArray, statusProductsArray}) => {
                         category={category} 
                         price={price}
                         img={img} 
-                        lable={lable}
+                        label={label}
                         _id={_id}
                         categoryUrl={categoryUrl}/> 
                 )
@@ -39,14 +42,14 @@ const ProductList = ({lable = false, productsArray, statusProductsArray}) => {
         }
     }
 
-    const cardItem = renderProductCard(productsArray, lable)
-    const spiner = statusProductsArray === 'loading' ? <Spinner/>  : null;
+    const cardItem = renderProductCard(productsArray, label)
+    const spinner = statusProductsArray === 'loading' ? <Spinner/>  : null;
     const error = statusProductsArray === 'error' ? <Error/> : null;
-    const content = !(spiner || error ) ? <ul className="card-list">{cardItem}</ul> : null;
+    const content = !(spinner || error ) ? <ul className="card-list">{cardItem}</ul> : null;
     
     return (
         <>
-            {spiner}
+            {spinner}
             {error}
             {content}
         </>

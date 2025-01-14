@@ -5,7 +5,7 @@ import cartWidget from '../components/cartWidget/CartWidgetSlice';
 import counter from '../components/counter/CounterSlice';
 import checkout from '../components/checkout/CheckoutSlice';
 import filterSlider from '../components/sliders/filterSlider/FilterSliderSlice';
-import productsPrevAndNext from '../components/breadeCrumbsMenu/BreadCrumbsMenuSlice';
+import productsPrevAndNext from '../components/breadCrumbsMenu/BreadCrumbsMenuSlice';
 import question from '../components/question/QuestionSlice';
 import search from '../components/search/SearchSlice';
 import filter from '../components/filters/FilterSlice';

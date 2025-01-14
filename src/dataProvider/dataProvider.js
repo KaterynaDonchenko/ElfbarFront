@@ -1,9 +1,8 @@
 import { withLifecycleCallbacks } from 'react-admin';
 import { stringify } from "query-string";
-import { v4 as uuidv4 } from 'uuid';
 
 
-const apiUrl = 'http://localhost:3001'; 
+const apiUrl = 'http://localhost:3001' 
 
 const customDataProvider = {
 
@@ -55,11 +54,11 @@ const customDataProvider = {
     const url = `${apiUrl}/${resource}`;
     const srcImg = params.data.name ? 'img/filterSlides' : 'img/products';
 
-    params.data.id = uuidv4();
+    // params.data.id = uuidv4();
     params.data.img = `${srcImg}/${params.data.image.title}`;
 
-    const data = Object.fromEntries(Object.entries(params.data).filter(([key, value]) => key !== 'image'));
-    
+    const data = Object.fromEntries(Object.entries(params.data).filter(([key, value]) => key !== 'image'))
+
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -68,8 +67,14 @@ const customDataProvider = {
       body: JSON.stringify(data)
     });
 
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result);
+    }
+
     const newData = Object.fromEntries(
-      Object.entries((await response.json())).map(([key, value]) => (key === '_id' ? ['id', value]: key === 'img' ? 
+      Object.entries((result)).map(([key, value]) => (key === '_id' ? ['id', value]: key === 'img' ? 
       [key, `http://localhost:3001/${value}`] : [key, value])));
 
     return { data: newData };

@@ -51,7 +51,7 @@
     &__center {
         position: relative;
     }
-    &__lable {
+    &__label {
         display: block;
         opacity: 0;
         position: absolute;
@@ -76,7 +76,7 @@
             border-top: 10px solid #000;
         }
     }
-    &__lable_active {
+    &__label_active {
         transform: translateY(-5px);
         opacity: 1;
     } 

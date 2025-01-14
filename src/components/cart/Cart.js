@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -16,7 +17,7 @@ const Cart = () => {
 
     useEffect(() => {
         dispatch(changeCartIconDisplay(false));
-    }, [])
+    }, [dispatch])
 
     const content = userProductCart.length > 0 ? <CartWithProducts/> : <EmptyCart/>
     return (
@@ -29,6 +30,7 @@ const Cart = () => {
 }
 
 const Product = ({userProductCart}) => {
+    const { t } = useTranslation()
     const dispatch = useDispatch();
     return (
         <>
@@ -36,7 +38,7 @@ const Product = ({userProductCart}) => {
                 userProductCart.map(({img, title, price, counter, _id}, i) => {
                     return (
                         <tr key={i} className="cart__table-body-row">
-                            <td onClick={() => dispatch(removeProductFromTheCart(_id))} className="cart__table-body-romove"></td>
+                            <td onClick={() => dispatch(removeProductFromTheCart(_id))} className="cart__table-body-remove"></td>
                             <td className="cart__table-body-thumbnail">
                                 <Link to={`/product/${_id}`}>
                                     <img src={`http://localhost:3001/${img}`} alt={title.slice(0, 100)} />
@@ -47,11 +49,11 @@ const Product = ({userProductCart}) => {
                                     {title}
                                 </Link>
                             </td>
-                            <td className="cart__table-body-price">{price} грн</td>
+                            <td className="cart__table-body-price">{price.toFixed(2)} {t("currency")}</td>
                             <td className="cart__table-body-quantity">
                                 <Counter counterProduct={counter} _id={_id}/>
                             </td>
-                            <td className="cart__table-body-subtota">{price * counter} грн</td>
+                            <td className="cart__table-body-subtotal">{(price * counter).toFixed(2)} {t("currency")}</td>
                         </tr>
                     )
                 })
@@ -61,18 +63,20 @@ const Product = ({userProductCart}) => {
 }
 
 const EmptyCart = () => {
+    const { t } = useTranslation()
     return (
         <div className="cart__empty">
             <img src={emptyCart} alt="empty cart" />
-            <h2 className="cart__empty-title">Ваш кошик порожній</h2>
+            <h2 className="cart__empty-title">{t("cart_widget.empty")}</h2>
             <div className="cart__empty-title-btn">
-                <Link to={`/catalog/filter?orderby=all&page=1`} className="btn">Повернутися в магазин</Link>
+                <Link to={`/catalog/filter?orderby=all&page=1`} className="btn">{t("cart_widget.return")}</Link>
             </div>
         </div>
     )
 }
 
 const CartWithProducts = () => {
+    const { t } = useTranslation()
     const { total, userProductCart } = useSelector(state => state.cartWidget);
 
     const product = userProductCart.length > 0 ? <Product userProductCart={userProductCart}/> : null;  
@@ -83,12 +87,12 @@ const CartWithProducts = () => {
                 <table className="cart__table">
                     <thead className="cart__table-header">
                         <tr className="cart__table-header-row">
-                            <th className="cart__table-header-romove"></th>
+                            <th className="cart__table-header-remove"></th>
                             <th className="cart__table-header-thumbnail"></th>
-                            <th className="cart__table-header-name">Товар</th>
-                            <th className="cart__table-header-price">Ціна</th>
-                            <th className="cart__table-header-quantity">Кількість</th>
-                            <th className="cart__table-header-subtota">Проміжний <br/> підсумок</th>
+                            <th className="cart__table-header-name">{t("cart.product")}</th>
+                            <th className="cart__table-header-price">{t("cart.price")}</th>
+                            <th className="cart__table-header-quantity">{t("cart.quantity")}</th>
+                            <th className="cart__table-header-subtotal">{t("cart.subtotal")} <br/> {t("cart.total")}</th>
                         </tr>
                     </thead>
                     <tbody className="cart__table-body">
@@ -98,17 +102,17 @@ const CartWithProducts = () => {
             </form>
             <div className="cart__total">
                 <div className="cart__total-wrapper">
-                    <h2 className="cart__total-title">Підсумки кошика</h2>
-                    <div className="cart__total-dilivery">
-                        Доставка
-                        <span>не враховується</span>
+                    <h2 className="cart__total-title">{t("cart.basket_result")}</h2>
+                    <div className="cart__total-delivery">
+                        {t("cart.delivery")}
+                        <span>{t("cart.consider")}</span>
                     </div>
                     <div className="cart__total-price">
-                        Загалом
-                        <span>{total} грн</span>
+                        {t("cart.total")}
+                        <span>{total.toFixed(2)} {t("currency")}</span>
                     </div>
                     <div className="cart__total-btn">
-                        <Link to='/checkout' className="btn"> Перейти до оформлення</Link>
+                        <Link to='/checkout' className="btn">{t("cart.checkout")}</Link>
                     </div>
                 </div>
             </div>

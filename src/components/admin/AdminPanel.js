@@ -22,14 +22,14 @@ const AdminPanel = () => {
       if (accessToken) {
         dispatch(checkAuth());
       }
-    }, []);
+    }, [dispatch, accessToken]);
 
     useEffect(() => {
       header.style.display = 'none';
       footer.style.display = 'none';
     }, [])
 
-    const onExid = () => {
+    const onExit = () => {
       dispatch(fetchLogout());
       header.style.display = 'flex';
       footer.style.display = 'block';
@@ -37,7 +37,7 @@ const AdminPanel = () => {
 
     return (
             <>
-              <Button onClick={() => {onExid()}} className='admin__btn' variant="outlined">Вихід</Button>
+              <Button onClick={() => {onExit()}} className='admin__btn' variant="outlined">Вихід</Button>
               <Admin basename="/adminPanel" dataProvider={decoratedCustomDataProvider} dashboard={Dashboard}>
                 <Resource options={{ label: 'Товари' }} name="products" list={ProductList} edit={EditProduct} create={CreateProduct} />
                 <Resource options={{ label: 'Фільтри' }} name="filterSlides" list={FilterSlidesList} edit={EditFilterSlide} create={CreateFilterSlide}/>

@@ -22,7 +22,7 @@
             object-fit: contain;
         }
     }
-    &__breadecrums {
+    &__breadcrumbs {
         display: grid;
         grid-template-columns: 600px 1fr;
         column-gap: 10px;
@@ -63,6 +63,11 @@
         justify-content: center;
         align-items: center;
     }
+    &__select .spinner {
+        img {
+            height: 40px;
+        }
+    }
     &__select-btn {
         position: absolute;
         right: 9px;
@@ -88,7 +93,7 @@
         max-height: 200px;
         overflow-y: auto;
     }
-    &__select-mainvariant {
+    &__select-mainVariant {
         position: relative;
         z-index: 1;
         width: 100%;

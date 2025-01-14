@@ -25,7 +25,7 @@
         grid-template-columns: repeat(3, 1fr);
         justify-items: center;
     }
-    &__menu-title, &__delivery-title, &__pay-title, &__sosial-title {
+    &__menu-title, &__delivery-title, &__pay-title, &__social-title {
         font-family: 'Roboto Condensed';
         font-weight: 700;
         font-size: 20px;
@@ -43,13 +43,13 @@
         line-height: 24px;
         color: #000;
     }
-    &__sosial-wrapper {
+    &__social-wrapper {
         margin-top: 20px;
         width: 160px;
         display: flex;
         justify-content: space-between;
     }
-    &__sosial-telegram, &__sosial-instagram, &__sosial-tiktok {
+    &__social-telegram, &__social-instagram, &__social-tiktok {
         cursor: pointer;
     }
     &__bottom {
@@ -71,5 +71,5 @@
         &:hover {
             color: $main-color;
         }
-    } 
+    }
 }

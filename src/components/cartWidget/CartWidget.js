@@ -3,14 +3,16 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 
-import { changeDispalayCartWidget, changeTotal, removeProductFromTheCart, fetchArrayOfProducts } from './CartWidgetSlice';
+import { changeDisplayCartWidget, changeTotal, removeProductFromTheCart, fetchArrayOfProducts } from './CartWidgetSlice';
 import { changeCartIconDisplay } from '../header/HeaderSlice'; 
 
 import './cartWidget.scss';
 
 import emptyCart from '../../assets/icons/empty-cart.svg';
+import { useTranslation } from 'react-i18next';
 
 const CartWidget = () => {
+    const { i18n ,t } = useTranslation()
     const { widgetDisplay, userProductCart } = useSelector(state => state.cartWidget);
     const dispatch = useDispatch();
 
@@ -19,24 +21,24 @@ const CartWidget = () => {
     useEffect(() => {
         const cartWidget = document.querySelector('.cart-widget');
 
-        const hideCartWidget = event => {
-            if (event.target === cartWidget || event.keyCode === 27) dispatch(changeDispalayCartWidget(false));
+        const hiddenCartWidget = event => {
+            if (event.target === cartWidget || event.keyCode === 27) dispatch(changeDisplayCartWidget(false));
         }
 
-        window.addEventListener('click', hideCartWidget);
-        window.addEventListener('keydown', hideCartWidget);
+        window.addEventListener('click', hiddenCartWidget);
+        window.addEventListener('keydown', hiddenCartWidget);
 
         return() => {
-            window.removeEventListener('click', hideCartWidget);
-            window.removeEventListener('keydown', hideCartWidget);
+            window.removeEventListener('click', hiddenCartWidget);
+            window.removeEventListener('keydown', hiddenCartWidget);
         }
     }, [widgetDisplay])
 
     useEffect(() => {
         const existingLocalStorage = JSON.parse(localStorage.getItem('userProductCart')) || [];
         const idArrayFromLocalStorage = existingLocalStorage.map(item => item.id);
-        dispatch(fetchArrayOfProducts(idArrayFromLocalStorage));
-    }, [])
+        dispatch(fetchArrayOfProducts({arr: idArrayFromLocalStorage, language: i18n.language}));
+    }, [i18n.language])
     
     useEffect(() => {
         if (totalSumCart <= 0) dispatch(changeCartIconDisplay(false));
@@ -54,9 +56,9 @@ const CartWidget = () => {
                                classNames="cart-widget__wrapper">
                     <div className="cart-widget__wrapper">
                         <div className="cart-widget__header">
-                            <div className="cart-widget__title">Кошик</div>
-                            <div onClick={() => {dispatch(changeDispalayCartWidget(false)); document.body.style.overflow = ''}} 
-                                 className="cart-widget__close">Закрити</div>
+                            <div className="cart-widget__title">{t("cart_widget.cart")}</div>
+                            <div onClick={() => {dispatch(changeDisplayCartWidget(false)); document.body.style.overflow = ''}} 
+                                 className="cart-widget__close">{t("cart_widget.close")}</div>
                         </div>
                         {list}
                     </div>
@@ -67,6 +69,7 @@ const CartWidget = () => {
 }
 
 const ProductList = ({userProductCart}) => {
+    const { t } = useTranslation()
     const { total } = useSelector(state => state.cartWidget);
     const dispatch = useDispatch();
 
@@ -82,7 +85,7 @@ const ProductList = ({userProductCart}) => {
                                         <img src={`http://localhost:3001/${img}`} alt={title} className="cart-widget__product-img" />
                                         <div className="cart-widget__product-info">
                                             <div className="cart-widget__product-title">{title.slice(0, 50)}</div>
-                                            <div className="cart-widget__product-quantity"><span> {counter} x </span> {price} грн</div>
+                                            <div className="cart-widget__product-quantity"><span> {counter} x </span> {price.toFixed(2)} {t("currency")}</div>
                                         </div>
                                     </Link>
                                     <div onClick={() => dispatch(removeProductFromTheCart(_id))} 
@@ -96,19 +99,19 @@ const ProductList = ({userProductCart}) => {
             </div>
             <div className="cart-widget__footer">
                 <div className="cart-widget__total">
-                    <span>Разом:</span>
-                    <span>{total} грн</span> 
+                    <span>{t("cart_widget.total")}:</span>
+                    <span>{total.toFixed(2)} {t("currency")}</span> 
                 </div>
                 <div className="cart-widget__buttons">
                     <Link to='/cart' 
-                          onClick={() => {dispatch(changeDispalayCartWidget(false))}} 
+                          onClick={() => {dispatch(changeDisplayCartWidget(false))}} 
                           className="btn">
-                          Переглянути кошик
+                          {t("cart_widget.view_cart")}
                     </Link>
                     <Link to='/checkout' 
-                          onClick={() => {dispatch(changeDispalayCartWidget(false))}} 
+                          onClick={() => {dispatch(changeDisplayCartWidget(false))}} 
                           className="btn"> 
-                          Оформити замовлення
+                          {t("cart_widget.place_order")}
                     </Link>
                 </div>
             </div>
@@ -117,11 +120,12 @@ const ProductList = ({userProductCart}) => {
 }
 
 const EmptyCart = () => {
+    const { t } = useTranslation()
     return (
         <div className="cart-widget__empty-cart">
             <img src={emptyCart} alt="the empty cart" />
-            <div className="cart-widget__empty-cart-text">НЕМАЄ ТОВАРІВ В КОШИКУ</div>
-            <Link to={`/catalog/filter?orderby=all&page=1`} className="btn">До каталогу</Link>
+            <div className="cart-widget__empty-cart-text">{t("cart_widget.empty")}</div>
+            <Link to={`/catalog/filter?orderby=all&page=1`} className="btn">{t("cart_widget.to_catalog")}</Link>
         </div>
     )
 }

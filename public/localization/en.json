@@ -1,0 +1,184 @@
+{
+    "header": {
+        "main": "main",
+        "catalog": "catalog",
+        "answer": "answer to the questions"
+    },
+    "ask": "ask the expert",
+    "title_main-screen": {
+        "first": "Enjoy products from advanced producers",
+        "second": {
+            "header": "New tastes",
+            "sub-header": "distributor of original products"
+        }
+    },
+    "section_name": {
+        "categories": "Categories",
+        "new": "New products",
+        "popular": "Popular products"
+
+    },
+    "currency": "$",
+    "advantages": {
+        "first": {
+            "price": "The best price",
+            "original": "Only original products availabel at the best price on the market"
+        },
+        "second": {
+            "availability": "Actual availability",
+            "updating": "Every day, we update the product assortment and availability."
+        }
+    },
+    "info": {
+        "first_title": "Online vape store Solodkiypar",
+        "first-text": "Recently, electronic cigarettes have become more popular than traditional cigarettes. This is partly due to the fact that Elf Bar does not emit combustion products, which significantly reduces the load on the smoker's lungs. In addition, cigarette smoke no longer causes discomfort to the average passerby. The range of electronic cigarettes includes various models made from high quality raw materials and availabel in different tastes.",
+        "second_title": "Benefits of Smoking Elf Bar",
+        "second_text": "A variety of tastes and a stylish body guarantee a pleasant impression from smoking an electronic cigarette. However, a key feature of any Elf Bar model is the combination of technology and simplicity. They have all the features of a traditional electronic cigarette, but at the same time, they have advantageous differences. A variety of tastes and stylish design guarantee a pleasant experience from using an electronic cigarette. However, the most important feature of Elf Bar models is the combination of technology and simplicity. Elf Bar e-cigarettes have all the features of traditional electronic cigarettes, but at the same time they differ from other electronic cigarettes.",
+        "third_title": "Varieties of models",
+        "third_text": "When choosing a specific Elf Bar, paying attention to several parameters is advisable. Taste - manufacturers offer many flavor combinations, so everyone can choose the best option for themselves. Sweet or fruity, cold or not - you decide. Number of puffs - this figure varies from 350 to 5000 puffs from one device. Brand and manufacturer - the popularity of the manufacturer indicates to consumers that it offers a quality product that they have already appreciated.",
+        "forth_title": "Best Buy Elf Bar",
+        "forth_text": "In our online store you can buy Elf Bar at the lowest price from the manufacturer. We offer favorable terms of purchase, fast delivery and expert advice. We sell only certified branded products with varying degrees of strength, taste and composition."
+
+    },
+    "footer": {
+        "site": {
+            "name": "Site",
+            "main": "Main",
+            "catalog": "Catalog",
+            "answer": "Answer to the questions"
+        },
+        "delivery": {
+            "name": "Delivery",
+            "nova_poshta": "Nova Poshta",
+            "ukr_poshta": "Ukrposhta"
+        },
+        "payment": {
+            "name": "Payment",
+            "cart": "Debit cart",
+            "cash": "Cash after delivery"
+        },
+        "follow": "follow us",
+        "agreement": "User Agreement"
+    },
+    "product_title": "Product catalog",
+    "catalog_bread-crumbs": {
+        "main": "Main",
+        "product_catalog": "Product catalog",
+        "search": "Searching result for",
+        "to_catalog": "To catalog"
+    },
+    "sort": {
+        "name": "To Sort",
+        "all": "All products",
+        "cheap": "From cheap to expensive",
+        "expensive": "From expensive to cheap",
+        "top": "Top Sales",
+        "new": "New arrivals first" 
+    },
+    "ask-answer": {
+        "name": "Questions and Answers",
+        "place_order": "How to place an order?",
+        "description_first": "Select the desired taste, and quantity and add to the basket. Go to the shopping cart and place your order. You can also place an order on Telegram",
+        "time": "How long will the order take?",
+        "description_second": "Orders issued before 15:00 are sent on the same day. Delivery time 'Nova poshta' takes from 1 to 4 days. 'Ukrposhta' takes up to 6 days. Delivery is carried out by 'Nova poshta' and 'Ukrposhta'",
+        "failure": "What if the ELF BAR does not work?",
+        "description_third": "Don't panic! Write to the manager and we will solve your problem!",
+        "original": "Do you have an original product?",
+        "description_forth": "Our store provides an original product that a QR code can easily check on the official website elfbar.com."
+    },
+    "product_page": {
+        "breadcrumbs": "Main",
+        "button": "Add to basket",
+        "category": "Category",
+        "description": "Description",
+        "strength": "Strength",
+        "drag": "Drag",
+        "liquid": "Liquid",
+        "battery": "Battery",
+        "same_products": "Similar products"
+    },
+    "cart_widget": {
+        "cart": "cart",
+        "close": "close",
+        "total": "total",
+        "view_cart": "view cart",
+        "place_order": "place an order",
+        "empty": "Your cart is empty",
+        "return": "Return to shop",
+        "to_catalog": "To catalog"
+    },
+    "cart": {
+        "product": "product",
+        "price": "price",
+        "quantity": "quantity",
+        "subtotal": "subtotal",
+        "basket_result": "basket result",
+        "delivery": "delivery",
+        "consider": "is not considered",
+        "total": "total",
+        "checkout": "proceed to checkout"
+    },
+    "checkout": {
+        "payment_delivery": "payment and delivery",
+        "name": "Name",
+        "surname": "Surname",
+        "phone": "Phone",
+        "delivery_address": "type your delivery address",
+        "shipping_method": "Select shipping method",
+        "choose_city": "Choose a city",
+        "branch": "-Choose a branch (parcel locker)",
+        "index": "Type index",
+        "addition_inform": "addition information",
+        "order_notes": "Order notes (optional)",
+        "your_order": "your order",
+        "product": "product",
+        "subtotal": "subtotal",
+        "delivery": "delivery",
+        "total": "total",
+        "payment": {
+            "first": "Cart payment",
+            "second": "Cash after delivery"
+        },
+        "button": "confirm order",
+        "required_field": "Required field",
+        "min_length": "Minimum of 2 characters",
+        "incorrect_number": "Incorrect number entered",
+        "empty_field": "Field is empty",
+        "delivery_impossible": "Delivery to this city is now impossible. Please check the name or select another nearest settlement",
+        "loading": "loading...",
+        "sms": "An SMS with payment details will be sent to the provided phone number.",
+        "receipt": "Payment upon receipt of the goods at the branch."
+    },
+    "received": {
+        "massage": "Thank you for your order! If necessary, our manager will contact you.",
+        "order_number": "Order number",
+        "date": "Date",
+        "total": "Total",
+        "payment_method": "Payment method",
+        "order_detail": "Order details",
+        "overall": "Overall",
+        "total_two": "Total"
+    },
+    "modal": {
+        "question": "Are you 18 years old?",
+        "text": "To use this website, you must confirm that you are 18 + years old. Are you 18 years old?",
+        "button_yes": "Так, мені є 18",
+        "button_no": "Ні, мені немає 18"
+
+    },
+  "policy": {
+    "title": "User Agreement",
+    "subtitle-first-part": "Attention! The site",
+    "subtitle-second-part": "may only be used by individuals who have reached the age of 18. By viewing our site, you confirm that you are at least 18 years old. Before browsing this site, please read these terms carefully. If you do not agree with these terms, do not use this site. Use of this site, including filling out various forms, applications, and ordering products/services, implies your agreement to the terms of this Agreement.",
+    "terminology": "Terms mentioned in this Agreement:<br/> <strong>Administration</strong> – the administration of the Solodkiypar.com online store website.<br/> <strong>Website</strong> – the website of the Solodkiypar.com online store, including all web pages.<strong>Agreement</strong> – this user agreement.<br/> <strong>Seller</strong> – a legal entity or individual entrepreneur who posts information about goods/services sold by them on the Website. The Seller may be either the Administration or any other person authorized by the Website Administration to post information about their goods/services.<br/> <strong>Product</strong> – goods, services, works, property rights, other tangible and intangible objects, the information about which is posted on the Website.<br/> <strong>User</strong> – a person who views information on the Website and/or orders and/or receives Products using the tools of the Website. The Recipient and the Payer are also considered Users.<br/><strong>Order</strong> – a User's request through the Website to the Seller to purchase a Product, as well as the collection of Products ordered by the User.<br/> <strong>Payer</strong> – the person who pays for the Order.<br/> <strong>Recipient</strong> – the person specified by the Payer as authorized to receive the Product according to the Order. Unless otherwise specified in the Order form, the Recipient is the Payer.<br/> <strong>Verification</strong> – is the process of checking the Client's personal data when a request is routed through the Site. When the correct Login and Password are entered by the User and confirmed with a One-Time Password from the Site, the Site allows access to the User's Personal Account on the Site.<br/> <strong>Personal Account</strong> – User registration is completed by filling out a registration form, after which the User gains access to the 'Personal Account.' The User agrees not to use the 'Personal Account' for illegal actions or actions that violate the rights or interests of third parties. In case of violation of this rule, the User agrees to reimburse the Site for all expenses incurred as a result of such actions.<br/> <strong>Offer</strong> – information posted on the Site about a specific Product that can be purchased by the consumer. The Offer includes: information about the product itself, its price, payment and delivery methods, as well as other terms of purchase. The terms of the offer are determined by the seller. The offer is not an agreement but only information about the possible terms of purchasing the Product.",
+    "text": "1. General Terms of Use. <br/> 1.1. The site is a platform for placing offers for the sale of Goods. <br/> <br/> 1.2. This Agreement is a public offer. By accessing the materials of the Site, the User is considered to have joined this Agreement. <br/> <br/> 1.3. The Site Administration has the right to unilaterally change the terms of this Agreement at any time. Such changes shall take effect upon posting of the new version of the Agreement on the website. <br/> <br/> 1.4. The offer on the Site is not an offer. However, the User, after reading the Offer, has the right to make an offer to the Seller (Sellers) by filling out the Order form. Filling out the Order form is considered an offer of the User to the Seller (s) for the User to purchase the relevant Goods on the terms specified in the Offer. <br/> <br/> 1.5. The Offer is considered accepted by the Seller if the latter has committed actions indicating the acceptance of the User's offer, namely: actually shipped the goods, began providing services or performing work in accordance with the conditions stipulated by the User's offer. <br/> <br/> 1.6. After receiving the offer of the User, the Seller has the right to offer to purchase the Goods on conditions other than those provided for by the offer of the User. In this case, such a proposal is considered a counter offer and must be accepted by the User. Acceptance of a counter offer is considered to be the actual receipt by the User (Recipient) of the Goods under the conditions stipulated by the counter offer. The Seller shall have the right to withdraw such counter offer until the Goods are delivered to the Buyer. <br/> <br/> 1.7. Sufficient evidence of acceptance of the offer by the Seller or counter-offer (i.e. agreement by the Parties of all material terms of sale of the Goods) is the actual receipt and acceptance of the Goods by the Recipient. <br/> <br/> 1.8. Sending by the Seller and/or the Administration by means of electrical (sms-informing, e-mail, telephone, etc.) or other communication of the Seller/Administration's notification of receipt of the User's Order and/or the timing of its receipt and/or the price of the Goods is not considered to be accepted by the Seller of the User's Offer. This notice is solely a notice of receipt by the Seller of the User's offer (but not of its acceptance) and contains a reproduction of the terms of the offer provided by the User. <br/> <br/> 1.9. The only means of compensation that is provided to the User in case of non-compliance with the actual terms of the offer sale is to provide the User (Recipient) with the right to refuse to receive and accept the relevant Goods and to demand the return of the cost paid for it, as well as the cost of delivering the Goods to the point of issue (if these amounts were actually paid by the Payer). The Recipient has the right to exercise this right until the signing of documents confirming the receipt of the Goods (including the carrier's documents on the delivery of the shipment with the Goods to the Recipient). <br/> <br/>1.10. The moment of receipt and acceptance of the Goods by the Recipient is the moment (depending on which came earlier):<br/> - signing by the Recipient of the act of acceptance and transfer of the Goods (or other equivalent document confirming the fact of transfer of the Goods to the Recipient), or <br/> - signing by the Recipient of the documents of the carrier confirming the fact of receipt of the shipment containing the Goods, or <br/> - the actual receipt by the Recipient of the Goods and the performance by the Recipient of actions indicating the acceptance of the Goods (the Recipient received the Goods and left the point of issue of the goods, etc.). <br/> <br/> 1.11. Product information. <br/> 1.11.1. The information in the Goods is contained on the Goods themselves, its packaging, shipping documents for the Goods. Product information can also be provided remotely (by phone by posting product information on the site). <br/> <br/> 1.11.2. Upon receipt of the Goods before signing the documents confirming the receipt of the Goods, the Recipient is obliged to familiarize himself with the information about the Goods contained on the Goods and/or packaging. If it is necessary to obtain additional information about the Goods, the Recipient shall contact the Seller and obtain the necessary information by remote communication until the Recipient accepts the Goods. <br/> <br/> 1.11.3. Price for the Goods agreed by the Parties in accordance with clause 1.4.-1.7. The Agreement may be amended by the Seller until the Goods are delivered to the Recipient. <br/> <br/> 1.11.4. If the price of the Goods changes in comparison with the agreed Parties in accordance with clause 1.4. - 1.6. The Recipient has the right to refuse to receive and accept the Goods. In this case, the Recipient (Payer) has the right to demand the return of the amounts paid for the Goods, as well as the amounts paid for the delivery of the Goods to the Recipient. Any other compensation (including damages, penalty, etc.) is not provided by the Seller and the Administration. <br/> 1.12. Limitation of liability. <br/> - for compliance with the terms of the Offer on the actual conditions of sale of the Goods, for the absence of the Goods, <br/> - for delay in delivery of the Goods, <br/> - for the quality of the Goods, <br/> - for the proper performance of warranty obligations by the Sellers and/or manufacturers. <br/> <br/> 1.12.2. The conditions specified in the Offer are preliminary conditions for the purchase of the Goods. The terms of the Offer may be changed by the Sellers, including after acceptance of the Order for execution. The specific conditions for the sale of the Goods by the Sellers may be determined and changed by the Sellers until the Goods are transferred to the Recipient. <br/> <br/> 1.12.3. The Administration shall under no circumstances be liable for any loss (including, but not limited to, loss of profit, data or interruption of business) resulting from the use, inability to use or results of use of this Site. <br/> <br/> 1.12.4. The Seller's liability for changes in the terms of purchase of the Goods in comparison with those specified in the Offer is limited by the fact that the Recipient (User, Payer) has the right to refuse to purchase the Goods and demand the return of the funds paid for it (if they are paid). <br/> <br/> 1.12.5. In any case, the amount of losses (both material and non-material) that can be paid to the User (Payer, Recipient) in connection with the violation of his rights when using the Site (including in connection with the failure to fulfill the Order or its improper execution, other violations of the User's rights) in accordance with Art. 22 of the Civil Code of Ukraine is limited to ten grn. <br/> <br/> 1.12.6. The Goods for which the warranty period is established are subject to warranty obligations in accordance with the conditions specified in the warranty card and/or in the manufacturer's information materials. If, in accordance with the legislation of Ukraine, a warranty period must be established for the Goods, but it is not established by the manufacturer, the warranty period for such Goods is considered to be three days. <br/> <br/> 1.12.7 The User is responsible for the accuracy of the data specified in the Order form. In the event that inaccurate (incorrect) indication of the data in the Order led to additional costs of the Seller related to the delivery of the Goods to the wrong address or the delivery of the Goods to the improper Recipient, all losses and costs associated with this are borne by the User. The Seller has the right to deduct the amount of such losses or expenses from the amounts paid by the Payer as payment for the Goods (set off counterclaims). <br/> <br/> 2. Obligations of the Parties. <br/> 2.1. The User undertakes to carefully read this Agreement. In case of disagreement with its terms, the User undertakes to immediately stop using the Site. <br/> <br/> 2.2. The User agrees not to take actions that may be considered as violating Ukrainian legislation or international law, including in the field of intellectual property, copyright and/or related rights, as well as any actions that lead or may lead to a violation of the normal operation of the Site and site services. <br/> <br/> 2.3. Use of the materials of the Site without the permission of the copyright holders is not allowed. For the legitimate use of the materials of the Site, it is necessary to conclude license agreements (obtaining licenses) from the Copyright Holders. <br/> <br/> 2.4. When quoting the materials of the Site, including protected works, a link to the Site is required. <br/> <br/> 2.5. Comments and other records of the User on the Site should not contradict the requirements of the legislation of Ukraine and generally accepted norms of morality and morality. Comments/User reviews posted on the Site are not confidential information and can be used by the Site Administration without restrictions. <br/> <br/>2.6. The User is warned that the Site Administration is not responsible for visiting and using external resources, links to which may be contained on the site. <br/> <br/> 2.7. The User accepts the provision that all materials and services of the Site or any part thereof may be accompanied by advertising. The User agrees that the Site Administration does not bear any responsibility and has no obligations in connection with such advertising. <br/> <br/> 2.8. By registering on the Site, the user agrees to provide reliable and accurate information about himself and his contact details. As a result of registration, you receive a login and password to enter the Personal Account, for the security of which you are responsible. You are also responsible for all actions under your login and password on the Site. In case of loss of registration data, you agree to inform us. The site administration reserves the right to send our shares to the user number specified in the order. In case of refusal, we undertake to exclude your address from the SMS distribution. <br/> <br/> 2.9. The site administration has the right to unilaterally cancel the User's account (Personal Account) if it has not been used for more than 24 calendar months in a row without notifying the User. <br/> <br/> 3. Personal information. <br/> 3.1. By placing an Order on the Site, the User gives his consent to the Administration to collect and process (accumulate, store, adapt, update, use, distribute, depersonalize and destroy) the data indicated by him, namely: surname, name, patronymic, e-mail, telephone, address, in order to ensure the implementation of purchase and sale relations, relations in the field of consumer protection, in the field of advertising and marketing research, and also gives its consent to the transfer (distribution) of its data to NOVA POSHTA LLC (EDRPOU 31316718), other freight forwarding and courier organizations and other third parties (without limitation) at the discretion of the Site Administration. This provision is valid without limitation of validity. <br/> <br/> 3.2. The source of personal data collection is information directly and voluntarily provided by the User. <br/> <br/> 3.3. The owner of the personal data provided by the User is the Site Administration. <br/> <br/> 3.4 The subject of personal data, in accordance with the Law of Ukraine 'On the Protection of Personal Data,' has the right: to know about the sources of collection, the location of his personal data, the purpose of their processing, the location or place of residence (stay) of the owner or manager of personal data or to give the appropriate order to obtain this information to persons authorized by them, except in cases established by law; receive information about the conditions for granting access to personal data, in particular information about third parties, to which his personal data are transmitted; access to their personal data; receive no later than thirty calendar days from the date of receipt of the request, except as provided by law, an answer about whether his personal data are processed, as well as receive the content of such personal data; make a motivated demand to the owner of personal data with an objection to the processing of his personal data; make a reasoned request to change or destroy their personal data by any owner and manager of personal data, if these data are processed illegally or are unreliable; to protect their personal data from illegal processing and accidental loss, destruction, damage due to deliberate concealment, failure to provide or untimely provision of them, as well as to protect them from providing information that is inaccurate or discrediting the honor, dignity and business reputation of an individual; complain about the processing of their personal data to the Authorized Person or to the court; apply remedies in case of violation of the legislation on personal data protection; make reservations regarding the restriction of the right to process their personal data when granting consent; withdraw consent to the processing of personal data; know the mechanism of automatic processing of personal data; to protect against an automated solution that has legal consequences. <br/> <br/> 3.5. Like many other companies, we use cookie technology on our website and beyond. Cookies are pieces of information that a website transmits to the consumer's hard drive to store information related to the website. This technology expands your ability to use the Internet, keeping your priorities when viewing a particular site. Cookie technology does not contain personal information and cannot in any way configure your system or read information from the hard drive. While browsing the site, we can place cookies on your computer. Such temporary cookies are used to count the number of visits to our site. They are deleted when you exit the browser. Persistent cookies may be stored on your computer by your browser. When registering, this type of cookie reports that you first visited us or visited our site earlier. Cookies do not contain personal data and can be blocked by you at any time. Tokens do not receive personal information about you and do not give us contact information, nor do they receive any information from your computer. We use cookies to determine the characteristics of the site and offers that you like to provide you with more information in which you are interested. In addition, cookies are used to make the website elfbar-vape.com.ua secure, secure and convenient. Cookies provide support for security features and launch. Cookies also allow you to track violations of the PRIVACY POLICY by visitors or devices. Cookies help to estimate the number and frequency of requests, as well as detect and block those visitors or devices trying to batch download information from the website. <br/> <br/> 4. Other conditions. <br/>4.1. The User has the right to appoint a third party as the Recipient of the purchased goods. In this case, the Recipient is obliged to indicate in the Order form the data necessary to identify the Recipient and deliver the goods. The relations of the parties, in the case, are subject to the provisions of Art. 636 of the Civil Code of Ukraine. <br/> <br/> 4.2. For the delivery of the Goods to the Recipient, the latter is obliged to present an identity document (passport) upon receipt of the Goods. <br/> <br/> 4.3. Upon receipt of the Goods, the Recipient shall sign the documents confirming receipt of the Goods. <br/> <br/> 4.4. All possible disputes arising out of or related to this Agreement shall be resolved in accordance with the current legislation of Ukraine. <br/> <br/> 4.5. Nothing in the Agreement can be understood as establishing agency relations between the User and the Site Administration, partnership relations, joint activity relations, personal hiring relations, or any other relations that are not expressly provided for in the Agreement. <br/> <br/> 4.6. The court's recognition of any provision of the Agreement as invalid or not enforceable does not entail the invalidity of other provisions of the Agreement. <br/> <br/> 4.7. Inaction on the part of the Site Administration in case of violation by any of the Users of the provisions of the Agreement does not deprive the Site Administration of the right to take appropriate actions later to protect its interests and protect copyright to the Site materials protected in accordance with the law. The User confirms that he is familiar with all clauses of this Agreement and unconditionally accepts them. <br/> 4.8. This Agreement shall be governed by and construed in accordance with the laws of Ukraine. Issues that are not regulated by the Agreement shall be resolved in accordance with the legislation of Ukraine. <br/>"},
+    "search": {
+        "all": "All results",
+        "no_result": "No products found matching this criterion",
+        "search_result": "Search Results"
+    },
+    "label": {
+        "top": "Top",
+        "new": "New arrival"
+    }
+}

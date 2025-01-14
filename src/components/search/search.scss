@@ -61,6 +61,7 @@
         display: grid;
         grid-template: 73px / 1fr 3fr;
         column-gap: 15px;
+        overflow-y: hidden;
     }
     &__result-info {
         position: relative;
@@ -89,7 +90,14 @@
         }
     }
     &__result-list-text {
-        padding: 5px;
+        padding: 5px 15px;
         color: red;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.105);
+    }
+}
+
+.search + .spinner {
+    img {
+        height: 30px;
     }
 }

@@ -28,9 +28,9 @@ const FilterSlice = createSlice({
 
 export const fetchFilter = createAsyncThunk(
     'filter/fetchFilter',
-    async (filter) => {
+    async ({filter, language}) => {
         const request = useHttp();
-        return await request(`http://localhost:3001/products/filter/?orderby=${filter}`);
+        return await request(`http://localhost:3001/products/filter/?orderby=${filter}&language=${language}`);
     }
 );
 

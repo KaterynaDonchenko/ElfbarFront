@@ -1,7 +1,7 @@
 import MainSlider from '../sliders/mainSlider/MainSlider';
 import ErrorBoundary from '../errorBoundary/ErrorBoundary';
 
-import './mainScreem.scss';
+import './mainScreen.scss';
 
 const MainScreen = () => {
     return (

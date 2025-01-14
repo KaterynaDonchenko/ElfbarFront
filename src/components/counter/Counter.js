@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { increaceCounter, decreaceCounter } from './CounterSlice';
+import { increaseCounter, decreaseCounter } from './CounterSlice';
 import { increaseCounterInTheProduct, decreaseCounterInTheProduct } from '../cartWidget/CartWidgetSlice';
 
 import './counter.scss'
@@ -12,14 +12,14 @@ const Counter = ({counterProduct = false, _id}) => {
     return (
         <div className="counter">
             <input onClick={() => {
-                counterProduct ? dispatch(decreaseCounterInTheProduct(_id)) : dispatch(decreaceCounter())
+                counterProduct ? dispatch(decreaseCounterInTheProduct(_id)) : dispatch(decreaseCounter())
                 }} 
                 type="button" 
                 value='-' 
                 className="counter__minus"/>
                 <div className="counter__number">{counterProduct ? counterProduct : counter}</div>
             <input onClick={() => {
-                 counterProduct ? dispatch(increaseCounterInTheProduct(_id)) : dispatch(increaceCounter());
+                 counterProduct ? dispatch(increaseCounterInTheProduct(_id)) : dispatch(increaseCounter());
                 }} 
                 type="button" 
                 value='+' 

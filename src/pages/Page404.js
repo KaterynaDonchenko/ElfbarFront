@@ -16,7 +16,7 @@ const Page404 = () => {
         dispatch(changeMobileMenuDisplay(false));
         window.scrollTo(0, 0);
         document.body.style.overflow = '';
-    }, []);
+    }, [dispatch]);
     
     return (
         <div className='page404'>

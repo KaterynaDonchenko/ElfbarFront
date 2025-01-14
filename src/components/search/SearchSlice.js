@@ -5,7 +5,7 @@ const initialState = {
     search: '',
     searchResult: [],
     displaySearchResult: false,
-    serchResultLoadingStatus: 'idle',
+    SearchResultLoadingStatus: 'idle',
     searchResultForSearchPage: []
 }
 
@@ -17,31 +17,31 @@ const SearchSlice = createSlice({
             state.search = actions.payload;
             if(actions.payload.length > 0) sessionStorage.setItem('userSearch', JSON.stringify(actions.payload));
         },
-        cleareSearchResult: state => {state.searchResult = []},
+        clearSearchResult: state => {state.searchResult = []},
         setSearchResultForSearchPage: (state, actions) => {state.searchResultForSearchPage = actions.payload},
         changeDisplaySearchResult: (state, actions) => {state.displaySearchResult = actions.payload}
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchSearch.pending, state => {state.serchResultLoadingStatus = 'loading'})
+            .addCase(fetchSearch.pending, state => {state.SearchResultLoadingStatus = 'loading'})
             .addCase(fetchSearch.fulfilled, (state, action) => {
-                state.serchResultLoadingStatus = 'idle';
+                state.SearchResultLoadingStatus = 'idle';
                 state.searchResult = action.payload;
             })
-            .addCase(fetchSearch.rejected, state => {state.serchResultLoadingStatus = 'error'})
+            .addCase(fetchSearch.rejected, state => {state.SearchResultLoadingStatus = 'error'})
     }
 });
 
 export const fetchSearch = createAsyncThunk(
     'search/fetchSearch',
-    async (search) => {
+    async ({search, language}) => {
         const request = useHttp();
-        return await request(`http://localhost:3001/products/search/?s=${search}`);
+        return await request(`http://localhost:3001/products/search/?s=${search}&language=${language}`);
     }
 );
 
 const {actions, reducer} = SearchSlice;
-export const { setSearch, cleareSearchResult, setSearchResultForSearchPage, changeDisplaySearchResult } = actions;
+export const { setSearch, clearSearchResult, setSearchResultForSearchPage, changeDisplaySearchResult } = actions;
 
 export default reducer;
 

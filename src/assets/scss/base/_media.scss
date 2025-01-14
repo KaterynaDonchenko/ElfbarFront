@@ -1,10 +1,24 @@
 @media (max-width: 1400px) {
+    .header {
+        &__menu {
+            width: 438px;
+            right: 53%;
+        }
+        &__menu-list {
+            grid-template-columns: 1fr 1fr 2fr;
+        }
+    }
+
     .container {
         width: 1200px;
     }
 
     .card-list {
         grid-template: 430px/repeat(5, 224px);
+    }
+
+    .filter-slider .splide {
+        padding: 0 30px;
     }
 
     .product {
@@ -15,10 +29,11 @@
             text-align: left;
             padding-left: 10px;
         }
-        &__breadecrums {
+        &__breadcrumbs {
             grid-template-columns: 8fr 1fr;
         }
     }
+
 }
 
 @media (max-width: 1200px) {
@@ -37,10 +52,9 @@
             width: 205px;
         }
         &__menu {
-            width: 396px;
-        }
-        &__menu-list {
-            grid-template-columns: 82px 82px 160px;
+            width: 320px;
+            padding: 14px 34px;
+            right: 57%;
         }
     }
 
@@ -78,7 +92,7 @@
             grid-template: 105px 17px 22px / 1fr;
             row-gap: 4px;
         }
-        &__item-sircle {
+        &__item-circle {
             width: 105px;
             height: 105px;
         }
@@ -127,6 +141,20 @@
 
 @media (max-width: 991px) {
 
+    .title-h2 {
+        &__filter {
+            display: none;
+        }
+    }
+
+    .filter-slider {
+        padding: 15px 0;
+    }
+
+    .main-screen {
+        height: auto;
+    }
+
     .check-age {
         &__window {
             width: 470px;
@@ -158,9 +186,8 @@
             display: grid;
         }
         &__mobile-menu-block {
-            .spiner {
+            .spinner {
                 position: absolute;
-                top: -50px;
                 background: #fff;
                 left: 7px;
                 img {
@@ -177,7 +204,7 @@
             padding-bottom: 10px; 
         }
         &__mobile-menu-category-list {
-            .spiner {
+            .spinner {
                 position: static;
                 background: transparent;
                 margin-top: 10px;
@@ -334,7 +361,7 @@
             top: -10px;
             bottom: -10px;
         }
-        &__item-lable {
+        &__item-label {
             padding: 0 7px;
             height: 20px;
         }
@@ -346,7 +373,7 @@
             line-height: 19px;
         }
         &__item-price-now {
-            font-size: 17px;
+            font-size: 15px;
         }
         &__item-basket {
             width: 59px;
@@ -462,13 +489,6 @@
         .container {
             padding: 0 20px;
         }
-        &__item {
-            img {
-                // height: 70%;
-                // transform: translateY(20%);
-                height: 100%;
-            }
-        }
         &__bottom {
             top: 33%;
         }
@@ -481,7 +501,7 @@
             text-align: left;
         }
         .splide__slide {
-            background-color: rgb(255, 179, 230, .4);
+            background-color: rgb(246, 246, 246);
         }
     }
 
@@ -508,6 +528,11 @@
         }
         &__mobile-menu-category-item-title {
             font-size: 16px;
+        }
+        &__mobile-menu-btn {
+            a {
+                font-size: 15px;
+            }
         }
     }
     
@@ -652,7 +677,7 @@
                 text-align: left;
             }
         }
-        &__table-body-romove {
+        &__table-body-remove {
             position: absolute;
             right: 0;
             border: none;
@@ -672,7 +697,7 @@
                 }
             }
         }
-        &__table-body-price, &__table-body-quantity, &__table-body-subtota {
+        &__table-body-price, &__table-body-quantity, &__table-body-subtotal {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -680,7 +705,7 @@
         .cart__table-body-price, .cart__table-body-quantity {
             border-bottom: 1px solid rgba(0, 0, 0, 0.12);
         }
-        &__table-body-price, &__table-body-quantity, &__table-body-subtota {
+        &__table-body-price, &__table-body-quantity, &__table-body-subtotal {
             position: relative;
             &::before {
                 content: 'ціна:';
@@ -696,7 +721,7 @@
                 content: 'кількість:';
             }
         }
-        &__table-body-subtota {
+        &__table-body-subtotal {
             font-size: 18px;
             &::before {
                 content: 'проміжний підсумок:';
@@ -754,7 +779,7 @@
             font-size: 17px;
             line-height: 27px;
         }
-        &__sosial-wrapper {
+        &__social-wrapper {
             margin: 20px auto 0 auto;
         }
     }
@@ -877,6 +902,11 @@
         }
     }
 
+    .filter-slider {
+        .splide {
+            padding: 0 5px;
+        }
+    }
     .container {
         width: 100%;
     }
@@ -905,7 +935,7 @@
         }
     }
 
-    .breade-crumbs {
+    .bread-crumbs {
         padding: 10px;
         padding-left: 0;
     }
@@ -932,7 +962,7 @@
         grid-auto-rows: 1fr;
         justify-content: center;
         padding: 20px 10px;
-        &__item-lable {
+        &__item-label {
             height: 15px;
             font-size: 9px;
             line-height: 15px;
@@ -1139,7 +1169,7 @@
         }
     }
     .slide {
-        &__item-sircle {
+        &__item-circle {
             width: 90px;
             height: 90px;
         }
@@ -1160,7 +1190,7 @@
     }
 
     .cart {
-        &__table-body-subtota, &__table-body-price {
+        &__table-body-subtotal, &__table-body-price {
             font-size: 12px;
         }  
         span {

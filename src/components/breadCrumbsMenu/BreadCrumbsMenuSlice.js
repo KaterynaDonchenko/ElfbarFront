@@ -32,17 +32,17 @@ const productsPrevAndNext = createSlice({
 
 export const fetchProductPrev = createAsyncThunk(
     'productsPrevAndNext/fetchProductPrev',
-    (id) => {
+    ({id, language}) => {
         const request = useHttp();
-        return request(`http://localhost:3001/products/prevProduct/${id}`);
+        return request(`http://localhost:3001/products/prevProduct/${id}?language=${language}`);
     }
 );
 
 export const fetchProductNext = createAsyncThunk(
     'productsPrevAndNext/fetchProductNext',
-    (id) => {
+    ({id, language}) => {
         const request = useHttp();
-        return request(`http://localhost:3001/products/nextProduct/${id}`);
+        return request(`http://localhost:3001/products/nextProduct/${id}?language=${language}`);
     }
 );
 

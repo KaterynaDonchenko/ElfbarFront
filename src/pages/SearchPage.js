@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { setSearch, 
          fetchSearch, 
          setSearchResultForSearchPage, 
-         cleareSearchResult, 
+         clearSearchResult, 
          changeDisplaySearchResult } from "../components/search/SearchSlice";
 import { changeMobileMenuDisplay } from "../components/header/HeaderSlice";
 import ProductList from "../components/productList/ProductList";
@@ -13,11 +13,13 @@ import TitleH1 from "../components/titleH1/TitleH1";
 import BreadCrumbs from "../components/breadCrumbs/BreadCrumbs";
 import Pagination from "../components/pagination/Pagination";
 import ErrorBoundary from "../components/errorBoundary/ErrorBoundary";
+import { useTranslation } from "react-i18next";
 
 const SearchPage = () => {
+    const { i18n, t } = useTranslation()
     const { search, 
             searchResultForSearchPage, 
-            serchResultLoadingStatus, 
+            SearchResultLoadingStatus, 
             searchResult} = useSelector(state => state.search);
     const { currentPage, currentPageData } = useSelector(state => state.pagination);
     const dispatch = useDispatch();
@@ -37,7 +39,7 @@ const SearchPage = () => {
     useEffect(() => {
         if (search.length === 0) {
             const userSearchFromSessionStorage = JSON.parse(sessionStorage.getItem('userSearch'));
-            dispatch(fetchSearch(userSearchFromSessionStorage));
+            dispatch(fetchSearch({search: userSearchFromSessionStorage, language: i18n.language}));
         }
     }, []);
 
@@ -50,7 +52,7 @@ const SearchPage = () => {
 
     useEffect(() => {
         if (search.length === 0 && searchResult.length > 0 && searchResultForSearchPage.length > 0) {
-            dispatch(cleareSearchResult());
+            dispatch(clearSearchResult());
         }
     }, [searchResultForSearchPage]);
 
@@ -68,7 +70,7 @@ const SearchPage = () => {
         <div className="main-content" style={{'backgroundColor': 'rgb(246,246,246)'}}>
             <div className="main-content__header" style={{'backgroundColor': 'rgb(251, 242, 251)'}}>
                 <div className="container">
-                    <TitleH1 title='Результат пошуку' classN='title-h1_pdt150 title-h1_center title-h1_fz-50'/>
+                    <TitleH1 title={t("search.search_result")} classN='title-h1_pdt150 title-h1_center title-h1_fz-50'/>
                 </div>
             </div>
             <div className="container">
@@ -79,7 +81,7 @@ const SearchPage = () => {
                     <ProductList productsArray={currentPageData}/>
                 </ErrorBoundary>
                 <ErrorBoundary>
-                    {!(serchResultLoadingStatus === 'loading') ? <Pagination array={searchResultForSearchPage}/> : null}
+                    {!(SearchResultLoadingStatus === 'loading') ? <Pagination array={searchResultForSearchPage}/> : null}
                 </ErrorBoundary>
             </div>
         </div>

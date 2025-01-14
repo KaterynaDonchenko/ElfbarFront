@@ -2,20 +2,20 @@ import { useParams, Link} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
-
 import { fetchProduct, fetchCategoryInfo} from './ProductSlice';
 import { fetchProductsCategory } from '../productList/ProductListSlice';
 import { saveUserProductCart } from '../cartWidget/CartWidgetSlice';
 import { resetCounter } from '../counter/CounterSlice';
 import { changeCartIconDisplay } from '../header/HeaderSlice';
 import Counter from '../counter/Counter';
-import Spiner from '../spinner/Spinner';
+import Spinner from '../spinner/Spinner';
 import Error from '../error/Error';
 import BreadCrumbs from '../breadCrumbs/BreadCrumbs';
-import BreadCrumbsMenu from '../breadeCrumbsMenu/BreadCrumbsMenu';
+import BreadCrumbsMenu from '../breadCrumbsMenu/BreadCrumbsMenu';
 import TitleH1 from '../titleH1/TitleH1';
 
 import './product.scss';
+import { useTranslation } from 'react-i18next';
 
 const Product = () => {
     const { userProductCart } = useSelector( state => state.cartWidget);
@@ -23,7 +23,7 @@ const Product = () => {
 
     useEffect(() => {
         if (userProductCart.length > 0) dispatch(changeCartIconDisplay('block'));
-    }, [userProductCart]);
+    }, [userProductCart, dispatch]);
 
     return (
         <section className="product">
@@ -42,6 +42,7 @@ const Product = () => {
 }
 
 const ProductMain = () => {
+    const { i18n, t } = useTranslation()
     const { productId } = useParams();
     const { product, productLoadingStatus } = useSelector(state => state.product);
     const { productsCategory, 
@@ -52,18 +53,18 @@ const ProductMain = () => {
     const [rotateArrow, setRotateArrow] = useState(false);
 
     useEffect(() => {
-        dispatch(fetchProduct(productId));
+        dispatch(fetchProduct({id: productId, language: i18n.language}));
         dispatch(resetCounter());
         window.scrollTo(0, 0);
-    }, [productId]);
+    }, [productId, i18n.language, dispatch]);
 
     useEffect(() => {
-        if (product.category) dispatch(fetchProductsCategory(product.category));
-    }, [product.category]);
+        if (product.category) dispatch(fetchProductsCategory({category: product.category, language: i18n.language}));
+    }, [product.category, i18n.language, dispatch]);
 
     useEffect(() => {
-        if (product.category) dispatch(fetchCategoryInfo(product.category));
-    }, [product.category]);
+        if (product.category) dispatch(fetchCategoryInfo({category: product.category, language: i18n.language}));
+    }, [product.category, i18n.language, dispatch]);
 
     const onToggleDropdown = () => {
         setShowSelect(!showSelect);
@@ -72,10 +73,10 @@ const ProductMain = () => {
 
     const renderSelect = (arr) => {
         let mainVariant;
-        const variants = arr.map((item, i) => {
+        const variants = arr.forEach((item, i) => {
             if (item._id === productId) {
                 mainVariant = <div key={i} onClick={onToggleDropdown} 
-                                   className="product__select-mainvariant">
+                                   className="product__select-mainVariant">
                                    {item.taste.slice(0, 18)}
                                </div>
             }
@@ -110,9 +111,9 @@ const ProductMain = () => {
     }
 
     const renderMainContentForTheProduct = () => {
-        const spinerSelector = productsCategoryLoadingStatus === 'loading' ? <Spiner/> : null;
+        const spinnerSelector = productsCategoryLoadingStatus === 'loading' ? <Spinner/> : null;
         const errorSelector = productsCategoryLoadingStatus === 'error' ? <Error/> : null;
-        const selectBlock = !(spinerSelector && errorSelector)? renderSelect(productsCategory) : null;
+        const selectBlock = !(spinnerSelector && errorSelector)? renderSelect(productsCategory) : null;
         const {title, price, quantity, category, img, dscr, categoryUrl} = product;
 
         return (
@@ -121,15 +122,15 @@ const ProductMain = () => {
                     <img src={`http://localhost:3001/${img}`} alt={title} />
                 </div>
                 <div className="product__right-block">
-                    <div className="product__breadecrums">
+                    <div className="product__breadcrumbs">
                         <BreadCrumbs/>
                         <BreadCrumbsMenu/>
                     </div>
                     <TitleH1 title={title} classN='product__name'/>
-                    <div className="product__price">{price} грн</div>
+                    <div className="product__price">{price ? price.toFixed(2) : price} {t("currency")}</div>
                     <div className="product__dscr">{dscr}</div>
                     <div name="taste" className="product__select">
-                        {spinerSelector}
+                        {spinnerSelector}
                         {errorSelector}
                         {selectBlock}
                     </div> 
@@ -141,11 +142,11 @@ const ProductMain = () => {
                                 dispatch(saveUserProductCart({_id : productId, title, price, img, counter}))
                                 dispatch(changeCartIconDisplay(true))}} 
                                 className="product__form-button">
-                                Додати в кошик
+                                {t("product_page.button")}
                         </button>
                     </form>
                     <div className="product__category">
-                        <span>Категорія:</span> 
+                        <span>{t("product_page.category")}:</span> 
                         <Link to={`/product-category/${categoryUrl}`}>{category}</Link>
                     </div>
                 </div>
@@ -153,12 +154,12 @@ const ProductMain = () => {
         )
     }
     
-    const spinerMain = productLoadingStatus === 'loading' ? <Spiner clazz='product__spinner'/> : null;
+    const spinnerMain = productLoadingStatus === 'loading' ? <spinner clazz='product__spinner'/> : null;
     const errorMain = productLoadingStatus === 'error' ? <Error/> : null;
-    const mainContent = !(spinerMain || errorMain) ? renderMainContentForTheProduct() : null;
+    const mainContent = !(spinnerMain || errorMain) ? renderMainContentForTheProduct() : null;
     return (
         <>
-            {spinerMain}
+            {spinnerMain}
             {errorMain}
             {mainContent}
         </>
@@ -166,15 +167,16 @@ const ProductMain = () => {
 }
 
 const ProductBottom = () => {
+    const { t } = useTranslation()
     const { categoryInfo, characteristic, categoryInfoLoadingStatus } = useSelector(state => state.product);
 
     const renderCharacteristic = (info, characteristic) => {
         return characteristic.map(({icon, title}, i) => {
             return (
                 <div key={i} className="product__info-item">
-                    <img src={`http://localhost:3001/${icon}`} alt={title} className="product__info-item-img" />
-                    <div className="product__info-item-rightblock">
-                        <div className="product__info-item-title">{title}</div>
+                    <img src={`http://localhost:3001/${icon}`} alt={t(`product_page.${title}`, title)} className="product__info-item-img" />
+                    <div className="product__info-item-rightBlock">
+                        <div className="product__info-item-title">{t(`product_page.${title}`, title)}</div>
                         <div className="product__info-item-subtitle">{info ? Object.values(info)[i] : null}</div>
                     </div>
                 </div>
@@ -188,7 +190,7 @@ const ProductBottom = () => {
 
         return (
             <div className="product__bottom">
-                <div className="product__bottom-title">Опис</div>
+                <div className="product__bottom-title">{t("product_page.description")}</div>
                 {additionalInfo ? <div className="product__additional-info">{additionalInfo}</div> : null}
                 <div className="product__info">
                     {characteristicBlock}
@@ -198,12 +200,12 @@ const ProductBottom = () => {
         )
     }
 
-    const spinerMain = categoryInfoLoadingStatus === 'loading' ? <Spiner clazz='product__spinner'/> : null;
+    const spinnerMain = categoryInfoLoadingStatus === 'loading' ? <spinner clazz='product__spinner'/> : null;
     const errorMain = categoryInfoLoadingStatus === 'error' ? <Error/> : null;
-    const mainContent = !(spinerMain || errorMain) ? renderBottomForTheProduct() : null;
+    const mainContent = !(spinnerMain || errorMain) ? renderBottomForTheProduct() : null;
     return (
         <>
-            {spinerMain}
+            {spinnerMain}
             {errorMain}
             {mainContent}
         </>

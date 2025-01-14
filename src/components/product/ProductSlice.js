@@ -6,10 +6,10 @@ const initialState = {
     productLoadingStatus: 'idle',
     categoryInfoLoadingStatus: 'idle',
     categoryInfo: {},
-    characteristic: [{'icon': 'img/info/strong.svg', 'title': 'Міцність'}, 
-           {'icon': 'img/info/man.svg', 'title': 'Тяг'}, 
-           {'icon': 'img/info/volume.svg', 'title': 'Рідина'}, 
-           {'icon': 'img/info/batterysvg.svg', 'title': 'Батарея'}],
+    characteristic: [{'icon': 'img/info/strong.svg', 'title': 'strength'}, 
+           {'icon': 'img/info/man.svg', 'title': 'drag'}, 
+           {'icon': 'img/info/volume.svg', 'title': 'liquid'}, 
+           {'icon': 'img/info/batterysvg.svg', 'title': 'battery'}],
 }
 
 const productSlice = createSlice({
@@ -23,7 +23,7 @@ const productSlice = createSlice({
             .addCase(fetchProduct.pending, state => {state.productLoadingStatus = 'loading'})
             .addCase(fetchProduct.fulfilled, (state, action) => {
                 state.productLoadingStatus = 'idle';
-                state.product = action.payload;
+                state.product = action.payload
             })
             .addCase(fetchProduct.rejected, state => {state.productLoadingStatus = 'error'})
             .addCase(fetchCategoryInfo.pending, state => {state.categoryInfoLoadingStatus = 'loading'})
@@ -38,17 +38,17 @@ const productSlice = createSlice({
 
 export const fetchProduct = createAsyncThunk(
     'product/fetchProduct',
-    (id) => {
+    ({id, language}) => {
         const request = useHttp();
-        return request(`http://localhost:3001/products/${id}`);
+        return request(`http://localhost:3001/products/${id}?language=${language}`);
     }
 );
 
 export const fetchCategoryInfo = createAsyncThunk(
     'product/fetchCategoryInfo',
-    (category) => {
+    ({category, language}) => {
         const request = useHttp();
-        return request(`http://localhost:3001/filterSlides/categoryInfo/${category}`);
+        return request(`http://localhost:3001/filterSlides/categoryInfo/${category}?language=${language}`);
     }
 );
 

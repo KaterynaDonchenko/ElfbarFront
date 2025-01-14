@@ -1,8 +1,10 @@
 import { useRef, useEffect } from 'react';
 
 import './checkAge.scss';
+import { useTranslation } from 'react-i18next';
 
 const CheckAge = () => {
+    const { t } = useTranslation()
     const checkAgeRef = useRef();
 
     useEffect(() => {
@@ -10,7 +12,7 @@ const CheckAge = () => {
         if (!isCheckAgeInLocaleStore) checkAgeRef.current.style.display = 'block';
     }, [])
 
-    const onHiddeModel = () => {
+    const onHiddenModel = () => {
         checkAgeRef.current.style.display = 'none';
         localStorage.setItem('checkAge', JSON.stringify(true));
     }
@@ -18,11 +20,11 @@ const CheckAge = () => {
     return (
         <div ref={checkAgeRef} className="check-age">
             <div className="check-age__window">
-                <div className="check-age__window-title">Вам виповнилось 18 років?</div>
-                <div className="check-age__window-subtitle">Щоб використовувати цей веб-сайт, ви повинні підтвердити, що вам 18+ років. Вам виповнилося 18?</div>
+                <div className="check-age__window-title">{t("modal.question")}</div>
+                <div className="check-age__window-subtitle">{t("modal.text")}</div>
                 <div className="check-age__btns">
-                    <button onClick={onHiddeModel} className="btn check-age__btn">Так, мені є 18</button>
-                    <a href='https://www.google.com/' className="btn check-age__btn check-age__btn_color-grey">Ні, мені немає 18</a>
+                    <button onClick={onHiddenModel} className="btn check-age__btn">{t("modal.button_yes")}</button>
+                    <a href='https://www.google.com/' className="btn check-age__btn check-age__btn_color-grey">{t("modal.button_no")}</a>
                 </div>
             </div>
         </div>

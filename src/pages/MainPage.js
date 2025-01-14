@@ -10,9 +10,11 @@ import TitleH2 from '../components/titleH2/TitleH2';
 import MainInfo from '../components/mainInfo/MainInfo';
 import Advantages from '../components/advantages/Advantages';
 import ErrorBoundary from "../components/errorBoundary/ErrorBoundary";
+import { useTranslation } from "react-i18next";
 
 const MainPage = () => {
-    const { productsTop, productsNew, productsWithLableLoadingStatus } = useSelector(state => state.products);
+    const { t } = useTranslation()
+    const { productsTop, productsNew, productsWithLabelLoadingStatus } = useSelector(state => state.products);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -20,23 +22,25 @@ const MainPage = () => {
         dispatch(changeMobileMenuDisplay(false));
         window.scrollTo(0, 0);
         document.body.style.overflow = '';
-    }, []);
+    }, [dispatch]);
 
     return (
         <>
             <MainScreen/>
             <div className="container">
-                <TitleH2 title='Категорії' classN='title-h2__filter'/>
+                <TitleH2 title={t("section_name.categories")} classN='title-h2__filter'/>
+            </div>
+            <ErrorBoundary>
+                <FilterSlider/>
+            </ErrorBoundary>
+            <div className="container">
+                <TitleH2 title={t("section_name.new")}/>
                 <ErrorBoundary>
-                    <FilterSlider/>
+                    <ProductList label={t("label.new")} productsArray={productsNew} statusProductsArray={productsWithLabelLoadingStatus}/>
                 </ErrorBoundary>
-                <TitleH2 title='Новинки'/>
+                <TitleH2 title={t("section_name.popular")}/>
                 <ErrorBoundary>
-                    <ProductList lable='новинка' productsArray={productsNew} statusProductsArray={productsWithLableLoadingStatus}/>
-                </ErrorBoundary>
-                <TitleH2 title='Популярні товари'/>
-                <ErrorBoundary>
-                    <ProductList lable='топ' productsArray={productsTop} statusProductsArray={productsWithLableLoadingStatus}/>
+                    <ProductList label={t("label.top")} productsArray={productsTop} statusProductsArray={productsWithLabelLoadingStatus}/>
                 </ErrorBoundary>
                 <Advantages/>
                 <MainInfo/>

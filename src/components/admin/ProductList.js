@@ -21,7 +21,7 @@ const quantity = [
     {id: 'Є в наявності', name: 'Є в наявності'}, 
     {id: 'Нема в наявності', name: 'Нема в наявності'}
 ]
-const lable = [
+const label = [
     {id: 'новинка', name: 'новинка'}, 
     {id: 'топ', name: 'топ'}
 ]
@@ -53,7 +53,7 @@ export const ProductList = (props) => {
         <NumberInput label="price" source="price" defaultValue="" />,
         <SelectInput label="quantity" source="quantity" choices={quantity}/>,
         <TextInput label="taste" source="taste" defaultValue="" />,
-        <TextInput label="lable" source="lable" defaultValue="" />,
+        <TextInput label="label" source="label" defaultValue="" />,
         <AutocompleteInput label="category" source="category" choices={category} isLoading={loading} />
     ];
 
@@ -71,8 +71,8 @@ export const ProductList = (props) => {
                 <div className="quantity">Наявність</div>
                 <ImageField source="img" title="title"/>
                 <div className="img">Фото</div>
-                <TextField source="lable"/>
-                <div className="lable">Відмітка</div>
+                <TextField source="label"/>
+                <div className="label">Відмітка</div>
                 <TextField source="category"/>
                 <div className="category">Категорія</div>
                 <TextField source="dscr"/>
@@ -144,7 +144,7 @@ export const EditProduct = () => {
                 </Typography>
                 <Box display={{ xs: 'block', sm: 'flex', width: '50%' }}>
                     <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-                        <SelectInput source="lable" choices={lable} fullWidth/>
+                        <SelectInput source="label" choices={label} fullWidth/>
                     </Box>
                     <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
                         <AutocompleteInput source="category" choices={category} isLoading={loading} isRequired fullWidth/>
@@ -213,7 +213,7 @@ export const CreateProduct = () => {
                 </Typography>
                 <Box display={{ xs: 'block', sm: 'flex', width: '50%' }}>
                     <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-                        <SelectInput source="lable" choices={lable} fullWidth/>
+                        <SelectInput source="label" choices={label} fullWidth/>
                     </Box>
                     <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
                         <AutocompleteInput source="category" choices={category} isLoading={loading} isRequired fullWidth/>

@@ -1,11 +1,11 @@
-import spiner from '../../assets/icons/spiner.gif';
+import spinner from '../../assets/icons/spinner.gif';
 
 import './spinner.scss';
 
 const Spinner = ({clazz = ''}) => {
     return (
-        <div className={`spiner ${clazz}`}>
-            <img src={spiner} alt="spiner" />
+        <div className={`spinner ${clazz}`}>
+            <img src={spinner} alt="spinner" />
         </div>
     )
 }

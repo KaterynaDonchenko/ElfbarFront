@@ -59,21 +59,21 @@
     transform: rotate(225deg);
 }
 
-.mobile-menu-item-arow-enter {
+.mobile-menu-item-arrow-enter {
     transform: rotate(-45deg);
 }
-.mobile-menu-item-arow-enter-active {
+.mobile-menu-item-arrow-enter-active {
     transform: rotate(45deg);
     transition: all 300ms;
 }
-.mobile-menu-item-arow-exit {
+.mobile-menu-item-arrow-exit {
     transform: rotate(45deg);
     transition: all 300ms;
 }
-.mobile-menu-item-arow-exit-active {
+.mobile-menu-item-arrow-exit-active {
     transform: rotate(-45deg);
 }
-.mobile-menu-item-arow-enter-done {
+.mobile-menu-item-arrow-enter-done {
     transform: rotate(45deg);
 }
 

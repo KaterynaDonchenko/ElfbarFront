@@ -2,6 +2,7 @@
     padding: 45px 0 34px 0;
     .splide {
         overflow-x: hidden;
+        padding: 0 70px;
     }
     .splide__list_jc {
         justify-content: center;
@@ -27,7 +28,7 @@
         justify-items: center;
         row-gap: 8px;
     }
-    &__item-sircle {
+    &__item-circle {
         position: relative;
         width: 120px;
         height: 120px;
@@ -77,22 +78,22 @@
     }
     .splide__arrows {
         .splide__arrow--prev {
-            transform: translateX(-65px);
+            transform: translate(-65px, -100%);
             opacity: 0;
             transition: all .3s;
         }
         .splide__arrow--prev_show {
-            transform: translateX(-50px) !important; 
+            transform: translate(35px, -100%) !important; 
             opacity: .3 !important;
         }
         .splide__arrow--next {
-            transform: translateX(65px);
+            transform: translate(65px, -100%);
             opacity: 0;
             transition: all .3s;
         }
         .splide__arrow--next_show {
             opacity: .3 !important;
-            transform: translateX(50px) !important; 
+            transform: translate(-35px, -100%) !important; 
         }
     }
 }

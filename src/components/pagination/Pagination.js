@@ -18,7 +18,7 @@ const Pagination = ({array}) => {
   
   useEffect(() => {
     dispatch(setCurrentPageData(array.slice(offset, offset + PER_PAGE)));
-  }, [array, offset]);
+  }, [array, offset, dispatch]);
 
   const pageCount = Math.ceil(array.length / PER_PAGE);
     

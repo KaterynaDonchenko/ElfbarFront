@@ -7,8 +7,10 @@ import Product from "../components/product/Product";
 import TitleH2 from "../components/titleH2/TitleH2";
 import ProductSlider from "../components/sliders/productSlider/ProductSlider";
 import ErrorBoundary from "../components/errorBoundary/ErrorBoundary";
+import { useTranslation } from "react-i18next";
 
 const ProductPageItem = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -24,7 +26,7 @@ const ProductPageItem = () => {
                 <Product/>
             </ErrorBoundary>
             <div className="container">
-                <TitleH2 title='Cхожі товари'/>
+                <TitleH2 title={t("product_page.same_products")}/>
                 <ErrorBoundary>
                     <ProductSlider/>
                 </ErrorBoundary>

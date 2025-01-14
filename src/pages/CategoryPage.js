@@ -12,8 +12,10 @@ import FilterSlider from "../components/sliders/filterSlider/FilterSlider";
 import TitleH1 from "../components/titleH1/TitleH1";
 import BreadCrumbs from "../components/breadCrumbs/BreadCrumbs";
 import ErrorBoundary from "../components/errorBoundary/ErrorBoundary";
+import { useTranslation } from "react-i18next";
 
 const CategoryPage = () => {
+    const { i18n } = useTranslation()
     const { productsCategory, productsCategoryLoadingStatus, productsCategoryAfterLoading } = useSelector(state => state.products);
     const { currentPage, currentPageData } = useSelector(state => state.pagination);
     const dispatch = useDispatch();
@@ -21,19 +23,19 @@ const CategoryPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        dispatch(fetchProductsCategory(category));
-    }, [category]);
+        dispatch(fetchProductsCategory({category, language: i18n.language}));
+    }, [category, i18n.language, dispatch]);
 
     useEffect(() => {
         dispatch(setSearch(''));
         dispatch(changeMobileMenuDisplay(false));
         window.scrollTo(0, 0);
         document.body.style.overflow = '';
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         navigate(`/product-category/${category}?page=${currentPage + 1}`, { replace: true });
-    }, [currentPage, category]);
+    }, [currentPage, category, navigate]);
 
     const renderProducts = () => {
         return (

@@ -6,7 +6,7 @@ const initialState = {
     productsTop: [],
     productsNew: [],
     productsCategoryLoadingStatus: 'idle',
-    productsWithLableLoadingStatus: 'idle',
+    productsWithLabelLoadingStatus: 'idle',
     productsCategoryAfterLoading: ''
 }
 
@@ -29,32 +29,33 @@ const productsSlice = createSlice({
                 state.productsCategoryAfterLoading = '';
                 state.productsCategoryLoadingStatus = 'error';
             })
-            .addCase(fetchProductsWithTheLable.pending, state => {state.productsWithLableLoadingStatus = 'loading'})
-            .addCase(fetchProductsWithTheLable.fulfilled, (state, action) => {
-                const lable = action.payload[0].lable;
-                state.productsWithLableLoadingStatus = 'idle';
-                lable === 'топ' ? state.productsTop = action.payload : state.productsNew = action.payload;
+            .addCase(fetchProductsWithTheLabel.pending, state => {state.productsWithLabelLoadingStatus = 'loading'})
+            .addCase(fetchProductsWithTheLabel.fulfilled, (state, action) => {
+                const label = action.payload[0].label;
+                state.productsWithLabelLoadingStatus = 'idle';
+                label === 'топ' || label === 'Top' ? state.productsTop = action.payload : state.productsNew = action.payload;
             })
-            .addCase(fetchProductsWithTheLable.rejected, state => {state.productsWithLableLoadingStatus = 'error'})
+            .addCase(fetchProductsWithTheLabel.rejected, state => {state.productsWithLabelLoadingStatus = 'error'})
             .addDefaultCase(() => {})
     }
 });
 
 export const fetchProductsCategory = createAsyncThunk(
     'products/fetchProductsCategory',
-    async (category) => {
+    async ({category, language}) => {
         const request = useHttp();
-        return await request(`http://localhost:3001/products/category/${category}`);
+        return await request(`http://localhost:3001/products/category/${category}?language=${language}`);
     }
 );
 
-export const fetchProductsWithTheLable = createAsyncThunk(
-    'products/fetchProductsWithTheLable',
-    async (lable) => {
+export const fetchProductsWithTheLabel = createAsyncThunk(
+    'products/fetchProductsWithTheLabel',
+    async ({label, language}) => {
         const request = useHttp();
-        return await request(`http://localhost:3001/products/lable/${lable}`);
+        return await request(`http://localhost:3001/products/label/${label}?language=${language}`);
     }
 )
+
 
 const {actions, reducer} = productsSlice;
 

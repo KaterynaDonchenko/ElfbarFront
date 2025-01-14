@@ -13,7 +13,7 @@ const cartWidgetSlice = createSlice({
     name: 'cartWidget',
     initialState,
     reducers: {
-        changeDispalayCartWidget: (state, actions) => {state.widgetDisplay = actions.payload},
+        changeDisplayCartWidget: (state, actions) => {state.widgetDisplay = actions.payload},
         changeTotal: (state, action) => {state.total = action.payload},
         changeFutureDateOfTheLocaleStorage: (state, actions) => {
             const date = new Date(actions.payload);
@@ -77,7 +77,7 @@ const cartWidgetSlice = createSlice({
             item.counter -=1 : userProductCartInLocalStorage = userProductCartInLocalStorage.filter(item => item.id !== productId));
             localStorage.setItem('userProductCart', JSON.stringify(userProductCartInLocalStorage));
         },
-        cleareUserProductCart: state => {state.userProductCart = []}
+        clearUserProductCart: state => {state.userProductCart = []}
     },
     extraReducers: builder => {
         builder
@@ -99,20 +99,20 @@ const cartWidgetSlice = createSlice({
 
 export const fetchArrayOfProducts = createAsyncThunk(
     'cartWidget/fetchArrayOfProducts',
-    (arr) => {
+    ({arr, language}) => {
         const arrayOfRequests = useHttpArray();
-        return arrayOfRequests(arr, 'http://localhost:3001/products');
+        return arrayOfRequests(arr, language, 'http://localhost:3001/products');
     }
 )
 
 const {actions, reducer} = cartWidgetSlice;
 export default reducer;
-export const {changeDispalayCartWidget, 
+export const {changeDisplayCartWidget, 
               changeTotal,
               saveUserProductCart, 
               removeProductFromTheCart, 
               increaseCounterInTheProduct, 
               decreaseCounterInTheProduct,
-              cleareUserProductCart,
+              clearUserProductCart,
               changeFutureDateOfTheLocaleStorage} = actions;
 

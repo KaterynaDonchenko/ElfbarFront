@@ -34,7 +34,7 @@
             text-align: right;
         }
     }
-    &__table-body-romove {
+    &__table-body-remove {
         &::before {
             content: '\2573';
             font-size: 11px;
@@ -57,7 +57,7 @@
     &__table-body-name > a {
         color: rgb(51,51,51);
     }
-    &__table-body-subtota {
+    &__table-body-subtotal {
         font-size: 16px;
         font-weight: 600;
         line-height: 22px;
@@ -78,7 +78,7 @@
         text-transform: uppercase;
         padding: 0 10px;
     }
-    &__total-dilivery {
+    &__total-delivery {
         display: flex;
         justify-content: space-between;
         border-bottom: 1px solid rgba(0,0,0,.075);
