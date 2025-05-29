@@ -3,16 +3,16 @@ import Backend from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
 
 i18n.use(Backend)
- .use(initReactI18next)
- .init({
-  backend: {
-   loadPath: "/localization/{{lng}}.json",
-  },
-  fallbackLng: localStorage.getItem('language'),
-  debug: true,
-  interpolation: {
-    escapeValue: false,
-  },
-  react: {},
- });
+  .use(initReactI18next)
+  .init({
+    backend: {
+      loadPath: "/localization/{{lng}}.json",
+    },
+    fallbackLng: localStorage.getItem('language'),
+    debug: false,
+    interpolation: {
+      escapeValue: false,
+    },
+    react: {},
+  });
 export default i18n;

@@ -13,20 +13,22 @@ import Spinner from '../spinner/Spinner';
 import './checkout.scss'
 import { useTranslation } from 'react-i18next';
 
-const TextInput = ({label, ...props}) => {
+const TextInput = ({ label, ...props }) =>
+{
     const [field, meta] = useField(props);
     return (
         <div className="checkout__form-info-group">
-            <label className="checkout__form-info-label">{label}<span style={{'color': '#e01020'}}>*</span></label>
-            <input {...props} {...field}/>
+            <label className="checkout__form-info-label">{label}<span style={{ 'color': '#e01020' }}>*</span></label>
+            <input {...props} {...field} />
             {
-                meta.touched && meta.error ? (<div style={{'color': '#e01020'}}>{meta.error}</div>) : null
+                meta.touched && meta.error ? (<div style={{ 'color': '#e01020' }}>{meta.error}</div>) : null
             }
         </div>
     )
 }
 
-const Checkout = () => {
+const Checkout = () =>
+{
     const { t } = useTranslation()
     const { total, userProductCart } = useSelector(state => state.cartWidget);
     const { fetchEmailLoadingStatus, isSendForm } = useSelector(state => state.checkout);
@@ -34,36 +36,40 @@ const Checkout = () => {
     const [spinnerStyle, setSpinnerStyle] = useState('none')
     const navigate = useNavigate();
 
-    const onFetchEmail = (data) => {
+    const onFetchEmail = (data) =>
+    {
         data.total = total;
         data.userProductCart = userProductCart;
         dispatch(fetchEmail(JSON.stringify(data)));
         dispatch(onSaveOrder(data));
     }
 
-    useEffect(() => {
+    useEffect(() =>
+    {
         dispatch(changeCartIconDisplay(false));
     }, [changeCartIconDisplay]);
 
-    useEffect(() => {
+    useEffect(() =>
+    {
         fetchEmailLoadingStatus === 'loading' ? setSpinnerStyle('block') : setSpinnerStyle('none')
     }, [fetchEmailLoadingStatus]);
 
-    
-    useEffect(() => {
+
+    useEffect(() =>
+    {
         if (isSendForm === true) navigate('/checkout/order-received');
     }, [isSendForm])
 
-    const order = userProductCart.length > 0 ? <Order userProductCart={userProductCart}/> : null;
+    const order = userProductCart.length > 0 ? <Order userProductCart={userProductCart} /> : null;
     return (
         <div className="checkout">
             <div className="container">
-                <div className="checkout__spinner" style={{"display": spinnerStyle}}>
-                    <Spinner/>
+                <div className="checkout__spinner" style={{ "display": spinnerStyle }}>
+                    <Spinner />
                 </div>
                 <div className="checkout__wrapper">
                     <Formik
-                        initialValues = {{
+                        initialValues={{
                             firstName: '',
                             lastName: '',
                             phone: '',
@@ -74,76 +80,76 @@ const Checkout = () => {
                             text: '',
                             checkbox: '',
                         }}
-                        validationSchema = {Yup.object({
+                        validationSchema={Yup.object({
                             firstName: Yup.string()
-                                    .min(2, `${t("checkout.min_length")}`)
-                                    .required(`${t("checkout.required_field")}`),
+                                .min(2, `${ t("checkout.min_length") }`)
+                                .required(`${ t("checkout.required_field") }`),
                             lastName: Yup.string()
-                                    .min(2, `${t("checkout.min_length")}`)
-                                    .required(`${t("checkout.required_field")}`),
+                                .min(2, `${ t("checkout.min_length") }`)
+                                .required(`${ t("checkout.required_field") }`),
                             phone: Yup.string()
-                                    .matches(/^\+\d{2} \(\d{3}\) \d{3} \d{2} \d{2}$/, `${t("checkout.incorrect_number")}`)
-                                    .required(`${t("checkout.required_field")}`),
+                                .matches(/^\+\d{2} \(\d{3}\) \d{3} \d{2} \d{2}$/, `${ t("checkout.incorrect_number") }`)
+                                .required(`${ t("checkout.required_field") }`),
                             city: Yup.string().when('deliveryMethod', {
                                 is: 'nova',
-                                then: () => Yup.string().required(`${t("checkout.empty_field")}`),
-                                }),
+                                then: () => Yup.string().required(`${ t("checkout.empty_field") }`),
+                            }),
                             warehouse: Yup.string().when('deliveryMethod', {
                                 is: 'nova',
-                                then: () => Yup.string().required(`${t("checkout.empty_field")}`),
-                                }),         
+                                then: () => Yup.string().required(`${ t("checkout.empty_field") }`),
+                            }),
                             ukrDelivery: Yup.string().when('deliveryMethod', {
                                 is: 'ukr',
-                                then: () => Yup.string().required(`${t("checkout.empty_field")}`),
-                                }),
+                                then: () => Yup.string().required(`${ t("checkout.empty_field") }`),
+                            }),
                             checkbox: Yup.string()
-                                        .required(`${t("checkout.required_field")}`),
+                                .required(`${ t("checkout.required_field") }`),
                         })}
                         onSubmit={(value) => onFetchEmail(value)}>
                         {
-                            ({values, handleChange, handleBlur}) => (
+                            ({ values, handleChange, handleBlur }) => (
                                 <Form className="checkout__form">
                                     <div className="checkout__form-left">
                                         <div className="checkout__form-info">
                                             <div className="checkout__form-title">{t("checkout.payment_delivery")}</div>
                                             <div className="checkout__form-block">
-                                                <TextInput label={`${t("checkout.name")}`} type="text" name='firstName' className="checkout__form-info-input"/>
-                                                <TextInput label={`${t("checkout.surname")}`} type="text" name='lastName' className="checkout__form-info-input"/>
+                                                <TextInput label={`${ t("checkout.name") }`} type="text" name='firstName' className="checkout__form-info-input" />
+                                                <TextInput label={`${ t("checkout.surname") }`} type="text" name='lastName' className="checkout__form-info-input" />
                                                 <div className="checkout__form-info-group">
-                                                    <label className="checkout__form-info-label">{t("checkout.phone")}<span style={{'color': '#e01020'}}>*</span></label>
-                                                    <InputMask 
-                                                        type="tel" 
-                                                        mask="+38 (999) 999 99 99" 
-                                                        name='phone' 
-                                                        onChange={handleChange} 
-                                                        onBlur={handleBlur} 
-                                                        value={values.phone} 
-                                                        className="checkout__form-info-input"/>
-                                                    <ErrorMessage style={{'color': '#e01020'}} name='phone' component='div'/>
+                                                    <label className="checkout__form-info-label">{t("checkout.phone")}<span style={{ 'color': '#e01020' }}>*</span></label>
+                                                    <InputMask
+                                                        type="tel"
+                                                        mask="+38 (999) 999 99 99"
+                                                        name='phone'
+                                                        onChange={handleChange}
+                                                        onBlur={handleBlur}
+                                                        value={values.phone}
+                                                        className="checkout__form-info-input" />
+                                                    <ErrorMessage style={{ 'color': '#e01020' }} name='phone' component='div' />
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="checkout__form-delivery">
                                             <div className="checkout__form-title">{t("checkout.delivery_address")}</div>
                                             <label className="checkout__form-info-label">{t("checkout.shipping_method")}</label>
-                                            <Field 
-                                                name="deliveryMethod" 
+                                            <Field
+                                                name="deliveryMethod"
                                                 className="checkout__form-delivery-select"
                                                 as='select'>
-                                                    <option value="nova">{t("footer.delivery.nova_poshta")}</option>
-                                                    <option value="ukr">{t("footer.delivery.ukr_poshta")}</option>
+                                                <option value="nova">{t("footer.delivery.nova_poshta")}</option>
+                                                <option value="ukr">{t("footer.delivery.ukr_poshta")}</option>
                                             </Field>
-                                            <ErrorMessage className='error' name='deliveryMethod' component='div'/>
-                                            <Delivery method={values.deliveryMethod}/>
+                                            <ErrorMessage className='error' name='deliveryMethod' component='div' />
+                                            <Delivery method={values.deliveryMethod} />
                                         </div>
                                         <div className="checkout__form-title">{t("checkout.addition_inform")}</div>
                                         <div className="checkout__form-info-group">
                                             <label className="checkout__form-info-label">{t("checkout.order_notes")}</label>
-                                            <Field 
-                                                name='text' 
+                                            <Field
+                                                name='text'
                                                 className="checkout__form-info-textarea"
-                                                as='textarea'/>
-                                            <ErrorMessage className='error' name='phone' component='div'/>
+                                                as='textarea' />
+                                            <ErrorMessage className='error' name='phone' component='div' />
                                         </div>
                                     </div>
                                     <div className="checkout__form-right">
@@ -158,12 +164,12 @@ const Checkout = () => {
                                             </div>
                                             <div className="checkout__form-footer">
                                                 <div className="checkout__form-footer-delivery">
-                                                {t("footer.delivery.name")}
+                                                    {t("footer.delivery.name")}
                                                     <span>
-                                                        {values.deliveryMethod === 'nova' ? 
-                                                        t("footer.delivery.nova_poshta")
-                                                        : 
-                                                        t("footer.delivery.ukr_poshta")}
+                                                        {values.deliveryMethod === 'nova' ?
+                                                            t("footer.delivery.nova_poshta")
+                                                            :
+                                                            t("footer.delivery.ukr_poshta")}
                                                     </span>
                                                 </div>
                                                 <div className="checkout__form-footer-total">
@@ -172,7 +178,7 @@ const Checkout = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <Checkbox handleChange={handleChange} handleBlur={handleBlur}/>
+                                        <Checkbox handleChange={handleChange} handleBlur={handleBlur} />
                                         <button type='submit' className="btn">{t("checkout.button")}</button>
                                     </div>
                                 </Form>
@@ -185,12 +191,14 @@ const Checkout = () => {
     )
 }
 
-const Order = ({userProductCart}) => {
+const Order = ({ userProductCart }) =>
+{
     const { t } = useTranslation()
     return (
         <ul className="checkout__form-list">
             {
-                userProductCart.map(({title, price, counter}, i) => {
+                userProductCart.map(({ title, price, counter }, i) =>
+                {
                     return (
                         <li key={i} className="checkout__form-list-item">
                             <div className="checkout__form-list-item-name">{title} <span> x {counter}</span></div>
@@ -203,47 +211,53 @@ const Order = ({userProductCart}) => {
     )
 }
 
-const Delivery = ({method}) => {
+const Delivery = ({ method }) =>
+{
     const { t } = useTranslation()
     const [citySearch, setCitySearch] = useState('');
     const [warehousesSearch, setWarehousesSearch] = useState([]);
-    const { cities, cityLoadingStatus, warehouses, cityLoadingWarehouses } = useSelector( state => state.checkout);
+    const { cities, cityLoadingStatus, warehouses, cityLoadingWarehouses } = useSelector(state => state.checkout);
     const dispatch = useDispatch();
     const citySearchRef = useRef();
     const cityRef = useRef();
     const warehouseRef = useRef();
     const labelWarehouseRef = useRef();
     const warehouseListRef = useRef();
-    const { values} = useFormikContext();
+    const { values } = useFormikContext();
 
-    const onFetchCity = (event) => {
+    const onFetchCity = (event) =>
+    {
         const city = {
             marker: 'city',
             name: event.target.value
         };
 
-        if(event.target.value.length > 2) dispatch(fetchCity(city));
+        if (event.target.value.length > 2) dispatch(fetchCity(city));
     }
 
-    const onSaveCity = (city, ref) => {
+    const onSaveCity = (city, ref) =>
+    {
         values.city = city;
         cityRef.current.value = city;
-        dispatch(fetchWarehouses({marker: 'warehouse', cityRef: ref}));
+        dispatch(fetchWarehouses({ marker: 'warehouse', cityRef: ref }));
         labelWarehouseRef.current.style.color = '#000';
     }
-    
-    const onSaveWarehouse = (warehouse) => {
+
+    const onSaveWarehouse = (warehouse) =>
+    {
         values.warehouse = warehouse;
         warehouseRef.current.value = warehouse;
         labelWarehouseRef.current.style.display = 'none';
         warehouseListRef.current.style.display = 'none';
     }
- 
 
-    const renderCity = (arr, search, loading) => {
+
+    const renderCity = (arr, search, loading) =>
+    {
         let items = [];
 
-        if (search.length > 2 && arr.length === 0 && loading !== 'loading' || loading === 'error') {
+        if (search.length > 2 && arr.length === 0 && loading !== 'loading' || loading === 'error')
+        {
             return (
                 <div className="checkout__form-delivery-select-none">
                     {t("checkout.delivery_impossible")}
@@ -251,8 +265,10 @@ const Delivery = ({method}) => {
             )
         }
 
-        if (arr.length > 0) {
-            items = arr.map(({city, cityRef}, i) => {
+        if (arr.length > 0)
+        {
+            items = arr.map(({ city, cityRef }, i) =>
+            {
                 return (
                     <li onClick={() => onSaveCity(city, cityRef)} key={i} className="checkout__form-delivery-select-item">
                         {city}
@@ -260,14 +276,16 @@ const Delivery = ({method}) => {
                 )
             })
         }
-        
-        if (loading === 'loading') {
+
+        if (loading === 'loading')
+        {
             return (
                 <div className="checkout__form-delivery-select-loading">
                     {t("checkout.loading")}
                 </div>
             )
-        } else {
+        } else
+        {
             return (
                 <ul className="checkout__form-delivery-select-list">
                     {items}
@@ -278,12 +296,15 @@ const Delivery = ({method}) => {
 
     }
 
-    useEffect(() => {
-        const onhiddenCitySearch = event => {
+    useEffect(() =>
+    {
+        const onhiddenCitySearch = event =>
+        {
 
-            if (citySearchRef.current && event.target !== citySearchRef.current && 
-                cityRef.current.className !== event.target.className) {
-                    
+            if (citySearchRef.current && event.target !== citySearchRef.current &&
+                cityRef.current.className !== event.target.className)
+            {
+
                 citySearchRef.current.style.display = "none";
                 setCitySearch('');
             }
@@ -291,30 +312,34 @@ const Delivery = ({method}) => {
 
         window.addEventListener('click', onhiddenCitySearch);
 
-        return () => {
+        return () =>
+        {
             window.removeEventListener('click', onhiddenCitySearch);
         };
-    }, []); 
+    }, []);
 
-    useEffect(() => {
+    useEffect(() =>
+    {
         setWarehousesSearch([...warehouses]);
     }, [cityLoadingWarehouses])
 
-    const renderWarehouse = (arr, loading) => {
-        const items = arr.map(({warehouses}, i) => {
+    const renderWarehouse = (arr, loading) =>
+    {
+        const items = arr.map(({ warehouses }, i) =>
+        {
             return (
-                <li className="checkout__form-delivery-warehouse-select-item" 
-                    key={i} 
+                <li className="checkout__form-delivery-warehouse-select-item"
+                    key={i}
                     value={warehouses}
                     onClick={() => onSaveWarehouse(warehouses)}>{warehouses}</li>
             )
         });
 
-        const content = loading === 'loading'? 
-                                            <div className="checkout__form-delivery-warehouse-select-loading">
-                                                {t("checkout.loading")}
-                                            </div> 
-                                             : <ul>{items}</ul>
+        const content = loading === 'loading' ?
+            <div className="checkout__form-delivery-warehouse-select-loading">
+                {t("checkout.loading")}
+            </div>
+            : <ul>{items}</ul>
 
         return (
             <div ref={warehouseListRef} className="checkout__form-delivery-warehouse-select-list">
@@ -323,10 +348,12 @@ const Delivery = ({method}) => {
         );
     }
 
-    const CityInput = (props) => {
+    const CityInput = (props) =>
+    {
         const [field, meta, header] = useField(props);
 
-        const onShowCitySearch = () => {
+        const onShowCitySearch = () =>
+        {
             citySearchRef.current.style.display = "block";
             citySearchRef.current.focus();
             header.setTouched(false);
@@ -335,17 +362,20 @@ const Delivery = ({method}) => {
         };
 
         return (
-            
-            <input {...props} {...field} ref={cityRef} onClick={onShowCitySearch}/>
-             
+
+            <input {...props} {...field} ref={cityRef} onClick={onShowCitySearch} />
+
         )
     }
 
-    const WarehouseInput = (props) => {
+    const WarehouseInput = (props) =>
+    {
         const [field, meta, header] = useField(props);
 
-        const onSearchWarehouse = () => {
-            if (cities.length > 0 && cityRef.current.value.length > 0) {
+        const onSearchWarehouse = () =>
+        {
+            if (cities.length > 0 && cityRef.current.value.length > 0)
+            {
                 labelWarehouseRef.current.style.display = 'none';
                 warehouseRef.current.focus();
                 warehouseRef.current.value = '';
@@ -355,96 +385,103 @@ const Delivery = ({method}) => {
         }
 
         return (
-                <>
-                    <input
-                        {...props} 
-                        {...field} 
-                        ref={warehouseRef}
-                        onChange={() => {
-                            dispatch(onChangeWarehouse({input: warehouseRef.current.value, arr: warehousesSearch}));
-                        }}
-                        onClick={onSearchWarehouse}
-                    />
-                    <div 
-                        onClick={onSearchWarehouse}
-                        style={{'display': values.warehouse.length > 0 ? 'none': 'block'}} 
-                        className="checkout__form-delivery-select-label"
-                        ref={labelWarehouseRef}>
-                        {t("checkout.branch")}
-                    </div>
-                </>
-             
+            <>
+                <input
+                    {...props}
+                    {...field}
+                    ref={warehouseRef}
+                    onChange={() =>
+                    {
+                        dispatch(onChangeWarehouse({ input: warehouseRef.current.value, arr: warehousesSearch }));
+                    }}
+                    onClick={onSearchWarehouse}
+                />
+                <div
+                    onClick={onSearchWarehouse}
+                    style={{ 'display': values.warehouse.length > 0 ? 'none' : 'block' }}
+                    className="checkout__form-delivery-select-label"
+                    ref={labelWarehouseRef}>
+                    {t("checkout.branch")}
+                </div>
+            </>
+
         )
     }
-    
+
     const searchCity = citySearch.length > 0 ? renderCity(cities, citySearch, cityLoadingStatus) : null;
-    const SearchWarehouse = values.city.length > 0 ? renderWarehouse(warehouses, cityLoadingWarehouses): null;
+    const SearchWarehouse = values.city.length > 0 ? renderWarehouse(warehouses, cityLoadingWarehouses) : null;
 
     return (
-        <> 
+        <>
             {
-                method === 'nova' ? 
-                <>
-                    <CityInput
-                        placeholder={`${t("checkout.choose_city")}`} 
-                        name="city"  
-                        className="checkout__form-delivery-input" 
-                        readOnly
-                    />
-                    <input
-                        value={citySearch}
-                        ref={citySearchRef}
-                        style={{'display': 'none'}}
-                        name="citySearch"  
-                        className="checkout__form-delivery-city-search"
-                        onChange={(event) => {
-                            onFetchCity(event);
-                            setCitySearch(event.target.value);
-                        }}
-                    />
-                    {searchCity}
-                    <ErrorMessage style={{'color': '#e01020', 'position': 'relative', 'bottom': '21px'}} 
-                                  className='error' 
-                                  name='city' 
-                                  component='div'/>
-                    <div>
-                        <WarehouseInput name="warehouse" className="checkout__form-delivery-select"/>
-                        {SearchWarehouse}
-                        <ErrorMessage style={{'color': '#e01020', 'position': 'relative', 'bottom': '62px'}} 
-                                      className='error' 
-                                      name='warehouse' 
-                                      component='div'/>
-                    </div>
-                </>
-                : 
-                <TextInput label={`${t("checkout.index")}`} type="text" name='ukrDelivery' className="checkout__form-info-input"/>
+                method === 'nova' ?
+                    <>
+                        <CityInput
+                            placeholder={`${ t("checkout.choose_city") }`}
+                            name="city"
+                            className="checkout__form-delivery-input"
+                            readOnly
+                        />
+                        <input
+                            value={citySearch}
+                            ref={citySearchRef}
+                            style={{ 'display': 'none' }}
+                            name="citySearch"
+                            className="checkout__form-delivery-city-search"
+                            onChange={(event) =>
+                            {
+                                onFetchCity(event);
+                                setCitySearch(event.target.value);
+                            }}
+                        />
+                        {searchCity}
+                        <ErrorMessage style={{ 'color': '#e01020', 'position': 'relative', 'bottom': '21px' }}
+                            className='error'
+                            name='city'
+                            component='div' />
+                        <div>
+                            <WarehouseInput name="warehouse" className="checkout__form-delivery-select" />
+                            {SearchWarehouse}
+                            <ErrorMessage style={{ 'color': '#e01020', 'position': 'relative', 'bottom': '62px' }}
+                                className='error'
+                                name='warehouse'
+                                component='div' />
+                        </div>
+                    </>
+                    :
+                    <TextInput label={`${ t("checkout.index") }`} type="text" name='ukrDelivery' className="checkout__form-info-input" />
             }
         </>
 
     )
 }
 
-const Checkbox = () => {
+const Checkbox = () =>
+{
     const { t } = useTranslation()
     const [displayCardText, setDisplayCardText] = useState('none');
     const [displayCashText, setDisplayCashText] = useState('none');
 
-    const Checkbox = (props) => {
+    const Checkbox = (props) =>
+    {
         const [field] = useField(props);
 
-        const onSwitchCheckbox = () => {
-            if (props.className === 'checkout__form-checkbox-card') {
+        const onSwitchCheckbox = () =>
+        {
+            if (props.className === 'checkout__form-checkbox-card')
+            {
                 setDisplayCardText('block');
                 setDisplayCashText('none');
-    
-            } else if (props.className === 'checkout__form-checkbox-cash') {
+
+            } else if (props.className === 'checkout__form-checkbox-cash')
+            {
                 setDisplayCardText('none');
                 setDisplayCashText('block');
             }
         }
 
         return (
-            <input {...props} {...field} onClick={onSwitchCheckbox} />   
+            <input {...props} {...field} onClick={onSwitchCheckbox} />
         )
     }
 
@@ -453,36 +490,36 @@ const Checkbox = () => {
             <div className="checkout__form-checkbox">
                 <div className="checkout__form-checkbox-group">
                     <label htmlFor="checkbox" className="checkout__form-checkbox-label">
-                        <Checkbox 
-                            name="checkbox" 
-                            type="radio" 
+                        <Checkbox
+                            name="checkbox"
+                            type="radio"
                             className="checkout__form-checkbox-card"
                             value='card'
-                            />
+                        />
                         {t("checkout.payment.first")}
                     </label>
-                    <div className="checkout__form-checkbox-info" style={{'display': displayCardText}}>
+                    <div className="checkout__form-checkbox-info" style={{ 'display': displayCardText }}>
                         {t("checkout.sms")}
                     </div>
                 </div>
                 <div className="checkout__form-checkbox-group">
                     <label htmlFor="" className="checkout__form-checkbox-label">
-                        <Checkbox 
-                            name="checkbox"   
-                            type="radio" 
+                        <Checkbox
+                            name="checkbox"
+                            type="radio"
                             className="checkout__form-checkbox-cash"
                             value='cash'
-                            />
+                        />
                         {t("checkout.payment.second")}
                     </label>
-                    <div className="checkout__form-checkbox-info" style={{'display': displayCashText}}>
-                    {t("checkout.receipt")}
+                    <div className="checkout__form-checkbox-info" style={{ 'display': displayCashText }}>
+                        {t("checkout.receipt")}
                     </div>
                 </div>
-                <ErrorMessage style={{'color': '#e01020', 'position': 'relative', 'bottom': '25px'}} 
-                        className='error' 
-                        name='checkbox' 
-                        component='div'/>
+                <ErrorMessage style={{ 'color': '#e01020', 'position': 'relative', 'bottom': '25px' }}
+                    className='error'
+                    name='checkbox'
+                    component='div' />
             </div>
 
         </>

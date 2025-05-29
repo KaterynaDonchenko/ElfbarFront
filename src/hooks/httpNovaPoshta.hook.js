@@ -1,10 +1,14 @@
-export const useHttpNovaPoshta = () => {
+export const useHttpNovaPoshta = () =>
+    
+    {
 
-    const getBodyRequest = (marker, value) => {
-        switch (marker) {
+    const getBodyRequest = (marker, value) =>
+    {
+        switch (marker)
+        {
             case 'city':
                 return {
-                    apiKey: "732428d3fbb9b42deb3d8dc46b4341e2",
+                    apiKey: "88f65fe80f88fe7f6baf32b4ce3eab7e",
                     modelName: "Address",
                     calledMethod: "searchSettlements",
                     methodProperties: {
@@ -15,20 +19,23 @@ export const useHttpNovaPoshta = () => {
                 }
             case 'warehouse':
                 return {
-                    apiKey: "732428d3fbb9b42deb3d8dc46b4341e2",
+                    apiKey: "88f65fe80f88fe7f6baf32b4ce3eab7e",
                     modelName: "Address",
                     calledMethod: "getWarehouses",
                     methodProperties: {
                         CityRef: value
                     }
-                }    
+                }
             default:
                 break;
         }
     }
 
-    const request = async (marker, value) => {
-        try {
+    const request = async (marker, value) =>
+    {
+        console.log(marker, value)
+        try
+        {
             const response = await fetch('https://api.novaposhta.ua/v2.0/json/', {
                 method: 'POST',
                 body: JSON.stringify(getBodyRequest(marker, value)),
@@ -37,42 +44,47 @@ export const useHttpNovaPoshta = () => {
                 }
             });
 
-            if (!response.ok) {
-                throw new Error(`Could not fetch, status: ${response.status}`);
+            if (!response.ok)
+            {
+                throw new Error(`Could not fetch, status: ${ response.status }`);
             }
 
             const data = await response.json();
 
             return data;
 
-        } catch(e) {
-
+        } catch (e)
+        {
             throw e;
         }
     };
 
-    const _transformCities = (city) => {
+    const _transformCities = (city) =>
+    {
         return {
             city: city.Present,
-            cityRef: city.DeliveryCity 
+            cityRef: city.DeliveryCity
         }
     }
 
-    const _transformWarehouses = (warehouses) => {
+    const _transformWarehouses = (warehouses) =>
+    {
         return {
             warehouses: warehouses.Description,
         }
     }
 
-    const getCities = async (marker, city) => {
+    const getCities = async (marker, city) =>
+    {
         const res = await request(marker, city);
         return res.data[0].Addresses.map(_transformCities);
     }
 
-    const getWarehouses = async (marker, cityRef) => {
+    const getWarehouses = async (marker, cityRef) =>
+    {
         const res = await request(marker, cityRef);
         return res.data.map(_transformWarehouses);
     }
 
-    return { getCities, getWarehouses }     
+    return { getCities, getWarehouses }
 }
